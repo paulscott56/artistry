@@ -2,11 +2,16 @@ package artistry.models;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
+@NodeEntity
 public class Train {
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	private String name;
@@ -15,20 +20,26 @@ public class Train {
 
 	private String solutionStatement;
 
+	@Relationship(type = "IS_BUSINESS_OWNER", direction = Relationship.INCOMING)
 	private List<Person> businessOwners;
 
+	@Relationship(type = "IS_KEY_CUSTOMER", direction = Relationship.INCOMING)
 	private List<Person> keyCustomers;
 
+	@Relationship(type = "IS_SUCCESS_MEASURE", direction = Relationship.INCOMING)
 	private List<String> successMeasures;
 
+	@Relationship(type = "IS_TEAM", direction = Relationship.INCOMING)
 	private List<Team> peopleAndLocations;
 
 	private PrincipalRoles principalRoles;
 
 	private String teamDesignStrategy;
 
+	@Relationship(type = "IS_OTHER_STAKEHOLDER", direction = Relationship.INCOMING)
 	private List<Person> otherStakeholders;
 
+	@Relationship(type = "IS_VALUESTREAM_OF", direction = Relationship.OUTGOING)
 	private ValueStream valueStream;
 
 	public Long getId() {
