@@ -1,0 +1,29 @@
+server:
+  port: 9988
+  compression:
+    enabled: true
+---
+spring:
+  profiles: dev
+  data:
+    neo4j:
+      username: neo4j 
+      password: hello
+      uri: localhost
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+    preferIpAddress: false
+    hostname: localhost
+       
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
