@@ -1,0 +1,59 @@
+package artistry.models.person;
+
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
+
+@NodeEntity
+public class EmailAddress {
+
+	@Id
+	@GeneratedValue
+	private Long id;
+
+	private String workEmail;
+	private String personalEmail;
+	private String supportEmail;
+	private String emergencyContactEmail;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getWorkEmail() {
+		return workEmail;
+	}
+
+	public void setWorkEmail(String workEmail) {
+		this.workEmail = workEmail;
+	}
+
+	public String getPersonalEmail() {
+		return personalEmail;
+	}
+
+	public void setPersonalEmail(String personalEmail) {
+		this.personalEmail = personalEmail;
+	}
+
+	public String getSupportEmail() {
+		return supportEmail;
+	}
+
+	public void setSupportEmail(String supportEmail) {
+		this.supportEmail = supportEmail;
+	}
+
+	public String getEmergencyContactEmail() {
+		return emergencyContactEmail;
+	}
+
+	public void setEmergencyContactEmail(String emergencyContactEmail) {
+		this.emergencyContactEmail = emergencyContactEmail;
+	}
+
+}
