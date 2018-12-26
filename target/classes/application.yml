@@ -27,3 +27,8 @@ eureka:
       enabled: true
     lease:
       duration: 5
+      
+jira:
+  url: http://myjira.company.com
+  username: myusername
+  password: sometrickyPassword
