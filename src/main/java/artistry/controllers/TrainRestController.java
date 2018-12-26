@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.Train;
+import artistry.models.train.Train;
 import artistry.repositories.TrainRepository;
 
 @Configuration

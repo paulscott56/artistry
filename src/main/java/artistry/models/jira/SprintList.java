@@ -1,4 +1,4 @@
-package artistry.models;
+package artistry.models.jira;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package artistry.models;
+package artistry.models.train;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class Portfolio {
+public class LargeProject {
 
 }

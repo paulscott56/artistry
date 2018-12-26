@@ -1,9 +1,9 @@
-package artistry.models;
+package artistry.models.jira;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class Completed {
+public class Estimated {
 
 	private double value;
 	private String text;

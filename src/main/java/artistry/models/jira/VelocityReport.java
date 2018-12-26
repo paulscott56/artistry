@@ -1,8 +1,8 @@
-package artistry.models;
+package artistry.models.jira;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class LargeProject {
+public class VelocityReport {
 
 }

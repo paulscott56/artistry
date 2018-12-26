@@ -1,4 +1,4 @@
-package artistry.models;
+package artistry.models.train;
 
 import java.util.List;
 

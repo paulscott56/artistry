@@ -1,4 +1,4 @@
-package artistry.models;
+package artistry.models.jira;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
