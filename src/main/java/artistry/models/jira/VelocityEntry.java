@@ -3,6 +3,7 @@ package artistry.models.jira;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 public class VelocityEntry {
@@ -11,9 +12,15 @@ public class VelocityEntry {
 	@GeneratedValue
 	private Long id;
 
+	@Relationship(type = "HAS_RAPIDVIEW_ID", direction = Relationship.INCOMING)
 	private String rapidviewId;
+
 	private int jiraId;
+
+	@Relationship(type = "HAS_ESTIMATION", direction = Relationship.INCOMING)
 	private Estimated estimated;
+
+	@Relationship(type = "HAS_COMPLETED", direction = Relationship.INCOMING)
 	private Completed completed;
 
 	public Long getId() {

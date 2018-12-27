@@ -3,6 +3,7 @@ package artistry.models.person;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 public class Country {
@@ -19,6 +20,8 @@ public class Country {
 	private String capital;
 	private Long areaInSqKm;
 	private Long population;
+
+	@Relationship(type = "ON_CONTINENT", direction = Relationship.INCOMING)
 	private String continent;
 
 	// TODO: we will need geo polygon outlines here too (Bounding boxes)

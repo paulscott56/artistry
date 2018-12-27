@@ -3,6 +3,7 @@ package artistry.models.jira;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 public class SprintEntry {
@@ -11,6 +12,7 @@ public class SprintEntry {
 	@GeneratedValue
 	private Long id;
 
+	@Relationship(type = "IS_LINKED", direction = Relationship.OUTGOING)
 	private String rapidviewId;
 	private int jiraId;
 	private int sequence;

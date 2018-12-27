@@ -5,6 +5,7 @@ import java.util.List;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 public class Company {
@@ -19,8 +20,14 @@ public class Company {
 	private EmailAddress emailAddress;
 	private Double latitude;
 	private Double longitude;
+
+	@Relationship(type = "HAS_CONTACT_PERSON", direction = Relationship.INCOMING)
 	private Person contactPerson;
+
+	@Relationship(type = "HAS_EMPLOYEE", direction = Relationship.INCOMING)
 	private List<Person> employees;
+
+	@Relationship(type = "HAS_TEAM", direction = Relationship.INCOMING)
 	private List<Team> teams;
 
 	public Long getId() {

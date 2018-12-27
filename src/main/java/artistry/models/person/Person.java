@@ -6,6 +6,7 @@ import java.util.TimeZone;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 public class Person {
@@ -18,12 +19,23 @@ public class Person {
 	private String surname;
 	private String username;
 	private String nickname;
+
+	@Relationship(type = "WORKS_FOR", direction = Relationship.OUTGOING)
 	private Company company;
+
+	@Relationship(type = "HAS_EMAIL_ADDRESS", direction = Relationship.OUTGOING)
 	private EmailAddress emailAddress;
+
+	@Relationship(type = "HAS_PHONE", direction = Relationship.OUTGOING)
 	private PhoneNumber phoneNumber;
 	private Address address;
+
+	@Relationship(type = "IN_TIMEZONE", direction = Relationship.OUTGOING)
 	private TimeZone timezone;
+
 	private LocalDateTime dateCreated;
+
+	@Relationship(type = "IS_ACTIVE", direction = Relationship.OUTGOING)
 	private Boolean active;
 
 	public Long getId() {

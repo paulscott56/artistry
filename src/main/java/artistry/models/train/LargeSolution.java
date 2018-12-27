@@ -16,6 +16,7 @@ public class LargeSolution {
 	@GeneratedValue
 	private Long id;
 
+	@Relationship(type = "IS_SOLUTION_ARCHITECT", direction = Relationship.INCOMING)
 	private Person solutionArchitect;
 
 	@Relationship(type = "IS_SOLUTION_MANAGER", direction = Relationship.INCOMING)

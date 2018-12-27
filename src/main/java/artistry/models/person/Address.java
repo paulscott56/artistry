@@ -5,6 +5,7 @@ import java.util.List;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 import artistry.enums.AddressType;
 
@@ -14,12 +15,20 @@ public class Address {
 	@Id
 	@GeneratedValue
 	private Long id;
+
+	@Relationship(type = "HAS_ADDRESS_TYPE", direction = Relationship.INCOMING)
 	private AddressType addressType;
+
 	private boolean isPostalAddress;
 	private String fullAddress;
 	private List<String> addressLine;
+
+	@Relationship(type = "IN_CITY", direction = Relationship.INCOMING)
 	private String city;
+
+	@Relationship(type = "IN_COUNTRY", direction = Relationship.INCOMING)
 	private Country country;
+
 	private String postalCode;
 
 	private Double latitude;

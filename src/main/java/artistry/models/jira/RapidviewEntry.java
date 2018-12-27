@@ -3,6 +3,7 @@ package artistry.models.jira;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 public class RapidviewEntry {
@@ -18,7 +19,10 @@ public class RapidviewEntry {
 	private boolean showDaysInColumn;
 	private boolean kanPlanEnabled;
 	private boolean showEpicAsPanel;
+
+	@Relationship(type = "PARENT_PROJECT", direction = Relationship.OUTGOING)
 	private int parentProjectId;
+
 	private boolean isSimpleBoard;
 	private int savedFilterId;
 
