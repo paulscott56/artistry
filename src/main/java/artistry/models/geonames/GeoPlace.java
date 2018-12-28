@@ -34,8 +34,10 @@ public class GeoPlace {
 	private String featureClass;
 	@CsvBindByPosition(position = 7)
 	private String featureCode;
+
 	@CsvBindByPosition(position = 8)
 	private String countryCode;
+
 	@CsvBindByPosition(position = 9)
 	private String cc2;
 	@CsvBindByPosition(position = 10)
@@ -54,8 +56,21 @@ public class GeoPlace {
 	private String dem;
 	@CsvBindByPosition(position = 17)
 	private String timezoneId;
+
 	@CsvBindByPosition(position = 18)
+	// @DateString("yy-MM-dd")
 	private String modificationDate;
+
+	@Relationship(type = "IN_COUNTRY", direction = Relationship.OUTGOING)
+	private Country country;
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
 
 	public Long getId() {
 		return id;

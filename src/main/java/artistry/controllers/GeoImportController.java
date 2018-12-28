@@ -41,7 +41,9 @@ public class GeoImportController {
 	@RequestMapping(value = "/import", method = RequestMethod.GET)
 	@ResponseBody
 	public String importData() throws IOException, URISyntaxException {
-		csvReader.readCsv();
+		csvReader.createPlanetEarth();
+		csvReader.readCountryInfoCsv();
+		// csvReader.readAllCountriesCsv();
 		return "hello";
 	}
 
