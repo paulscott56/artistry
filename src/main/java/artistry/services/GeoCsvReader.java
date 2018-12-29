@@ -81,6 +81,7 @@ public class GeoCsvReader {
 				.withIgnoreLeadingWhiteSpace(true).withSeparator('\t').build();
 		Iterator<GeoCountry> geoIterator = csvToBean.iterator();
 		while (geoIterator.hasNext()) {
+			List<Country> countriestoadd = new ArrayList<>();
 			GeoCountry place = geoIterator.next();
 
 			Country c = new Country();
@@ -88,6 +89,10 @@ public class GeoCsvReader {
 			c.setCapital(place.getCapital());
 			String continent = place.getContinent();
 			Continent continentCheck = continentRepo.findOneByCode(continent);
+			List<Country> countriesoncontinent = continentCheck.getCountry();
+			if (countriesoncontinent == null) {
+				countriesoncontinent = countriestoadd;
+			}
 			c.setContinent(continentCheck);
 			c.setCountry(place.getCountry());
 			c.setCurrencyCode(place.getCurrencyCode());
@@ -105,6 +110,9 @@ public class GeoCsvReader {
 			c.setPostalCodeFormat(place.getPostalCodeFormat());
 			c.setPostalCodeRegex(place.getPostalCodeRegex());
 			c.setTld(place.getTld());
+			countriesoncontinent.add(c);
+			continentCheck.setCountry(countriesoncontinent);
+			continentRepo.save(continentCheck);
 			countryRepo.save(c);
 		}
 	}

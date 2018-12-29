@@ -8,13 +8,12 @@ import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
-@NodeEntity
+@NodeEntity(label = "Country")
 public class Country {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-
 	private String iso;
 	private String iso3;
 	private String isoNumeric;
@@ -200,5 +199,4 @@ public class Country {
 	public void setEquivalentFipsCode(String equivalentFipsCode) {
 		this.equivalentFipsCode = equivalentFipsCode;
 	}
-
 }
