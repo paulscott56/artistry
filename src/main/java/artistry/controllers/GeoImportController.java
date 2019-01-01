@@ -3,6 +3,7 @@ package artistry.controllers;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.ParseException;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +45,14 @@ public class GeoImportController {
 	@ResponseBody
 	public Iterable<Place> getPlaceByName(@RequestParam("name") String name) {
 		return repo.findAllByName(name);
+	}
+
+	@RequestMapping(value = "/searchbyname", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public Set<Place> searchPlaceByName(@RequestParam("name") String name) {
+		String regex = "(?i).*" + name + "*";
+		return repo.getFuzzyByAsciiName(regex);
 	}
 
 	@RequestMapping(value = "/import", method = RequestMethod.GET)
