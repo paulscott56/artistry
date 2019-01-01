@@ -1,5 +1,7 @@
 package artistry.models.geonames;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -28,6 +30,17 @@ public class Country {
 
 	@Relationship(type = "ON_CONTINENT", direction = Relationship.OUTGOING)
 	private Continent continent;
+
+	@Relationship(type = "HAS_PLACE", direction = Relationship.OUTGOING)
+	private List<Place> places;
+
+	public List<Place> getPlaces() {
+		return places;
+	}
+
+	public void setPlaces(List<Place> places) {
+		this.places = places;
+	}
 
 	private String tld;
 	private String currencyCode;

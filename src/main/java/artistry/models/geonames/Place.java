@@ -1,76 +1,48 @@
 package artistry.models.geonames;
 
+import java.util.Date;
+import java.util.List;
+
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
-import com.opencsv.bean.CsvBindByPosition;
-
 @NodeEntity
-public class GeoPlace {
+public class Place {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
-	@CsvBindByPosition(position = 0)
 	private String geonameId;
-	@CsvBindByPosition(position = 1)
 	private String name;
-	@CsvBindByPosition(position = 2)
 	private String asciiName;
 
-	@CsvBindByPosition(position = 3)
 	@Relationship(type = "HAS_ALTERNATE_NAME", direction = Relationship.OUTGOING)
-	private String alternateNames;
+	private List<AlternateName> alternateNames;
 
-	@CsvBindByPosition(position = 4)
 	private Double latitude;
-	@CsvBindByPosition(position = 5)
 	private Double longitude;
 
-	@CsvBindByPosition(position = 6)
 	private String featureClass;
-	@CsvBindByPosition(position = 7)
 	private String featureCode;
 
-	@CsvBindByPosition(position = 8)
 	private String countryCode;
 
-	@CsvBindByPosition(position = 9)
 	private String cc2;
-	@CsvBindByPosition(position = 10)
 	private String admin1Code;
-	@CsvBindByPosition(position = 11)
 	private String admin2Code;
-	@CsvBindByPosition(position = 12)
 	private String admin3Code;
-	@CsvBindByPosition(position = 13)
 	private String admin4Code;
-	@CsvBindByPosition(position = 14)
 	private String population;
-	@CsvBindByPosition(position = 15)
 	private String elevation;
-	@CsvBindByPosition(position = 16)
 	private String dem;
-	@CsvBindByPosition(position = 17)
 	private String timezoneId;
-
-	@CsvBindByPosition(position = 18)
-	// @DateString("yyyy-MM-dd")
-	private String modificationDate;
+	private Date modificationDate;
 
 	@Relationship(type = "IN_COUNTRY", direction = Relationship.OUTGOING)
 	private Country country;
-
-	public Country getCountry() {
-		return country;
-	}
-
-	public void setCountry(Country country) {
-		this.country = country;
-	}
 
 	public Long getId() {
 		return id;
@@ -104,11 +76,11 @@ public class GeoPlace {
 		this.asciiName = asciiName;
 	}
 
-	public String getAlternateNames() {
+	public List<AlternateName> getAlternateNames() {
 		return alternateNames;
 	}
 
-	public void setAlternateNames(String alternateNames) {
+	public void setAlternateNames(List<AlternateName> alternateNames) {
 		this.alternateNames = alternateNames;
 	}
 
@@ -224,12 +196,20 @@ public class GeoPlace {
 		this.timezoneId = timezoneId;
 	}
 
-	public String getModificationDate() {
+	public Date getModificationDate() {
 		return modificationDate;
 	}
 
-	public void setModificationDate(String modificationDate) {
-		this.modificationDate = modificationDate;
+	public void setModificationDate(Date moddate) {
+		this.modificationDate = moddate;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
 }

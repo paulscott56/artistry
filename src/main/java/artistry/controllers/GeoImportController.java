@@ -2,6 +2,7 @@ package artistry.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +12,11 @@ import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.geonames.GeoPlace;
+import artistry.models.geonames.Place;
 import artistry.repositories.GeoRepository;
 import artistry.services.GeoCsvReader;
 
@@ -34,16 +36,22 @@ public class GeoImportController {
 
 	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
-	public Iterable<GeoPlace> getAllPlaces() {
+	public Iterable<Place> getAllPlaces() {
 		return repo.findAll();
+	}
+
+	@RequestMapping(value = "/getbyname", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public Iterable<Place> getPlaceByName(@RequestParam("name") String name) {
+		return repo.findAllByName(name);
 	}
 
 	@RequestMapping(value = "/import", method = RequestMethod.GET)
 	@ResponseBody
-	public String importData() throws IOException, URISyntaxException {
+	public String importData() throws IOException, URISyntaxException, ParseException {
 		csvReader.createPlanetEarth();
 		csvReader.readCountryInfoCsv();
-		// csvReader.readAllCountriesCsv();
+		csvReader.readAllCountriesCsv();
 		return "hello";
 	}
 

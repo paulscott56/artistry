@@ -6,10 +6,15 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +22,12 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 import artistry.enums.Continents;
+import artistry.models.geonames.AlternateName;
 import artistry.models.geonames.Continent;
 import artistry.models.geonames.Country;
 import artistry.models.geonames.GeoCountry;
 import artistry.models.geonames.GeoPlace;
+import artistry.models.geonames.Place;
 import artistry.models.geonames.Planet;
 import artistry.repositories.ContinentRepository;
 import artistry.repositories.CountryRepository;
@@ -29,6 +36,8 @@ import artistry.repositories.PlanetRepository;
 
 @Component
 public class GeoCsvReader {
+
+	static final Logger log = LoggerFactory.getLogger(GeoCsvReader.class);
 
 	@Autowired
 	private GeoRepository geoRepo;
@@ -42,17 +51,62 @@ public class GeoCsvReader {
 	@Autowired
 	private PlanetRepository planetRepo;
 
-	public void readAllCountriesCsv() throws IOException, URISyntaxException {
+	public void readAllCountriesCsv() throws IOException, URISyntaxException, ParseException {
 		Path CSV_PATH = Paths.get(ClassLoader.getSystemResource("csv/allCountries.txt").toURI());
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoPlace> csvToBean = new CsvToBeanBuilder<GeoPlace>(reader).withType(GeoPlace.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator('\t').build();
 		Iterator<GeoPlace> geoIterator = csvToBean.iterator();
 		while (geoIterator.hasNext()) {
-			GeoPlace place = geoIterator.next();
-			Country country = countryRepo.findByIso(place.getCountryCode());
-			place.setCountry(country);
-			geoRepo.save(place);
+			try {
+				GeoPlace place = geoIterator.next();
+				Country country = countryRepo.findByIso(place.getCountryCode());
+
+				Place poi = new Place();
+
+				poi.setAdmin1Code(place.getAdmin1Code());
+				poi.setAdmin2Code(place.getAdmin2Code());
+				poi.setAdmin3Code(place.getAdmin3Code());
+				poi.setAdmin4Code(place.getAdmin4Code());
+
+				List<AlternateName> alternatenames = new ArrayList<>();
+				String[] anames = place.getAlternateNames().split(",");
+				for (String a : anames) {
+					AlternateName alt = new AlternateName();
+					alt.setAlternateName(a);
+					alternatenames.add(alt);
+				}
+				poi.setAlternateNames(alternatenames);
+				poi.setAsciiName(place.getAsciiName());
+				poi.setCc2(place.getCc2());
+				poi.setCountry(country);
+				poi.setCountryCode(place.getCountryCode());
+				poi.setDem(place.getDem());
+				poi.setElevation(place.getElevation());
+				poi.setFeatureClass(place.getFeatureClass());
+				poi.setFeatureCode(place.getFeatureCode());
+				poi.setGeonameId(place.getGeonameId());
+				poi.setLatitude(place.getLatitude());
+				poi.setLongitude(place.getLongitude());
+				String pattern = "yyyy-MM-dd";
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+				Date moddate = simpleDateFormat.parse(place.getModificationDate());
+				poi.setModificationDate(moddate);
+				poi.setName(place.getName());
+				poi.setPopulation(place.getPopulation());
+				poi.setTimezoneId(place.getTimezoneId());
+
+				List<Place> placelist = new ArrayList<>();
+				List<Place> countrytoadd = country.getPlaces();
+				if (countrytoadd == null) {
+					countrytoadd = placelist;
+				}
+				country.setPlaces(countrytoadd);
+				countryRepo.save(country);
+				geoRepo.save(poi);
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
 		}
 	}
 
