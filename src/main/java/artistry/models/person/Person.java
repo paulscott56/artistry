@@ -8,6 +8,9 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import artistry.models.geonames.Country;
+import artistry.models.geonames.Place;
+
 @NodeEntity
 public class Person {
 
@@ -19,6 +22,12 @@ public class Person {
 	private String surname;
 	private String username;
 	private String nickname;
+
+	@Relationship(type = "LIVES_IN_COUNTRY", direction = Relationship.OUTGOING)
+	private Country country;
+
+	@Relationship(type = "IS_AT_PLACE", direction = Relationship.OUTGOING)
+	private Place place;
 
 	@Relationship(type = "WORKS_FOR", direction = Relationship.OUTGOING)
 	private Company company;
@@ -35,7 +44,7 @@ public class Person {
 
 	private LocalDateTime dateCreated;
 
-	@Relationship(type = "IS_ACTIVE", direction = Relationship.OUTGOING)
+	// @Relationship(type = "IS_ACTIVE", direction = Relationship.OUTGOING)
 	private Boolean active;
 
 	public Long getId() {
@@ -134,4 +143,19 @@ public class Person {
 		this.active = active;
 	}
 
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	public Place getPlace() {
+		return place;
+	}
+
+	public void setPlace(Place place) {
+		this.place = place;
+	}
 }
