@@ -16,6 +16,8 @@ public class Country {
 	@Id
 	@GeneratedValue
 	private Long id;
+
+	@Index(unique = true)
 	private String iso;
 	private String iso3;
 	private String isoNumeric;

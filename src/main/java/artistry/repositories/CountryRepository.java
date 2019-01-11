@@ -8,6 +8,8 @@ import artistry.models.geonames.Country;
 @RepositoryRestResource(collectionResourceRel = "geo", path = "country")
 public interface CountryRepository extends Neo4jRepository<Country, Long> {
 
-	Country findByIso(String countryCode);
+	Country findOneByIso(String countryCode);
+
+	Country findOneByCountry(String countryCode);
 
 }

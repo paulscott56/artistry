@@ -3,6 +3,15 @@ server:
   compression:
     enabled: true
 ---
+
+logging:
+  level: 
+    org.springframework.web: DEBUG
+    org.springframework.ws.client.MessageTracing.sent: TRACE
+    org.springframework.ws.server.MessageTracing.sent: TRACE
+    org.springframework.ws.client.MessageTracing.received: TRACE
+    org.springframework.ws.server.MessageTracing.received: TRACE
+
 spring:
   profiles: dev
   data:

@@ -1,9 +1,14 @@
 package artistry.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import artistry.models.geonames.Place;
 import artistry.repositories.GeoRepository;
 import artistry.services.GeoCsvReader;
+import artistry.utils.DownloadService;
 
 @Configuration
 @RestController
@@ -34,6 +40,9 @@ public class GeoImportController {
 
 	@Autowired
 	private GeoCsvReader csvReader;
+
+	@Autowired
+	private DownloadService downloader;
 
 	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
@@ -58,10 +67,68 @@ public class GeoImportController {
 	@RequestMapping(value = "/import", method = RequestMethod.GET)
 	@ResponseBody
 	public String importData() throws IOException, URISyntaxException, ParseException {
-		csvReader.createPlanetEarth();
-		csvReader.readCountryInfoCsv();
-		csvReader.readAllCountriesCsv();
-		return "hello";
+		try {
+			csvReader.readAllCountriesCsv();
+			return "Data import has been completed!";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@RequestMapping(value = "/setup", method = RequestMethod.GET)
+	@ResponseBody
+	public String setup() {
+		try {
+			csvReader.createPlanetEarth();
+			csvReader.readCountryInfoCsv();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "done";
+	}
+
+	@RequestMapping(value = "/importbycode", method = RequestMethod.GET)
+	@ResponseBody
+	public String importDataByCode(@RequestParam("code") String code)
+			throws IOException, URISyntaxException, ParseException {
+
+		try {
+			String data = downloader.download("http://download.geonames.org/export/dump/" + code + ".zip", code);
+			FileInputStream fis = new FileInputStream(data);
+
+			ZipInputStream zis = new ZipInputStream(fis);
+			ZipEntry zipEntry = zis.getNextEntry();
+
+			byte[] buffer = new byte[1024];
+			while (zipEntry != null) {
+				File destPath = new File(ClassLoader.getSystemResource("csv/").getFile() + zipEntry.getName());
+				destPath.createNewFile();
+				FileOutputStream fos = new FileOutputStream(destPath, false);
+				int len;
+				while ((len = zis.read(buffer)) > 0) {
+					fos.write(buffer, 0, len);
+				}
+				fos.close();
+				zipEntry = zis.getNextEntry();
+			}
+			zis.closeEntry();
+			zis.close();
+
+			// clean up
+			new File(ClassLoader.getSystemResource("csv/").getFile() + code + ".zip").delete();
+			new File(ClassLoader.getSystemResource("csv/").getFile() + "readme.txt").delete();
+
+			csvReader.readCountryByCode(code);
+
+			// finally delete the file info as well
+			new File(ClassLoader.getSystemResource("csv/").getFile() + code + ".txt").delete();
+
+			return "Country: " + code + " has been imported";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
