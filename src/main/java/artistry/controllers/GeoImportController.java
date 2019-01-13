@@ -6,7 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.ParseException;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -15,15 +16,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.geonames.Place;
-import artistry.repositories.GeoRepository;
 import artistry.services.GeoCsvReader;
 import artistry.utils.DownloadService;
 
@@ -36,33 +34,10 @@ public class GeoImportController {
 	static final Logger log = LoggerFactory.getLogger(GeoImportController.class);
 
 	@Autowired
-	private GeoRepository repo;
-
-	@Autowired
 	private GeoCsvReader csvReader;
 
 	@Autowired
 	private DownloadService downloader;
-
-	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
-	@ResponseBody
-	public Iterable<Place> getAllPlaces() {
-		return repo.findAll();
-	}
-
-	@RequestMapping(value = "/getbyname", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
-	@ResponseBody
-	public Iterable<Place> getPlaceByName(@RequestParam("name") String name) {
-		return repo.findAllByName(name);
-	}
-
-	@RequestMapping(value = "/searchbyname", method = RequestMethod.GET, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	@ResponseBody
-	public Set<Place> searchPlaceByName(@RequestParam("name") String name) {
-		String regex = "(?i).*" + name + "*";
-		return repo.getFuzzyByAsciiName(regex);
-	}
 
 	@RequestMapping(value = "/import", method = RequestMethod.GET)
 	@ResponseBody
@@ -125,6 +100,51 @@ public class GeoImportController {
 			new File(ClassLoader.getSystemResource("csv/").getFile() + code + ".txt").delete();
 
 			return "Country: " + code + " has been imported";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@RequestMapping(value = "/importcities", method = RequestMethod.GET)
+	@ResponseBody
+	public String importDataByCity() throws IOException, URISyntaxException, ParseException {
+
+		try {
+			List<String> downloadfiles = Arrays.asList("cities1000.zip", "cities15000.zip", "cities500.zip",
+					"cities5000.zip");
+
+			for (String file : downloadfiles) {
+				String data = downloader.download("http://download.geonames.org/export/dump/" + file,
+						file.replace(".zip", ""));
+				FileInputStream fis = new FileInputStream(data);
+				ZipInputStream zis = new ZipInputStream(fis);
+				ZipEntry zipEntry = zis.getNextEntry();
+
+				byte[] buffer = new byte[1024];
+				while (zipEntry != null) {
+					File destPath = new File(ClassLoader.getSystemResource("csv/").getFile() + zipEntry.getName());
+					destPath.createNewFile();
+					FileOutputStream fos = new FileOutputStream(destPath, false);
+					int len;
+					while ((len = zis.read(buffer)) > 0) {
+						fos.write(buffer, 0, len);
+					}
+					fos.close();
+					zipEntry = zis.getNextEntry();
+				}
+				zis.closeEntry();
+				zis.close();
+
+				csvReader.readCity(file.replace(".zip", ""));
+
+				// finally delete the file info as well
+				new File(ClassLoader.getSystemResource("csv/").getFile() + file.replace(".zip", "") + ".txt").delete();
+				new File(ClassLoader.getSystemResource("csv/").getFile() + file).delete();
+				log.info("Cities: " + file + " has been imported");
+			}
+			return "Cities have been imported!";
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

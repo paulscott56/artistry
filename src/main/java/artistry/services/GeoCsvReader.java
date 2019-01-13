@@ -26,12 +26,15 @@ import artistry.models.geonames.AlternateName;
 import artistry.models.geonames.Continent;
 import artistry.models.geonames.Country;
 import artistry.models.geonames.GeoCountry;
+import artistry.models.geonames.GeoMajorCity;
 import artistry.models.geonames.GeoPlace;
+import artistry.models.geonames.MajorCity;
 import artistry.models.geonames.Place;
 import artistry.models.geonames.Planet;
 import artistry.repositories.ContinentRepository;
 import artistry.repositories.CountryRepository;
 import artistry.repositories.GeoRepository;
+import artistry.repositories.MajorCityRepository;
 import artistry.repositories.PlanetRepository;
 
 @Component
@@ -41,6 +44,9 @@ public class GeoCsvReader {
 
 	@Autowired
 	private GeoRepository geoRepo;
+
+	@Autowired
+	private MajorCityRepository cityRepo;
 
 	@Autowired
 	private CountryRepository countryRepo;
@@ -245,5 +251,67 @@ public class GeoCsvReader {
 				System.out.println(e.getMessage());
 			}
 		}
+	}
+
+	public void readCity(String file) throws URISyntaxException, IOException {
+		Path CSV_PATH = Paths.get(ClassLoader.getSystemResource("csv/" + file + ".txt").toURI());
+		Reader reader = Files.newBufferedReader(CSV_PATH);
+		CsvToBean<GeoMajorCity> csvToBean = new CsvToBeanBuilder<GeoMajorCity>(reader).withType(GeoMajorCity.class)
+				.withIgnoreLeadingWhiteSpace(true).withSeparator('\t').build();
+		Iterator<GeoMajorCity> geoIterator = csvToBean.iterator();
+		while (geoIterator.hasNext()) {
+			try {
+				GeoMajorCity place = geoIterator.next();
+				System.out.println("Processing city: " + place.getName());
+				Country country = countryRepo.findOneByIso(place.getCountryCode());
+
+				MajorCity poi = new MajorCity();
+
+				poi.setAdmin1Code(place.getAdmin1Code());
+				poi.setAdmin2Code(place.getAdmin2Code());
+				poi.setAdmin3Code(place.getAdmin3Code());
+				poi.setAdmin4Code(place.getAdmin4Code());
+
+				List<AlternateName> alternatenames = new ArrayList<>();
+				String[] anames = place.getAlternateNames().split(",");
+				for (String a : anames) {
+					AlternateName alt = new AlternateName();
+					alt.setAlternateName(a);
+					alternatenames.add(alt);
+				}
+				poi.setAlternateNames(alternatenames);
+				poi.setAsciiName(place.getAsciiName());
+				poi.setCc2(place.getCc2());
+				poi.setCountry(country);
+				poi.setCountryCode(place.getCountryCode());
+				poi.setDem(place.getDem());
+				poi.setElevation(place.getElevation());
+				poi.setFeatureClass(place.getFeatureClass());
+				poi.setFeatureCode(place.getFeatureCode());
+				poi.setGeonameId(place.getGeonameId());
+				poi.setLatitude(place.getLatitude());
+				poi.setLongitude(place.getLongitude());
+				String pattern = "yyyy-MM-dd";
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+				Date moddate = simpleDateFormat.parse(place.getModificationDate());
+				poi.setModificationDate(moddate);
+				poi.setName(place.getName());
+				poi.setPopulation(place.getPopulation());
+				poi.setTimezoneId(place.getTimezoneId());
+
+				List<Place> placelist = new ArrayList<>();
+				List<Place> countrytoadd = country.getPlaces();
+				if (countrytoadd == null) {
+					countrytoadd = placelist;
+				}
+				country.setPlaces(countrytoadd);
+				countryRepo.save(country);
+				cityRepo.save(poi);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				log.error(e.getMessage());
+			}
+		}
+
 	}
 }
