@@ -44,7 +44,6 @@ public class Person {
 
 	private LocalDateTime dateCreated;
 
-	// @Relationship(type = "IS_ACTIVE", direction = Relationship.OUTGOING)
 	private Boolean active;
 
 	public Long getId() {
