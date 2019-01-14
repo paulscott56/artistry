@@ -32,14 +32,5 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/paul/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar" sourcepath="/home/paul/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="commons-codec"/>
-			<attribute name="maven.artifactId" value="commons-codec"/>
-			<attribute name="maven.version" value="1.11"/>
-			<attribute name="maven.scope" value="runtime"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
