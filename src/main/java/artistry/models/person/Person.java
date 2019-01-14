@@ -32,11 +32,12 @@ public class Person {
 	@Relationship(type = "WORKS_FOR", direction = Relationship.OUTGOING)
 	private Company company;
 
-	@Relationship(type = "HAS_EMAIL_ADDRESS", direction = Relationship.OUTGOING)
 	private EmailAddress emailAddress;
 
+	// we make this a rel as people can share phone numbers like as a business phone
 	@Relationship(type = "HAS_PHONE", direction = Relationship.OUTGOING)
 	private PhoneNumber phoneNumber;
+	
 	private Address address;
 
 	@Relationship(type = "IN_TIMEZONE", direction = Relationship.OUTGOING)
