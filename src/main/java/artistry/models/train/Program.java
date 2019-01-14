@@ -6,8 +6,8 @@ import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import artistry.models.person.ImplementationTeam;
 import artistry.models.person.Person;
-import artistry.models.person.Team;
 
 @NodeEntity
 public class Program {
@@ -16,7 +16,9 @@ public class Program {
 	@GeneratedValue
 	private Long id;
 
-	private List<Team> teams;
+	// list of teams on the program train
+	private List<ImplementationTeam> teams;
+	
 	private ProgramIncrement pi;
 	private List<Person> productManagement;
 	private Person SystemArchitect;
@@ -38,10 +40,10 @@ public class Program {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<Team> getTeams() {
+	public List<ImplementationTeam> getTeams() {
 		return teams;
 	}
-	public void setTeams(List<Team> teams) {
+	public void setTeams(List<ImplementationTeam> teams) {
 		this.teams = teams;
 	}
 	public ProgramIncrement getPi() {

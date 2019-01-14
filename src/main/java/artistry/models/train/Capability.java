@@ -36,5 +36,35 @@ public class Capability {
 	
 	private boolean accepted;
 
-	
+	public String getCapabilityName() {
+		return capabilityName;
+	}
+
+	public void setCapabilityName(String capabilityName) {
+		this.capabilityName = capabilityName;
+	}
+
+	public Document getBenefitHypothesis() {
+		return benefitHypothesis;
+	}
+
+	public void setBenefitHypothesis(Document benefitHypothesis) {
+		this.benefitHypothesis = benefitHypothesis;
+	}
+
+	public SolutionBacklog getSolutionBacklog() {
+		return solutionBacklog;
+	}
+
+	public void setSolutionBacklog(SolutionBacklog solutionBacklog) {
+		this.solutionBacklog = solutionBacklog;
+	}
+
+	public boolean isAccepted() {
+		return accepted;
+	}
+
+	public void setAccepted(boolean accepted) {
+		this.accepted = accepted;
+	}
 }

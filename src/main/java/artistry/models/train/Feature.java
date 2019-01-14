@@ -7,6 +7,8 @@ import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import artistry.models.person.ImplementationTeam;
+
 
 @NodeEntity
 public class Feature {
@@ -23,6 +25,7 @@ public class Feature {
 	private List<Document> acceptanceCriteria;
 	private Integer businessValue;
 	private boolean complete;
+	private List<ImplementationTeam> implementationTeams;
 	
 	public Long getId() {
 		return id;
@@ -77,5 +80,11 @@ public class Feature {
 	}
 	public void setComplete(boolean complete) {
 		this.complete = complete;
+	}
+	public List<ImplementationTeam> getImplementationTeams() {
+		return implementationTeams;
+	}
+	public void setImplementationTeams(List<ImplementationTeam> implementationTeams) {
+		this.implementationTeams = implementationTeams;
 	}	
 }

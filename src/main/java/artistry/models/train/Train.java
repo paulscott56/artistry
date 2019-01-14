@@ -7,8 +7,8 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import artistry.models.person.ImplementationTeam;
 import artistry.models.person.Person;
-import artistry.models.person.Team;
 
 @NodeEntity
 public class Train {
@@ -33,7 +33,7 @@ public class Train {
 	private List<String> successMeasures;
 
 	@Relationship(type = "IS_TEAM", direction = Relationship.INCOMING)
-	private List<Team> peopleAndLocations;
+	private List<ImplementationTeam> peopleAndLocations;
 
 	private PrincipalRoles principalRoles;
 
@@ -101,11 +101,11 @@ public class Train {
 		this.successMeasures = successMeasures;
 	}
 
-	public List<Team> getPeopleAndLocations() {
+	public List<ImplementationTeam> getPeopleAndLocations() {
 		return peopleAndLocations;
 	}
 
-	public void setPeopleAndLocations(List<Team> peopleAndLocations) {
+	public void setPeopleAndLocations(List<ImplementationTeam> peopleAndLocations) {
 		this.peopleAndLocations = peopleAndLocations;
 	}
 

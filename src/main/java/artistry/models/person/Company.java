@@ -28,7 +28,7 @@ public class Company {
 	private List<Person> employees;
 
 	@Relationship(type = "HAS_TEAM", direction = Relationship.INCOMING)
-	private List<Team> teams;
+	private List<ImplementationTeam> teams;
 
 	public Long getId() {
 		return id;
@@ -102,11 +102,11 @@ public class Company {
 		this.employees = employees;
 	}
 
-	public List<Team> getTeams() {
+	public List<ImplementationTeam> getTeams() {
 		return teams;
 	}
 
-	public void setTeams(List<Team> teams) {
+	public void setTeams(List<ImplementationTeam> teams) {
 		this.teams = teams;
 	}
 
