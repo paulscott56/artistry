@@ -222,82 +222,82 @@ public class GoogleTileUtils {
 		return 18 - satRef.length();
 	}
 
-	/**
-	 * Test cases
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		double eps = 1.0e-6;
-		System.out.println("toNormalizedCoords");
-
-		// center
-		System.out.println("center, expect 0.5,0.5\t" + toNormalisedPixelCoords(0, 0));
-
-		// topleft
-		System.out.println("topLeft, expect 0,0\t" + toNormalisedPixelCoords(85.05113f, -180));
-
-		// topright
-		System.out.println("topRight, expect 1,0\t" + toNormalisedPixelCoords(85.05113f, 180 - eps));
-
-		// bottomleft
-		System.out.println("bottomLeft, expect 0,1\t" + toNormalisedPixelCoords(-85.05113f, -180));
-
-		// bottomright
-		System.out.println("bottomRight, expect 1,1\t" + toNormalisedPixelCoords(-85.05113f, 180 - eps));
-
-		// my old home
-		System.out.println("my old home, expect \t" + toNormalisedPixelCoords(53.427972089896805, -2.2671961784362793));
-
-		System.out.println("getTileXY");
-		System.out.println("center zoom=17, expect 0,0\t" + toTileXY(0, 0, 17));
-		System.out.println("slightly up right of center zoom=16, expect 1,0\t" + toTileXY(eps, eps, 16));
-		System.out.println("slightly up right of center zoom=15, expect 2,1\t" + toTileXY(eps, eps, 15));
-		System.out.println(
-				"my old home zoom=0, expect 64710,42436\t" + toTileXY(53.427972089896805, -2.2671961784362793, 0));
-
-		System.out.println("toPixelCoords");
-		System.out.println("center zoom=17, expect 127,127\t" + toZoomedPixelCoords(0, 0, 17));
-		System.out.println("slightly up right of center zoom=16, expect 256,256\t" + toZoomedPixelCoords(eps, eps, 16));
-		System.out.println("slightly up right of center zoom=15, expect 512,512\t" + toZoomedPixelCoords(eps, eps, 15));
-		System.out.println("my old home zoom=0, expect 16565898,10863803\t"
-				+ toZoomedPixelCoords(53.427972089896805, -2.2671961784362793, 0));
-
-		System.out.println("getPixelOffsetInTile");
-		System.out.println("center zoom=17, expect 127,127\t" + getPixelOffsetInTile(0, 0, 17));
-		System.out.println("slightly up right of center zoom=16, expect 0,0\t" + getPixelOffsetInTile(eps, eps, 16));
-		System.out.println("slightly up right of center zoom=15, expect 0,0\t" + getPixelOffsetInTile(eps, eps, 15));
-		System.out.println("my old home zoom=0, expect 138,187\t"
-				+ getPixelOffsetInTile(53.427972089896805, -2.2671961784362793, 0));
-
-		System.out.println("getSatelliteRef");
-		System.out.println("center zoom=17, expect t\t" + getSatelliteRef(0, 0, 17));
-		System.out.println("slightly up right of center zoom=16, expect tr\t" + getSatelliteRef(eps, eps, 16));
-		System.out.println("slightly up right of center zoom=15, expect trt\t" + getSatelliteRef(eps, eps, 15));
-		System.out.println("my old home zoom=0, expect tqsrsrrsqtssqqqsrq\t"
-				+ getSatelliteRef(53.427972089896805, -2.2671961784362793, 0));
-
-		System.out.println();
-		System.out.println();
-		System.out.println("from google to lat/lng");
-		System.out.println();
-		System.out.println("satelliteRefToZoom");
-		System.out.println("expect 17\t" + satelliteRefToZoom("t"));
-		System.out.println("expect 16\t" + satelliteRefToZoom("tr"));
-		System.out.println("expect 15\t" + satelliteRefToZoom("trt"));
-		System.out.println("expect 0\t" + satelliteRefToZoom("tqsrsrrsqtssqqqsrq"));
-
-		System.out.println("satelliteRefToTileXY");
-		System.out.println("expect 0,0\t" + satelliteRefToTileXY("t"));
-		System.out.println("expect 1,0\t" + satelliteRefToTileXY("tr"));
-		System.out.println("expect 2,1\t" + satelliteRefToTileXY("trt"));
-		System.out.println("expect 64710,42436\t" + satelliteRefToTileXY("tqsrsrrsqtssqqqsrq"));
-
-		System.out.println("tileXYToRectangle");
-		System.out.println("expect -180,-85,360,170\t" + getTileRect(0, 0, 17));
-		System.out.println("expect 0,0,180,85\t" + getTileRect(1, 0, 16));
-		System.out.println("expect 0,0,90,66.5\t" + getTileRect(2, 1, 15));
-		System.out.println("expect -2.268677,53.42754, 0.002747,0.00163\t" + getTileRect(64710, 42436, 0));
-	}
+//	/**
+//	 * Test cases
+//	 * 
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		double eps = 1.0e-6;
+//		System.out.println("toNormalizedCoords");
+//
+//		// center
+//		System.out.println("center, expect 0.5,0.5\t" + toNormalisedPixelCoords(0, 0));
+//
+//		// topleft
+//		System.out.println("topLeft, expect 0,0\t" + toNormalisedPixelCoords(85.05113f, -180));
+//
+//		// topright
+//		System.out.println("topRight, expect 1,0\t" + toNormalisedPixelCoords(85.05113f, 180 - eps));
+//
+//		// bottomleft
+//		System.out.println("bottomLeft, expect 0,1\t" + toNormalisedPixelCoords(-85.05113f, -180));
+//
+//		// bottomright
+//		System.out.println("bottomRight, expect 1,1\t" + toNormalisedPixelCoords(-85.05113f, 180 - eps));
+//
+//		// my old home
+//		System.out.println("my old home, expect \t" + toNormalisedPixelCoords(53.427972089896805, -2.2671961784362793));
+//
+//		System.out.println("getTileXY");
+//		System.out.println("center zoom=17, expect 0,0\t" + toTileXY(0, 0, 17));
+//		System.out.println("slightly up right of center zoom=16, expect 1,0\t" + toTileXY(eps, eps, 16));
+//		System.out.println("slightly up right of center zoom=15, expect 2,1\t" + toTileXY(eps, eps, 15));
+//		System.out.println(
+//				"my old home zoom=0, expect 64710,42436\t" + toTileXY(53.427972089896805, -2.2671961784362793, 0));
+//
+//		System.out.println("toPixelCoords");
+//		System.out.println("center zoom=17, expect 127,127\t" + toZoomedPixelCoords(0, 0, 17));
+//		System.out.println("slightly up right of center zoom=16, expect 256,256\t" + toZoomedPixelCoords(eps, eps, 16));
+//		System.out.println("slightly up right of center zoom=15, expect 512,512\t" + toZoomedPixelCoords(eps, eps, 15));
+//		System.out.println("my old home zoom=0, expect 16565898,10863803\t"
+//				+ toZoomedPixelCoords(53.427972089896805, -2.2671961784362793, 0));
+//
+//		System.out.println("getPixelOffsetInTile");
+//		System.out.println("center zoom=17, expect 127,127\t" + getPixelOffsetInTile(0, 0, 17));
+//		System.out.println("slightly up right of center zoom=16, expect 0,0\t" + getPixelOffsetInTile(eps, eps, 16));
+//		System.out.println("slightly up right of center zoom=15, expect 0,0\t" + getPixelOffsetInTile(eps, eps, 15));
+//		System.out.println("my old home zoom=0, expect 138,187\t"
+//				+ getPixelOffsetInTile(53.427972089896805, -2.2671961784362793, 0));
+//
+//		System.out.println("getSatelliteRef");
+//		System.out.println("center zoom=17, expect t\t" + getSatelliteRef(0, 0, 17));
+//		System.out.println("slightly up right of center zoom=16, expect tr\t" + getSatelliteRef(eps, eps, 16));
+//		System.out.println("slightly up right of center zoom=15, expect trt\t" + getSatelliteRef(eps, eps, 15));
+//		System.out.println("my old home zoom=0, expect tqsrsrrsqtssqqqsrq\t"
+//				+ getSatelliteRef(53.427972089896805, -2.2671961784362793, 0));
+//
+//		System.out.println();
+//		System.out.println();
+//		System.out.println("from google to lat/lng");
+//		System.out.println();
+//		System.out.println("satelliteRefToZoom");
+//		System.out.println("expect 17\t" + satelliteRefToZoom("t"));
+//		System.out.println("expect 16\t" + satelliteRefToZoom("tr"));
+//		System.out.println("expect 15\t" + satelliteRefToZoom("trt"));
+//		System.out.println("expect 0\t" + satelliteRefToZoom("tqsrsrrsqtssqqqsrq"));
+//
+//		System.out.println("satelliteRefToTileXY");
+//		System.out.println("expect 0,0\t" + satelliteRefToTileXY("t"));
+//		System.out.println("expect 1,0\t" + satelliteRefToTileXY("tr"));
+//		System.out.println("expect 2,1\t" + satelliteRefToTileXY("trt"));
+//		System.out.println("expect 64710,42436\t" + satelliteRefToTileXY("tqsrsrrsqtssqqqsrq"));
+//
+//		System.out.println("tileXYToRectangle");
+//		System.out.println("expect -180,-85,360,170\t" + getTileRect(0, 0, 17));
+//		System.out.println("expect 0,0,180,85\t" + getTileRect(1, 0, 16));
+//		System.out.println("expect 0,0,90,66.5\t" + getTileRect(2, 1, 15));
+//		System.out.println("expect -2.268677,53.42754, 0.002747,0.00163\t" + getTileRect(64710, 42436, 0));
+//	}
 
 }
