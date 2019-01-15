@@ -8,4 +8,6 @@ import artistry.models.person.EmailAddress;
 @RepositoryRestResource(collectionResourceRel = "person", path = "emailaddress")
 public interface EmailAddressRepository extends Neo4jRepository<EmailAddress, Long> {
 
+	EmailAddress findByWorkEmail(String emailAddress);
+
 }

@@ -3,8 +3,11 @@ package artistry.models.person;
 import java.time.LocalDateTime;
 import java.util.TimeZone;
 
+import javax.validation.constraints.NotNull;
+
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -19,6 +22,9 @@ public class Person {
 
 	private String name;
 	private String surname;
+
+	@NotNull
+	@Index(unique = true)
 	private String username;
 	private String nickname;
 	private String countryCode;

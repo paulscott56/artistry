@@ -58,7 +58,7 @@ public class JsonConfiguration {
 		final MarshallingHttpMessageConverter converter = new MarshallingHttpMessageConverter();
 		converter.setMarshaller(jaxb2Marshaller);
 		converter.setUnmarshaller(jaxb2Marshaller);
-		converter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_XML));
+		converter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML));
 
 		return converter;
 	}
