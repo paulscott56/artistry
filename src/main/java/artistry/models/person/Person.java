@@ -9,7 +9,6 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 import artistry.models.geonames.Country;
-import artistry.models.geonames.Place;
 
 @NodeEntity
 public class Person {
@@ -22,29 +21,16 @@ public class Person {
 	private String surname;
 	private String username;
 	private String nickname;
+	private String countryCode;
 
 	@Relationship(type = "LIVES_IN_COUNTRY", direction = Relationship.OUTGOING)
 	private Country country;
 
-	@Relationship(type = "IS_AT_PLACE", direction = Relationship.OUTGOING)
-	private Place place;
-
-	@Relationship(type = "WORKS_FOR", direction = Relationship.OUTGOING)
-	private Company company;
-
 	private EmailAddress emailAddress;
-
-	// we make this a rel as people can share phone numbers like as a business phone
-	@Relationship(type = "HAS_PHONE", direction = Relationship.OUTGOING)
 	private PhoneNumber phoneNumber;
-	
 	private Address address;
-
-	@Relationship(type = "IN_TIMEZONE", direction = Relationship.OUTGOING)
 	private TimeZone timezone;
-
 	private LocalDateTime dateCreated;
-
 	private Boolean active;
 
 	public Long getId() {
@@ -85,14 +71,6 @@ public class Person {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
 	}
 
 	public EmailAddress getEmailAddress() {
@@ -151,11 +129,19 @@ public class Person {
 		this.country = country;
 	}
 
-	public Place getPlace() {
-		return place;
+	public String getCountryCode() {
+		return countryCode;
 	}
 
-	public void setPlace(Place place) {
-		this.place = place;
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
+
+	// public Place getPlace() {
+	// return place;
+	// }
+	//
+	// public void setPlace(Place place) {
+	// this.place = place;
+	// }
 }
