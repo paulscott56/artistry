@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import artistry.models.person.Company;
+import artistry.models.person.ImplementationTeam;
 import artistry.models.train.Enterprise;
 import artistry.repositories.CompanyRepository;
 import artistry.repositories.EnterpriseRepository;
+import artistry.repositories.ImplementationTeamRepository;
 
 @Configuration
 @RestController
@@ -30,6 +32,9 @@ public class OrganizationController {
 	@Autowired
 	private CompanyRepository companyRepo;
 
+	@Autowired
+	private ImplementationTeamRepository teamRepo;
+
 	@RequestMapping(value = "/newenterprise", method = RequestMethod.POST)
 	@ResponseBody
 	private Enterprise createEnterprise(@RequestBody Enterprise enterprise) {
@@ -42,6 +47,13 @@ public class OrganizationController {
 	private Company createCompany(@RequestBody Company company) {
 		Company savedcompany = companyRepo.save(company);
 		return savedcompany;
+	}
+
+	@RequestMapping(value = "/newteam", method = RequestMethod.POST)
+	@ResponseBody
+	private ImplementationTeam createTeam(@RequestBody ImplementationTeam team) {
+		ImplementationTeam savedteam = teamRepo.save(team);
+		return savedteam;
 	}
 
 }

@@ -9,13 +9,8 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 import artistry.models.train.Document;
-import artistry.models.train.EnablerStory;
-import artistry.models.train.IterationGoal;
 import artistry.models.train.IterationRetrospective;
 import artistry.models.train.IterationReview;
-import artistry.models.train.Objective;
-import artistry.models.train.Story;
-import artistry.models.train.TeamBacklog;
 
 @NodeEntity
 public class ImplementationTeam {
@@ -28,26 +23,28 @@ public class ImplementationTeam {
 	private EmailAddress teamEmail;
 	private Company company;
 	private URL teamLogo;
-	
+
 	@Relationship(type = "HAS_PRODUCT_OWNER", direction = Relationship.OUTGOING)
 	private Person productOwner;
-	
+
 	@Relationship(type = "HAS_AGILE_TEAM_MEMBER", direction = Relationship.OUTGOING)
 	private List<Person> agileTeam;
+
 	@Relationship(type = "HAS_DEV_TEAM_MEMBER", direction = Relationship.OUTGOING)
 	private List<Person> devTeam;
+
 	@Relationship(type = "HAS_SCRUM_MASTER", direction = Relationship.OUTGOING)
 	private Person scrumMaster;
-	
+
 	@Relationship(type = "HAS_PLANNING_DOCUMENT", direction = Relationship.OUTGOING)
 	private List<Document> iterationPlanningDocuments;
-	
+
 	@Relationship(type = "HAS_ITERATION_REVIEW", direction = Relationship.OUTGOING)
 	private List<IterationReview> iterationReviews;
-	
+
 	@Relationship(type = "HAS_ITERATION_RETRO", direction = Relationship.OUTGOING)
 	private List<IterationRetrospective> iterationRetrospectives;
-	
+
 	@Relationship(type = "HAS_INNOVATION_DOCUMENT", direction = Relationship.OUTGOING)
 	private List<Document> innovationAndPlanningDocuments;
 
@@ -154,19 +151,18 @@ public class ImplementationTeam {
 	public void setInnovationAndPlanningDocuments(List<Document> innovationAndPlanningDocuments) {
 		this.innovationAndPlanningDocuments = innovationAndPlanningDocuments;
 	}
-	
-//	@Relationship(type = "HAS_STORY", direction = Relationship.OUTGOING)
-//	private List<Story> stories;
-//	
-//	@Relationship(type = "HAS_ENABLER_STORY", direction = Relationship.OUTGOING)
-//	private List<EnablerStory> enablerStories;
-//	
-//	@Relationship(type = "HAS_ITERATION_GOAL", direction = Relationship.OUTGOING)
-//	private List<IterationGoal> iterationGoals;
-//	@Relationship(type = "HAS_BACKLOG", direction = Relationship.OUTGOING)
-//	private TeamBacklog teamBacklog;
-//	@Relationship(type = "HAS_PI_OBJECTIVE", direction = Relationship.OUTGOING)
-//	private List<Objective> teamPiObjectives;
 
-	
+	// @Relationship(type = "HAS_STORY", direction = Relationship.OUTGOING)
+	// private List<Story> stories;
+	//
+	// @Relationship(type = "HAS_ENABLER_STORY", direction = Relationship.OUTGOING)
+	// private List<EnablerStory> enablerStories;
+	//
+	// @Relationship(type = "HAS_ITERATION_GOAL", direction = Relationship.OUTGOING)
+	// private List<IterationGoal> iterationGoals;
+	// @Relationship(type = "HAS_BACKLOG", direction = Relationship.OUTGOING)
+	// private TeamBacklog teamBacklog;
+	// @Relationship(type = "HAS_PI_OBJECTIVE", direction = Relationship.OUTGOING)
+	// private List<Objective> teamPiObjectives;
+
 }

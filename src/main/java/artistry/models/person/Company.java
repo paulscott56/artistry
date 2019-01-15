@@ -21,13 +21,13 @@ public class Company {
 	private Double latitude;
 	private Double longitude;
 
-	@Relationship(type = "HAS_CONTACT_PERSON", direction = Relationship.INCOMING)
+	@Relationship(type = "HAS_CONTACT_PERSON", direction = Relationship.OUTGOING)
 	private Person contactPerson;
 
-	@Relationship(type = "HAS_EMPLOYEE", direction = Relationship.INCOMING)
+	@Relationship(type = "HAS_EMPLOYEE", direction = Relationship.OUTGOING)
 	private List<Person> employees;
 
-	@Relationship(type = "HAS_TEAM", direction = Relationship.INCOMING)
+	@Relationship(type = "HAS_TEAM", direction = Relationship.OUTGOING)
 	private List<ImplementationTeam> teams;
 
 	public Long getId() {
