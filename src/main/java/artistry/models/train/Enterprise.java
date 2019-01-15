@@ -31,7 +31,6 @@ public class Enterprise {
 	
 	@Relationship(type = "HAS_QUALITATIVE_DATA", direction = Relationship.OUTGOING)
 	private List<Document> qualitativeData;
-	
 	private GuardRails guardRails;
 	
 	public Long getId() {

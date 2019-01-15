@@ -5,7 +5,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import artistry.models.person.Person;
 
-@RepositoryRestResource(collectionResourceRel = "person", path = "person")
+@RepositoryRestResource(collectionResourceRel = "people", path = "person")
 public interface PersonRepository extends Neo4jRepository<Person, Long> {
 
 }
