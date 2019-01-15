@@ -26,6 +26,7 @@ public class Feature {
 	private Integer businessValue;
 	private boolean complete;
 	private List<ImplementationTeam> implementationTeams;
+	private WeightedShortestJobFirst wsjf;
 	
 	public Long getId() {
 		return id;
@@ -86,5 +87,11 @@ public class Feature {
 	}
 	public void setImplementationTeams(List<ImplementationTeam> implementationTeams) {
 		this.implementationTeams = implementationTeams;
+	}
+	public WeightedShortestJobFirst getWsjf() {
+		return wsjf;
+	}
+	public void setWsjf(WeightedShortestJobFirst wsjf) {
+		this.wsjf = wsjf;
 	}	
 }
