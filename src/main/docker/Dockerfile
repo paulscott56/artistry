@@ -6,4 +6,4 @@ RUN bash -c 'touch /artistry.jar'
 
 EXPOSE 9988
 
-ENTRYPOINT exec java $JAVA_OPTS -jar /avail.jar
+ENTRYPOINT exec java $JAVA_OPTS -jar /artistry.jar
