@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import artistry.models.geonames.Country;
 import artistry.models.person.Person;
+import artistry.models.person.PersonRole;
 import artistry.repositories.CountryRepository;
 import artistry.repositories.PersonRepository;
+import artistry.repositories.RolesRepository;
 
 @Configuration
 @RestController
@@ -35,6 +37,9 @@ public class PersonRestController {
 
 	@Autowired
 	private CountryRepository countryRepo;
+	
+	@Autowired
+	private RolesRepository rolesRepo;
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	@ResponseBody
@@ -114,5 +119,18 @@ public class PersonRestController {
 	private Optional<Person> getById(@PathVariable("id") Long id) {
 		Optional<Person> person = personRepo.findById(id);
 		return person;
+	}
+	
+	@RequestMapping(value = "/createrole", method = RequestMethod.POST)
+	@ResponseBody
+	private PersonRole createRole(@RequestBody PersonRole role) {
+		Optional<PersonRole> existingrole = rolesRepo.findByRoleName(role.getRoleName());
+		if(!existingrole.isPresent()) {
+			return rolesRepo.save(role);
+		} else {
+			PersonRole oldrole = existingrole.get();
+			role.setId(oldrole.getId());
+			return rolesRepo.save(role);
+		}
 	}
 }

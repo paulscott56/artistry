@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import artistry.enums.Role;
 import artistry.models.dto.PersonTeamObject;
 import artistry.models.person.Company;
 import artistry.models.person.ImplementationTeam;
 import artistry.models.person.Person;
+import artistry.models.person.PersonRole;
 import artistry.models.train.Enterprise;
 import artistry.repositories.CompanyRepository;
 import artistry.repositories.EnterpriseRepository;
@@ -92,6 +94,16 @@ public class OrganizationController {
 			ImplementationTeam team = optteam.get();
 			
 			Person person = optperson.get();
+			List<PersonRole> personroles = person.getRoles();
+			for(PersonRole role : personroles) {
+				Role roleEnum = role.getRole();
+				switch(roleEnum.toString()) {
+				    case "SCRUM_MASTER":
+				    	
+					
+				    break;
+				}
+			}
 		}
 		return null;
 	}

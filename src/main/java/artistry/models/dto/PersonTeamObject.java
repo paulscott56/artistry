@@ -1,12 +1,12 @@
 package artistry.models.dto;
 
-import artistry.enums.PersonRole;
+import artistry.enums.Role;
 
 public class PersonTeamObject {
 	
 	private Long personId;
 	private Long implemantationTeamId;
-	private PersonRole role;
+	private Role role;
 	
 	public Long getPersonId() {
 		return personId;
@@ -20,10 +20,10 @@ public class PersonTeamObject {
 	public void setImplemantationTeamId(Long implemantationTeamId) {
 		this.implemantationTeamId = implemantationTeamId;
 	}
-	public PersonRole getRole() {
+	public Role getRole() {
 		return role;
 	}
-	public void setRole(PersonRole role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 	

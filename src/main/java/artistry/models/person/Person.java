@@ -12,7 +12,7 @@ import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
-import artistry.enums.PersonRole;
+import artistry.enums.Role;
 import artistry.models.geonames.Country;
 
 @NodeEntity
@@ -40,7 +40,10 @@ public class Person {
 	private TimeZone timezone;
 	private LocalDateTime dateCreated;
 	private Boolean active;
+	
+	@Relationship(type = "ROLE", direction = Relationship.OUTGOING)
 	private List<PersonRole> roles;
+
 	private LocalDateTime modificationDate;
 
 	public Long getId() {
