@@ -66,6 +66,12 @@ public class PersonRestController {
 		}
 	}
 	
+	/**
+	 * We only deactivate people, not delete them. This is to create an audit trail for archive
+	 * 
+	 * @param person
+	 * @return
+	 */
 	@RequestMapping(value = "/deactivate", method = RequestMethod.POST)
 	@ResponseBody
 	private Person deactivatePerson(@RequestBody Person person) {
