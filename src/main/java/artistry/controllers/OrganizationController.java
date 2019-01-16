@@ -9,18 +9,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import artistry.models.dto.PersonTeamObject;
 import artistry.models.person.Company;
 import artistry.models.person.ImplementationTeam;
+import artistry.models.person.Person;
 import artistry.models.train.Enterprise;
 import artistry.repositories.CompanyRepository;
 import artistry.repositories.EnterpriseRepository;
 import artistry.repositories.ImplementationTeamRepository;
+import artistry.repositories.PersonRepository;
 
 @Configuration
 @RestController
@@ -38,6 +42,9 @@ public class OrganizationController {
 
 	@Autowired
 	private ImplementationTeamRepository teamRepo;
+	
+	@Autowired
+	private PersonRepository personRepo;
 
 	@RequestMapping(value = "/newenterprise", method = RequestMethod.POST)
 	@ResponseBody
@@ -74,6 +81,19 @@ public class OrganizationController {
 			companyRepo.save(cotoupdate);
 		}
 		return savedteam;
+	}
+	
+	@RequestMapping(value = "/addpersontoteam", method = RequestMethod.POST)
+	@ResponseBody
+	private ImplementationTeam addPersonToTeam(@RequestBody PersonTeamObject personteam) {
+		Optional<Person> optperson = personRepo.findById(personteam.getPersonId());
+		Optional<ImplementationTeam> optteam = teamRepo.findById(personteam.getImplemantationTeamId());
+		if(optperson.isPresent() && optteam.isPresent()) {
+			ImplementationTeam team = optteam.get();
+			
+			Person person = optperson.get();
+		}
+		return null;
 	}
 
 }

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import artistry.models.geonames.Country;
 import artistry.models.person.Person;
 import artistry.repositories.CountryRepository;
-import artistry.repositories.EmailAddressRepository;
 import artistry.repositories.PersonRepository;
 
 @Configuration
@@ -37,10 +36,7 @@ public class PersonRestController {
 	@Autowired
 	private CountryRepository countryRepo;
 
-	@Autowired
-	private EmailAddressRepository emailRepo;
-
-	@RequestMapping(value = "/newperson", method = RequestMethod.POST)
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	@ResponseBody
 	private Person createPerson(@RequestBody Person person) {
 		try {
@@ -51,7 +47,50 @@ public class PersonRestController {
 
 			return personRepo.save(person);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.info(e.getMessage());
+			return person;
+		}
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	private Person updatePerson(@RequestBody Person person) {
+		try {
+			Country country = countryRepo.findOneByIso(person.getCountryCode());
+			person.setCountry(country);
+			person.setModificationDate(LocalDateTime.now());
+			return personRepo.save(person);
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			return person;
+		}
+	}
+	
+	@RequestMapping(value = "/deactivate", method = RequestMethod.POST)
+	@ResponseBody
+	private Person deactivatePerson(@RequestBody Person person) {
+		try {
+			Country country = countryRepo.findOneByIso(person.getCountryCode());
+			person.setCountry(country);
+			person.setModificationDate(LocalDateTime.now());
+			person.setActive(false);
+			return personRepo.save(person);
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			return person;
+		}
+	}
+	
+	@RequestMapping(value = "/activate", method = RequestMethod.POST)
+	@ResponseBody
+	private Person activatePerson(@RequestBody Person person) {
+		try {
+			Country country = countryRepo.findOneByIso(person.getCountryCode());
+			person.setCountry(country);
+			person.setModificationDate(LocalDateTime.now());
+			person.setActive(true);
+			return personRepo.save(person);
+		} catch (Exception e) {
 			log.info(e.getMessage());
 			return person;
 		}
@@ -70,5 +109,4 @@ public class PersonRestController {
 		Optional<Person> person = personRepo.findById(id);
 		return person;
 	}
-
 }

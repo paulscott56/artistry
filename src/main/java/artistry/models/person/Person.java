@@ -1,6 +1,7 @@
 package artistry.models.person;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.TimeZone;
 
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import artistry.enums.PersonRole;
 import artistry.models.geonames.Country;
 
 @NodeEntity
@@ -38,6 +40,8 @@ public class Person {
 	private TimeZone timezone;
 	private LocalDateTime dateCreated;
 	private Boolean active;
+	private List<PersonRole> roles;
+	private LocalDateTime modificationDate;
 
 	public Long getId() {
 		return id;
@@ -143,11 +147,19 @@ public class Person {
 		this.countryCode = countryCode;
 	}
 
-	// public Place getPlace() {
-	// return place;
-	// }
-	//
-	// public void setPlace(Place place) {
-	// this.place = place;
-	// }
+	public List<PersonRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<PersonRole> roles) {
+		this.roles = roles;
+	}
+
+	public LocalDateTime getModificationDate() {
+		return modificationDate;
+	}
+
+	public void setModificationDate(LocalDateTime modificationDate) {
+		this.modificationDate = modificationDate;
+	}
 }
