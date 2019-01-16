@@ -15,6 +15,8 @@ public class EmailAddress {
 	private String personalEmail;
 	private String supportEmail;
 	private String emergencyContactEmail;
+	private String teamEmail;
+
 
 	public Long getId() {
 		return id;
@@ -55,5 +57,14 @@ public class EmailAddress {
 	public void setEmergencyContactEmail(String emergencyContactEmail) {
 		this.emergencyContactEmail = emergencyContactEmail;
 	}
+
+	public String getTeamEmail() {
+		return teamEmail;
+	}
+
+	public void setTeamEmail(String teamEmail) {
+		this.teamEmail = teamEmail;
+	}
+
 
 }

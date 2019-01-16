@@ -1,5 +1,9 @@
 package artistry.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +57,22 @@ public class OrganizationController {
 	@ResponseBody
 	private ImplementationTeam createTeam(@RequestBody ImplementationTeam team) {
 		ImplementationTeam savedteam = teamRepo.save(team);
+		// we need to also update the company links
+		Company c = team.getCompany();
+		Optional<Company> coCheck = companyRepo.findById(c.getId());
+		if(coCheck.isPresent()) {
+			Company cotoupdate = coCheck.get();
+			List<ImplementationTeam> teamlist = cotoupdate.getTeams();
+			if(teamlist != null && teamlist.size() > 0) {
+				teamlist.add(savedteam);
+				cotoupdate.setTeams(teamlist);
+			} else {
+				List<ImplementationTeam> newteamlist = new ArrayList<>();
+				newteamlist.add(savedteam);
+				cotoupdate.setTeams(newteamlist);
+			}
+			companyRepo.save(cotoupdate);
+		}
 		return savedteam;
 	}
 
