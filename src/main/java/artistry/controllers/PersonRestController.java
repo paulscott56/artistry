@@ -1,5 +1,7 @@
 package artistry.controllers;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.TimeZone;
@@ -23,6 +25,7 @@ import artistry.models.person.PersonRole;
 import artistry.repositories.CountryRepository;
 import artistry.repositories.PersonRepository;
 import artistry.repositories.RolesRepository;
+import artistry.services.ArtistryCsvReader;
 
 @Configuration
 @RestController
@@ -40,6 +43,9 @@ public class PersonRestController {
 	
 	@Autowired
 	private RolesRepository rolesRepo;
+	
+	@Autowired
+	private ArtistryCsvReader csvReader;
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	@ResponseBody
@@ -132,5 +138,13 @@ public class PersonRestController {
 			role.setId(oldrole.getId());
 			return rolesRepo.save(role);
 		}
+	}
+	
+	@RequestMapping(value = "/setuproles", method = RequestMethod.GET)
+	@ResponseBody
+	private String createBaseRoles() throws URISyntaxException, IOException {
+		// parse the csv file
+		csvReader.readRolesCsv();
+		return "Import of roles complete";
 	}
 }

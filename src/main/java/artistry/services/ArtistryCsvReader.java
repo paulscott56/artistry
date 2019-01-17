@@ -31,16 +31,18 @@ import artistry.models.geonames.GeoPlace;
 import artistry.models.geonames.MajorCity;
 import artistry.models.geonames.Place;
 import artistry.models.geonames.Planet;
+import artistry.models.person.PersonRole;
 import artistry.repositories.ContinentRepository;
 import artistry.repositories.CountryRepository;
 import artistry.repositories.GeoRepository;
 import artistry.repositories.MajorCityRepository;
 import artistry.repositories.PlanetRepository;
+import artistry.repositories.RolesRepository;
 
 @Component
-public class GeoCsvReader {
+public class ArtistryCsvReader {
 
-	static final Logger log = LoggerFactory.getLogger(GeoCsvReader.class);
+	static final Logger log = LoggerFactory.getLogger(ArtistryCsvReader.class);
 
 	@Autowired
 	private GeoRepository geoRepo;
@@ -56,6 +58,9 @@ public class GeoCsvReader {
 
 	@Autowired
 	private PlanetRepository planetRepo;
+	
+	@Autowired
+	private RolesRepository rolesRepo;
 
 	public void readCountryByCode(String code) throws URISyntaxException, IOException {
 		Path CSV_PATH = Paths.get(ClassLoader.getSystemResource("csv/" + code + ".txt").toURI());
@@ -313,5 +318,22 @@ public class GeoCsvReader {
 			}
 		}
 
+	}
+
+	public void readRolesCsv() throws URISyntaxException, IOException {
+		Path CSV_PATH = Paths.get(ClassLoader.getSystemResource("csv/roles.csv").toURI());
+		Reader reader = Files.newBufferedReader(CSV_PATH);
+		CsvToBean<PersonRole> csvToBean = new CsvToBeanBuilder<PersonRole>(reader).withType(PersonRole.class)
+				.withIgnoreLeadingWhiteSpace(true).withSeparator(',').withSkipLines(1).build();
+		Iterator<PersonRole> roleIterator = csvToBean.iterator();
+		while (roleIterator.hasNext()) {
+			try {
+				PersonRole role = roleIterator.next();
+				log.info("Importing role: " + role.getRoleName() + " " + role.getRole().toString());
+				rolesRepo.save(role);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

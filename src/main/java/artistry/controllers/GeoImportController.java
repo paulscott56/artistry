@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.services.GeoCsvReader;
+import artistry.services.ArtistryCsvReader;
 import artistry.utils.DownloadService;
 
 @Configuration
@@ -34,7 +34,7 @@ public class GeoImportController {
 	static final Logger log = LoggerFactory.getLogger(GeoImportController.class);
 
 	@Autowired
-	private GeoCsvReader csvReader;
+	private ArtistryCsvReader csvReader;
 
 	@Autowired
 	private DownloadService downloader;

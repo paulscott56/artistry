@@ -1,0 +1,36 @@
+roleName,role,roleDescription,safeRole
+Developer,DEVELOPER,A person who primarily writes code,TRUE
+Scrum Master,SCRUM_MASTER,A person who manages the iteration at a team level,TRUE
+Agile Team Member,AGILE_TEAM_MEMBER,A person wjo is a part of an agile implementation team,TRUE
+Product Owner,PRODUCT_OWNER,A person who owns the overall product from a team perspective,TRUE
+Release Train Engineer,RTE,A person who owns the train release process,TRUE
+STE,STE,A Solution Train Engineer looks after trains at the solution level,TRUE
+Product Manager,PRODUCT_MANAGER,Product manager looks after the Product team,TRUE
+Tester,TESTER,Testing engineer,FALSE
+Business Owner,BUSINESS_OWNER,A Business owner oversees business and value,TRUE
+Customer,CUSTOMER,A Customer can be any user or organization that consumes the code,TRUE
+Solution Manager,SOLUTION_MANAGER,Solution manager looks after the product teams at the solution level,TRUE
+Supplier,SUPPLIER,A supplier can be any third party that plays a role in the train,TRUE
+Portfolio Manager,PORTFOLIO_MANAGER,Portfolio Manager looks after the entire portfolio from a business perspective,TRUE
+Epic Owner,EPIC_OWNER,Epic owners are high level business people that direct the portfolio,TRUE
+Enterprise Architect,ENTERPRISE_ARCHITECT,Enterprise Architects decide the architectural direction of the portfolio,TRUE
+UX,UX,UX practitioners ensure the systems produced are usable,TRUE
+Agile Leader,AGILE_LEADER,Agile leaders are experts within the train that can help with agile direction,TRUE
+Agile Coach,AGILE_COACH,Agile coaches teach and coach agile methods,FALSE
+Development Manager,DEVELOPMENT_MANAGER,Development Managers are generally responsible for a small subset of teams within the portfolio,FALSE
+Team Lead,TEAM_LEAD,team leads lead the individual implementation teams,FALSE
+Translator,TRANSLATOR,Translators translate text from one language to another,FALSE
+Mobile IOS Developer,MOBILE_IOS_DEV,IOS developer,FALSE
+Mobile Android (Java) Developer,MOBILE_ANDROID_DEV,Java based Android developer,FALSE
+Mobile Android (Kotlin) Developer,MOBILE_ANDROID_KOT_DEV,Kotlin based Android developer,FALSE
+CTO,CTO,Chief Technical Officer,FALSE
+CEO,CEO,Chief Executive Officer,FALSE
+DevOps Engineer,DEVOPS_ENGINEER,Devops person that has full visibility onto the code and environments,TRUE
+Marketing,MARKETING,Marketing practitioner,FALSE
+Marketing Manager,MARKETING_MANAGER,Marketing manager,FALSE
+Analytics,ANALYTICS,Analytics jockey,FALSE
+Analytics Manager,ANALYTICS_MANAGER,Analytics manager responsible for analytics teams,FALSE
+Reporting Engineer,REPORTING,Report generation and dessimination ,FALSE
+GIS Engineer,GIS,GIS engineer for Geographical information,FALSE
+Consultant,CONSULTANT,Generic consultant role,FALSE
+Database Administrator,DBA,A Person who is responsible for administering database systems,FALSE

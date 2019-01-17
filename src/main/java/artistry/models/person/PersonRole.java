@@ -4,7 +4,11 @@ import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvCustomBindByPosition;
+
 import artistry.enums.Role;
+import artistry.services.RoleTypeEnumConverter;
 
 @NodeEntity
 public class PersonRole {
@@ -13,9 +17,13 @@ public class PersonRole {
 	@GeneratedValue
 	private Long id;
 	
+	@CsvBindByPosition(position = 0)
 	private String roleName;
+	@CsvCustomBindByPosition(converter = RoleTypeEnumConverter.class, position = 1)
 	private Role role;
+	@CsvBindByPosition(position = 2)
 	private String roleDescription;
+	@CsvBindByPosition(position = 3)
 	private boolean safeRole;
 	
 	public Long getId() {
