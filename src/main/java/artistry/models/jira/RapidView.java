@@ -1,6 +1,7 @@
 package artistry.models.jira;
 
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
@@ -9,13 +10,13 @@ import org.neo4j.ogm.annotation.Relationship;
 public class RapidView {
 
 	@Relationship(type = "HAS_RAPIDVIEW_ENTRIES", direction = Relationship.OUTGOING)
-	private List<RapidviewEntry> views;
+	private Set<RapidviewEntry> views;
 
-	public List<RapidviewEntry> getViews() {
+	public Set<RapidviewEntry> getViews() {
 		return views;
 	}
 
-	public void setViews(List<RapidviewEntry> views) {
+	public void setViews(Set<RapidviewEntry> views) {
 		this.views = views;
 	}
 }

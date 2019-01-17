@@ -1,14 +1,17 @@
 package artistry.controllers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,21 +49,21 @@ public class OrganizationController {
 	@Autowired
 	private PersonRepository personRepo;
 
-	@RequestMapping(value = "/newenterprise", method = RequestMethod.POST)
+	@RequestMapping(value = "/newenterprise", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Enterprise createEnterprise(@RequestBody Enterprise enterprise) {
 		Enterprise savedenterprise = enterpriseRepo.save(enterprise);
 		return savedenterprise;
 	}
 
-	@RequestMapping(value = "/newcompany", method = RequestMethod.POST)
+	@RequestMapping(value = "/newcompany", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Company createCompany(@RequestBody Company company) {
 		Company savedcompany = companyRepo.save(company);
 		return savedcompany;
 	}
 
-	@RequestMapping(value = "/newteam", method = RequestMethod.POST)
+	@RequestMapping(value = "/newteam", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private ImplementationTeam createTeam(@RequestBody ImplementationTeam team) {
 		ImplementationTeam savedteam = teamRepo.save(team);
@@ -69,12 +72,12 @@ public class OrganizationController {
 		Optional<Company> coCheck = companyRepo.findById(c.getId());
 		if (coCheck.isPresent()) {
 			Company cotoupdate = coCheck.get();
-			List<ImplementationTeam> teamlist = cotoupdate.getTeams();
+			Set<ImplementationTeam> teamlist = cotoupdate.getTeams();
 			if (teamlist != null && teamlist.size() > 0) {
 				teamlist.add(savedteam);
 				cotoupdate.setTeams(teamlist);
 			} else {
-				List<ImplementationTeam> newteamlist = new ArrayList<>();
+				Set<ImplementationTeam> newteamlist = new HashSet<>();
 				newteamlist.add(savedteam);
 				cotoupdate.setTeams(newteamlist);
 			}
@@ -83,7 +86,7 @@ public class OrganizationController {
 		return savedteam;
 	}
 
-	@RequestMapping(value = "/addpersontoteam", method = RequestMethod.POST)
+	@RequestMapping(value = "/addpersontoteam", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private ImplementationTeam addPersonToTeam(@RequestBody PersonTeamObject personteam) {
 		Optional<Person> optperson = personRepo.findById(personteam.getPersonId());
@@ -94,9 +97,9 @@ public class OrganizationController {
 			List<Role> roles = personteam.getRoles();
 			// first we add the person as part of the agile team. All people in the team go
 			// into this list
-			List<Person> agileteam = team.getAgileTeam();
+			Set<Person> agileteam = team.getAgileTeam();
 			if (agileteam == null) {
-				agileteam = new ArrayList<>();
+				agileteam = new HashSet<>();
 			}
 			if (!agileteam.contains(person)) {
 				agileteam.add(person);
@@ -112,9 +115,9 @@ public class OrganizationController {
 					break;
 
 				case "DEVELOPER":
-					List<Person> devlist = team.getDevTeam();
+					Set<Person> devlist = team.getDevTeam();
 					if (devlist == null) {
-						devlist = new ArrayList<>();
+						devlist = new HashSet<>();
 					}
 					if (!devlist.contains(person)) {
 						devlist.add(person);
@@ -127,6 +130,7 @@ public class OrganizationController {
 					break;
 				}
 			}
+			
 			return teamRepo.save(team);
 		}
 		return null;

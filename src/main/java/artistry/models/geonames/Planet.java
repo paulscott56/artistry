@@ -1,6 +1,7 @@
 package artistry.models.geonames;
 
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -17,16 +18,16 @@ public class Planet {
 	private String name;
 
 	@Relationship(type = "HAS_OCEAN", direction = Relationship.OUTGOING)
-	private List<Ocean> ocean;
+	private Set<Ocean> ocean;
 
 	@Relationship(type = "HAS_CONTINENT", direction = Relationship.OUTGOING)
-	private List<Continent> continent;
+	private Set<Continent> continent;
 
 	@Relationship(type = "HAS_BIOME", direction = Relationship.OUTGOING)
-	private List<Biome> biome;
+	private Set<Biome> biome;
 
 	@Relationship(type = "HAS_ISLAND", direction = Relationship.OUTGOING)
-	private List<Island> island;
+	private Set<Island> island;
 
 	public Long getId() {
 		return id;
@@ -44,36 +45,38 @@ public class Planet {
 		this.name = name;
 	}
 
-	public List<Ocean> getOcean() {
+	public Set<Ocean> getOcean() {
 		return ocean;
 	}
 
-	public void setOcean(List<Ocean> ocean) {
+	public void setOcean(Set<Ocean> ocean) {
 		this.ocean = ocean;
 	}
 
-	public List<Continent> getContinent() {
+	public Set<Continent> getContinent() {
 		return continent;
 	}
 
-	public void setContinent(List<Continent> continent) {
+	public void setContinent(Set<Continent> continent) {
 		this.continent = continent;
 	}
 
-	public List<Biome> getBiome() {
+	public Set<Biome> getBiome() {
 		return biome;
 	}
 
-	public void setBiome(List<Biome> biome) {
+	public void setBiome(Set<Biome> biome) {
 		this.biome = biome;
 	}
 
-	public List<Island> getIsland() {
+	public Set<Island> getIsland() {
 		return island;
 	}
 
-	public void setIsland(List<Island> island) {
+	public void setIsland(Set<Island> island) {
 		this.island = island;
 	}
+
+	
 
 }

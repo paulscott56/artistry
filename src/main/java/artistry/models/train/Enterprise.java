@@ -1,6 +1,6 @@
 package artistry.models.train;
 
-import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -19,18 +19,18 @@ public class Enterprise {
 	private String enterpriseName;
 	
 	@Relationship(type = "KEY_PERSON", direction = Relationship.OUTGOING)
-	private List<Person> keyPersonnel;
+	private Set<Person> keyPersonnel;
 	
 	@Relationship(type = "HAS_KPI", direction = Relationship.OUTGOING)
-	private List<KPI> kpis;
+	private Set<KPI> kpis;
 	
 	private PortfolioBudget portfolioBudget;
 	
 	@Relationship(type = "HAS_STRATEGIC_THEME", direction = Relationship.OUTGOING)
-	private List<StrategicTheme> strategicThemes;
+	private Set<StrategicTheme> strategicThemes;
 	
 	@Relationship(type = "HAS_QUALITATIVE_DATA", direction = Relationship.OUTGOING)
-	private List<Document> qualitativeData;
+	private Set<Document> qualitativeData;
 	private GuardRails guardRails;
 	
 	public Long getId() {
@@ -45,16 +45,16 @@ public class Enterprise {
 	public void setEnterpriseName(String enterpriseName) {
 		this.enterpriseName = enterpriseName;
 	}
-	public List<Person> getKeyPersonnel() {
+	public Set<Person> getKeyPersonnel() {
 		return keyPersonnel;
 	}
-	public void setKeyPersonnel(List<Person> keyPersonnel) {
+	public void setKeyPersonnel(Set<Person> keyPersonnel) {
 		this.keyPersonnel = keyPersonnel;
 	}
-	public List<KPI> getKpis() {
+	public Set<KPI> getKpis() {
 		return kpis;
 	}
-	public void setKpis(List<KPI> kpis) {
+	public void setKpis(Set<KPI> kpis) {
 		this.kpis = kpis;
 	}
 	public PortfolioBudget getPortfolioBudget() {
@@ -63,16 +63,16 @@ public class Enterprise {
 	public void setPortfolioBudget(PortfolioBudget portfolioBudget) {
 		this.portfolioBudget = portfolioBudget;
 	}
-	public List<StrategicTheme> getStrategicThemes() {
+	public Set<StrategicTheme> getStrategicThemes() {
 		return strategicThemes;
 	}
-	public void setStrategicThemes(List<StrategicTheme> strategicThemes) {
+	public void setStrategicThemes(Set<StrategicTheme> strategicThemes) {
 		this.strategicThemes = strategicThemes;
 	}
-	public List<Document> getQualitativeData() {
+	public Set<Document> getQualitativeData() {
 		return qualitativeData;
 	}
-	public void setQualitativeData(List<Document> qualitativeData) {
+	public void setQualitativeData(Set<Document> qualitativeData) {
 		this.qualitativeData = qualitativeData;
 	}
 	public GuardRails getGuardRails() {

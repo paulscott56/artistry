@@ -2,6 +2,7 @@ package artistry.models.person;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -28,25 +29,25 @@ public class ImplementationTeam {
 	private Person productOwner;
 
 	@Relationship(type = "HAS_AGILE_TEAM_MEMBER", direction = Relationship.OUTGOING)
-	private List<Person> agileTeam;
+	private Set<Person> agileTeam;
 
 	@Relationship(type = "HAS_DEV_TEAM_MEMBER", direction = Relationship.OUTGOING)
-	private List<Person> devTeam;
+	private Set<Person> devTeam;
 
 	@Relationship(type = "HAS_SCRUM_MASTER", direction = Relationship.OUTGOING)
 	private Person scrumMaster;
 
 	@Relationship(type = "HAS_PLANNING_DOCUMENT", direction = Relationship.OUTGOING)
-	private List<Document> iterationPlanningDocuments;
+	private Set<Document> iterationPlanningDocuments;
 
 	@Relationship(type = "HAS_ITERATION_REVIEW", direction = Relationship.OUTGOING)
-	private List<IterationReview> iterationReviews;
+	private Set<IterationReview> iterationReviews;
 
 	@Relationship(type = "HAS_ITERATION_RETRO", direction = Relationship.OUTGOING)
-	private List<IterationRetrospective> iterationRetrospectives;
+	private Set<IterationRetrospective> iterationRetrospectives;
 
 	@Relationship(type = "HAS_INNOVATION_DOCUMENT", direction = Relationship.OUTGOING)
-	private List<Document> innovationAndPlanningDocuments;
+	private Set<Document> innovationAndPlanningDocuments;
 
 	public Long getId() {
 		return id;
@@ -96,19 +97,19 @@ public class ImplementationTeam {
 		this.productOwner = productOwner;
 	}
 
-	public List<Person> getAgileTeam() {
+	public Set<Person> getAgileTeam() {
 		return agileTeam;
 	}
 
-	public void setAgileTeam(List<Person> agileTeam) {
+	public void setAgileTeam(Set<Person> agileTeam) {
 		this.agileTeam = agileTeam;
 	}
 
-	public List<Person> getDevTeam() {
+	public Set<Person> getDevTeam() {
 		return devTeam;
 	}
 
-	public void setDevTeam(List<Person> devTeam) {
+	public void setDevTeam(Set<Person> devTeam) {
 		this.devTeam = devTeam;
 	}
 
@@ -120,49 +121,38 @@ public class ImplementationTeam {
 		this.scrumMaster = scrumMaster;
 	}
 
-	public List<Document> getIterationPlanningDocuments() {
+	public Set<Document> getIterationPlanningDocuments() {
 		return iterationPlanningDocuments;
 	}
 
-	public void setIterationPlanningDocuments(List<Document> iterationPlanningDocuments) {
+	public void setIterationPlanningDocuments(Set<Document> iterationPlanningDocuments) {
 		this.iterationPlanningDocuments = iterationPlanningDocuments;
 	}
 
-	public List<IterationReview> getIterationReviews() {
+	public Set<IterationReview> getIterationReviews() {
 		return iterationReviews;
 	}
 
-	public void setIterationReviews(List<IterationReview> iterationReviews) {
+	public void setIterationReviews(Set<IterationReview> iterationReviews) {
 		this.iterationReviews = iterationReviews;
 	}
 
-	public List<IterationRetrospective> getIterationRetrospectives() {
+	public Set<IterationRetrospective> getIterationRetrospectives() {
 		return iterationRetrospectives;
 	}
 
-	public void setIterationRetrospectives(List<IterationRetrospective> iterationRetrospectives) {
+	public void setIterationRetrospectives(Set<IterationRetrospective> iterationRetrospectives) {
 		this.iterationRetrospectives = iterationRetrospectives;
 	}
 
-	public List<Document> getInnovationAndPlanningDocuments() {
+	public Set<Document> getInnovationAndPlanningDocuments() {
 		return innovationAndPlanningDocuments;
 	}
 
-	public void setInnovationAndPlanningDocuments(List<Document> innovationAndPlanningDocuments) {
+	public void setInnovationAndPlanningDocuments(Set<Document> innovationAndPlanningDocuments) {
 		this.innovationAndPlanningDocuments = innovationAndPlanningDocuments;
 	}
 
-	// @Relationship(type = "HAS_STORY", direction = Relationship.OUTGOING)
-	// private List<Story> stories;
-	//
-	// @Relationship(type = "HAS_ENABLER_STORY", direction = Relationship.OUTGOING)
-	// private List<EnablerStory> enablerStories;
-	//
-	// @Relationship(type = "HAS_ITERATION_GOAL", direction = Relationship.OUTGOING)
-	// private List<IterationGoal> iterationGoals;
-	// @Relationship(type = "HAS_BACKLOG", direction = Relationship.OUTGOING)
-	// private TeamBacklog teamBacklog;
-	// @Relationship(type = "HAS_PI_OBJECTIVE", direction = Relationship.OUTGOING)
-	// private List<Objective> teamPiObjectives;
+	
 
 }

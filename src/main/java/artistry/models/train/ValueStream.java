@@ -1,6 +1,7 @@
 package artistry.models.train;
 
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -18,7 +19,7 @@ public class ValueStream {
 	private DevelopmentValueStream developmentValueStream;
 
 	@Relationship(type = "IS_ON_TRAIN", direction = Relationship.OUTGOING)
-	private List<Train> trains;
+	private Set<Train> trains;
 
 	public Long getId() {
 		return id;
@@ -44,11 +45,11 @@ public class ValueStream {
 		this.developmentValueStream = developmentValueStream;
 	}
 
-	public List<Train> getTrains() {
+	public Set<Train> getTrains() {
 		return trains;
 	}
 
-	public void setTrains(List<Train> trains) {
+	public void setTrains(Set<Train> trains) {
 		this.trains = trains;
 	}
 }

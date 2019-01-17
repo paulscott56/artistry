@@ -1,6 +1,7 @@
 package artistry.models.train;
 
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -17,33 +18,32 @@ public class Program {
 	private Long id;
 
 	// list of teams on the program train
-	private List<ImplementationTeam> teams;
+	private Set<ImplementationTeam> teams;
 	
 	private ProgramIncrement pi;
-	private List<Person> productManagement;
+	private Set<Person> productManagement;
 	private Person SystemArchitect;
 	private Person releaseTrainEngineer;
-	private List<Person> businessOwners;
-	private List<SystemDemo> systemDemo;
-	private List<InspectAndAdapt> inspectAndAdaptWorkshops;
+	private Set<Person> businessOwners;
+	private Set<SystemDemo> systemDemo;
+	private Set<InspectAndAdapt> inspectAndAdaptWorkshops;
 	
-	private List<Feature> features;
-	private List<Epic> programEpics;
+	private Set<Feature> features;
+	private Set<Epic> programEpics;
 	private ProgramBacklog programBacklog;
 	private ProgramKanban programKanban;
-	private List<Objective> piObjectives;
-	private List<Document> architecturalRunway;
-	
+	private Set<Objective> piObjectives;
+	private Set<Document> architecturalRunway;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<ImplementationTeam> getTeams() {
+	public Set<ImplementationTeam> getTeams() {
 		return teams;
 	}
-	public void setTeams(List<ImplementationTeam> teams) {
+	public void setTeams(Set<ImplementationTeam> teams) {
 		this.teams = teams;
 	}
 	public ProgramIncrement getPi() {
@@ -52,10 +52,10 @@ public class Program {
 	public void setPi(ProgramIncrement pi) {
 		this.pi = pi;
 	}
-	public List<Person> getProductManagement() {
+	public Set<Person> getProductManagement() {
 		return productManagement;
 	}
-	public void setProductManagement(List<Person> productManagement) {
+	public void setProductManagement(Set<Person> productManagement) {
 		this.productManagement = productManagement;
 	}
 	public Person getSystemArchitect() {
@@ -70,34 +70,34 @@ public class Program {
 	public void setReleaseTrainEngineer(Person releaseTrainEngineer) {
 		this.releaseTrainEngineer = releaseTrainEngineer;
 	}
-	public List<Person> getBusinessOwners() {
+	public Set<Person> getBusinessOwners() {
 		return businessOwners;
 	}
-	public void setBusinessOwners(List<Person> businessOwners) {
+	public void setBusinessOwners(Set<Person> businessOwners) {
 		this.businessOwners = businessOwners;
 	}
-	public List<SystemDemo> getSystemDemo() {
+	public Set<SystemDemo> getSystemDemo() {
 		return systemDemo;
 	}
-	public void setSystemDemo(List<SystemDemo> systemDemo) {
+	public void setSystemDemo(Set<SystemDemo> systemDemo) {
 		this.systemDemo = systemDemo;
 	}
-	public List<InspectAndAdapt> getInspectAndAdaptWorkshops() {
+	public Set<InspectAndAdapt> getInspectAndAdaptWorkshops() {
 		return inspectAndAdaptWorkshops;
 	}
-	public void setInspectAndAdaptWorkshops(List<InspectAndAdapt> inspectAndAdaptWorkshops) {
+	public void setInspectAndAdaptWorkshops(Set<InspectAndAdapt> inspectAndAdaptWorkshops) {
 		this.inspectAndAdaptWorkshops = inspectAndAdaptWorkshops;
 	}
-	public List<Feature> getFeatures() {
+	public Set<Feature> getFeatures() {
 		return features;
 	}
-	public void setFeatures(List<Feature> features) {
+	public void setFeatures(Set<Feature> features) {
 		this.features = features;
 	}
-	public List<Epic> getProgramEpics() {
+	public Set<Epic> getProgramEpics() {
 		return programEpics;
 	}
-	public void setProgramEpics(List<Epic> programEpics) {
+	public void setProgramEpics(Set<Epic> programEpics) {
 		this.programEpics = programEpics;
 	}
 	public ProgramBacklog getProgramBacklog() {
@@ -112,16 +112,18 @@ public class Program {
 	public void setProgramKanban(ProgramKanban programKanban) {
 		this.programKanban = programKanban;
 	}
-	public List<Objective> getPiObjectives() {
+	public Set<Objective> getPiObjectives() {
 		return piObjectives;
 	}
-	public void setPiObjectives(List<Objective> piObjectives) {
+	public void setPiObjectives(Set<Objective> piObjectives) {
 		this.piObjectives = piObjectives;
 	}
-	public List<Document> getArchitecturalRunway() {
+	public Set<Document> getArchitecturalRunway() {
 		return architecturalRunway;
 	}
-	public void setArchitecturalRunway(List<Document> architecturalRunway) {
+	public void setArchitecturalRunway(Set<Document> architecturalRunway) {
 		this.architecturalRunway = architecturalRunway;
 	}
+	
+	
 }

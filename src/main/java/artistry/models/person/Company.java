@@ -1,11 +1,13 @@
 package artistry.models.person;
 
-import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
+
+import artistry.models.geonames.Country;
 
 @NodeEntity
 public class Company {
@@ -25,10 +27,21 @@ public class Company {
 	private Person contactPerson;
 
 	@Relationship(type = "HAS_EMPLOYEE", direction = Relationship.OUTGOING)
-	private List<Person> employees;
+	private Set<Person> employees;
 
 	@Relationship(type = "HAS_TEAM", direction = Relationship.OUTGOING)
-	private List<ImplementationTeam> teams;
+	private Set<ImplementationTeam> teams;
+	
+	@Relationship(type = "IN_COUNTRY", direction = Relationship.OUTGOING)
+	private Country country;
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
 
 	public Long getId() {
 		return id;
@@ -94,19 +107,19 @@ public class Company {
 		this.contactPerson = contactPerson;
 	}
 
-	public List<Person> getEmployees() {
+	public Set<Person> getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(List<Person> employees) {
+	public void setEmployees(Set<Person> employees) {
 		this.employees = employees;
 	}
 
-	public List<ImplementationTeam> getTeams() {
+	public Set<ImplementationTeam> getTeams() {
 		return teams;
 	}
 
-	public void setTeams(List<ImplementationTeam> teams) {
+	public void setTeams(Set<ImplementationTeam> teams) {
 		this.teams = teams;
 	}
 

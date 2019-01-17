@@ -2,6 +2,7 @@ package artistry.services;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,7 +47,7 @@ public class RapidviewService {
 	}
 
 	public void saveViews(RapidView views) {
-		List<RapidviewEntry> viewlist = views.getViews();
+		Set<RapidviewEntry> viewlist = views.getViews();
 		for (RapidviewEntry e : viewlist) {
 			if (!repo.existsByRapidviewId(e.getId())) {
 				RapidviewEntry record = new RapidviewEntry();

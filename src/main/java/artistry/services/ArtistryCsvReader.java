@@ -10,8 +10,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,7 +83,7 @@ public class ArtistryCsvReader {
 				poi.setAdmin3Code(place.getAdmin3Code());
 				poi.setAdmin4Code(place.getAdmin4Code());
 
-				List<AlternateName> alternatenames = new ArrayList<>();
+				Set<AlternateName> alternatenames = new HashSet<>();
 				String[] anames = place.getAlternateNames().split(",");
 				for (String a : anames) {
 					AlternateName alt = new AlternateName();
@@ -108,8 +110,8 @@ public class ArtistryCsvReader {
 				poi.setPopulation(place.getPopulation());
 				poi.setTimezoneId(place.getTimezoneId());
 
-				List<Place> placelist = new ArrayList<>();
-				List<Place> countrytoadd = country.getPlaces();
+				Set<Place> placelist = new HashSet<>();
+				Set<Place> countrytoadd = country.getPlaces();
 				if (countrytoadd == null) {
 					countrytoadd = placelist;
 				}
@@ -143,7 +145,7 @@ public class ArtistryCsvReader {
 				poi.setAdmin3Code(place.getAdmin3Code());
 				poi.setAdmin4Code(place.getAdmin4Code());
 
-				List<AlternateName> alternatenames = new ArrayList<>();
+				Set<AlternateName> alternatenames = new HashSet<>();
 				String[] anames = place.getAlternateNames().split(",");
 				for (String a : anames) {
 					AlternateName alt = new AlternateName();
@@ -170,8 +172,8 @@ public class ArtistryCsvReader {
 				poi.setPopulation(place.getPopulation());
 				poi.setTimezoneId(place.getTimezoneId());
 
-				List<Place> placelist = new ArrayList<>();
-				List<Place> countrytoadd = country.getPlaces();
+				Set<Place> placelist = new HashSet<>();
+				Set<Place> countrytoadd = country.getPlaces();
 				if (countrytoadd == null) {
 					countrytoadd = placelist;
 				}
@@ -188,7 +190,7 @@ public class ArtistryCsvReader {
 	public void createPlanetEarth() {
 		String planetName = "Earth";
 		Planet planet = new Planet();
-		List<Continent> continents = new ArrayList<>();
+		Set<Continent> continents = new HashSet<>();
 		for (Continents c : Continents.values()) {
 			Continent continent = new Continent();
 			continent.setName(c.getKey());
@@ -212,7 +214,7 @@ public class ArtistryCsvReader {
 		Iterator<GeoCountry> geoIterator = csvToBean.iterator();
 		while (geoIterator.hasNext()) {
 			try {
-				List<Country> countriestoadd = new ArrayList<>();
+				Set<Country> countriestoadd = new HashSet<>();
 				GeoCountry place = geoIterator.next();
 
 				Country c = new Country();
@@ -220,7 +222,7 @@ public class ArtistryCsvReader {
 				c.setCapital(place.getCapital());
 				String continent = place.getContinent();
 				Continent continentCheck = continentRepo.findOneByCode(continent);
-				List<Country> countriesoncontinent = continentCheck.getCountry();
+				Set<Country> countriesoncontinent = continentCheck.getCountry();
 				if (countriesoncontinent == null) {
 					countriesoncontinent = countriestoadd;
 				}
@@ -277,7 +279,7 @@ public class ArtistryCsvReader {
 				poi.setAdmin3Code(place.getAdmin3Code());
 				poi.setAdmin4Code(place.getAdmin4Code());
 
-				List<AlternateName> alternatenames = new ArrayList<>();
+				Set<AlternateName> alternatenames = new HashSet<>();
 				String[] anames = place.getAlternateNames().split(",");
 				for (String a : anames) {
 					AlternateName alt = new AlternateName();
@@ -304,8 +306,8 @@ public class ArtistryCsvReader {
 				poi.setPopulation(place.getPopulation());
 				poi.setTimezoneId(place.getTimezoneId());
 
-				List<Place> placelist = new ArrayList<>();
-				List<Place> countrytoadd = country.getPlaces();
+				Set<Place> placelist = new HashSet<>();
+				Set<Place> countrytoadd = country.getPlaces();
 				if (countrytoadd == null) {
 					countrytoadd = placelist;
 				}

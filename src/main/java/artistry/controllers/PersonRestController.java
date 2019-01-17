@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +48,7 @@ public class PersonRestController {
 	@Autowired
 	private ArtistryCsvReader csvReader;
 
-	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Person createPerson(@RequestBody Person person) {
 		try {
@@ -63,7 +64,7 @@ public class PersonRestController {
 		}
 	}
 	
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Person updatePerson(@RequestBody Person person) {
 		try {
@@ -83,7 +84,7 @@ public class PersonRestController {
 	 * @param person
 	 * @return
 	 */
-	@RequestMapping(value = "/deactivate", method = RequestMethod.POST)
+	@RequestMapping(value = "/deactivate", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Person deactivatePerson(@RequestBody Person person) {
 		try {
@@ -98,7 +99,7 @@ public class PersonRestController {
 		}
 	}
 	
-	@RequestMapping(value = "/activate", method = RequestMethod.POST)
+	@RequestMapping(value = "/activate", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Person activatePerson(@RequestBody Person person) {
 		try {
@@ -113,21 +114,21 @@ public class PersonRestController {
 		}
 	}
 
-	@RequestMapping(value = "/getbyusername", method = RequestMethod.GET)
+	@RequestMapping(value = "/getbyusername", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Person getByUsername(@RequestParam("username") String username) {
 		Person person = personRepo.findByUsername(username);
 		return person;
 	}
 
-	@RequestMapping(value = "/getbyid/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getbyid/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Optional<Person> getById(@PathVariable("id") Long id) {
 		Optional<Person> person = personRepo.findById(id);
 		return person;
 	}
 	
-	@RequestMapping(value = "/createrole", method = RequestMethod.POST)
+	@RequestMapping(value = "/createrole", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private PersonRole createRole(@RequestBody PersonRole role) {
 		Optional<PersonRole> existingrole = rolesRepo.findByRoleName(role.getRoleName());
@@ -140,7 +141,7 @@ public class PersonRestController {
 		}
 	}
 	
-	@RequestMapping(value = "/setuproles", method = RequestMethod.GET)
+	@RequestMapping(value = "/setuproles", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private String createBaseRoles() throws URISyntaxException, IOException {
 		// parse the csv file

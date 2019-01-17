@@ -3,6 +3,7 @@ package artistry.models.train;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 
@@ -18,7 +19,7 @@ import artistry.models.person.Person;
 @NodeEntity
 public class Epic {
 	
-	private List<Person> customers;
+	private Set<Person> customers;
 	private String hypothesisStatement;
 	private EpicType epicType;
 	
@@ -31,15 +32,15 @@ public class Epic {
 	private Document businessOutcomeHypothesis;
 	private Document leadingIndicators;
 	
-	private List<Requirement> inScope;
-	private List<Requirement> outOfScope;
-	private List<NonFunctionalRequirement> nonFunctionalRequirements;
+	private Set<Requirement> inScope;
+	private Set<Requirement> outOfScope;
+	private Set<NonFunctionalRequirement> nonFunctionalRequirements;
 	
-	private List<Feature> mvpFeatures;
-	private List<Feature> additionalPotentialFeatures;
+	private Set<Feature> mvpFeatures;
+	private Set<Feature> additionalPotentialFeatures;
 	
-	private List<Person> sponsors;
-	private List<String> usersAndMarketsAffecred;
+	private Set<Person> sponsors;
+	private Set<String> usersAndMarketsAffecred;
 	
 	private Document impactOnProductsAndServices;
 	private Document impactOnSalesDeployment;
@@ -54,13 +55,12 @@ public class Epic {
 	private EpicType incrementalImplementationStrategy;
 	private Document sequencingAndDependencies;
 	private Document milestones;
-	private List<Document> attachments;
+	private Set<Document> attachments;
 	private Document notesAndComments;
-
-	public List<Person> getCustomers() {
+	public Set<Person> getCustomers() {
 		return customers;
 	}
-	public void setCustomers(List<Person> customers) {
+	public void setCustomers(Set<Person> customers) {
 		this.customers = customers;
 	}
 	public String getHypothesisStatement() {
@@ -111,46 +111,46 @@ public class Epic {
 	public void setLeadingIndicators(Document leadingIndicators) {
 		this.leadingIndicators = leadingIndicators;
 	}
-	public List<Requirement> getInScope() {
+	public Set<Requirement> getInScope() {
 		return inScope;
 	}
-	public void setInScope(List<Requirement> inScope) {
+	public void setInScope(Set<Requirement> inScope) {
 		this.inScope = inScope;
 	}
-	public List<Requirement> getOutOfScope() {
+	public Set<Requirement> getOutOfScope() {
 		return outOfScope;
 	}
-	public void setOutOfScope(List<Requirement> outOfScope) {
+	public void setOutOfScope(Set<Requirement> outOfScope) {
 		this.outOfScope = outOfScope;
 	}
-	public List<NonFunctionalRequirement> getNonFunctionalRequirements() {
+	public Set<NonFunctionalRequirement> getNonFunctionalRequirements() {
 		return nonFunctionalRequirements;
 	}
-	public void setNonFunctionalRequirements(List<NonFunctionalRequirement> nonFunctionalRequirements) {
+	public void setNonFunctionalRequirements(Set<NonFunctionalRequirement> nonFunctionalRequirements) {
 		this.nonFunctionalRequirements = nonFunctionalRequirements;
 	}
-	public List<Feature> getMvpFeatures() {
+	public Set<Feature> getMvpFeatures() {
 		return mvpFeatures;
 	}
-	public void setMvpFeatures(List<Feature> mvpFeatures) {
+	public void setMvpFeatures(Set<Feature> mvpFeatures) {
 		this.mvpFeatures = mvpFeatures;
 	}
-	public List<Feature> getAdditionalPotentialFeatures() {
+	public Set<Feature> getAdditionalPotentialFeatures() {
 		return additionalPotentialFeatures;
 	}
-	public void setAdditionalPotentialFeatures(List<Feature> additionalPotentialFeatures) {
+	public void setAdditionalPotentialFeatures(Set<Feature> additionalPotentialFeatures) {
 		this.additionalPotentialFeatures = additionalPotentialFeatures;
 	}
-	public List<Person> getSponsors() {
+	public Set<Person> getSponsors() {
 		return sponsors;
 	}
-	public void setSponsors(List<Person> sponsors) {
+	public void setSponsors(Set<Person> sponsors) {
 		this.sponsors = sponsors;
 	}
-	public List<String> getUsersAndMarketsAffecred() {
+	public Set<String> getUsersAndMarketsAffecred() {
 		return usersAndMarketsAffecred;
 	}
-	public void setUsersAndMarketsAffecred(List<String> usersAndMarketsAffecred) {
+	public void setUsersAndMarketsAffecred(Set<String> usersAndMarketsAffecred) {
 		this.usersAndMarketsAffecred = usersAndMarketsAffecred;
 	}
 	public Document getImpactOnProductsAndServices() {
@@ -231,10 +231,10 @@ public class Epic {
 	public void setMilestones(Document milestones) {
 		this.milestones = milestones;
 	}
-	public List<Document> getAttachments() {
+	public Set<Document> getAttachments() {
 		return attachments;
 	}
-	public void setAttachments(List<Document> attachments) {
+	public void setAttachments(Set<Document> attachments) {
 		this.attachments = attachments;
 	}
 	public Document getNotesAndComments() {
@@ -243,4 +243,6 @@ public class Epic {
 	public void setNotesAndComments(Document notesAndComments) {
 		this.notesAndComments = notesAndComments;
 	}
+
+	
 }

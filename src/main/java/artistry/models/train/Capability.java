@@ -1,6 +1,7 @@
 package artistry.models.train;
 
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -20,7 +21,7 @@ public class Capability {
 	private Long id;
 
 	@Relationship(type = "HAS_FEATURE", direction = Relationship.OUTGOING)
-	private List<Feature> features;
+	private Set<Feature> features;
 	
 	private String capabilityName;
 	private Document benefitHypothesis;
@@ -32,7 +33,7 @@ public class Capability {
 	private SolutionBacklog solutionBacklog;
 	
 	@Relationship(type = "HAS_ENABLER", direction = Relationship.OUTGOING)
-	private List<Enabler> enablers;
+	private Set<Enabler> enablers;
 	
 	private boolean accepted;
 

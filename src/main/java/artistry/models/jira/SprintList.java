@@ -1,6 +1,6 @@
 package artistry.models.jira;
 
-import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
@@ -9,24 +9,24 @@ import org.neo4j.ogm.annotation.Relationship;
 public class SprintList {
 
 	@Relationship(type = "HAS_SPRINT_ENTRY", direction = Relationship.OUTGOING)
-	private List<SprintEntry> sprints;
+	private Set<SprintEntry> sprints;
 
 	@Relationship(type = "HAS_VELOCITY", direction = Relationship.OUTGOING)
-	private List<VelocityEntry> velocities;
+	private Set<VelocityEntry> velocities;
 
-	public List<SprintEntry> getSprints() {
+	public Set<SprintEntry> getSprints() {
 		return sprints;
 	}
 
-	public void setSprints(List<SprintEntry> sprints) {
+	public void setSprints(Set<SprintEntry> sprints) {
 		this.sprints = sprints;
 	}
 
-	public List<VelocityEntry> getVelocities() {
+	public Set<VelocityEntry> getVelocities() {
 		return velocities;
 	}
 
-	public void setVelocities(List<VelocityEntry> velocities) {
+	public void setVelocities(Set<VelocityEntry> velocities) {
 		this.velocities = velocities;
 	}
 }

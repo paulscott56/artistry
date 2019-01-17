@@ -1,6 +1,6 @@
 package artistry.models.person;
 
-import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -21,7 +21,7 @@ public class Address {
 
 	private boolean isPostalAddress;
 	private String fullAddress;
-	private List<String> addressLine;
+	private Set<String> addressLine;
 
 	// @Relationship(type = "IN_CITY", direction = Relationship.INCOMING)
 	private String city;
@@ -68,11 +68,11 @@ public class Address {
 		this.fullAddress = fullAddress;
 	}
 
-	public List<String> getAddressLine() {
+	public Set<String> getAddressLine() {
 		return addressLine;
 	}
 
-	public void setAddressLine(List<String> addressLine) {
+	public void setAddressLine(Set<String> addressLine) {
 		this.addressLine = addressLine;
 	}
 

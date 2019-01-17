@@ -2,6 +2,7 @@ package artistry.models.train;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -21,13 +22,13 @@ public class LargeSolution {
 	private Person solutionArchitect;
 
 	@Relationship(type = "HAS_SOLUTION_MANAGER", direction = Relationship.OUTGOING)
-	private List<Person> solutionManagement;
+	private Set<Person> solutionManagement;
 
 	@Relationship(type = "HAS_SOLUTION_TRAIN_ENGINEER", direction = Relationship.OUTGOING)
 	private Person solutionTrainEngineer;
 	
 	@Relationship(type = "HAS_TRAIN", direction = Relationship.OUTGOING)
-	private List<Train> trains;
+	private Set<Train> trains;
 	
 	private Document solutionIntent;
 	
@@ -37,25 +38,25 @@ public class LargeSolution {
 	private Document solutionContext;
 	
 	@Relationship(type = "HAS_CAPABILITY", direction = Relationship.OUTGOING)
-	private List<Capability> capabilities;
+	private Set<Capability> capabilities;
 	
 	@Relationship(type = "HAS_SOLUTION_EPIC", direction = Relationship.OUTGOING)
-	private List<Epic> solutionEpics;
+	private Set<Epic> solutionEpics;
 	
 	@Relationship(type = "HAS_NFR", direction = Relationship.OUTGOING)
-	private List<NonFunctionalRequirement> nonFunctionalRequirements;
+	private Set<NonFunctionalRequirement> nonFunctionalRequirements;
 	
 	// solution kanban model ...
 	private SolutionBacklog solutionBacklog;
 	
 	@Relationship(type = "HAS_PROGRAM", direction = Relationship.OUTGOING)
-	private List<Program> programs;
+	private Set<Program> programs;
 	
 	
 	@Relationship(type = "HAS_DOCUMENT", direction = Relationship.OUTGOING)
-	private List<Document> prePlanningDocuments;
+	private Set<Document> prePlanningDocuments;
 	@Relationship(type = "HAS_DOCUMENT", direction = Relationship.OUTGOING)
-	private List<Document> postPlanningDocuments;
+	private Set<Document> postPlanningDocuments;
 	
 	private Date solutionDemo;
 	
@@ -78,11 +79,11 @@ public class LargeSolution {
 		this.solutionArchitect = solutionArchitect;
 	}
 
-	public List<Person> getSolutionManagement() {
+	public Set<Person> getSolutionManagement() {
 		return solutionManagement;
 	}
 
-	public void setSolutionManagement(List<Person> solutionManagement) {
+	public void setSolutionManagement(Set<Person> solutionManagement) {
 		this.solutionManagement = solutionManagement;
 	}
 
@@ -94,11 +95,11 @@ public class LargeSolution {
 		this.solutionTrainEngineer = solutionTrainEngineer;
 	}
 
-	public List<Train> getTrains() {
+	public Set<Train> getTrains() {
 		return trains;
 	}
 
-	public void setTrains(List<Train> trains) {
+	public void setTrains(Set<Train> trains) {
 		this.trains = trains;
 	}
 
@@ -126,27 +127,27 @@ public class LargeSolution {
 		this.solutionContext = solutionContext;
 	}
 
-	public List<Capability> getCapabilities() {
+	public Set<Capability> getCapabilities() {
 		return capabilities;
 	}
 
-	public void setCapabilities(List<Capability> capabilities) {
+	public void setCapabilities(Set<Capability> capabilities) {
 		this.capabilities = capabilities;
 	}
 
-	public List<Epic> getSolutionEpics() {
+	public Set<Epic> getSolutionEpics() {
 		return solutionEpics;
 	}
 
-	public void setSolutionEpics(List<Epic> solutionEpics) {
+	public void setSolutionEpics(Set<Epic> solutionEpics) {
 		this.solutionEpics = solutionEpics;
 	}
 
-	public List<NonFunctionalRequirement> getNonFunctionalRequirements() {
+	public Set<NonFunctionalRequirement> getNonFunctionalRequirements() {
 		return nonFunctionalRequirements;
 	}
 
-	public void setNonFunctionalRequirements(List<NonFunctionalRequirement> nonFunctionalRequirements) {
+	public void setNonFunctionalRequirements(Set<NonFunctionalRequirement> nonFunctionalRequirements) {
 		this.nonFunctionalRequirements = nonFunctionalRequirements;
 	}
 
@@ -158,19 +159,27 @@ public class LargeSolution {
 		this.solutionBacklog = solutionBacklog;
 	}
 
-	public List<Document> getPrePlanningDocuments() {
+	public Set<Program> getPrograms() {
+		return programs;
+	}
+
+	public void setPrograms(Set<Program> programs) {
+		this.programs = programs;
+	}
+
+	public Set<Document> getPrePlanningDocuments() {
 		return prePlanningDocuments;
 	}
 
-	public void setPrePlanningDocuments(List<Document> prePlanningDocuments) {
+	public void setPrePlanningDocuments(Set<Document> prePlanningDocuments) {
 		this.prePlanningDocuments = prePlanningDocuments;
 	}
 
-	public List<Document> getPostPlanningDocuments() {
+	public Set<Document> getPostPlanningDocuments() {
 		return postPlanningDocuments;
 	}
 
-	public void setPostPlanningDocuments(List<Document> postPlanningDocuments) {
+	public void setPostPlanningDocuments(Set<Document> postPlanningDocuments) {
 		this.postPlanningDocuments = postPlanningDocuments;
 	}
 
@@ -189,6 +198,7 @@ public class LargeSolution {
 	public void setInspectAndAdaptEvent(InspectAndAdapt inspectAndAdaptEvent) {
 		this.inspectAndAdaptEvent = inspectAndAdaptEvent;
 	}
+
 	
 	
 }

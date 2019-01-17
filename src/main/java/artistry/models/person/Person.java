@@ -1,7 +1,7 @@
 package artistry.models.person;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 import java.util.TimeZone;
 
 import javax.validation.constraints.NotNull;
@@ -42,7 +42,7 @@ public class Person {
 	private Boolean active;
 	
 	@Relationship(type = "ROLE", direction = Relationship.OUTGOING)
-	private List<PersonRole> roles;
+	private Set<PersonRole> roles;
 
 	private LocalDateTime modificationDate;
 
@@ -150,11 +150,11 @@ public class Person {
 		this.countryCode = countryCode;
 	}
 
-	public List<PersonRole> getRoles() {
+	public Set<PersonRole> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<PersonRole> roles) {
+	public void setRoles(Set<PersonRole> roles) {
 		this.roles = roles;
 	}
 

@@ -1,7 +1,7 @@
 package artistry.models.train;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -22,10 +22,10 @@ public class Feature {
 	private Date lastModificationDate;
 	private Date creationDate;
 	private Date completionDate;
-	private List<Document> acceptanceCriteria;
+	private Set<Document> acceptanceCriteria;
 	private Integer businessValue;
 	private boolean complete;
-	private List<ImplementationTeam> implementationTeams;
+	private Set<ImplementationTeam> implementationTeams;
 	private WeightedShortestJobFirst wsjf;
 	
 	public Long getId() {
@@ -64,10 +64,10 @@ public class Feature {
 	public void setCompletionDate(Date completionDate) {
 		this.completionDate = completionDate;
 	}
-	public List<Document> getAcceptanceCriteria() {
+	public Set<Document> getAcceptanceCriteria() {
 		return acceptanceCriteria;
 	}
-	public void setAcceptanceCriteria(List<Document> acceptanceCriteria) {
+	public void setAcceptanceCriteria(Set<Document> acceptanceCriteria) {
 		this.acceptanceCriteria = acceptanceCriteria;
 	}
 	public Integer getBusinessValue() {
@@ -82,10 +82,10 @@ public class Feature {
 	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
-	public List<ImplementationTeam> getImplementationTeams() {
+	public Set<ImplementationTeam> getImplementationTeams() {
 		return implementationTeams;
 	}
-	public void setImplementationTeams(List<ImplementationTeam> implementationTeams) {
+	public void setImplementationTeams(Set<ImplementationTeam> implementationTeams) {
 		this.implementationTeams = implementationTeams;
 	}
 	public WeightedShortestJobFirst getWsjf() {

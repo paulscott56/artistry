@@ -1,7 +1,7 @@
 package artistry.models.train;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -30,9 +30,9 @@ public class Document {
 	private String documentBody;
 	private String version;
 	private Person primaryAuthor;
-	private List<Person> additionalAuthors;
+	private Set<Person> additionalAuthors;
 	private DocumentStatus status;
-	private List<Date> revisionDates;
+	private Set<Date> revisionDates;
 	private License license;
 	
 	public Long getId() {
@@ -71,10 +71,10 @@ public class Document {
 	public void setPrimaryAuthor(Person primaryAuthor) {
 		this.primaryAuthor = primaryAuthor;
 	}
-	public List<Person> getAdditionalAuthors() {
+	public Set<Person> getAdditionalAuthors() {
 		return additionalAuthors;
 	}
-	public void setAdditionalAuthors(List<Person> additionalAuthors) {
+	public void setAdditionalAuthors(Set<Person> additionalAuthors) {
 		this.additionalAuthors = additionalAuthors;
 	}
 	public DocumentStatus getStatus() {
@@ -83,10 +83,10 @@ public class Document {
 	public void setStatus(DocumentStatus status) {
 		this.status = status;
 	}
-	public List<Date> getRevisionDates() {
+	public Set<Date> getRevisionDates() {
 		return revisionDates;
 	}
-	public void setRevisionDates(List<Date> revisionDates) {
+	public void setRevisionDates(Set<Date> revisionDates) {
 		this.revisionDates = revisionDates;
 	}
 	public License getLicense() {

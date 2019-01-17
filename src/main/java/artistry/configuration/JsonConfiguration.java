@@ -53,7 +53,7 @@ public class JsonConfiguration {
 	@Bean
 	public MarshallingHttpMessageConverter marshallingHttpMessageConverter() {
 		final Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-		jaxb2Marshaller.setPackagesToScan(new String[] { "artistry.models.person" });
+		jaxb2Marshaller.setPackagesToScan(new String[] { "artistry.models" });
 
 		final MarshallingHttpMessageConverter converter = new MarshallingHttpMessageConverter();
 		converter.setMarshaller(jaxb2Marshaller);

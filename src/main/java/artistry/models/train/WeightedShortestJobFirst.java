@@ -2,6 +2,7 @@ package artistry.models.train;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -20,7 +21,7 @@ public class WeightedShortestJobFirst {
 	private BigDecimal costOfDelay;
 	private BigDecimal jobSize;
 	private BigDecimal wsjfValue;
-	private List<Document> attachedDocuments;
+	private Set<Document> attachedDocuments;
 	
 	public Long getId() {
 		return id;
@@ -64,10 +65,10 @@ public class WeightedShortestJobFirst {
 	public void setWsjfValue(BigDecimal wsjfValue) {
 		this.wsjfValue = wsjfValue;
 	}
-	public List<Document> getAttachedDocuments() {
+	public Set<Document> getAttachedDocuments() {
 		return attachedDocuments;
 	}
-	public void setAttachedDocuments(List<Document> attachedDocuments) {
+	public void setAttachedDocuments(Set<Document> attachedDocuments) {
 		this.attachedDocuments = attachedDocuments;
 	}
 	

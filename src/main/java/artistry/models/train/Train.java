@@ -1,6 +1,7 @@
 package artistry.models.train;
 
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -24,23 +25,23 @@ public class Train {
 	private String solutionStatement;
 
 	@Relationship(type = "IS_BUSINESS_OWNER", direction = Relationship.INCOMING)
-	private List<Person> businessOwners;
+	private Set<Person> businessOwners;
 
 	@Relationship(type = "IS_KEY_CUSTOMER", direction = Relationship.INCOMING)
-	private List<Person> keyCustomers;
+	private Set<Person> keyCustomers;
 
 	@Relationship(type = "IS_SUCCESS_MEASURE", direction = Relationship.INCOMING)
-	private List<String> successMeasures;
+	private Set<String> successMeasures;
 
 	@Relationship(type = "IS_TEAM", direction = Relationship.INCOMING)
-	private List<ImplementationTeam> peopleAndLocations;
+	private Set<ImplementationTeam> peopleAndLocations;
 
 	private PrincipalRoles principalRoles;
 
 	private String teamDesignStrategy;
 
 	@Relationship(type = "IS_OTHER_STAKEHOLDER", direction = Relationship.INCOMING)
-	private List<Person> otherStakeholders;
+	private Set<Person> otherStakeholders;
 
 	@Relationship(type = "IS_VALUESTREAM_OF", direction = Relationship.OUTGOING)
 	private ValueStream valueStream;
@@ -77,35 +78,35 @@ public class Train {
 		this.solutionStatement = solutionStatement;
 	}
 
-	public List<Person> getBusinessOwners() {
+	public Set<Person> getBusinessOwners() {
 		return businessOwners;
 	}
 
-	public void setBusinessOwners(List<Person> businessOwners) {
+	public void setBusinessOwners(Set<Person> businessOwners) {
 		this.businessOwners = businessOwners;
 	}
 
-	public List<Person> getKeyCustomers() {
+	public Set<Person> getKeyCustomers() {
 		return keyCustomers;
 	}
 
-	public void setKeyCustomers(List<Person> keyCustomers) {
+	public void setKeyCustomers(Set<Person> keyCustomers) {
 		this.keyCustomers = keyCustomers;
 	}
 
-	public List<String> getSuccessMeasures() {
+	public Set<String> getSuccessMeasures() {
 		return successMeasures;
 	}
 
-	public void setSuccessMeasures(List<String> successMeasures) {
+	public void setSuccessMeasures(Set<String> successMeasures) {
 		this.successMeasures = successMeasures;
 	}
 
-	public List<ImplementationTeam> getPeopleAndLocations() {
+	public Set<ImplementationTeam> getPeopleAndLocations() {
 		return peopleAndLocations;
 	}
 
-	public void setPeopleAndLocations(List<ImplementationTeam> peopleAndLocations) {
+	public void setPeopleAndLocations(Set<ImplementationTeam> peopleAndLocations) {
 		this.peopleAndLocations = peopleAndLocations;
 	}
 
@@ -125,11 +126,11 @@ public class Train {
 		this.teamDesignStrategy = teamDesignStrategy;
 	}
 
-	public List<Person> getOtherStakeholders() {
+	public Set<Person> getOtherStakeholders() {
 		return otherStakeholders;
 	}
 
-	public void setOtherStakeholders(List<Person> otherStakeholders) {
+	public void setOtherStakeholders(Set<Person> otherStakeholders) {
 		this.otherStakeholders = otherStakeholders;
 	}
 
@@ -141,4 +142,5 @@ public class Train {
 		this.valueStream = valueStream;
 	}
 
+	
 }

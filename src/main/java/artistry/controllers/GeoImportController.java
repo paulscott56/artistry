@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +40,7 @@ public class GeoImportController {
 	@Autowired
 	private DownloadService downloader;
 
-	@RequestMapping(value = "/import", method = RequestMethod.GET)
+	@RequestMapping(value = "/import", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public String importData() throws IOException, URISyntaxException, ParseException {
 		try {
@@ -51,7 +52,7 @@ public class GeoImportController {
 		}
 	}
 
-	@RequestMapping(value = "/setup", method = RequestMethod.GET)
+	@RequestMapping(value = "/setup", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public String setup() {
 		try {
@@ -63,7 +64,7 @@ public class GeoImportController {
 		return "done";
 	}
 
-	@RequestMapping(value = "/importbycode", method = RequestMethod.GET)
+	@RequestMapping(value = "/importbycode", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public String importDataByCode(@RequestParam("code") String code)
 			throws IOException, URISyntaxException, ParseException {
@@ -106,7 +107,7 @@ public class GeoImportController {
 		}
 	}
 
-	@RequestMapping(value = "/importcities", method = RequestMethod.GET)
+	@RequestMapping(value = "/importcities", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public String importDataByCity() throws IOException, URISyntaxException, ParseException {
 

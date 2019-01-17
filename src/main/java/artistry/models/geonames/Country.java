@@ -1,6 +1,7 @@
 package artistry.models.geonames;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
@@ -34,13 +35,13 @@ public class Country {
 	private Continent continent;
 
 	@Relationship(type = "HAS_PLACE", direction = Relationship.OUTGOING)
-	private List<Place> places;
+	private Set<Place> places;
 
-	public List<Place> getPlaces() {
+	public Set<Place> getPlaces() {
 		return places;
 	}
 
-	public void setPlaces(List<Place> places) {
+	public void setPlaces(Set<Place> places) {
 		this.places = places;
 	}
 

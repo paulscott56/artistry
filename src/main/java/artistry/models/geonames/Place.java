@@ -2,6 +2,7 @@ package artistry.models.geonames;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -20,7 +21,7 @@ public class Place {
 	private String asciiName;
 
 	@Relationship(type = "HAS_ALTERNATE_NAME", direction = Relationship.OUTGOING)
-	private List<AlternateName> alternateNames;
+	private Set<AlternateName> alternateNames;
 
 	private String latitude;
 	private String longitude;
@@ -76,11 +77,11 @@ public class Place {
 		this.asciiName = asciiName;
 	}
 
-	public List<AlternateName> getAlternateNames() {
+	public Set<AlternateName> getAlternateNames() {
 		return alternateNames;
 	}
 
-	public void setAlternateNames(List<AlternateName> alternateNames) {
+	public void setAlternateNames(Set<AlternateName> alternateNames) {
 		this.alternateNames = alternateNames;
 	}
 

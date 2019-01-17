@@ -1,6 +1,7 @@
 package artistry.models.train;
 
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -24,7 +25,7 @@ public class Portfolio {
 	private Long id;
 	
 	@Relationship(type = "HAS_EPIC_OWNERS", direction = Relationship.OUTGOING)
-	private List<Person> epicOwners;
+	private Set<Person> epicOwners;
 	
 	@Relationship(type = "HAS_ENTERPRISE_ARCHITECT", direction = Relationship.OUTGOING)
 	private Person enterpriseArchitect;
@@ -32,12 +33,12 @@ public class Portfolio {
 	private String portfolioName;
 	
 	@Relationship(type = "HAS_MANAGEMENT_TEAM", direction = Relationship.OUTGOING)
-	private List<Person> portfolioManagementTeam;
+	private Set<Person> portfolioManagementTeam;
 	
-	private List<ValueStream> valueStreams;
+	private Set<ValueStream> valueStreams;
 	
 	@Relationship(type = "HAS_STRATEGIC_THEME", direction = Relationship.OUTGOING)
-	private List<StrategicTheme> strategicThemes;
+	private Set<StrategicTheme> strategicThemes;
 	
 	@Relationship(type = "HAS_PORTFOLIO_CANVAS", direction = Relationship.OUTGOING)
 	private PortfolioCanvas portfolioCanvas;
@@ -46,26 +47,24 @@ public class Portfolio {
 	// this will probably change from a document type to something more solid
 	private Document leanBudget;
 	
-	private List<Feature> portfolioBacklog;
+	private Set<Feature> portfolioBacklog;
 	
-	private List<Epic> businessEpics;
-	private List<Epic> enablerEpics;
+	private Set<Epic> businessEpics;
+	private Set<Epic> enablerEpics;
 	
 	// we can either go to large solution or program level here, depending on size of portfolio
-	private List<LargeSolution> largeSolutions;
-	private List<Program> programs;
-	
-	
+	private Set<LargeSolution> largeSolutions;
+	private Set<Program> programs;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<Person> getEpicOwners() {
+	public Set<Person> getEpicOwners() {
 		return epicOwners;
 	}
-	public void setEpicOwners(List<Person> epicOwners) {
+	public void setEpicOwners(Set<Person> epicOwners) {
 		this.epicOwners = epicOwners;
 	}
 	public Person getEnterpriseArchitect() {
@@ -80,22 +79,22 @@ public class Portfolio {
 	public void setPortfolioName(String portfolioName) {
 		this.portfolioName = portfolioName;
 	}
-	public List<Person> getPortfolioManagementTeam() {
+	public Set<Person> getPortfolioManagementTeam() {
 		return portfolioManagementTeam;
 	}
-	public void setPortfolioManagementTeam(List<Person> portfolioManagementTeam) {
+	public void setPortfolioManagementTeam(Set<Person> portfolioManagementTeam) {
 		this.portfolioManagementTeam = portfolioManagementTeam;
 	}
-	public List<ValueStream> getValueStreams() {
+	public Set<ValueStream> getValueStreams() {
 		return valueStreams;
 	}
-	public void setValueStreams(List<ValueStream> valueStreams) {
+	public void setValueStreams(Set<ValueStream> valueStreams) {
 		this.valueStreams = valueStreams;
 	}
-	public List<StrategicTheme> getStrategicThemes() {
+	public Set<StrategicTheme> getStrategicThemes() {
 		return strategicThemes;
 	}
-	public void setStrategicThemes(List<StrategicTheme> strategicThemes) {
+	public void setStrategicThemes(Set<StrategicTheme> strategicThemes) {
 		this.strategicThemes = strategicThemes;
 	}
 	public PortfolioCanvas getPortfolioCanvas() {
@@ -110,22 +109,37 @@ public class Portfolio {
 	public void setLeanBudget(Document leanBudget) {
 		this.leanBudget = leanBudget;
 	}
-	public List<Feature> getPortfolioBacklog() {
+	public Set<Feature> getPortfolioBacklog() {
 		return portfolioBacklog;
 	}
-	public void setPortfolioBacklog(List<Feature> portfolioBacklog) {
+	public void setPortfolioBacklog(Set<Feature> portfolioBacklog) {
 		this.portfolioBacklog = portfolioBacklog;
 	}
-	public List<Epic> getBusinessEpics() {
+	public Set<Epic> getBusinessEpics() {
 		return businessEpics;
 	}
-	public void setBusinessEpics(List<Epic> businessEpics) {
+	public void setBusinessEpics(Set<Epic> businessEpics) {
 		this.businessEpics = businessEpics;
 	}
-	public List<Epic> getEnablerEpics() {
+	public Set<Epic> getEnablerEpics() {
 		return enablerEpics;
 	}
-	public void setEnablerEpics(List<Epic> enablerEpics) {
+	public void setEnablerEpics(Set<Epic> enablerEpics) {
 		this.enablerEpics = enablerEpics;
 	}
+	public Set<LargeSolution> getLargeSolutions() {
+		return largeSolutions;
+	}
+	public void setLargeSolutions(Set<LargeSolution> largeSolutions) {
+		this.largeSolutions = largeSolutions;
+	}
+	public Set<Program> getPrograms() {
+		return programs;
+	}
+	public void setPrograms(Set<Program> programs) {
+		this.programs = programs;
+	}
+	
+	
+	
 }

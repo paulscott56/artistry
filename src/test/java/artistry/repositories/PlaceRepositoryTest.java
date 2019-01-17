@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -37,7 +38,7 @@ public class PlaceRepositoryTest {
 		place.setAdmin2Code("adm2");
 		place.setAdmin3Code("adm3");
 		place.setAdmin4Code("adm4");
-		List<AlternateName> altnames = new ArrayList<>();
+		Set<AlternateName> altnames = new HashSet<>();
 		AlternateName aname = new AlternateName();
 		aname.setAlternateName("egplace");
 		place.setAlternateNames(altnames);
@@ -48,7 +49,7 @@ public class PlaceRepositoryTest {
 		country.setCapital("ExampleTown");
 		Continent continent = new Continent();
 		continent.setCode("EG");
-		List<Country> clist = new ArrayList<>();
+		Set<Country> clist = new HashSet<>();
 		clist.add(country);
 		continent.setCountry(clist);
 		continent.setHasChanges(false);
@@ -65,7 +66,7 @@ public class PlaceRepositoryTest {
 		country.setLanguages("example lang");
 		country.setNeighbours("EG2");
 		country.setPhone("123456");
-		List<Place> placelist = new ArrayList<>();
+		Set<Place> placelist = new HashSet<>();
 		placelist.add(place);
 		country.setPlaces(placelist);
 		country.setPopulation("1");
