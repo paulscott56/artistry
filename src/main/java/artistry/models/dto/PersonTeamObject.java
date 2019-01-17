@@ -1,12 +1,14 @@
 package artistry.models.dto;
 
+import java.util.List;
+
 import artistry.enums.Role;
 
 public class PersonTeamObject {
 	
 	private Long personId;
-	private Long implemantationTeamId;
-	private Role role;
+	private Long implementationTeamId;
+	private List<Role> roles;
 	
 	public Long getPersonId() {
 		return personId;
@@ -14,19 +16,16 @@ public class PersonTeamObject {
 	public void setPersonId(Long personId) {
 		this.personId = personId;
 	}
-	public Long getImplemantationTeamId() {
-		return implemantationTeamId;
+	public Long getImplementationTeamId() {
+		return implementationTeamId;
 	}
-	public void setImplemantationTeamId(Long implemantationTeamId) {
-		this.implemantationTeamId = implemantationTeamId;
+	public void setImplementationTeamId(Long implemantationTeamId) {
+		this.implementationTeamId = implemantationTeamId;
 	}
-	public Role getRole() {
-		return role;
+	public List<Role> getRoles() {
+		return roles;
 	}
-	public void setRole(Role role) {
-		this.role = role;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
-	
-	
-
 }
