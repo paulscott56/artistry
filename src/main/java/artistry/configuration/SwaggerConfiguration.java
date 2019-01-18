@@ -30,13 +30,16 @@ public class SwaggerConfiguration {
 
 	@Bean
 	public Docket artistryApi() {
-		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("artistry"))
-				.paths(PathSelectors.ant("/*")).build().apiInfo(apiInfo());
+		return new Docket(DocumentationType.SWAGGER_2).select()
+				.apis(RequestHandlerSelectors.basePackage("artistry.controllers"))
+				.paths(PathSelectors.ant("/*"))
+				.build()
+				.apiInfo(apiInfo());
 	}
 
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("Artistry SAFe Agile Management").description(
-				"")
+				"SAFe Management made easy!")
 				.license("Apache License Version 2.0")
 				.licenseUrl("https://www.apache.org/licenses/LICENSE-2.0").version("1.0").build();
 	}
