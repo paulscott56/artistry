@@ -31,7 +31,11 @@ public class Enterprise {
 	
 	@Relationship(type = "HAS_QUALITATIVE_DATA", direction = Relationship.OUTGOING)
 	private Set<Document> qualitativeData;
+	
 	private GuardRails guardRails;
+	
+	@Relationship(type = "HAS_PORTFOLIO", direction = Relationship.OUTGOING)
+	private Set<Portfolio> portfolios;
 	
 	public Long getId() {
 		return id;
@@ -80,6 +84,12 @@ public class Enterprise {
 	}
 	public void setGuardRails(GuardRails guardRails) {
 		this.guardRails = guardRails;
+	}
+	public Set<Portfolio> getPortfolios() {
+		return portfolios;
+	}
+	public void setPortfolios(Set<Portfolio> portfolios) {
+		this.portfolios = portfolios;
 	}
 	
 	

@@ -35,6 +35,7 @@ public class Portfolio {
 	@Relationship(type = "HAS_MANAGEMENT_TEAM", direction = Relationship.OUTGOING)
 	private Set<Person> portfolioManagementTeam;
 	
+	@Relationship(type = "HAS_VALUE_STREAM", direction = Relationship.OUTGOING)
 	private Set<ValueStream> valueStreams;
 	
 	@Relationship(type = "HAS_STRATEGIC_THEME", direction = Relationship.OUTGOING)
@@ -47,14 +48,22 @@ public class Portfolio {
 	// this will probably change from a document type to something more solid
 	private Document leanBudget;
 	
+	@Relationship(type = "HAS_BACKLOG_FEATURE", direction = Relationship.OUTGOING)
 	private Set<Feature> portfolioBacklog;
 	
+	@Relationship(type = "HAS_BUSINESS_EPIC", direction = Relationship.OUTGOING)
 	private Set<Epic> businessEpics;
+	
+	@Relationship(type = "HAS_ENABLER_EPIC", direction = Relationship.OUTGOING)
 	private Set<Epic> enablerEpics;
 	
 	// we can either go to large solution or program level here, depending on size of portfolio
+	@Relationship(type = "HAS_LARGE_SOLUTION", direction = Relationship.OUTGOING)
 	private Set<LargeSolution> largeSolutions;
+	
+	@Relationship(type = "HAS_PROGRAM", direction = Relationship.OUTGOING)
 	private Set<Program> programs;
+	
 	public Long getId() {
 		return id;
 	}
