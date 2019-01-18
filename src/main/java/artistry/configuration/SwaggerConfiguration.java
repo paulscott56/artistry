@@ -43,16 +43,6 @@ public class SwaggerConfiguration {
 				.version("1.0").build();
 	}
 
-	// @Bean
-	// UiConfiguration uiConfig() {
-	// return new UiConfiguration("validatorUrl", // url
-	// "list", // docExpansion => none | list
-	// "alpha", // apiSorter => alpha
-	// "schema", // defaultModelRendering => schema
-	// false, // enableJsonEditor => true | false
-	// true); // showRequestHeaders => true | false
-	// }
-
 	@Bean
 	UiConfiguration uiConfig() {
 		return UiConfigurationBuilder.builder().displayRequestDuration(true).validatorUrl(StringUtils.EMPTY).build();
