@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,23 +29,39 @@ public class LocationRestController {
 	static final Logger log = LoggerFactory.getLogger(LocationRestController.class);
 
 	@Autowired
-	private GeoRepository repo;
+	private GeoRepository placeRepo;
 
 	@Autowired
 	private MajorCityRepository cityRepo;
 
-	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/getallplaces", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public Iterable<Place> getAllPlaces() {
-		return repo.findAll();
+		return placeRepo.findAll();
 	}
 
-	@RequestMapping(value = "/searchbyname", method = RequestMethod.GET, produces = {
+	@RequestMapping(value = "/searchplacebyname", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public Set<Place> searchPlaceByName(@RequestParam("name") String name) {
 		String regex = "(?i).*" + name + "*";
-		return repo.getFuzzyByAsciiName(regex);
+		return placeRepo.getFuzzyByAsciiName(regex);
+	}
+
+	@RequestMapping(value = "/getallcities", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public Iterable<MajorCity> getAllCities() {
+		return cityRepo.findAll();
+	}
+
+	@RequestMapping(value = "/searchcitybyname", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public Set<MajorCity> searchCityByName(@RequestParam("name") String name) {
+		String regex = "(?i).*" + name + "*";
+		return cityRepo.getFuzzyByAsciiName(regex);
 	}
 
 	@RequestMapping(value = "/searchbycityname", method = RequestMethod.GET, produces = {
@@ -53,6 +70,19 @@ public class LocationRestController {
 	public Set<MajorCity> searchMajorCityByName(@RequestParam("name") String name) {
 		String regex = "(?i).*" + name + "*";
 		return cityRepo.getFuzzyByAsciiName(regex);
+	}
+
+	@RequestMapping(value = "/addmajorcity", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public MajorCity addMajorCity(@RequestBody MajorCity majorCity) {
+		return cityRepo.save(majorCity);
+	}
+
+	@RequestMapping(value = "/addplace", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public Place addPlace(@RequestBody Place place) {
+		return placeRepo.save(place);
 	}
 
 }
