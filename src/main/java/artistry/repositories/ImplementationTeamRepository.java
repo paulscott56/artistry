@@ -14,7 +14,7 @@ import artistry.models.person.ImplementationTeam;
  * @author paul
  *
  */
-@RepositoryRestResource(collectionResourceRel = "team", path = "implementationteam")
+@RepositoryRestResource(collectionResourceRel = "org", path = "implementationteam")
 public interface ImplementationTeamRepository extends Neo4jRepository<ImplementationTeam, Long> {
 
 	Optional<ImplementationTeam> findByTeamName(String name);
