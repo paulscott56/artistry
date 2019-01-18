@@ -33,9 +33,9 @@ import artistry.repositories.PersonRepository;
 @RestController
 @Description("Controller to set up and maintain the various levels of organization")
 @RequestMapping("/org")
-public class OrganizationController {
+public class OrganizationRestController {
 
-	static final Logger log = LoggerFactory.getLogger(OrganizationController.class);
+	static final Logger log = LoggerFactory.getLogger(OrganizationRestController.class);
 
 	@Autowired
 	private EnterpriseRepository enterpriseRepo;

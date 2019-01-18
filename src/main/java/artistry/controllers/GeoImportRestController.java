@@ -30,9 +30,9 @@ import artistry.utils.DownloadService;
 @RestController
 @Description("Controller to simplify the import of the geo data")
 @RequestMapping("/geo")
-public class GeoImportController {
+public class GeoImportRestController {
 
-	static final Logger log = LoggerFactory.getLogger(GeoImportController.class);
+	static final Logger log = LoggerFactory.getLogger(GeoImportRestController.class);
 
 	@Autowired
 	private ArtistryCsvReader csvReader;
