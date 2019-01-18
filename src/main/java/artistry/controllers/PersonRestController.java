@@ -41,14 +41,14 @@ public class PersonRestController {
 
 	@Autowired
 	private CountryRepository countryRepo;
-	
+
 	@Autowired
 	private RolesRepository rolesRepo;
-	
+
 	@Autowired
 	private ArtistryCsvReader csvReader;
 
-	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Person createPerson(@RequestBody Person person) {
 		try {
@@ -63,8 +63,9 @@ public class PersonRestController {
 			return person;
 		}
 	}
-	
-	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Person updatePerson(@RequestBody Person person) {
 		try {
@@ -77,14 +78,16 @@ public class PersonRestController {
 			return person;
 		}
 	}
-	
+
 	/**
-	 * We only deactivate people, not delete them. This is to create an audit trail for archive
+	 * We only deactivate people, not delete them. This is to create an audit trail
+	 * for archive
 	 * 
 	 * @param person
 	 * @return
 	 */
-	@RequestMapping(value = "/deactivate", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@RequestMapping(value = "/deactivate", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Person deactivatePerson(@RequestBody Person person) {
 		try {
@@ -98,8 +101,9 @@ public class PersonRestController {
 			return person;
 		}
 	}
-	
-	@RequestMapping(value = "/activate", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
+
+	@RequestMapping(value = "/activate", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Person activatePerson(@RequestBody Person person) {
 		try {
@@ -114,25 +118,28 @@ public class PersonRestController {
 		}
 	}
 
-	@RequestMapping(value = "/getbyusername", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@RequestMapping(value = "/getbyusername", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Person getByUsername(@RequestParam("username") String username) {
 		Person person = personRepo.findByUsername(username);
 		return person;
 	}
 
-	@RequestMapping(value = "/getbyid/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@RequestMapping(value = "/getbyid/{id}", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Optional<Person> getById(@PathVariable("id") Long id) {
 		Optional<Person> person = personRepo.findById(id);
 		return person;
 	}
-	
-	@RequestMapping(value = "/createrole", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
+
+	@RequestMapping(value = "/createrole", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private PersonRole createRole(@RequestBody PersonRole role) {
 		Optional<PersonRole> existingrole = rolesRepo.findByRoleName(role.getRoleName());
-		if(!existingrole.isPresent()) {
+		if (!existingrole.isPresent()) {
 			return rolesRepo.save(role);
 		} else {
 			PersonRole oldrole = existingrole.get();
@@ -140,12 +147,20 @@ public class PersonRestController {
 			return rolesRepo.save(role);
 		}
 	}
-	
-	@RequestMapping(value = "/setuproles", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
+
+	@RequestMapping(value = "/setuproles", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private String createBaseRoles() throws URISyntaxException, IOException {
 		// parse the csv file
 		csvReader.readRolesCsv();
 		return "Import of roles complete";
+	}
+
+	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	private Iterable<Person> getAll() {
+		Iterable<Person> person = personRepo.findAll();
+		return person;
 	}
 }
