@@ -34,6 +34,8 @@ public class Program {
 	private ProgramKanban programKanban;
 	private Set<Objective> piObjectives;
 	private Set<Document> architecturalRunway;
+	private String programName;
+	
 	public Long getId() {
 		return id;
 	}
@@ -123,6 +125,12 @@ public class Program {
 	}
 	public void setArchitecturalRunway(Set<Document> architecturalRunway) {
 		this.architecturalRunway = architecturalRunway;
+	}
+	public String getProgramName() {
+		return programName;
+	}
+	public void setProgramName(String programName) {
+		this.programName = programName;
 	}
 	
 	

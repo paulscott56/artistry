@@ -1,6 +1,8 @@
 package artistry.controllers;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import artistry.models.dto.PersonTeamObject;
+import artistry.models.person.Company;
 import artistry.models.person.ImplementationTeam;
 import artistry.models.person.Person;
+import artistry.models.train.LargeSolution;
+import artistry.repositories.CompanyRepository;
 import artistry.repositories.ImplementationTeamRepository;
 
 @Configuration
@@ -30,11 +35,21 @@ public class TeamRestController {
 	
 	@Autowired
 	private ImplementationTeamRepository teamRepo;
+	
+	@Autowired
+	private CompanyRepository companyRepo;
 
 	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Iterable<ImplementationTeam> getAll() {
 		 return teamRepo.findAll();
+	}
+	
+	@RequestMapping(value = "/getbyname/{name}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	private Optional<ImplementationTeam> getByName(@PathVariable("name") String name) {
+		Optional<ImplementationTeam> team = teamRepo.findByTeamName(name);
+		return team;
 	}
 	
 	@RequestMapping(value = "/updatescrummaster", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
@@ -51,4 +66,35 @@ public class TeamRestController {
 		return team;
 	}
 	
+	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	private ImplementationTeam createTeam(@RequestBody ImplementationTeam team) {
+		ImplementationTeam savedteam = teamRepo.save(team);
+		// we need to also update the company links
+		Company c = team.getCompany();
+		Optional<Company> coCheck = companyRepo.findById(c.getId());
+		if (coCheck.isPresent()) {
+			Company cotoupdate = coCheck.get();
+			Set<ImplementationTeam> teamlist = cotoupdate.getTeams();
+			if (teamlist != null && teamlist.size() > 0) {
+				teamlist.add(savedteam);
+				cotoupdate.setTeams(teamlist);
+			} else {
+				Set<ImplementationTeam> newteamlist = new HashSet<>();
+				newteamlist.add(savedteam);
+				cotoupdate.setTeams(newteamlist);
+			}
+			companyRepo.save(cotoupdate);
+		}
+		return savedteam;
+	}
+	
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	private void deleteLargeSolution(@PathVariable("id") Long id) {
+		Optional<ImplementationTeam> team = teamRepo.findById(id);
+		if(team.isPresent()) {
+			teamRepo.delete(team.get());
+		}
+	}
 }

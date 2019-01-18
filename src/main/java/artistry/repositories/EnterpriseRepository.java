@@ -8,4 +8,6 @@ import artistry.models.train.Enterprise;
 @RepositoryRestResource(collectionResourceRel = "organization", path = "enterprise")
 public interface EnterpriseRepository extends Neo4jRepository<Enterprise, Long> {
 
+	Iterable<Enterprise> findByEnterpriseName(String name);
+
 }

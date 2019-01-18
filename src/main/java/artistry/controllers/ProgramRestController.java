@@ -15,56 +15,58 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.train.Portfolio;
-import artistry.repositories.PortfolioRepository;
+import artistry.models.train.LargeSolution;
+import artistry.models.train.Program;
+import artistry.repositories.LargeSolutionRepository;
+import artistry.repositories.ProgramRepository;
 
 @Configuration
 @RestController
-@Description("Controller to manage portfolios")
-@RequestMapping("/portfolio")
-public class PortfolioRestController {
-
-static final Logger log = LoggerFactory.getLogger(PortfolioRestController.class);
+@Description("Controller to manage programs")
+@RequestMapping("/program")
+public class ProgramRestController {
 	
+	static final Logger log = LoggerFactory.getLogger(ProgramRestController.class);
+
 	@Autowired
-	private PortfolioRepository portRepo;
+	private ProgramRepository progRepo;
 	
 	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public Iterable<Portfolio> getAll() {
-		return portRepo.findAll();
+	public Iterable<Program> getAll() {
+		return progRepo.findAll();
 	}
 	
 	@RequestMapping(value = "/getbyname/{name}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public Iterable<Portfolio> getAllByName(@PathVariable("name") String name) {
-		return portRepo.findByPortfolioName(name);
+	public Iterable<Program> getAllByName(@PathVariable("name") String name) {
+		return progRepo.findByProgramName(name);
 	}
 	
 	@RequestMapping(value = "/getbyid/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public Optional<Portfolio> getById(@PathVariable("id") Long id) {
-		return portRepo.findById(id);
+	public Optional<Program> getById(@PathVariable("id") Long id) {
+		return progRepo.findById(id);
 	}
 	
 	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	private Portfolio createPortfolio(@RequestBody Portfolio portfolio) {
-		return portRepo.save(portfolio);
+	private Program createProgram(@RequestBody Program program) {
+		return progRepo.save(program);
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	private Portfolio updatePortfolio(@RequestBody Portfolio portfolio) {
-		return portRepo.save(portfolio);
+	private Program updateProgram(@RequestBody Program program) {
+		return progRepo.save(program);
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	private void deletePortfolio(@PathVariable("id") Long id) {
-		Optional<Portfolio> portfolio = portRepo.findById(id);
-		if(portfolio.isPresent()) {
-			portRepo.delete(portfolio.get());
+	private void deleteProgram(@PathVariable("id") Long id) {
+		Optional<Program> program = progRepo.findById(id);
+		if(program.isPresent()) {
+			progRepo.delete(program.get());
 		}
 	}
 }

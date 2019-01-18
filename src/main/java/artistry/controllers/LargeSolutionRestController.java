@@ -15,56 +15,57 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.train.Portfolio;
-import artistry.repositories.PortfolioRepository;
+import artistry.models.train.LargeSolution;
+import artistry.repositories.LargeSolutionRepository;
 
 @Configuration
 @RestController
-@Description("Controller to manage portfolios")
-@RequestMapping("/portfolio")
-public class PortfolioRestController {
+@Description("Controller to manage large solutions")
+@RequestMapping("/largesolution")
+public class LargeSolutionRestController {
 
-static final Logger log = LoggerFactory.getLogger(PortfolioRestController.class);
-	
+	static final Logger log = LoggerFactory.getLogger(LargeSolutionRestController.class);
+
 	@Autowired
-	private PortfolioRepository portRepo;
+	private LargeSolutionRepository largeRepo;
 	
 	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public Iterable<Portfolio> getAll() {
-		return portRepo.findAll();
+	public Iterable<LargeSolution> getAll() {
+		return largeRepo.findAll();
 	}
 	
 	@RequestMapping(value = "/getbyname/{name}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public Iterable<Portfolio> getAllByName(@PathVariable("name") String name) {
-		return portRepo.findByPortfolioName(name);
+	public Iterable<LargeSolution> getAllByName(@PathVariable("name") String name) {
+		return largeRepo.findByLargeSolutionName(name);
 	}
 	
 	@RequestMapping(value = "/getbyid/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public Optional<Portfolio> getById(@PathVariable("id") Long id) {
-		return portRepo.findById(id);
+	public Optional<LargeSolution> getById(@PathVariable("id") Long id) {
+		return largeRepo.findById(id);
 	}
 	
 	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	private Portfolio createPortfolio(@RequestBody Portfolio portfolio) {
-		return portRepo.save(portfolio);
+	private LargeSolution createLargeSolution(@RequestBody LargeSolution ls) {
+		return largeRepo.save(ls);
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	private Portfolio updatePortfolio(@RequestBody Portfolio portfolio) {
-		return portRepo.save(portfolio);
+	private LargeSolution updateLargeSolution(@RequestBody LargeSolution ls) {
+		return largeRepo.save(ls);
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	private void deletePortfolio(@PathVariable("id") Long id) {
-		Optional<Portfolio> portfolio = portRepo.findById(id);
-		if(portfolio.isPresent()) {
-			portRepo.delete(portfolio.get());
+	private void deleteLargeSolution(@PathVariable("id") Long id) {
+		Optional<LargeSolution> ls = largeRepo.findById(id);
+		if(ls.isPresent()) {
+			largeRepo.delete(ls.get());
 		}
 	}
+	
 }

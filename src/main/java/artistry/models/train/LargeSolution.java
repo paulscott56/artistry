@@ -17,6 +17,8 @@ public class LargeSolution {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	private String largeSolutionName;
 
 	@Relationship(type = "HAS_SOLUTION_ARCHITECT", direction = Relationship.OUTGOING)
 	private Person solutionArchitect;
@@ -197,6 +199,14 @@ public class LargeSolution {
 
 	public void setInspectAndAdaptEvent(InspectAndAdapt inspectAndAdaptEvent) {
 		this.inspectAndAdaptEvent = inspectAndAdaptEvent;
+	}
+
+	public String getLargeSolutionName() {
+		return largeSolutionName;
+	}
+
+	public void setLargeSolutionName(String largeSolutionName) {
+		this.largeSolutionName = largeSolutionName;
 	}
 
 	
