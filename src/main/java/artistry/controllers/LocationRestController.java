@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import artistry.models.geonames.Country;
 import artistry.models.geonames.MajorCity;
 import artistry.models.geonames.Place;
+import artistry.repositories.CountryRepository;
 import artistry.repositories.GeoRepository;
 import artistry.repositories.MajorCityRepository;
 
@@ -34,6 +36,9 @@ public class LocationRestController {
 	@Autowired
 	private MajorCityRepository cityRepo;
 
+	@Autowired
+	private CountryRepository countryRepo;
+
 	@RequestMapping(value = "/getallplaces", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
@@ -45,7 +50,7 @@ public class LocationRestController {
 			MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public Set<Place> searchPlaceByName(@RequestParam("name") String name) {
-		String regex = "(?i).*" + name + "*";
+		String regex = "(?i)" + name;
 		return placeRepo.getFuzzyByAsciiName(regex);
 	}
 
@@ -60,7 +65,7 @@ public class LocationRestController {
 			MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public Set<MajorCity> searchCityByName(@RequestParam("name") String name) {
-		String regex = "(?i).*" + name + "*";
+		String regex = "(?i)" + name;
 		return cityRepo.getFuzzyByAsciiName(regex);
 	}
 
@@ -68,7 +73,7 @@ public class LocationRestController {
 			MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public Set<MajorCity> searchMajorCityByName(@RequestParam("name") String name) {
-		String regex = "(?i).*" + name + "*";
+		String regex = "(?i)" + name;
 		return cityRepo.getFuzzyByAsciiName(regex);
 	}
 
@@ -83,6 +88,21 @@ public class LocationRestController {
 	@ResponseBody
 	public Place addPlace(@RequestBody Place place) {
 		return placeRepo.save(place);
+	}
+
+	@RequestMapping(value = "/getallcountries", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public Iterable<Country> getAllCountries() {
+		return countryRepo.findAll();
+	}
+
+	@RequestMapping(value = "/getcountrybyname", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public Country getCountriesByName(@RequestParam("country") String countryName) {
+		String regex = "(?i)" + countryName;
+		return countryRepo.findByCountry(regex);
 	}
 
 }
