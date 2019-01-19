@@ -1,4 +1,4 @@
-package artistry.models.geonames;
+package artistry.models.geo;
 
 import java.util.Date;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
-@NodeEntity
-public class Place {
+@NodeEntity(label = "MajorCity")
+public class MajorCity {
 
 	@Id
 	@GeneratedValue
@@ -201,8 +201,8 @@ public class Place {
 		return modificationDate;
 	}
 
-	public void setModificationDate(Date moddate) {
-		this.modificationDate = moddate;
+	public void setModificationDate(Date modificationDate) {
+		this.modificationDate = modificationDate;
 	}
 
 	public Country getCountry() {

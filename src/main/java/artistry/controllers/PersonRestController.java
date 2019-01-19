@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.geonames.Country;
+import artistry.models.geo.Country;
 import artistry.models.person.Person;
 import artistry.models.person.PersonRole;
 import artistry.repositories.CountryRepository;

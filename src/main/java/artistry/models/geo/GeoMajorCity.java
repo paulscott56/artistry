@@ -1,4 +1,4 @@
-package artistry.models.geonames;
+package artistry.models.geo;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -8,7 +8,7 @@ import org.neo4j.ogm.annotation.Relationship;
 import com.opencsv.bean.CsvBindByPosition;
 
 @NodeEntity
-public class GeoPlace {
+public class GeoMajorCity {
 
 	@Id
 	@GeneratedValue

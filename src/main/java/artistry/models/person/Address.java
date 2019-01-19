@@ -7,7 +7,7 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 import artistry.enums.AddressType;
-import artistry.models.geonames.Country;
+import artistry.models.geo.Country;
 
 @NodeEntity
 public class Address {

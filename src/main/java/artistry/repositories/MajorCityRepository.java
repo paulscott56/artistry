@@ -6,7 +6,7 @@ import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import artistry.models.geonames.MajorCity;
+import artistry.models.geo.MajorCity;
 
 @RepositoryRestResource(collectionResourceRel = "geo", path = "MajorCity")
 public interface MajorCityRepository extends Neo4jRepository<MajorCity, Long> {

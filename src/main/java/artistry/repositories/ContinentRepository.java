@@ -3,7 +3,7 @@ package artistry.repositories;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import artistry.models.geonames.Continent;
+import artistry.models.geo.Continent;
 
 @RepositoryRestResource(collectionResourceRel = "geo", path = "continent")
 public interface ContinentRepository extends Neo4jRepository<Continent, Long> {

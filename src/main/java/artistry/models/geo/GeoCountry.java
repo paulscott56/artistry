@@ -1,68 +1,47 @@
-package artistry.models.geonames;
+package artistry.models.geo;
 
-import java.util.List;
-import java.util.Set;
+import com.opencsv.bean.CsvBindByPosition;
 
-import javax.validation.constraints.NotNull;
+public class GeoCountry {
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.Index;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
-
-@NodeEntity(label = "Country")
-public class Country {
-
-	@Id
-	@GeneratedValue
-	private Long id;
-
-	@Index(unique = true)
+	@CsvBindByPosition(position = 0)
 	private String iso;
+	@CsvBindByPosition(position = 1)
 	private String iso3;
+	@CsvBindByPosition(position = 2)
 	private String isoNumeric;
+	@CsvBindByPosition(position = 3)
 	private String fips;
-
-	@Index(unique = true)
-	@NotNull
+	@CsvBindByPosition(position = 4)
 	private String country;
+	@CsvBindByPosition(position = 5)
 	private String capital;
+	@CsvBindByPosition(position = 6)
 	private String areainsqkm;
+	@CsvBindByPosition(position = 7)
 	private String population;
-
-	@Relationship(type = "ON_CONTINENT", direction = Relationship.OUTGOING)
-	private Continent continent;
-
-	@Relationship(type = "HAS_PLACE", direction = Relationship.OUTGOING)
-	private Set<Place> places;
-
-	public Set<Place> getPlaces() {
-		return places;
-	}
-
-	public void setPlaces(Set<Place> places) {
-		this.places = places;
-	}
-
+	@CsvBindByPosition(position = 8)
+	private String continent;
+	@CsvBindByPosition(position = 9)
 	private String tld;
+	@CsvBindByPosition(position = 10)
 	private String currencyCode;
+	@CsvBindByPosition(position = 11)
 	private String currencyName;
+	@CsvBindByPosition(position = 12)
 	private String phone;
+	@CsvBindByPosition(position = 13)
 	private String postalCodeFormat;
+	@CsvBindByPosition(position = 14)
 	private String postalCodeRegex;
+	@CsvBindByPosition(position = 15)
 	private String languages;
+	@CsvBindByPosition(position = 16)
 	private String geonameid;
+	@CsvBindByPosition(position = 17)
 	private String neighbours;
+	@CsvBindByPosition(position = 18)
 	private String equivalentFipsCode;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getIso() {
 		return iso;
@@ -128,11 +107,11 @@ public class Country {
 		this.population = population;
 	}
 
-	public Continent getContinent() {
+	public String getContinent() {
 		return continent;
 	}
 
-	public void setContinent(Continent continent) {
+	public void setContinent(String continent) {
 		this.continent = continent;
 	}
 
@@ -215,4 +194,5 @@ public class Country {
 	public void setEquivalentFipsCode(String equivalentFipsCode) {
 		this.equivalentFipsCode = equivalentFipsCode;
 	}
+
 }

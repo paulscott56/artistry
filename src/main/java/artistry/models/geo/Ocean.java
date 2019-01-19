@@ -1,4 +1,4 @@
-package artistry.models.geonames;
+package artistry.models.geo;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package artistry.models.geonames;
+package artistry.models.geo;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
