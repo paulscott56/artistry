@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import artistry.enums.AddressType;
 import artistry.enums.Continents;
 import artistry.models.geo.AlternateName;
 import artistry.models.geo.Continent;
@@ -367,6 +368,7 @@ public class ArtistryCsvReader {
 					addlines.add(l);
 				}
 				address.setAddressLine(addlines);
+				address.setAddressType(AddressType.PERSON);
 				p.setAddress(address);
 				p.setCountryCode(pcsv.getCountryCode());
 				p.setDateCreated(LocalDateTime.now());
