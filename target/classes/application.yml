@@ -19,6 +19,11 @@ spring:
       username: neo4j 
       password: hello
       uri: localhost
+  servlet:
+    multipart:
+      max-file-size: 128MB
+      max-request-size: 128MB
+      enabled: true
 
 eureka:
   instance:
@@ -51,6 +56,11 @@ spring:
       username: neo4j 
       password: hello
       uri: localhost
+  servlet:
+    multipart:
+      max-file-size: 128KB
+      max-request-size: 128KB
+      enabled: false
 
 eureka:
   instance:

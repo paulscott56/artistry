@@ -6,12 +6,15 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.TimeZone;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import artistry.exceptions.StorageFileNotFoundException;
 import artistry.models.geo.Country;
 import artistry.models.person.Person;
 import artistry.models.person.PersonRole;
@@ -27,6 +33,7 @@ import artistry.repositories.CountryRepository;
 import artistry.repositories.PersonRepository;
 import artistry.repositories.RolesRepository;
 import artistry.services.ArtistryCsvReader;
+import artistry.utils.StorageService;
 
 @Configuration
 @RestController
@@ -47,6 +54,9 @@ public class PersonRestController {
 
 	@Autowired
 	private ArtistryCsvReader csvReader;
+	
+	@Autowired
+	private StorageService storageService;
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
@@ -163,4 +173,27 @@ public class PersonRestController {
 		Iterable<Person> person = personRepo.findAll();
 		return person;
 	}
+	
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+		log.info("uploading file: " + file.getOriginalFilename());
+		if (!file.isEmpty()) {
+			if(file.getContentType().equals("text/csv") && FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase().equals("csv")) {
+				storageService.store(file);
+				// send this off for processing now...
+				
+		        return "You successfully uploaded " + file.getOriginalFilename() + "!";	
+			} else {
+				return "File: " + file.getOriginalFilename() + " does not seem to be a valid CSV file";
+			}
+		} else {
+			return "You failed to upload " + file.getOriginalFilename() + " because the file was empty.";
+		}
+	}
+	
+	@ExceptionHandler(StorageFileNotFoundException.class)
+    public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
+        return ResponseEntity.notFound().build();
+    }
+
 }
