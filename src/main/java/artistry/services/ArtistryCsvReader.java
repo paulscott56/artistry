@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -18,7 +19,9 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -33,7 +36,12 @@ import artistry.models.geo.GeoPlace;
 import artistry.models.geo.MajorCity;
 import artistry.models.geo.Place;
 import artistry.models.geo.Planet;
+import artistry.models.person.Address;
+import artistry.models.person.EmailAddress;
+import artistry.models.person.Person;
+import artistry.models.person.PersonCsv;
 import artistry.models.person.PersonRole;
+import artistry.models.person.PhoneNumber;
 import artistry.repositories.ContinentRepository;
 import artistry.repositories.CountryRepository;
 import artistry.repositories.GeoRepository;
@@ -60,7 +68,7 @@ public class ArtistryCsvReader {
 
 	@Autowired
 	private PlanetRepository planetRepo;
-	
+
 	@Autowired
 	private RolesRepository rolesRepo;
 
@@ -336,6 +344,49 @@ public class ArtistryCsvReader {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	@Async
+	public void importPeople(MultipartFile file) throws URISyntaxException, IOException {
+		log.info("Parsing file: " + ClassLoader.getSystemResource("csv/").toString() + file.getOriginalFilename());
+		Path CSV_PATH = Paths.get(ClassLoader.getSystemResource("csv/" + file.getOriginalFilename()).toURI());
+		Reader reader = Files.newBufferedReader(CSV_PATH);
+		CsvToBean<PersonCsv> csvToBean = new CsvToBeanBuilder<PersonCsv>(reader).withType(PersonCsv.class)
+				.withIgnoreLeadingWhiteSpace(true).withSeparator(',').withSkipLines(1).build();
+		Iterator<PersonCsv> personIterator = csvToBean.iterator();
+		while (personIterator.hasNext()) {
+			try {
+				PersonCsv pcsv = personIterator.next();
+				Person p = new Person();
+				p.setActive(pcsv.isActive());
+				Address address = new Address();
+				Set<String> addlines = new HashSet<>();
+				String[] lines = pcsv.getAddress().split(",");
+				for (String l : lines) {
+					addlines.add(l);
+				}
+				address.setAddressLine(addlines);
+				p.setAddress(address);
+				p.setCountryCode(pcsv.getCountryCode());
+				p.setDateCreated(LocalDateTime.now());
+				EmailAddress emailAddress = new EmailAddress();
+				emailAddress.setPersonalEmail(pcsv.getPersonalEmail());
+				emailAddress.setWorkEmail(pcsv.getWorkemail());
+				p.setEmailAddress(emailAddress);
+				p.setName(pcsv.getName());
+				p.setNickname(pcsv.getNickname());
+				PhoneNumber phoneNumber = new PhoneNumber();
+				phoneNumber.setOfficePhone(pcsv.getWorkPhone());
+				phoneNumber.setMobilePhone(pcsv.getMobilePhone());
+				p.setPhoneNumber(phoneNumber);
+				p.setSurname(pcsv.getSurname());
+				p.setUsername(pcsv.getUsername());
+				
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
+
 		}
 	}
 }

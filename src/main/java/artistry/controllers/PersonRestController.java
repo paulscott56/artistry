@@ -175,13 +175,13 @@ public class PersonRestController {
 	}
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+	public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException, URISyntaxException {
 		log.info("uploading file: " + file.getOriginalFilename());
 		if (!file.isEmpty()) {
 			if(file.getContentType().equals("text/csv") && FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase().equals("csv")) {
 				storageService.store(file);
 				// send this off for processing now...
-				
+				csvReader.importPeople(file);
 		        return "You successfully uploaded " + file.getOriginalFilename() + "!";	
 			} else {
 				return "File: " + file.getOriginalFilename() + " does not seem to be a valid CSV file";
