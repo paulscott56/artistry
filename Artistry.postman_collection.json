@@ -1,0 +1,487 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Artistry",
+		"_postman_id": "bd382cb3-c9d7-3169-0ae7-a408c245c39d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create New Person",
+			"request": {
+				"url": "localhost:9988/person/new",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Niall\",\n  \"surname\" : \"'O Conner'\",\n  \"username\": \"macdaddyniall\",\n  \"nickname\": \"Niall\",\n  \"countryCode\": \"IE\",\n  \"emailAddress\": {\n    \"workEmail\": \"noconner@mobacar.com\",\n    \"personalEmail\": \"noconner@gmail.com\",\n    \"supportEmail\": \"entropy@mobacar.com\",\n    \"emergencyContactEmail\": \"noconnor@mobacar.com\"\n  },\n  \"phoneNumber\": {\n    \"officePhone\": \"\",\n    \"mobilePhone\": \"0874015683\",\n    \"homePhone\": \"\"\n  },\n  \"address\": {\n    \"isPostalAddress\": true,\n    \"addressLine\": [ \"48 Some Place\", \"Killorglin\"]\n  },\n  \"active\": true,\n  \"roles\": [\n    \t{\"role\": \"DEVELOPER\"}, \n    \t{\"role\": \"AGILE_TEAM_MEMBER\"}\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Company",
+			"request": {
+				"url": "localhost:9988/org/newcompany",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"companyName\": \"Mobacar\",\n\t\"companyAddress\": {\n\t\t\"addressType\": \"LOCALBUSINESS\",\n        \"isPostalAddress\": true,\n        \"addressLine\": [ \"Mobacar House\", \"Muckross Rd\"]\n\t},\n\t\"phoneNumber\": {\n\t\t\"officePhone\": \"353-1234567\",\n        \"mobilePhone\": \"0874015683\"\n\t},\n\t\"emailAddress\": {\n\t\t\"workEmail\": \"info@mobacar.com\",\n        \"supportEmail\": \"support@mobacar.com\",\n        \"emergencyContactEmail\": \"mwwebster@mobacar.com\"\n\t},\n\t\"latitude\": \"\",\n\t\"longitude\": \"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by Username",
+			"request": {
+				"url": {
+					"raw": "localhost:9988/person/getbyusername?username=paulscott56",
+					"host": [
+						"localhost"
+					],
+					"port": "9988",
+					"path": [
+						"person",
+						"getbyusername"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "paulscott56",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"companyName\": \"Mobacar\",\n\t\"companyAddress\": {\n\t\t\"addressType\": \"LOCALBUSINESS\",\n        \"isPostalAddress\": true,\n        \"addressLine\": [ \"Mobacar House\", \"Muckross Rd\"]\n\t},\n\t\"phoneNumber\": {\n\t\t\"officePhone\": \"353-1234567\",\n        \"mobilePhone\": \"0874015683\"\n\t},\n\t\"emailAddress\": {\n\t\t\"workEmail\": \"info@mobacar.com\",\n        \"supportEmail\": \"support@mobacar.com\",\n        \"emergencyContactEmail\": \"mwwebster@mobacar.com\"\n\t},\n\t\"latitude\": \"\",\n\t\"longitude\": \"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Team",
+			"request": {
+				"url": "localhost:9988/org/newteam",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"teamName\": \"Entropy\",\n   \t\"teamEmail\": {\n\t\t\"teamEmail\": \"entropy@mobacar.com\"\n\t},\n\t\"company\":{\n        \"id\": 2221675,\n        \"companyName\": \"Mobacar\",\n        \"companyAddress\": {\n            \"id\": 2221676,\n            \"addressType\": \"LOCALBUSINESS\",\n            \"fullAddress\": null,\n            \"addressLine\": [\n                \"Mobacar House\",\n                \"Muckross Rd\"\n            ],\n            \"city\": null,\n            \"country\": null,\n            \"postalCode\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"postalAddress\": false\n        },\n        \"phoneNumber\": {\n            \"id\": 2221677,\n            \"officePhone\": \"353-1234567\",\n            \"mobilePhone\": \"0874015683\",\n            \"homePhone\": null,\n            \"otherPhone\": null\n        },\n        \"emailAddress\": {\n            \"id\": 2221678,\n            \"workEmail\": \"info@mobacar.com\",\n            \"personalEmail\": null,\n            \"supportEmail\": \"support@mobacar.com\",\n            \"emergencyContactEmail\": \"mwebster@mobacar.com\"\n        },\n        \"latitude\": null,\n        \"longitude\": null,\n        \"contactPerson\": null,\n        \"employees\": null,\n        \"teams\": null\n    },\n\t\"teamLogo\": \"http://www.mobacar.com/logo/entropy.png\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "update Person",
+			"request": {
+				"url": "localhost:9988/person/update",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 2219556,\n    \"name\": \"Paul\",\n    \"surname\": \"Scott\",\n    \"username\": \"paulscott56\",\n    \"nickname\": \"paul\",\n    \"countryCode\": null,\n    \"country\": null,\n    \"emailAddress\": {\n        \"id\": 2219557,\n        \"workEmail\": \"pscott@mobacar.com\",\n        \"personalEmail\": \"pscott209@gmail.com\",\n        \"supportEmail\": \"entropy@mobacar.com\",\n        \"emergencyContactEmail\": \"\"\n    },\n    \"phoneNumber\": {\n        \"id\": 2219555,\n        \"officePhone\": \"\",\n        \"mobilePhone\": \"0874015683\",\n        \"homePhone\": \"\",\n        \"otherPhone\": null\n    },\n    \"address\": {\n        \"id\": 2219554,\n        \"addressType\": null,\n        \"fullAddress\": null,\n        \"addressLine\": [\n            \"48 Pairc Chuimin\",\n            \"Kilcummin\"\n        ],\n        \"city\": null,\n        \"country\": null,\n        \"postalCode\": null,\n        \"latitude\": null,\n        \"longitude\": null,\n        \"postalAddress\": false\n    },\n    \"timezone\": \"Europe/Dublin\",\n    \"dateCreated\": \"2019-01-16T09:14:46.245\",\n    \"active\": true,\n    \"roles\": [\n    \t{\"role\": \"SCRUM_MASTER\"}, \n    \t{\"role\": \"DEVELOPER\"}, \n    \t{\"role\": \"AGILE_TEAM_MEMBER\"}\n    ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Enterprise",
+			"request": {
+				"url": "localhost:9988/org/newenterprise",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"enterpriseName\": \"Test enterprise\"\n\t\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Company",
+			"request": {
+				"url": "localhost:9988/org/newcompany",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"companyName\": \"Mobacar\",\n\t\"companyAddress\": {\n\t\t\"addressType\": \"LOCALBUSINESS\",\n        \"isPostalAddress\": true,\n        \"addressLine\": [ \"Mobacar House\", \"Muckross Rd\"]\n\t},\n\t\"phoneNumber\": {\n\t\t\"officePhone\": \"353-1234567\",\n        \"mobilePhone\": \"0874015683\"\n\t},\n\t\"emailAddress\": {\n\t\t\"workEmail\": \"info@mobacar.com\",\n        \"supportEmail\": \"support@mobacar.com\",\n        \"emergencyContactEmail\": \"mwebster@mobacar.com\"\n\t},\n\t\"latitude\": \"\",\n\t\"longitude\": \"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add person to team",
+			"request": {
+				"url": "localhost:9988/org/addpersontoteam",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"personId\": 2221686,\n\t\"implementationTeamId\" : 2221679,\n\t\"roles\": [\"DEVELOPER\", \"SCRUM_MASTER\"]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create role",
+			"request": {
+				"url": "localhost:9988/person/createrole",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"roleName\": \"Tea Maker\",\n\t\"role\": \"OTHER\",\n\t\"roleDescription\": \"A person who ensures the tea is hot and fresh\",\n\t\"safeRole\": false\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add person to team",
+			"request": {
+				"url": "localhost:9988/org/addpersontoteam",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"personId\": 2221686,\n\t\"implementationTeamId\" : 2221679,\n\t\"roles\": [\"DEVELOPER\", \"SCRUM_MASTER\"]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Enterprise delete",
+			"request": {
+				"url": "http://localhost:9988/enterprise/delete/253",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Person bulk upload",
+			"request": {
+				"url": "localhost:9988/person/upload",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"description": "",
+							"type": "file",
+							"src": "people.csv"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Portfolio",
+			"request": {
+				"url": "localhost:9988/portfolio/new",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"portfolioName\": \"Test Portfolio\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "update Enterprise with portfolio",
+			"request": {
+				"url": "localhost:9988/enterprise/update",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 324,\n    \"enterpriseName\": \"Test enterprise\",\n    \"keyPersonnel\": null,\n    \"kpis\": null,\n    \"portfolioBudget\": null,\n    \"strategicThemes\": null,\n    \"qualitativeData\": null,\n    \"guardRails\": null,\n    \"portfolios\": [{\n      \"id\": 343,\n      \"epicOwners\": null,\n      \"enterpriseArchitect\": null,\n      \"portfolioName\": \"Test Portfolio\",\n      \"portfolioManagementTeam\": null,\n      \"valueStreams\": null,\n      \"strategicThemes\": null,\n      \"portfolioCanvas\": null,\n      \"leanBudget\": null,\n      \"portfolioBacklog\": null,\n      \"businessEpics\": null,\n      \"enablerEpics\": null,\n      \"largeSolutions\": null,\n      \"programs\": null\n  }]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "new large solution",
+			"request": {
+				"url": "localhost:9988/largesolution/new",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"largeSolutionName\": \"Test large solution\"\n\t\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update portfolio with large solution",
+			"request": {
+				"url": "localhost:9988/portfolio/update",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 343,\n    \"epicOwners\": null,\n    \"enterpriseArchitect\": null,\n    \"portfolioName\": \"Test Portfolio\",\n    \"portfolioManagementTeam\": null,\n    \"valueStreams\": null,\n    \"strategicThemes\": null,\n    \"portfolioCanvas\": null,\n    \"leanBudget\": null,\n    \"portfolioBacklog\": null,\n    \"businessEpics\": null,\n    \"enablerEpics\": null,\n    \"largeSolutions\": [\n    \t{\n          \"id\": 363,\n          \"largeSolutionName\": \"Test large solution\",\n          \"solutionArchitect\": null,\n          \"solutionManagement\": null,\n          \"solutionTrainEngineer\": null,\n          \"trains\": null,\n          \"solutionIntent\": null,\n          \"customer\": null,\n          \"solutionContext\": null,\n          \"capabilities\": null,\n          \"solutionEpics\": null,\n          \"nonFunctionalRequirements\": null,\n          \"solutionBacklog\": null,\n          \"programs\": null,\n          \"prePlanningDocuments\": null,\n          \"postPlanningDocuments\": null,\n          \"solutionDemo\": null,\n          \"inspectAndAdaptEvent\": null\n       }\n    ],\n    \"programs\": null\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create new program",
+			"request": {
+				"url": "localhost:9988/program/new",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"programName\": \"Test Program\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "update program",
+			"request": {
+				"url": "localhost:9988/program/update",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 364,\n    \"teams\": [\n    \t{\n    \"id\": 318,\n    \"teamName\": \"Entropy\",\n    \"teamEmail\": {\n      \"id\": 342,\n      \"workEmail\": null,\n      \"personalEmail\": null,\n      \"supportEmail\": null,\n      \"emergencyContactEmail\": null,\n      \"teamEmail\": \"entropy@mobacar.com\"\n    },\n    \"company\": {\n      \"id\": 21,\n      \"companyName\": \"Mobacar\",\n      \"companyAddress\": null,\n      \"phoneNumber\": null,\n      \"emailAddress\": null,\n      \"latitude\": null,\n      \"longitude\": null,\n      \"contactPerson\": null,\n      \"employees\": null,\n      \"teams\": null,\n      \"country\": null\n    },\n    \"teamLogo\": null,\n    \"productOwner\": null,\n    \"agileTeam\": [\n      {\n        \"id\": 313,\n        \"name\": \"Paul\",\n        \"surname\": \"Scott\",\n        \"username\": \"paulscott56\",\n        \"nickname\": \"Paul\",\n        \"countryCode\": \"IE\",\n        \"country\": null,\n        \"emailAddress\": null,\n        \"phoneNumber\": null,\n        \"address\": null,\n        \"timezone\": null,\n        \"dateCreated\": \"2019-01-17T14:16:34.133\",\n        \"active\": true,\n        \"roles\": null,\n        \"modificationDate\": null\n      }\n    ],\n    \"devTeam\": [\n      {\n        \"id\": 313,\n        \"name\": \"Paul\",\n        \"surname\": \"Scott\",\n        \"username\": \"paulscott56\",\n        \"nickname\": \"Paul\",\n        \"countryCode\": \"IE\",\n        \"country\": null,\n        \"emailAddress\": null,\n        \"phoneNumber\": null,\n        \"address\": null,\n        \"timezone\": null,\n        \"dateCreated\": \"2019-01-17T14:16:34.133\",\n        \"active\": true,\n        \"roles\": null,\n        \"modificationDate\": null\n      }\n    ],\n    \"scrumMaster\": {\n      \"id\": 313,\n      \"name\": \"Paul\",\n      \"surname\": \"Scott\",\n      \"username\": \"paulscott56\",\n      \"nickname\": \"Paul\",\n      \"countryCode\": \"IE\",\n      \"country\": null,\n      \"emailAddress\": null,\n      \"phoneNumber\": null,\n      \"address\": null,\n      \"timezone\": null,\n      \"dateCreated\": \"2019-01-17T14:16:34.133\",\n      \"active\": true,\n      \"roles\": null,\n      \"modificationDate\": null\n    },\n    \"iterationPlanningDocuments\": null,\n    \"iterationReviews\": null,\n    \"iterationRetrospectives\": null,\n    \"innovationAndPlanningDocuments\": null\n  }\n    ],\n    \"pi\": null,\n    \"productManagement\": null,\n    \"releaseTrainEngineer\": null,\n    \"businessOwners\": null,\n    \"systemDemo\": null,\n    \"inspectAndAdaptWorkshops\": null,\n    \"features\": null,\n    \"programEpics\": null,\n    \"programBacklog\": null,\n    \"programKanban\": null,\n    \"piObjectives\": null,\n    \"architecturalRunway\": null,\n    \"programName\": \"Test Program\",\n    \"systemArchitect\": null\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "update large solution with program",
+			"request": {
+				"url": "localhost:9988/largesolution/update",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 363,\n    \"largeSolutionName\": \"Test large solution\",\n    \"solutionArchitect\": null,\n    \"solutionManagement\": null,\n    \"solutionTrainEngineer\": null,\n    \"trains\": null,\n    \"solutionIntent\": null,\n    \"customer\": null,\n    \"solutionContext\": null,\n    \"capabilities\": null,\n    \"solutionEpics\": null,\n    \"nonFunctionalRequirements\": null,\n    \"solutionBacklog\": null,\n    \"programs\": [\n    \t{\n          \"id\": 364,\n          \"teams\": null,\n          \"pi\": null,\n          \"productManagement\": null,\n          \"releaseTrainEngineer\": null,\n          \"businessOwners\": null,\n          \"systemDemo\": null,\n          \"inspectAndAdaptWorkshops\": null,\n          \"features\": null,\n          \"programEpics\": null,\n          \"programBacklog\": null,\n          \"programKanban\": null,\n          \"piObjectives\": null,\n          \"architecturalRunway\": null,\n          \"programName\": \"Test Program\",\n          \"systemArchitect\": null\n        }\n    ],\n    \"prePlanningDocuments\": null,\n    \"postPlanningDocuments\": null,\n    \"solutionDemo\": null,\n    \"inspectAndAdaptEvent\": null\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
