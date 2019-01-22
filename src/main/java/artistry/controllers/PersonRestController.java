@@ -3,7 +3,9 @@ package artistry.controllers;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.TimeZone;
 
 import org.apache.commons.io.FilenameUtils;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import artistry.enums.Role;
 import artistry.exceptions.StorageFileNotFoundException;
 import artistry.models.geo.Country;
 import artistry.models.person.Person;
@@ -54,7 +57,7 @@ public class PersonRestController {
 
 	@Autowired
 	private ArtistryCsvReader csvReader;
-	
+
 	@Autowired
 	private StorageService storageService;
 
@@ -173,16 +176,17 @@ public class PersonRestController {
 		Iterable<Person> person = personRepo.findAll();
 		return person;
 	}
-	
+
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException, URISyntaxException {
 		log.info("uploading file: " + file.getOriginalFilename());
 		if (!file.isEmpty()) {
-			if(file.getContentType().equals("text/csv") && FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase().equals("csv")) {
+			if (file.getContentType().equals("text/csv")
+					&& FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase().equals("csv")) {
 				storageService.store(file);
 				// send this off for processing now...
 				csvReader.importPeople(file);
-		        return "You successfully uploaded " + file.getOriginalFilename() + "!";	
+				return "You successfully uploaded " + file.getOriginalFilename() + "!";
 			} else {
 				return "File: " + file.getOriginalFilename() + " does not seem to be a valid CSV file";
 			}
@@ -190,10 +194,58 @@ public class PersonRestController {
 			return "You failed to upload " + file.getOriginalFilename() + " because the file was empty.";
 		}
 	}
-	
+
 	@ExceptionHandler(StorageFileNotFoundException.class)
-    public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
-        return ResponseEntity.notFound().build();
-    }
+	public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
+		return ResponseEntity.notFound().build();
+	}
+
+	@RequestMapping(value = "/generatedemopeople", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public void generateDemoUsers() {
+		// enterprise management
+		for (int i = 0; i < 10; i++) {
+			Person manager = new Person();
+			manager.setActive(true);
+			manager.setCountryCode("IE");
+			manager.setName("manager" + i);
+			manager.setUsername("manager" + i);
+			Set<PersonRole> roles = new HashSet<>();
+			PersonRole prole = new PersonRole();
+			prole.setRole(Role.BUSINESS_OWNER);
+			roles.add(prole);
+			manager.setRoles(roles);
+			personRepo.save(manager);
+		}
+		// developers
+		for (int i = 0; i < 50; i++) {
+			Person dev = new Person();
+			dev.setActive(true);
+			dev.setCountryCode("IE");
+			dev.setName("dev" + i);
+			dev.setUsername("dev" + i);
+			Set<PersonRole> roles = new HashSet<>();
+			PersonRole prole = new PersonRole();
+			prole.setRole(Role.DEVELOPER);
+			roles.add(prole);
+			dev.setRoles(roles);
+			personRepo.save(dev);
+		}
+
+		// scrum masters
+		for (int i = 0; i < 50; i++) {
+			Person sm = new Person();
+			sm.setActive(true);
+			sm.setCountryCode("IE");
+			sm.setName("sm" + i);
+			sm.setUsername("sm" + i);
+			Set<PersonRole> roles = new HashSet<>();
+			PersonRole prole = new PersonRole();
+			prole.setRole(Role.SCRUM_MASTER);
+			roles.add(prole);
+			sm.setRoles(roles);
+			personRepo.save(sm);
+		}
+	}
 
 }
