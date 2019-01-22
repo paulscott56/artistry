@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import artistry.models.train.Enterprise;
 import artistry.models.train.KPI;
+import artistry.models.train.StrategicTheme;
 import artistry.repositories.EnterpriseRepository;
 import artistry.repositories.KpiRepository;
+import artistry.repositories.StrategicThemeRepository;
 
 @Configuration
 @RestController
@@ -33,6 +35,9 @@ public class EnterpriseRestController {
 
 	@Autowired
 	private KpiRepository kpiRepo;
+
+	@Autowired
+	private StrategicThemeRepository themeRepo;
 
 	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
@@ -79,6 +84,12 @@ public class EnterpriseRestController {
 		}
 	}
 
+	/**
+	 * KPI Section
+	 * 
+	 * @param kpi
+	 * @return
+	 */
 	@RequestMapping(value = "/newkpi", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
@@ -119,4 +130,49 @@ public class EnterpriseRestController {
 	public Optional<KPI> getKPIById(@PathVariable("id") Long id) {
 		return kpiRepo.findById(id);
 	}
+
+	/**
+	 * Strategic themes
+	 */
+	@RequestMapping(value = "/newtheme", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	private StrategicTheme createTheme(@RequestBody StrategicTheme theme) {
+		StrategicTheme savedtheme = themeRepo.save(theme);
+		return savedtheme;
+	}
+
+	@RequestMapping(value = "/getallthemes", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	private Iterable<StrategicTheme> getAllThemess() {
+		Iterable<StrategicTheme> data = themeRepo.findAll();
+		return data;
+	}
+
+	@RequestMapping(value = "/updatetheme", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	private StrategicTheme updateTheme(@RequestBody StrategicTheme theme) {
+		StrategicTheme savedtheme = themeRepo.save(theme);
+		return savedtheme;
+	}
+
+	@RequestMapping(value = "/deletetheme/{id}", method = RequestMethod.DELETE, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	private void deleteTheme(@PathVariable("id") Long id) {
+		Optional<StrategicTheme> theme = themeRepo.findById(id);
+		if (theme.isPresent()) {
+			themeRepo.delete(theme.get());
+		}
+	}
+
+	@RequestMapping(value = "/getthemebyid/{id}", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	public Optional<StrategicTheme> getThemeById(@PathVariable("id") Long id) {
+		return themeRepo.findById(id);
+	}
+
 }
