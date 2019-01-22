@@ -8,6 +8,7 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 import artistry.models.person.ImplementationTeam;
+import artistry.models.person.Person;
 
 
 @NodeEntity
@@ -18,15 +19,27 @@ public class Feature {
 	private Long id;
 	
 	private String featureName;
+	private String benfitStatement;
+	private Document Scope;
 	private Document featureDescription;
 	private Date lastModificationDate;
 	private Date creationDate;
 	private Date completionDate;
 	private Set<Document> acceptanceCriteria;
+	private Document definitionOfDone;
+	private Set<NonFunctionalRequirement> nonFunctionalRequirements;
+	private Document assumptions;
 	private Integer businessValue;
 	private boolean complete;
 	private Set<ImplementationTeam> implementationTeams;
 	private WeightedShortestJobFirst wsjf;
+	private Set<Document> dependenciesAndStakeholders;
+	private Set<Feature> dependencies;
+	private Set<Person> stakeHolders;
+	private Set<TestPlan> testPlans;
+	private ImplementationTeam featureOwnerTeam;
+	private Person featureOwner;
+	private Set<String> additionalNotes;
 	
 	public Long getId() {
 		return id;
@@ -39,6 +52,18 @@ public class Feature {
 	}
 	public void setFeatureName(String featureName) {
 		this.featureName = featureName;
+	}
+	public String getBenfitStatement() {
+		return benfitStatement;
+	}
+	public void setBenfitStatement(String benfitStatement) {
+		this.benfitStatement = benfitStatement;
+	}
+	public Document getScope() {
+		return Scope;
+	}
+	public void setScope(Document scope) {
+		Scope = scope;
 	}
 	public Document getFeatureDescription() {
 		return featureDescription;
@@ -70,6 +95,24 @@ public class Feature {
 	public void setAcceptanceCriteria(Set<Document> acceptanceCriteria) {
 		this.acceptanceCriteria = acceptanceCriteria;
 	}
+	public Document getDefinitionOfDone() {
+		return definitionOfDone;
+	}
+	public void setDefinitionOfDone(Document definitionOfDone) {
+		this.definitionOfDone = definitionOfDone;
+	}
+	public Set<NonFunctionalRequirement> getNonFunctionalRequirements() {
+		return nonFunctionalRequirements;
+	}
+	public void setNonFunctionalRequirements(Set<NonFunctionalRequirement> nonFunctionalRequirements) {
+		this.nonFunctionalRequirements = nonFunctionalRequirements;
+	}
+	public Document getAssumptions() {
+		return assumptions;
+	}
+	public void setAssumptions(Document assumptions) {
+		this.assumptions = assumptions;
+	}
 	public Integer getBusinessValue() {
 		return businessValue;
 	}
@@ -93,5 +136,32 @@ public class Feature {
 	}
 	public void setWsjf(WeightedShortestJobFirst wsjf) {
 		this.wsjf = wsjf;
-	}	
+	}
+	public Set<Document> getDependenciesAndStakeholders() {
+		return dependenciesAndStakeholders;
+	}
+	public void setDependenciesAndStakeholders(Set<Document> dependenciesAndStakeholders) {
+		this.dependenciesAndStakeholders = dependenciesAndStakeholders;
+	}
+	public ImplementationTeam getFeatureOwnerTeam() {
+		return featureOwnerTeam;
+	}
+	public void setFeatureOwnerTeam(ImplementationTeam featureOwnerTeam) {
+		this.featureOwnerTeam = featureOwnerTeam;
+	}
+	public Person getFeatureOwner() {
+		return featureOwner;
+	}
+	public void setFeatureOwner(Person featureOwner) {
+		this.featureOwner = featureOwner;
+	}
+	public Set<String> getAdditionalNotes() {
+		return additionalNotes;
+	}
+	public void setAdditionalNotes(Set<String> additionalNotes) {
+		this.additionalNotes = additionalNotes;
+	}
+	
+	
+	
 }

@@ -39,6 +39,7 @@ public class Person {
 	private Address address;
 	private TimeZone timezone;
 	private LocalDateTime dateCreated;
+	private String jiraUsername;
 	private Boolean active;
 	
 	@Relationship(type = "ROLE", direction = Relationship.OUTGOING)
@@ -164,5 +165,13 @@ public class Person {
 
 	public void setModificationDate(LocalDateTime modificationDate) {
 		this.modificationDate = modificationDate;
+	}
+
+	public String getJiraUsername() {
+		return jiraUsername;
+	}
+
+	public void setJiraUsername(String jiraUsername) {
+		this.jiraUsername = jiraUsername;
 	}
 }

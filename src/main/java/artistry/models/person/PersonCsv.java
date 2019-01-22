@@ -26,6 +26,8 @@ public class PersonCsv {
 	private String address;
 	@CsvBindByPosition(position = 10)
 	private boolean active;
+	@CsvBindByPosition(position = 11)
+	private String jiraUsername;
 	
 	public String getName() {
 		return name;
