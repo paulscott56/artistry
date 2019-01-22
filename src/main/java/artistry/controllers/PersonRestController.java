@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import artistry.enums.Role;
 import artistry.exceptions.StorageFileNotFoundException;
@@ -205,47 +204,34 @@ public class PersonRestController {
 	public void generateDemoUsers() {
 		// enterprise management
 		for (int i = 0; i < 10; i++) {
-			Person manager = new Person();
-			manager.setActive(true);
-			manager.setCountryCode("IE");
-			manager.setName("manager" + i);
-			manager.setUsername("manager" + i);
-			Set<PersonRole> roles = new HashSet<>();
-			PersonRole prole = new PersonRole();
-			prole.setRole(Role.BUSINESS_OWNER);
-			roles.add(prole);
-			manager.setRoles(roles);
-			personRepo.save(manager);
+			personMaker("manager" + i, "manager" + i, "IE", Role.BUSINESS_OWNER);
 		}
 		// developers
 		for (int i = 0; i < 50; i++) {
-			Person dev = new Person();
-			dev.setActive(true);
-			dev.setCountryCode("IE");
-			dev.setName("dev" + i);
-			dev.setUsername("dev" + i);
-			Set<PersonRole> roles = new HashSet<>();
-			PersonRole prole = new PersonRole();
-			prole.setRole(Role.DEVELOPER);
-			roles.add(prole);
-			dev.setRoles(roles);
-			personRepo.save(dev);
+			personMaker("dev" + i, "dev" + i, "IE", Role.DEVELOPER);
 		}
 
 		// scrum masters
-		for (int i = 0; i < 50; i++) {
-			Person sm = new Person();
-			sm.setActive(true);
-			sm.setCountryCode("IE");
-			sm.setName("sm" + i);
-			sm.setUsername("sm" + i);
-			Set<PersonRole> roles = new HashSet<>();
-			PersonRole prole = new PersonRole();
-			prole.setRole(Role.SCRUM_MASTER);
-			roles.add(prole);
-			sm.setRoles(roles);
-			personRepo.save(sm);
+		for (int i = 0; i < 10; i++) {
+			personMaker("sm" + i, "sm" + i, "IE", Role.SCRUM_MASTER);
 		}
+		personMaker("rte1", "rte1", "IE", Role.RTE);
+		personMaker("ste1", "ste1", "IE", Role.STE);
+
+	}
+
+	private Person personMaker(String username, String name, String countryCode, Role role) {
+		Person person = new Person();
+		person.setActive(true);
+		person.setCountryCode("IE");
+		person.setName("rte1");
+		person.setUsername("rte1");
+		Set<PersonRole> roles = new HashSet<>();
+		PersonRole prole = new PersonRole();
+		prole.setRole(Role.RTE);
+		roles.add(prole);
+		person.setRoles(roles);
+		return personRepo.save(person);
 	}
 
 }
