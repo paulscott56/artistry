@@ -24,7 +24,7 @@ import artistry.repositories.StrategicThemeRepository;
 
 @Configuration
 @RestController
-@Description("Controller to manage entreprises")
+@Description("Controller to manage enterprises")
 @RequestMapping("/enterprise")
 public class EnterpriseRestController {
 
