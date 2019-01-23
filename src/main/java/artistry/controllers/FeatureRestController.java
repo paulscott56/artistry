@@ -1,5 +1,6 @@
 package artistry.controllers;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -45,6 +46,7 @@ public class FeatureRestController {
 	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Feature create(@RequestBody Feature feature) {
+		feature.setCreationDate(new Date());
 		return featureRepo.save(feature);
 	}
 
@@ -52,6 +54,7 @@ public class FeatureRestController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Feature update(@RequestBody Feature feature) {
+		feature.setLastModificationDate(new Date());
 		return featureRepo.save(feature);
 	}
 
