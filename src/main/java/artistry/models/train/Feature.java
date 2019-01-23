@@ -20,7 +20,7 @@ public class Feature {
 	private Long id;
 	
 	private String featureName;
-	private String benfitStatement;
+	private String benefitStatement;
 	private Document Scope;
 	private Document featureDescription;
 	private Date lastModificationDate;
@@ -76,11 +76,11 @@ public class Feature {
 	public void setFeatureName(String featureName) {
 		this.featureName = featureName;
 	}
-	public String getBenfitStatement() {
-		return benfitStatement;
+	public String getBenefitStatement() {
+		return benefitStatement;
 	}
-	public void setBenfitStatement(String benfitStatement) {
-		this.benfitStatement = benfitStatement;
+	public void setBenefitStatement(String benefitStatement) {
+		this.benefitStatement = benefitStatement;
 	}
 	public Document getScope() {
 		return Scope;
