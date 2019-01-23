@@ -6,6 +6,7 @@ import java.util.Set;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 import artistry.models.person.ImplementationTeam;
 import artistry.models.person.Person;
@@ -25,21 +26,43 @@ public class Feature {
 	private Date lastModificationDate;
 	private Date creationDate;
 	private Date completionDate;
+	
+	@Relationship(type = "HAS_ACCEPTANCE_CRITERIA", direction = Relationship.OUTGOING)
 	private Set<Document> acceptanceCriteria;
+	
 	private Document definitionOfDone;
+	
+	@Relationship(type = "HAS_NFR", direction = Relationship.OUTGOING)
 	private Set<NonFunctionalRequirement> nonFunctionalRequirements;
+	
 	private Document assumptions;
 	private Integer businessValue;
 	private boolean complete;
+	
+	@Relationship(type = "HAS_ASSIGNED_TEAM", direction = Relationship.OUTGOING)
 	private Set<ImplementationTeam> implementationTeams;
+	
 	private WeightedShortestJobFirst wsjf;
 	private Set<Document> dependenciesAndStakeholders;
+	
+	@Relationship(type = "HAS_DEPENDENCY", direction = Relationship.OUTGOING)
 	private Set<Feature> dependencies;
+	
+	@Relationship(type = "HAS_STAKEHOLDER", direction = Relationship.OUTGOING)
 	private Set<Person> stakeHolders;
+	
+	@Relationship(type = "HAS_TEST_PLAN", direction = Relationship.OUTGOING)
 	private Set<TestPlan> testPlans;
+	
+	@Relationship(type = "HAS_FEATURE_OWNER_TEAM", direction = Relationship.OUTGOING)
 	private ImplementationTeam featureOwnerTeam;
+	
+	@Relationship(type = "HAS_FEATURE_OWNER", direction = Relationship.OUTGOING)
 	private Person featureOwner;
 	private Set<String> additionalNotes;
+	
+	@Relationship(type = "CREATED_BY", direction = Relationship.OUTGOING)
+	private Person createdBy;
 	
 	public Long getId() {
 		return id;
@@ -143,6 +166,24 @@ public class Feature {
 	public void setDependenciesAndStakeholders(Set<Document> dependenciesAndStakeholders) {
 		this.dependenciesAndStakeholders = dependenciesAndStakeholders;
 	}
+	public Set<Feature> getDependencies() {
+		return dependencies;
+	}
+	public void setDependencies(Set<Feature> dependencies) {
+		this.dependencies = dependencies;
+	}
+	public Set<Person> getStakeHolders() {
+		return stakeHolders;
+	}
+	public void setStakeHolders(Set<Person> stakeHolders) {
+		this.stakeHolders = stakeHolders;
+	}
+	public Set<TestPlan> getTestPlans() {
+		return testPlans;
+	}
+	public void setTestPlans(Set<TestPlan> testPlans) {
+		this.testPlans = testPlans;
+	}
 	public ImplementationTeam getFeatureOwnerTeam() {
 		return featureOwnerTeam;
 	}
@@ -161,7 +202,10 @@ public class Feature {
 	public void setAdditionalNotes(Set<String> additionalNotes) {
 		this.additionalNotes = additionalNotes;
 	}
-	
-	
-	
+	public Person getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(Person createdBy) {
+		this.createdBy = createdBy;
+	}
 }

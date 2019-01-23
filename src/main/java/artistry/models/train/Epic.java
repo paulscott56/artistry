@@ -52,6 +52,7 @@ public class Epic {
 	private Document anticipatedBusinessImpact;
 	private Document inhouseOrExternalDev;
 	private DevelopmentTimeLine estimatedTimeline;
+	
 	private EpicType incrementalImplementationStrategy;
 	private Document sequencingAndDependencies;
 	private Document milestones;
