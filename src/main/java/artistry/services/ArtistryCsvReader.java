@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -341,9 +342,13 @@ public class ArtistryCsvReader {
 			try {
 				PersonRole role = roleIterator.next();
 				log.info("Importing role: " + role.getRoleName() + " " + role.getRole().toString());
-				rolesRepo.save(role);
+				// first check the role doesn't alraedy exist
+				Optional<PersonRole> rec = rolesRepo.findByRole(role.getRole());
+				if(!rec.isPresent()) {
+					rolesRepo.save(role);    	
+				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.error(e.getMessage());
 			}
 		}
 	}

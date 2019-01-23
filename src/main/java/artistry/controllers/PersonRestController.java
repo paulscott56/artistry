@@ -64,8 +64,17 @@ public class PersonRestController {
 	@ResponseBody
 	private Person createPerson(@RequestBody Person person) {
 		try {
+			Set<PersonRole> newroles = new HashSet<>();
 			Country country = countryRepo.findOneByIso(person.getCountryCode());
+			Set<PersonRole> roles = person.getRoles();
+			for(PersonRole role : roles) {
+				Optional<PersonRole> existingrole = rolesRepo.findByRole(role.getRole());
+				if(existingrole.isPresent()) {
+					newroles.add(existingrole.get());
+				}
+			}
 			person.setCountry(country);
+			person.setRoles(newroles);
 			person.setTimezone(TimeZone.getDefault());
 			person.setDateCreated(LocalDateTime.now());
 
@@ -82,6 +91,16 @@ public class PersonRestController {
 	private Person updatePerson(@RequestBody Person person) {
 		try {
 			Country country = countryRepo.findOneByIso(person.getCountryCode());
+			
+			Set<PersonRole> newroles = new HashSet<>();
+			Set<PersonRole> roles = person.getRoles();
+			for(PersonRole role : roles) {
+				Optional<PersonRole> existingrole = rolesRepo.findByRole(role.getRole());
+				if(existingrole.isPresent()) {
+					newroles.add(existingrole.get());
+				}
+			}
+			person.setRoles(newroles);
 			person.setCountry(country);
 			person.setModificationDate(LocalDateTime.now());
 			return personRepo.save(person);
