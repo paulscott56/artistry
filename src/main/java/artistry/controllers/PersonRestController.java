@@ -210,7 +210,6 @@ public class PersonRestController {
 		for (int i = 0; i < 50; i++) {
 			personMaker("dev" + i, "dev" + i, "IE", Role.DEVELOPER);
 		}
-
 		// scrum masters
 		for (int i = 0; i < 10; i++) {
 			personMaker("sm" + i, "sm" + i, "IE", Role.SCRUM_MASTER);

@@ -5,12 +5,14 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class Enabler {
-
+public class CustomerSegment {
+	
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	private String enablerName;
+	private CustomerType customerType;
+	private String customerName;
 	
+
 }
