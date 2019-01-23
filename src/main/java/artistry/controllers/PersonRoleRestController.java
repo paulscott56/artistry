@@ -95,6 +95,7 @@ public class PersonRoleRestController {
 	private String createBaseRoles() throws URISyntaxException, IOException {
 		// parse the csv file
 		csvReader.readRolesCsv();
+		// TODO: Make a proper response object for all these one liner messages.
 		return "Import of roles complete";
 	}
 

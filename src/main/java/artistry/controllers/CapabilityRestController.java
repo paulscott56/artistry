@@ -66,5 +66,13 @@ public class CapabilityRestController {
 			capRepo.delete(capability.get());
 		}
 	}
+	
+	@RequestMapping(value = "/deleteall", method = RequestMethod.DELETE, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	private void deleteAll() {
+		capRepo.deleteAll();
+
+	}
 
 }

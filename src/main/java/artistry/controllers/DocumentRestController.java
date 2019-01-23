@@ -67,4 +67,11 @@ public class DocumentRestController {
 		}
 	}
 
+	@RequestMapping(value = "/deleteall", method = RequestMethod.DELETE, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	private void deleteAll() {
+		docRepo.deleteAll();
+
+	}
 }

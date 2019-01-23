@@ -241,15 +241,22 @@ public class PersonRestController {
 	private Person personMaker(String username, String name, String countryCode, Role role) {
 		Person person = new Person();
 		person.setActive(true);
-		person.setCountryCode("IE");
-		person.setName("rte1");
-		person.setUsername("rte1");
+		person.setCountryCode(countryCode);
+		person.setName(name);
+		person.setUsername(username);
 		Set<PersonRole> roles = new HashSet<>();
-		PersonRole prole = new PersonRole();
-		prole.setRole(Role.RTE);
-		roles.add(prole);
+		Optional<PersonRole> prole = rolesRepo.findByRole(role);
+		roles.add(prole.get());
 		person.setRoles(roles);
 		return personRepo.save(person);
+	}
+	
+	@RequestMapping(value = "/deleteall", method = RequestMethod.DELETE, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	private void deleteAll() {
+		personRepo.deleteAll();
+
 	}
 
 }
