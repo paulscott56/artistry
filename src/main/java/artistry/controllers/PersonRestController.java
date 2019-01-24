@@ -67,9 +67,9 @@ public class PersonRestController {
 			Set<PersonRole> newroles = new HashSet<>();
 			Country country = countryRepo.findOneByIso(person.getCountryCode());
 			Set<PersonRole> roles = person.getRoles();
-			for(PersonRole role : roles) {
+			for (PersonRole role : roles) {
 				Optional<PersonRole> existingrole = rolesRepo.findByRole(role.getRole());
-				if(existingrole.isPresent()) {
+				if (existingrole.isPresent()) {
 					newroles.add(existingrole.get());
 				}
 			}
@@ -91,12 +91,12 @@ public class PersonRestController {
 	private Person updatePerson(@RequestBody Person person) {
 		try {
 			Country country = countryRepo.findOneByIso(person.getCountryCode());
-			
+
 			Set<PersonRole> newroles = new HashSet<>();
 			Set<PersonRole> roles = person.getRoles();
-			for(PersonRole role : roles) {
+			for (PersonRole role : roles) {
 				Optional<PersonRole> existingrole = rolesRepo.findByRole(role.getRole());
-				if(existingrole.isPresent()) {
+				if (existingrole.isPresent()) {
 					newroles.add(existingrole.get());
 				}
 			}
@@ -223,22 +223,22 @@ public class PersonRestController {
 	public void generateDemoUsers() {
 		// enterprise management
 		for (int i = 0; i < 10; i++) {
-			personMaker("manager" + i, "manager" + i, "IE", Role.BUSINESS_OWNER);
+			personMaker("manager" + i, "manager" + i, "IE", Role.BUSINESS_OWNER, false);
 		}
 		// developers
 		for (int i = 0; i < 50; i++) {
-			personMaker("dev" + i, "dev" + i, "IE", Role.DEVELOPER);
+			personMaker("dev" + i, "dev" + i, "IE", Role.DEVELOPER, true);
 		}
 		// scrum masters
 		for (int i = 0; i < 10; i++) {
-			personMaker("sm" + i, "sm" + i, "IE", Role.SCRUM_MASTER);
+			personMaker("sm" + i, "sm" + i, "IE", Role.SCRUM_MASTER, true);
 		}
-		personMaker("rte1", "rte1", "IE", Role.RTE);
-		personMaker("ste1", "ste1", "IE", Role.STE);
+		personMaker("rte1", "rte1", "IE", Role.RTE, false);
+		personMaker("ste1", "ste1", "IE", Role.STE, false);
 
 	}
 
-	private Person personMaker(String username, String name, String countryCode, Role role) {
+	private Person personMaker(String username, String name, String countryCode, Role role, boolean agileTeamMember) {
 		Person person = new Person();
 		person.setActive(true);
 		person.setCountryCode(countryCode);
@@ -247,10 +247,14 @@ public class PersonRestController {
 		Set<PersonRole> roles = new HashSet<>();
 		Optional<PersonRole> prole = rolesRepo.findByRole(role);
 		roles.add(prole.get());
+		if (agileTeamMember) {
+			Optional<PersonRole> agileteammem = rolesRepo.findByRole(Role.AGILE_TEAM_MEMBER);
+			roles.add(agileteammem.get());
+		}
 		person.setRoles(roles);
 		return personRepo.save(person);
 	}
-	
+
 	@RequestMapping(value = "/deleteall", method = RequestMethod.DELETE, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
