@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.train.LargeSolution;
-import artistry.models.train.Program;
+import artistry.models.LargeSolution;
+import artistry.models.Program;
 import artistry.repositories.LargeSolutionRepository;
 import artistry.repositories.ProgramRepository;
 

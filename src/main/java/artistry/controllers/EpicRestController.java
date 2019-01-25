@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.train.Epic;
+import artistry.models.Epic;
 import artistry.repositories.EpicRepository;
 
 @Configuration

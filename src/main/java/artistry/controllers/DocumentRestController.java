@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.train.Document;
+import artistry.models.Document;
 import artistry.repositories.DocumentRepository;
 
 @Configuration

@@ -6,7 +6,7 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import artistry.enums.Role;
-import artistry.models.person.PersonRole;
+import artistry.models.PersonRole;
 
 @RepositoryRestResource(collectionResourceRel = "person", path = "role")
 public interface RolesRepository extends Neo4jRepository<PersonRole, Long> {

@@ -20,10 +20,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import artistry.models.jira.Completed;
-import artistry.models.jira.Estimated;
-import artistry.models.jira.SprintEntry;
-import artistry.models.jira.VelocityEntry;
+import artistry.models.Completed;
+import artistry.models.Estimated;
+import artistry.models.SprintEntry;
+import artistry.models.VelocityEntry;
 import artistry.repositories.SprintRepository;
 import artistry.repositories.VelocityRepository;
 import artistry.utils.JiraUtils;

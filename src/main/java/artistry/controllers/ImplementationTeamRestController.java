@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.dto.PersonTeamObject;
-import artistry.models.person.Company;
-import artistry.models.person.ImplementationTeam;
-import artistry.models.person.Person;
-import artistry.models.train.LargeSolution;
+import artistry.models.Company;
+import artistry.models.ImplementationTeam;
+import artistry.models.LargeSolution;
+import artistry.models.Person;
+import artistry.models.PersonTeamObject;
 import artistry.repositories.CompanyRepository;
 import artistry.repositories.ImplementationTeamRepository;
 

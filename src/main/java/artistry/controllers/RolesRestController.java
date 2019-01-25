@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import artistry.enums.Role;
-import artistry.models.person.PersonRole;
+import artistry.models.PersonRole;
 import artistry.repositories.RolesRepository;
 import artistry.services.ArtistryCsvReader;
 

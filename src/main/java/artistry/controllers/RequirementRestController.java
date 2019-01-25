@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.person.PhoneNumber;
-import artistry.models.train.Requirement;
+import artistry.models.PhoneNumber;
+import artistry.models.Requirement;
 import artistry.repositories.PhoneNumberRepository;
 import artistry.repositories.RequirementRepository;
 

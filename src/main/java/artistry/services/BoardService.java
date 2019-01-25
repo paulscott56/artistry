@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import artistry.models.jira.BoardEntry;
+import artistry.models.BoardEntry;
 import artistry.repositories.BoardRepository;
 import artistry.utils.JiraUtils;
 

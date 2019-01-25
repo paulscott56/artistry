@@ -17,10 +17,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import artistry.models.geo.AlternateName;
-import artistry.models.geo.Continent;
-import artistry.models.geo.Country;
-import artistry.models.geo.Place;
+import artistry.models.AlternateName;
+import artistry.models.Continent;
+import artistry.models.Country;
+import artistry.models.Place;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

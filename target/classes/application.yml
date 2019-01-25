@@ -49,7 +49,7 @@ jira:
   
 artistry:
   data:
-    directory: "/artistry/data"
+    directory: /artistry/data
   
 ---
   
@@ -90,7 +90,7 @@ jira:
   
 artistry:
   data:
-    directory: "/artistry/data"
+    directory: /artistry/data
   
 ---
 
@@ -131,5 +131,5 @@ jira:
   
 artistry:
   data:
-    directory: "/artistry/data"
+    directory: /artistry/data
  

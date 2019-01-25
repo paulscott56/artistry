@@ -28,9 +28,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import artistry.enums.Role;
 import artistry.exceptions.StorageFileNotFoundException;
-import artistry.models.geo.Country;
-import artistry.models.person.Person;
-import artistry.models.person.PersonRole;
+import artistry.models.Country;
+import artistry.models.Person;
+import artistry.models.PersonRole;
 import artistry.repositories.CountryRepository;
 import artistry.repositories.PersonRepository;
 import artistry.repositories.RolesRepository;

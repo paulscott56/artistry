@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.train.Enterprise;
-import artistry.models.train.KPI;
-import artistry.models.train.StrategicTheme;
+import artistry.models.Enterprise;
+import artistry.models.KPI;
+import artistry.models.StrategicTheme;
 import artistry.repositories.EnterpriseRepository;
 import artistry.repositories.KpiRepository;
 import artistry.repositories.StrategicThemeRepository;

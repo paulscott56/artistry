@@ -14,8 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import artistry.models.jira.RapidView;
-import artistry.models.jira.RapidviewEntry;
+import artistry.models.RapidView;
+import artistry.models.RapidviewEntry;
 import artistry.repositories.RapidviewRepository;
 import artistry.utils.JiraUtils;
 

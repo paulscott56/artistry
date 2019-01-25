@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.geo.Country;
-import artistry.models.geo.MajorCity;
-import artistry.models.geo.Place;
+import artistry.models.Country;
+import artistry.models.MajorCity;
+import artistry.models.Place;
 import artistry.repositories.CountryRepository;
 import artistry.repositories.GeoRepository;
 import artistry.repositories.MajorCityRepository;
