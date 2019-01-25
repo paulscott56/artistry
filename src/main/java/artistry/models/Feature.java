@@ -1,5 +1,6 @@
 package artistry.models;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -10,7 +11,12 @@ import org.neo4j.ogm.annotation.Relationship;
 
 
 @NodeEntity
-public class Feature {
+public class Feature implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue

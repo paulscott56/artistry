@@ -3,10 +3,12 @@ package artistry.repositories;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
 import artistry.models.Country;
 
-@RepositoryRestResource(collectionResourceRel = "geo", path = "country")
+//@RepositoryRestResource(collectionResourceRel = "geo", path = "country")
+@Repository
 public interface CountryRepository extends Neo4jRepository<Country, Long> {
 
 	Country findOneByIso(String countryCode);

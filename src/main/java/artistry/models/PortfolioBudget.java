@@ -1,5 +1,6 @@
 package artistry.models;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.util.Set;
 
@@ -8,7 +9,12 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class PortfolioBudget {
+public class PortfolioBudget implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue

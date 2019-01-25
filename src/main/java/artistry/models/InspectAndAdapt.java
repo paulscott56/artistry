@@ -1,5 +1,12 @@
 package artistry.models;
 
-public class InspectAndAdapt {
+import java.io.Serializable;
+
+public class InspectAndAdapt implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 }

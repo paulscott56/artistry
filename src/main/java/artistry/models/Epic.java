@@ -1,5 +1,6 @@
 package artistry.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -16,8 +17,12 @@ import artistry.enums.EpicType;
  * @see https://www.scaledagileframework.com/epic/
  */
 @NodeEntity
-public class Epic {
+public class Epic implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Set<Person> customers;
 	private String hypothesisStatement;
 	private EpicType epicType;

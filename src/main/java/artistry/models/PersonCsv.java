@@ -1,9 +1,15 @@
 package artistry.models;
 
+import java.io.Serializable;
+
 import com.opencsv.bean.CsvBindByPosition;
 
-public class PersonCsv {
+public class PersonCsv implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@CsvBindByPosition(position = 0)
 	private String name;
 	@CsvBindByPosition(position = 1)

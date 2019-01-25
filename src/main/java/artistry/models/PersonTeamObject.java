@@ -1,11 +1,16 @@
 package artistry.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 import artistry.enums.Role;
 
-public class PersonTeamObject {
+public class PersonTeamObject implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long personId;
 	private Long implementationTeamId;
 	private List<Role> roles;

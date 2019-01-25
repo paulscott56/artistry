@@ -1,5 +1,6 @@
 package artistry.models;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.TimeZone;
@@ -15,7 +16,12 @@ import org.neo4j.ogm.annotation.Relationship;
 import artistry.enums.Role;
 
 @NodeEntity
-public class Person {
+public class Person implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue

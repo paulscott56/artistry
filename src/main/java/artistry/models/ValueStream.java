@@ -1,6 +1,6 @@
 package artistry.models;
 
-import java.util.List;
+import java.io.Serializable;
 import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -9,7 +9,12 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class ValueStream {
+public class ValueStream implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue

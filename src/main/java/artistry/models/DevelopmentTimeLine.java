@@ -1,9 +1,14 @@
 package artistry.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class DevelopmentTimeLine {
+public class DevelopmentTimeLine implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Date estimatedStartDate;
 	private Date estimatedCompletionDate;
 	

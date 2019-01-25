@@ -1,5 +1,6 @@
 package artistry.models;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -10,7 +11,12 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity(label = "MajorCity")
-public class MajorCity {
+public class MajorCity implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue

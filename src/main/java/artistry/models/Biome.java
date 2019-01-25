@@ -1,5 +1,6 @@
 package artistry.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -12,8 +13,12 @@ import org.neo4j.ogm.annotation.NodeEntity;
  *
  */
 @NodeEntity
-public class Biome {
+public class Biome implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Long id;

@@ -1,5 +1,12 @@
 package artistry.models;
 
-public class IterationGoal {
+import java.io.Serializable;
+
+public class IterationGoal implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 }

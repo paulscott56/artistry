@@ -1,5 +1,6 @@
 package artistry.models;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -9,7 +10,12 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import artistry.enums.AddressType;
 
 @NodeEntity
-public class Address {
+public class Address implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue

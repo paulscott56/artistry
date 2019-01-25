@@ -6,10 +6,12 @@ import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
 import artistry.models.Train;
 
-@RepositoryRestResource(collectionResourceRel = "trains", path = "trains")
+//@RepositoryRestResource(collectionResourceRel = "trains", path = "trains")
+@Repository
 public interface TrainRepository extends Neo4jRepository<Train, Long> {
 
 	Train findByName(@Param("name") String name);

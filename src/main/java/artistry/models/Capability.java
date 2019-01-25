@@ -1,5 +1,6 @@
 package artistry.models;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -14,8 +15,13 @@ import org.neo4j.ogm.annotation.Relationship;
  * @see https://www.scaledagileframework.com/features-and-capabilities/
  */
 @NodeEntity
-public class Capability {
+public class Capability implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private Long id;

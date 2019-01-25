@@ -1,5 +1,7 @@
 package artistry.models;
 
+import java.io.Serializable;
+
 /**
  * An object to determine communication preferences. 
  * Each field is a boolean as to whether the person/company/etc would like to receive comms on each of the channels listed.
@@ -7,8 +9,12 @@ package artistry.models;
  * @author paul
  *
  */
-public class CommunicationPreferences {
+public class CommunicationPreferences implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean marketingEmail;
 	private boolean personalEmail;
 	private boolean developmentEmail;

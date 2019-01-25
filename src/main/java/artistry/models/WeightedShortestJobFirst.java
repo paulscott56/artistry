@@ -1,7 +1,7 @@
 package artistry.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -9,7 +9,12 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class WeightedShortestJobFirst {
+public class WeightedShortestJobFirst implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue

@@ -1,5 +1,12 @@
 package artistry.models;
 
-public class TeamBacklog {
+import java.io.Serializable;
+
+public class TeamBacklog implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 }

@@ -1,5 +1,6 @@
 package artistry.models;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -7,7 +8,12 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class PhoneNumber {
+public class PhoneNumber implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue

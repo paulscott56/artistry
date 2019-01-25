@@ -2,10 +2,12 @@ package artistry.repositories;
 
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
 import artistry.models.Requirement;
 
-@RepositoryRestResource(collectionResourceRel = "feature", path = "requirement")
+//@RepositoryRestResource(collectionResourceRel = "feature", path = "requirement")
+@Repository
 public interface RequirementRepository extends Neo4jRepository<Requirement, Long> {
 
 }
