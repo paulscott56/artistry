@@ -26,9 +26,9 @@ import artistry.services.ArtistryCsvReader;
 @RestController
 @Description("Controller to for handling roles that people play)")
 @RequestMapping("/role")
-public class PersonRoleRestController {
+public class RolesRestController {
 
-	static final Logger log = LoggerFactory.getLogger(PersonRoleRestController.class);
+	static final Logger log = LoggerFactory.getLogger(RolesRestController.class);
 
 	@Autowired
 	private RolesRepository roleRepo;
