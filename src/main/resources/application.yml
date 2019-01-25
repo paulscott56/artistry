@@ -83,3 +83,40 @@ jira:
   url: http://myjira.company.com
   username: myusername
   password: sometrickyPassword
+  
+---
+
+spring:
+  profiles: docker
+  data:
+    neo4j:
+      username: neo4j 
+      password: hello
+      uri: neo4j
+  servlet:
+    multipart:
+      max-file-size: 128MB
+      max-request-size: 128MB
+      enabled: true
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+    preferIpAddress: false
+    hostname: registry
+       
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+      
+jira:
+  url: http://myjira.company.com
+  username: myusername
+  password: sometrickyPassword
