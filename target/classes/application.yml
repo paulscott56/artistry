@@ -47,6 +47,10 @@ jira:
   username: myusername
   password: sometrickyPassword
   
+artistry:
+  data:
+    directory: "/artistry/data"
+  
 ---
   
 spring:
@@ -84,6 +88,10 @@ jira:
   username: myusername
   password: sometrickyPassword
   
+artistry:
+  data:
+    directory: "/artistry/data"
+  
 ---
 
 spring:
@@ -120,3 +128,8 @@ jira:
   url: http://myjira.company.com
   username: myusername
   password: sometrickyPassword
+  
+artistry:
+  data:
+    directory: "/artistry/data"
+ 

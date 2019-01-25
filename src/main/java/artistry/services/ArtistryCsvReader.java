@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import artistry.configuration.StorageProperties;
 import artistry.enums.AddressType;
 import artistry.enums.Continents;
 import artistry.models.geo.AlternateName;
@@ -55,6 +56,8 @@ import artistry.repositories.RolesRepository;
 public class ArtistryCsvReader {
 
 	static final Logger log = LoggerFactory.getLogger(ArtistryCsvReader.class);
+	
+	private static final String RESOURCE = StorageProperties.getLocation();
 
 	@Autowired
 	private GeoRepository geoRepo;
@@ -75,7 +78,7 @@ public class ArtistryCsvReader {
 	private RolesRepository rolesRepo;
 
 	public void readCountryByCode(String code) throws URISyntaxException, IOException {
-		Path CSV_PATH = Paths.get(ClassLoader.getSystemResource("csv/" + code + ".txt").toURI());
+		Path CSV_PATH = Paths.get(RESOURCE + code + ".txt");
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoPlace> csvToBean = new CsvToBeanBuilder<GeoPlace>(reader).withType(GeoPlace.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator('\t').build();
@@ -137,7 +140,7 @@ public class ArtistryCsvReader {
 	}
 
 	public void readAllCountriesCsv() throws IOException, URISyntaxException, ParseException {
-		Path CSV_PATH = Paths.get(ClassLoader.getSystemResource("csv/allCountries.txt").toURI());
+		Path CSV_PATH = Paths.get(RESOURCE + "allCountries.txt");
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoPlace> csvToBean = new CsvToBeanBuilder<GeoPlace>(reader).withType(GeoPlace.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator('\t').build();
@@ -217,7 +220,7 @@ public class ArtistryCsvReader {
 	}
 
 	public void readCountryInfoCsv() throws IOException, URISyntaxException {
-		Path CSV_PATH = Paths.get(ClassLoader.getSystemResource("csv/countryInfo.txt").toURI());
+		Path CSV_PATH = Paths.get(RESOURCE + "countryInfo.txt");
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoCountry> csvToBean = new CsvToBeanBuilder<GeoCountry>(reader).withType(GeoCountry.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator('\t').build();
@@ -271,7 +274,7 @@ public class ArtistryCsvReader {
 	}
 
 	public void readCity(String file) throws URISyntaxException, IOException {
-		Path CSV_PATH = Paths.get(ClassLoader.getSystemResource("csv/" + file + ".txt").toURI());
+		Path CSV_PATH = Paths.get(RESOURCE + file + ".txt");
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoMajorCity> csvToBean = new CsvToBeanBuilder<GeoMajorCity>(reader).withType(GeoMajorCity.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator('\t').build();
@@ -333,7 +336,7 @@ public class ArtistryCsvReader {
 	}
 
 	public void readRolesCsv() throws URISyntaxException, IOException {
-		Path CSV_PATH = Paths.get(ClassLoader.getSystemResource("csv/roles.csv").toURI());
+		Path CSV_PATH = Paths.get(RESOURCE + "roles.csv");
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<PersonRole> csvToBean = new CsvToBeanBuilder<PersonRole>(reader).withType(PersonRole.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator(',').withSkipLines(1).build();
@@ -355,8 +358,8 @@ public class ArtistryCsvReader {
 
 	@Async
 	public void importPeople(MultipartFile file) throws URISyntaxException, IOException {
-		log.info("Parsing file: " + ClassLoader.getSystemResource("csv/").toString() + file.getOriginalFilename());
-		Path CSV_PATH = Paths.get(ClassLoader.getSystemResource("csv/" + file.getOriginalFilename()).toURI());
+		log.info("Parsing file: " + RESOURCE + file.getOriginalFilename());
+		Path CSV_PATH = Paths.get(RESOURCE + file.getOriginalFilename());
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<PersonCsv> csvToBean = new CsvToBeanBuilder<PersonCsv>(reader).withType(PersonCsv.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator(',').withSkipLines(1).build();

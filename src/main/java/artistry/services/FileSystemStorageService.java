@@ -30,7 +30,7 @@ public class FileSystemStorageService implements StorageService {
 
     @Autowired
     public FileSystemStorageService(StorageProperties properties) throws URISyntaxException {
-        this.rootLocation = Paths.get(ClassLoader.getSystemResource("csv/").toURI()); //Paths.get(properties.getLocation());
+        this.rootLocation = Paths.get(properties.getLocation());
     }
 
     @Override

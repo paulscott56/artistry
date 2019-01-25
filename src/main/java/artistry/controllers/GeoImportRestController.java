@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import artistry.configuration.StorageProperties;
 import artistry.services.ArtistryCsvReader;
 import artistry.utils.DownloadService;
 
@@ -31,6 +36,8 @@ import artistry.utils.DownloadService;
 @Description("Controller to simplify the import of the geo data")
 @RequestMapping("/geo")
 public class GeoImportRestController {
+
+	private static final String RESOURCE = StorageProperties.getLocation(); //"/artistry/data/csv/";
 
 	static final Logger log = LoggerFactory.getLogger(GeoImportRestController.class);
 
@@ -78,7 +85,7 @@ public class GeoImportRestController {
 
 			byte[] buffer = new byte[1024];
 			while (zipEntry != null) {
-				File destPath = new File(ClassLoader.getSystemResource("csv/").getFile() + zipEntry.getName());
+				File destPath = new File(RESOURCE + zipEntry.getName());
 				destPath.createNewFile();
 				FileOutputStream fos = new FileOutputStream(destPath, false);
 				int len;
@@ -92,13 +99,13 @@ public class GeoImportRestController {
 			zis.close();
 
 			// clean up
-			new File(ClassLoader.getSystemResource("csv/").getFile() + code + ".zip").delete();
-			new File(ClassLoader.getSystemResource("csv/").getFile() + "readme.txt").delete();
+			new File(RESOURCE + code + ".zip").delete();
+			new File(RESOURCE + "readme.txt").delete();
 
 			csvReader.readCountryByCode(code);
 
 			// finally delete the file info as well
-			new File(ClassLoader.getSystemResource("csv/").getFile() + code + ".txt").delete();
+			new File(RESOURCE + code + ".txt").delete();
 
 			return "Country: " + code + " has been imported";
 		} catch (Exception e) {
@@ -124,7 +131,7 @@ public class GeoImportRestController {
 
 				byte[] buffer = new byte[1024];
 				while (zipEntry != null) {
-					File destPath = new File(ClassLoader.getSystemResource("csv/").getFile() + zipEntry.getName());
+					File destPath = new File(RESOURCE + zipEntry.getName());
 					destPath.createNewFile();
 					FileOutputStream fos = new FileOutputStream(destPath, false);
 					int len;
@@ -140,8 +147,8 @@ public class GeoImportRestController {
 				csvReader.readCity(file.replace(".zip", ""));
 
 				// finally delete the file info as well
-				new File(ClassLoader.getSystemResource("csv/").getFile() + file.replace(".zip", "") + ".txt").delete();
-				new File(ClassLoader.getSystemResource("csv/").getFile() + file).delete();
+				new File(RESOURCE + file.replace(".zip", "") + ".txt").delete();
+				new File(RESOURCE + file).delete();
 				log.info("Cities: " + file + " has been imported");
 			}
 			return "Cities have been imported!";

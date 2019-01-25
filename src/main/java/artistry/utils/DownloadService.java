@@ -15,10 +15,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import artistry.configuration.StorageProperties;
+
 @Component
 public class DownloadService {
 
 	static final Logger log = LoggerFactory.getLogger(DownloadService.class);
+	
+	private static final String RESOURCE = StorageProperties.getLocation();
 
 	public File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
 		File destFile = new File(destinationDir, zipEntry.getName());
@@ -38,8 +42,8 @@ public class DownloadService {
 	public String download(String url, String code) throws IOException, URISyntaxException {
 		URL zipfile = new URL(url);
 		ReadableByteChannel rbc = Channels.newChannel(zipfile.openStream());
-		URI p = ClassLoader.getSystemResource("csv/").toURI();
-		String path = Paths.get(p).toString();
+		//URI p = ClassLoader.getSystemClassLoader().getResource("csv/").toURI();
+		String path = RESOURCE; //Paths.get(p).toString();
 		String finalpath = path + "/" + code + ".zip";
 		FileOutputStream fos = new FileOutputStream(finalpath);
 		fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
