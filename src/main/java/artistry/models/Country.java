@@ -1,7 +1,6 @@
 package artistry.models;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;

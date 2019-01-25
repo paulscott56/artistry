@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import artistry.models.Company;
 import artistry.models.ImplementationTeam;
-import artistry.models.LargeSolution;
-import artistry.models.Person;
 import artistry.models.PersonTeamObject;
 import artistry.repositories.CompanyRepository;
 import artistry.repositories.ImplementationTeamRepository;

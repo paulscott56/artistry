@@ -13,8 +13,6 @@ import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
-import artistry.enums.Role;
-
 @NodeEntity
 public class Person implements Serializable {
 

@@ -3,12 +3,10 @@ package artistry.utils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
 
 import org.slf4j.Logger;
