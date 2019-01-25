@@ -6,6 +6,7 @@ import java.util.Set;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 import artistry.enums.DocumentStatus;
 import artistry.enums.License;
@@ -29,7 +30,9 @@ public class Document {
 	private Date creationDate;
 	private String documentBody;
 	private String version;
+	@Relationship(type = "HAS_AUTHOR", direction = Relationship.OUTGOING)
 	private Person primaryAuthor;
+	@Relationship(type = "HAS_CONTRIBUTOR", direction = Relationship.OUTGOING)
 	private Set<Person> additionalAuthors;
 	private DocumentStatus status;
 	private Set<Date> revisionDates;

@@ -29,9 +29,9 @@ import artistry.repositories.ImplementationTeamRepository;
 @RestController
 @Description("Controller to for handling implementation teams")
 @RequestMapping("/team")
-public class TeamRestController {
+public class ImplementationTeamRestController {
 
-	static final Logger log = LoggerFactory.getLogger(TeamRestController.class);
+	static final Logger log = LoggerFactory.getLogger(ImplementationTeamRestController.class);
 	
 	@Autowired
 	private ImplementationTeamRepository teamRepo;

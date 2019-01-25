@@ -1,6 +1,9 @@
 package artistry.controllers;
 
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +48,7 @@ public class DocumentRestController {
 	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Document createDocument(@RequestBody Document document) {
+		document.setCreationDate(new Date());
 		Document saveddocument = docRepo.save(document);
 		return saveddocument;
 	}
@@ -53,8 +57,28 @@ public class DocumentRestController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Document updateDocument(@RequestBody Document document) {
-		Document saveddocument = docRepo.save(document);
-		return saveddocument;
+		Optional<Document> olddoc = docRepo.findById(document.getId());
+		if(olddoc.isPresent()) {
+			Document doc = olddoc.get();
+			Set<Date> revdates = doc.getRevisionDates();
+			if(revdates == null) {
+				revdates = new HashSet<>();
+			}
+			revdates.add(new Date());
+			doc.setRevisionDates(revdates);
+			doc.setAdditionalAuthors(document.getAdditionalAuthors());
+			doc.setCreationDate(doc.getCreationDate());
+			doc.setDocumentBody(document.getDocumentBody());
+			doc.setId(doc.getId());
+			doc.setLicense(document.getLicense());
+			doc.setPrimaryAuthor(document.getPrimaryAuthor());
+			doc.setStatus(document.getStatus());
+			doc.setTitle(document.getTitle());
+			doc.setVersion(document.getVersion());
+			
+			return docRepo.save(doc);
+		}
+		return document;
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = {
