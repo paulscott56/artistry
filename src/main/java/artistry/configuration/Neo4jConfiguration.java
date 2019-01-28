@@ -3,6 +3,7 @@ package artistry.configuration;
 import org.neo4j.ogm.session.SessionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableNeo4jRepositories(basePackages = "artistry.repositories")
 @EnableTransactionManagement
 @EnableAutoConfiguration
+@EntityScan({ "artistry.models", "BOOT-INF.classes.artistry.models" })
 public class Neo4jConfiguration {
 
 	@Value("${spring.data.neo4j.uri}")

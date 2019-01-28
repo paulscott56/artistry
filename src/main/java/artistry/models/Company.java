@@ -1,26 +1,23 @@
 package artistry.models;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
-@NodeEntity
-public class Company implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@NodeEntity("Company")
+public class Company extends AbstractAuditableBaseEntity {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
+	@Index(unique = true)
 	private String companyName;
+
 	private Address companyAddress;
 	private PhoneNumber phoneNumber;
 	private EmailAddress emailAddress;
@@ -35,17 +32,9 @@ public class Company implements Serializable {
 
 	@Relationship(type = "HAS_TEAM", direction = Relationship.OUTGOING)
 	private Set<ImplementationTeam> teams;
-	
+
 	@Relationship(type = "IN_COUNTRY", direction = Relationship.OUTGOING)
 	private Country country;
-
-	public Country getCountry() {
-		return country;
-	}
-
-	public void setCountry(Country country) {
-		this.country = country;
-	}
 
 	public Long getId() {
 		return id;
@@ -53,6 +42,14 @@ public class Company implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
 	public String getCompanyName() {

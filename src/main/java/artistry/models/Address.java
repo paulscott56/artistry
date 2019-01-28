@@ -1,6 +1,5 @@
 package artistry.models;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -9,29 +8,21 @@ import org.neo4j.ogm.annotation.NodeEntity;
 
 import artistry.enums.AddressType;
 
-@NodeEntity
-public class Address implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@NodeEntity("Address")
+public class Address extends AbstractAuditableBaseEntity {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
-	// @Relationship(type = "HAS_ADDRESS_TYPE", direction = Relationship.INCOMING)
 	private AddressType addressType;
 
 	private boolean isPostalAddress;
 	private String fullAddress;
 	private Set<String> addressLine;
 
-	// @Relationship(type = "IN_CITY", direction = Relationship.INCOMING)
 	private String city;
 
-	// @Relationship(type = "IN_COUNTRY", direction = Relationship.INCOMING)
 	private Country country;
 
 	private String postalCode;

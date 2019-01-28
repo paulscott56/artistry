@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import artistry.models.Company;
 
-//@RepositoryRestResource(collectionResourceRel = "person", path = "company")
 @Repository
 public interface CompanyRepository extends Neo4jRepository<Company, Long> {
 
