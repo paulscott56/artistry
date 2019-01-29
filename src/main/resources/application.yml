@@ -24,6 +24,17 @@ spring:
       max-file-size: 128MB
       max-request-size: 128MB
       enabled: true
+  resources:
+    chain:
+      enabled: true
+
+management:
+  endpoint:
+    auditevents:
+      enabled: true
+    web:
+      exposure:
+        include: "*"
 
 eureka:
   instance:
@@ -65,6 +76,17 @@ spring:
       max-file-size: 128KB
       max-request-size: 128KB
       enabled: false
+  resources:
+    chain:
+      enabled: true
+
+management:
+  endpoint:
+    auditevents:
+      enabled: true
+    web:
+      exposure:
+        include: "*"
 
 eureka:
   instance:
