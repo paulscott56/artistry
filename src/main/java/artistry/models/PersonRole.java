@@ -10,7 +10,7 @@ import com.opencsv.bean.CsvBindByPosition;
 import com.opencsv.bean.CsvCustomBindByPosition;
 
 import artistry.enums.Role;
-import artistry.services.RoleTypeEnumConverter;
+import artistry.utils.RoleTypeEnumConverter;
 
 @NodeEntity
 public class PersonRole implements Serializable {
