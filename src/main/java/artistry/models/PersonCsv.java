@@ -1,11 +1,9 @@
 package artistry.models;
 
-import java.io.Serializable;
-
 import com.opencsv.bean.CsvBindByPosition;
 
-public class PersonCsv implements Serializable {
-	
+public class PersonCsv {
+
 	/**
 	 * 
 	 */
@@ -34,74 +32,93 @@ public class PersonCsv implements Serializable {
 	private boolean active;
 	@CsvBindByPosition(position = 11)
 	private String jiraUsername;
-	
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getSurname() {
 		return surname;
 	}
+
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getNickname() {
 		return nickname;
 	}
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
 	public String getCountryCode() {
 		return countryCode;
 	}
+
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
+
 	public String getWorkemail() {
 		return workemail;
 	}
+
 	public void setWorkemail(String workemail) {
 		this.workemail = workemail;
 	}
+
 	public String getPersonalEmail() {
 		return personalEmail;
 	}
+
 	public void setPersonalEmail(String personalEmail) {
 		this.personalEmail = personalEmail;
 	}
+
 	public String getWorkPhone() {
 		return workPhone;
 	}
+
 	public void setWorkPhone(String workPhone) {
 		this.workPhone = workPhone;
 	}
+
 	public String getMobilePhone() {
 		return mobilePhone;
 	}
+
 	public void setMobilePhone(String mobilePhone) {
 		this.mobilePhone = mobilePhone;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public boolean isActive() {
 		return active;
 	}
+
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
-	
 
 }

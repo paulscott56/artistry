@@ -1,16 +1,10 @@
 package artistry.models;
 
-import java.io.Serializable;
-
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class Estimated implements Serializable {
+public class Estimated extends AbstractAuditableBaseEntity {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private double value;
 	private String text;
 

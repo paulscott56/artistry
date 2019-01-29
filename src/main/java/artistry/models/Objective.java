@@ -1,6 +1,5 @@
 package artistry.models;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -9,28 +8,24 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class Objective implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Objective extends AbstractAuditableBaseEntity {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String objectiveName;
 	private String objectiveDescription;
-	
-	// only required at team level. Perhaps we should link these with relationships for reporting on high value targets?
+
+	// only required at team level. Perhaps we should link these with relationships
+	// for reporting on high value targets?
 	private Integer businessValue;
-	
+
 	private boolean stretch;
-	
+
 	private Date dateCreated;
 	private Date lastModified;
-	
+
 	@Relationship(type = "IS_OBJECTIVE_OF", direction = Relationship.INCOMING)
 	private ProgramIncrement pi;
 

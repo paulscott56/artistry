@@ -1,6 +1,5 @@
 package artistry.models;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -10,12 +9,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class Place implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Place extends AbstractAuditableBaseEntity {
 
 	@Id
 	@GeneratedValue

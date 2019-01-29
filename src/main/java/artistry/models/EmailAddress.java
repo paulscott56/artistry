@@ -1,18 +1,11 @@
 package artistry.models;
 
-import java.io.Serializable;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class EmailAddress implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class EmailAddress extends AbstractAuditableBaseEntity {
 
 	@Id
 	@GeneratedValue
@@ -23,7 +16,6 @@ public class EmailAddress implements Serializable {
 	private String supportEmail;
 	private String emergencyContactEmail;
 	private String teamEmail;
-
 
 	public Long getId() {
 		return id;
@@ -72,6 +64,5 @@ public class EmailAddress implements Serializable {
 	public void setTeamEmail(String teamEmail) {
 		this.teamEmail = teamEmail;
 	}
-
 
 }

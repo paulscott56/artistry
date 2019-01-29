@@ -1,6 +1,5 @@
 package artistry.models;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -10,17 +9,12 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class LargeSolution implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class LargeSolution extends AbstractAuditableBaseEntity {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String largeSolutionName;
 
 	@Relationship(type = "HAS_SOLUTION_ARCHITECT", direction = Relationship.OUTGOING)
@@ -31,40 +25,39 @@ public class LargeSolution implements Serializable {
 
 	@Relationship(type = "HAS_SOLUTION_TRAIN_ENGINEER", direction = Relationship.OUTGOING)
 	private Person solutionTrainEngineer;
-	
+
 	@Relationship(type = "HAS_TRAIN", direction = Relationship.OUTGOING)
 	private Set<Train> trains;
-	
+
 	private Document solutionIntent;
-	
+
 	@Relationship(type = "HAS_CUSTOMER", direction = Relationship.OUTGOING)
 	private Person customer;
-	
+
 	private Document solutionContext;
-	
+
 	@Relationship(type = "HAS_CAPABILITY", direction = Relationship.OUTGOING)
 	private Set<Capability> capabilities;
-	
+
 	@Relationship(type = "HAS_SOLUTION_EPIC", direction = Relationship.OUTGOING)
 	private Set<Epic> solutionEpics;
-	
+
 	@Relationship(type = "HAS_NFR", direction = Relationship.OUTGOING)
 	private Set<NonFunctionalRequirement> nonFunctionalRequirements;
-	
+
 	// solution kanban model ...
 	private SolutionBacklog solutionBacklog;
-	
+
 	@Relationship(type = "HAS_PROGRAM", direction = Relationship.OUTGOING)
 	private Set<Program> programs;
-	
-	
+
 	@Relationship(type = "HAS_DOCUMENT", direction = Relationship.OUTGOING)
 	private Set<Document> prePlanningDocuments;
 	@Relationship(type = "HAS_DOCUMENT", direction = Relationship.OUTGOING)
 	private Set<Document> postPlanningDocuments;
-	
+
 	private Date solutionDemo;
-	
+
 	@Relationship(type = "HAS_INSPECT_AND_ADAPT", direction = Relationship.OUTGOING)
 	private InspectAndAdapt inspectAndAdaptEvent;
 
@@ -212,6 +205,4 @@ public class LargeSolution implements Serializable {
 		this.largeSolutionName = largeSolutionName;
 	}
 
-	
-	
 }

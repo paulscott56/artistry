@@ -1,6 +1,5 @@
 package artistry.models;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -11,16 +10,12 @@ import org.neo4j.ogm.annotation.Relationship;
 
 /**
  * Model for Capability. Capability is made up of many features
+ * 
  * @author paul
  * @see https://www.scaledagileframework.com/features-and-capabilities/
  */
 @NodeEntity
-public class Capability implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Capability extends AbstractAuditableBaseEntity {
 
 	@Id
 	@GeneratedValue
@@ -28,19 +23,19 @@ public class Capability implements Serializable {
 
 	@Relationship(type = "HAS_FEATURE", direction = Relationship.OUTGOING)
 	private Set<Feature> features;
-	
+
 	private String capabilityName;
 	private Document benefitHypothesis;
-	
+
 	// does this capability stretch multiple trains or just one?
 	@Relationship(type = "ON_TRAIN", direction = Relationship.OUTGOING)
 	private List<Train> trains;
-	
+
 	private SolutionBacklog solutionBacklog;
-	
+
 	@Relationship(type = "HAS_ENABLER", direction = Relationship.OUTGOING)
 	private Set<Enabler> enablers;
-	
+
 	private boolean accepted;
 
 	public String getCapabilityName() {

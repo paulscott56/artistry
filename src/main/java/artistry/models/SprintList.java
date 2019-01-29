@@ -1,18 +1,12 @@
 package artistry.models;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class SprintList implements Serializable  {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class SprintList extends AbstractAuditableBaseEntity {
 
 	@Relationship(type = "HAS_SPRINT_ENTRY", direction = Relationship.OUTGOING)
 	private Set<SprintEntry> sprints;

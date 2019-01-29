@@ -1,18 +1,11 @@
 package artistry.models;
 
-import java.io.Serializable;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class PhoneNumber implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class PhoneNumber extends AbstractAuditableBaseEntity {
 
 	@Id
 	@GeneratedValue
@@ -21,7 +14,7 @@ public class PhoneNumber implements Serializable {
 	private String officePhone;
 	private String mobilePhone;
 	private String homePhone;
-	//private Map<String, String> otherPhone; // This is a description:phone field.
+	// private Map<String, String> otherPhone; // This is a description:phone field.
 
 	public Long getId() {
 		return id;
@@ -55,12 +48,12 @@ public class PhoneNumber implements Serializable {
 		this.homePhone = homePhone;
 	}
 
-//	public Map<String, String> getOtherPhone() {
-//		return otherPhone;
-//	}
-//
-//	public void setOtherPhone(Map<String, String> otherPhone) {
-//		this.otherPhone = otherPhone;
-//	}
+	// public Map<String, String> getOtherPhone() {
+	// return otherPhone;
+	// }
+	//
+	// public void setOtherPhone(Map<String, String> otherPhone) {
+	// this.otherPhone = otherPhone;
+	// }
 
 }

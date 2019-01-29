@@ -1,15 +1,9 @@
 package artistry.models;
 
-import java.io.Serializable;
-
 import com.opencsv.bean.CsvBindByPosition;
 
-public class GeoCountry implements Serializable {
+public class GeoCountry {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	@CsvBindByPosition(position = 0)
 	private String iso;
 	@CsvBindByPosition(position = 1)

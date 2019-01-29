@@ -1,6 +1,5 @@
 package artistry.models;
 
-import java.io.Serializable;
 import java.net.URL;
 import java.util.Set;
 
@@ -10,12 +9,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class ImplementationTeam implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class ImplementationTeam extends AbstractAuditableBaseEntity {
 
 	@Id
 	@GeneratedValue
@@ -153,7 +147,5 @@ public class ImplementationTeam implements Serializable {
 	public void setInnovationAndPlanningDocuments(Set<Document> innovationAndPlanningDocuments) {
 		this.innovationAndPlanningDocuments = innovationAndPlanningDocuments;
 	}
-
-	
 
 }

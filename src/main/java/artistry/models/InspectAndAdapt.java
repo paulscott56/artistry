@@ -1,12 +1,5 @@
 package artistry.models;
 
-import java.io.Serializable;
-
-public class InspectAndAdapt implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class InspectAndAdapt extends AbstractAuditableBaseEntity {
 
 }
