@@ -5,30 +5,50 @@ import java.util.Set;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
-@NodeEntity
+@NodeEntity("Program")
 public class Program extends AbstractAuditableBaseEntity {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
-	// list of teams on the program train
-	private Set<ImplementationTeam> teams;
-
-	private ProgramIncrement pi;
-	private Set<Person> productManagement;
-	private Person SystemArchitect;
-	private Person releaseTrainEngineer;
+	@Relationship(type = "HAS_BUSINESS_OWNER", direction = Relationship.OUTGOING)
 	private Set<Person> businessOwners;
+
+	@Relationship(type = "HAS_KEY_CUSTOMER", direction = Relationship.OUTGOING)
+	private Set<Person> keyCustomers;
+
+	@Relationship(type = "HAS_SUCCESS_MEASURE", direction = Relationship.OUTGOING)
+	private Set<String> successMeasures;
+
+	private Set<PrincipalRole> principalRoles;
+
+	@Relationship(type = "HAS_OTHER_STAKEHOLDER", direction = Relationship.OUTGOING)
+	private Set<Person> otherStakeholders;
+
+	@Relationship(type = "HAS_VALUESTREAM", direction = Relationship.OUTGOING)
+	private ValueStream valueStream;
+
+	@Relationship(type = "HAS_PRODUCT_TEAM", direction = Relationship.OUTGOING)
+	private Set<Person> productManagement;
+
+	@Relationship(type = "HAS_STE", direction = Relationship.OUTGOING)
+	private Person SystemArchitect;
+
+	@Relationship(type = "HAS_RTE", direction = Relationship.OUTGOING)
+	private Person releaseTrainEngineer;
+
 	private Set<SystemDemo> systemDemo;
 	private Set<InspectAndAdapt> inspectAndAdaptWorkshops;
 
-	private Set<Feature> features;
+	// private Set<Feature> features;
+
 	private Set<Epic> programEpics;
 	private ProgramBacklog programBacklog;
 	private ProgramKanban programKanban;
-	private Set<Objective> piObjectives;
+	// private Set<Objective> piObjectives;
 	private Set<Document> architecturalRunway;
 	private String programName;
 
@@ -38,22 +58,6 @@ public class Program extends AbstractAuditableBaseEntity {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Set<ImplementationTeam> getTeams() {
-		return teams;
-	}
-
-	public void setTeams(Set<ImplementationTeam> teams) {
-		this.teams = teams;
-	}
-
-	public ProgramIncrement getPi() {
-		return pi;
-	}
-
-	public void setPi(ProgramIncrement pi) {
-		this.pi = pi;
 	}
 
 	public Set<Person> getProductManagement() {
@@ -104,14 +108,6 @@ public class Program extends AbstractAuditableBaseEntity {
 		this.inspectAndAdaptWorkshops = inspectAndAdaptWorkshops;
 	}
 
-	public Set<Feature> getFeatures() {
-		return features;
-	}
-
-	public void setFeatures(Set<Feature> features) {
-		this.features = features;
-	}
-
 	public Set<Epic> getProgramEpics() {
 		return programEpics;
 	}
@@ -136,14 +132,6 @@ public class Program extends AbstractAuditableBaseEntity {
 		this.programKanban = programKanban;
 	}
 
-	public Set<Objective> getPiObjectives() {
-		return piObjectives;
-	}
-
-	public void setPiObjectives(Set<Objective> piObjectives) {
-		this.piObjectives = piObjectives;
-	}
-
 	public Set<Document> getArchitecturalRunway() {
 		return architecturalRunway;
 	}
@@ -158,6 +146,14 @@ public class Program extends AbstractAuditableBaseEntity {
 
 	public void setProgramName(String programName) {
 		this.programName = programName;
+	}
+
+	public Set<PrincipalRole> getPrincipalRoles() {
+		return principalRoles;
+	}
+
+	public void setPrincipalRoles(Set<PrincipalRole> principalRoles) {
+		this.principalRoles = principalRoles;
 	}
 
 }
