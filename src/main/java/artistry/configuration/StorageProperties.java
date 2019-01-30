@@ -12,16 +12,16 @@ import artistry.utils.StorageService;
 
 @Configuration
 public class StorageProperties {
-	
+
 	@Value("${artistry.data.directory}")
 	private static String location;
 
-    public StorageProperties() throws IOException {
+	public StorageProperties() throws IOException {
 		super();
-		// TODO Auto-generated constructor stub
-		File flocation = new File("/artistry/data/"); //ResourceUtils.getFile("classpath:csv").toString();
-		if(!flocation.exists()) {
-			flocation.createNewFile();
+		File flocation = new File(location); // ResourceUtils.getFile("classpath:csv").toString();
+		if (!flocation.exists()) {
+			flocation.mkdirs();
+			// flocation.createNewFile();
 			location = flocation.toString();
 		} else {
 			location = flocation.toString();
@@ -29,24 +29,26 @@ public class StorageProperties {
 	}
 
 	/**
-     * Folder location for storing files
-     */
-    //private static String location;  //getClass().getResourceAsStream("csv/").toString(); //ClassLoader.getSystemClassLoader().getResource("csv/").toString();
+	 * Folder location for storing files
+	 */
+	// private static String location;
+	// //getClass().getResourceAsStream("csv/").toString();
+	// //ClassLoader.getSystemClassLoader().getResource("csv/").toString();
 
-    public static String getLocation() {
-        return location;
-    }
+	public static String getLocation() {
+		return location;
+	}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-    
-    @Bean
-    CommandLineRunner init(StorageService storageService) {
-    	return (args) -> {
-    		//storageService.deleteAll();
-    		storageService.init();
-    	};
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
+		return (args) -> {
+			// storageService.deleteAll();
+			storageService.init();
+		};
+	}
 
 }
