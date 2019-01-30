@@ -15,6 +15,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import artistry.models.BoardEntry;
@@ -41,42 +42,55 @@ public class JiraService {
 
 	public BoardEntry getBoard(int teamid) throws JSONException {
 		Optional<BoardEntry> exists = brepo.findOneByJiraId(teamid);
-		if (!exists.isPresent()) {
-			BoardEntry board = new BoardEntry();
-			final HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
-			headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-			headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
-			final HttpEntity<String> entity = new HttpEntity<>(null, headers);
+		try {
+			if (!exists.isPresent()) {
+				BoardEntry board = new BoardEntry();
+				final HttpHeaders headers = new HttpHeaders();
+				headers.setContentType(MediaType.APPLICATION_JSON);
+				headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+				headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+				final HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
-			final ResponseEntity<String> data = rt.exchange(jiraUrl + "/rest/agile/latest/board/" + teamid,
-					HttpMethod.GET, entity, String.class);
-			JSONObject json = new JSONObject(data.getBody());
-			board.setJiraId(json.getInt("id"));
-			board.setName(json.getString("name"));
-			board.setUrl(json.getString("self"));
-			board.setType(json.getString("type"));
-			JSONObject bloc = json.getJSONObject("location");
-			BoardLocation boardloc = new BoardLocation();
-			boardloc.setAvatarURI(bloc.optString("avatarURI"));
-			boardloc.setDisplayName(bloc.optString("displayName"));
-			boardloc.setName(bloc.optString("name"));
-			boardloc.setProjectId(bloc.optString("projectId"));
-			boardloc.setProjectKey(bloc.optString("projectKey"));
-			boardloc.setProjectName(bloc.optString("projectName"));
-			boardloc.setProjectTypeKey(bloc.optString("projectTypeKey"));
-			board.setLocation(boardloc);
+				final ResponseEntity<String> data = rt.exchange(jiraUrl + "/rest/agile/latest/board/" + teamid,
+						HttpMethod.GET, entity, String.class);
+				JSONObject json = new JSONObject(data.getBody());
+				board.setJiraId(json.getInt("id"));
+				board.setName(json.getString("name"));
+				board.setUrl(json.getString("self"));
+				board.setType(json.getString("type"));
+				JSONObject bloc = json.getJSONObject("location");
+				BoardLocation boardloc = new BoardLocation();
+				boardloc.setAvatarURI(bloc.optString("avatarURI"));
+				boardloc.setDisplayName(bloc.optString("displayName"));
+				boardloc.setName(bloc.optString("name"));
+				boardloc.setProjectId(bloc.optString("projectId"));
+				boardloc.setProjectKey(bloc.optString("projectKey"));
+				boardloc.setProjectName(bloc.optString("projectName"));
+				boardloc.setProjectTypeKey(bloc.optString("projectTypeKey"));
+				board.setLocation(boardloc);
 
-			brepo.save(board);
-			return board;
-		} else {
-			Optional<BoardEntry> boarddata = brepo.findOneByJiraId(Integer.valueOf(teamid));
-			if (boarddata.isPresent()) {
-				return boarddata.get();
+				brepo.save(board);
+				return board;
+			} else {
+				Optional<BoardEntry> boarddata = brepo.findOneByJiraId(Integer.valueOf(teamid));
+				if (boarddata.isPresent()) {
+					return boarddata.get();
+				}
 			}
+		} catch (HttpClientErrorException e) {
+			log.error(e.getLocalizedMessage());
+			BoardEntry b = new BoardEntry();
+			b.setCommentOrError("Board not found! Please check teamID");
+			return b;
 		}
 		return null;
 
+	}
+
+	public Iterable<BoardEntry> getAllBoards() {
+		// TODO: need to query jira rest here to get all boards also, add them to the
+		// db, then return
+		return brepo.findAll();
 	}
 
 	// public String makePostRequestToCreateBoard(AgileBoard agileBoard, Long[]

@@ -18,7 +18,7 @@ import artistry.services.JiraService;
 @Configuration
 @RestController
 @Description("Controller to manage jira and confluence")
-@RequestMapping("/jira")
+@RequestMapping("/boards")
 public class JiraRestController {
 
 	static final Logger log = LoggerFactory.getLogger(JiraRestController.class);
@@ -26,10 +26,17 @@ public class JiraRestController {
 	@Autowired
 	private JiraService jira;
 
-	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@RequestMapping(value = "/getbyteamid", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public BoardEntry getAll(@RequestParam("teamid") int teamid) {
 		return jira.getBoard(teamid);
+	}
+
+	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	public Iterable<BoardEntry> getAll() {
+		return jira.getAllBoards();
 	}
 
 }

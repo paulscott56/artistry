@@ -16,6 +16,7 @@ public class BoardEntry extends AbstractAuditableBaseEntity {
 	private String name;
 	private String type;
 	private BoardLocation location;
+	private String commentOrError;
 
 	public Long getId() {
 		return id;
@@ -63,6 +64,14 @@ public class BoardEntry extends AbstractAuditableBaseEntity {
 
 	public void setLocation(BoardLocation location) {
 		this.location = location;
+	}
+
+	public String getCommentOrError() {
+		return commentOrError;
+	}
+
+	public void setCommentOrError(String commentOrError) {
+		this.commentOrError = commentOrError;
 	}
 
 }
