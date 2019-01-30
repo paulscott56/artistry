@@ -18,7 +18,7 @@ public class StorageProperties {
 
 	public StorageProperties() throws IOException {
 		super();
-		File flocation = new File(location); // ResourceUtils.getFile("classpath:csv").toString();
+		File flocation = new File("/tmp/artistry/data"); // ResourceUtils.getFile("classpath:csv").toString();
 		if (!flocation.exists()) {
 			flocation.mkdirs();
 			// flocation.createNewFile();

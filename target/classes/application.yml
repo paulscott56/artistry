@@ -109,7 +109,7 @@ jira:
   url: http://myjira.company.com
   username: myusername
   password: sometrickyPassword
-  
+    
 artistry:
   data:
     directory: /tmp/artistry/data

@@ -15,6 +15,7 @@ public class BoardEntry extends AbstractAuditableBaseEntity {
 	private String url;
 	private String name;
 	private String type;
+	private BoardLocation location;
 
 	public Long getId() {
 		return id;
@@ -54,6 +55,14 @@ public class BoardEntry extends AbstractAuditableBaseEntity {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public BoardLocation getLocation() {
+		return location;
+	}
+
+	public void setLocation(BoardLocation location) {
+		this.location = location;
 	}
 
 }
