@@ -24,4 +24,60 @@ public class Train extends AbstractAuditableBaseEntity {
 
 	private Set<ProgramIncrement> pi;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Document getVisionStatement() {
+		return visionStatement;
+	}
+
+	public void setVisionStatement(Document visionStatement) {
+		this.visionStatement = visionStatement;
+	}
+
+	public Document getSolutionStatement() {
+		return solutionStatement;
+	}
+
+	public void setSolutionStatement(Document solutionStatement) {
+		this.solutionStatement = solutionStatement;
+	}
+
+	public Set<ImplementationTeam> getPeopleAndLocations() {
+		return peopleAndLocations;
+	}
+
+	public void setPeopleAndLocations(Set<ImplementationTeam> peopleAndLocations) {
+		this.peopleAndLocations = peopleAndLocations;
+	}
+
+	public Document getTeamDesignStrategy() {
+		return teamDesignStrategy;
+	}
+
+	public void setTeamDesignStrategy(Document teamDesignStrategy) {
+		this.teamDesignStrategy = teamDesignStrategy;
+	}
+
+	public Set<ProgramIncrement> getPi() {
+		return pi;
+	}
+
+	public void setPi(Set<ProgramIncrement> pi) {
+		this.pi = pi;
+	}
+
 }

@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import artistry.models.BoardEntry;
 import artistry.models.BoardLocation;
+import artistry.models.JiraWebhook;
 import artistry.repositories.BoardRepository;
 import artistry.utils.JiraUtils;
 
@@ -87,10 +88,80 @@ public class JiraService {
 
 	}
 
-	public Iterable<BoardEntry> getAllBoards() {
-		// TODO: need to query jira rest here to get all boards also, add them to the
-		// db, then return
-		return brepo.findAll();
+	public String createWebhook(JiraWebhook hook) {
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+		final HttpEntity<JiraWebhook> entity = new HttpEntity<>(hook, headers);
+		try {
+			ResponseEntity<String> data = rt.postForEntity(jiraUrl + "/rest/webhooks/1.0/webhook", entity,
+					String.class);
+			return data.getBody();
+		} catch (HttpClientErrorException e) {
+			// e.printStackTrace();
+			return e.getLocalizedMessage();
+		}
+	}
+
+	public String deleteWebhook(int id) {
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+		final HttpEntity<Integer> entity = new HttpEntity<>(id, headers);
+		try {
+			ResponseEntity<String> data = rt.exchange(jiraUrl + "/rest/webhooks/1.0/webhook/" + id, HttpMethod.DELETE,
+					entity, String.class);
+			return data.getBody();
+		} catch (HttpClientErrorException e) {
+			return e.getLocalizedMessage();
+		}
+	}
+
+	public String getAllWebhooks() {
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+		final HttpEntity<String> entity = new HttpEntity<>(null, headers);
+		try {
+			ResponseEntity<String> data = rt.exchange(jiraUrl + "/rest/webhooks/1.0/webhook", HttpMethod.GET, entity,
+					String.class);
+			return data.getBody();
+		} catch (HttpClientErrorException e) {
+			return e.getLocalizedMessage();
+		}
+	}
+
+	public String getWebhookById(int id) {
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+		final HttpEntity<String> entity = new HttpEntity<>(null, headers);
+		try {
+			ResponseEntity<String> data = rt.exchange(jiraUrl + "/rest/webhooks/1.0/webhook/" + id, HttpMethod.GET,
+					entity, String.class);
+			return data.getBody();
+		} catch (HttpClientErrorException e) {
+			return e.getLocalizedMessage();
+		}
+	}
+
+	public String updateWebhookById(int id, JiraWebhook hook) {
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+		final HttpEntity<JiraWebhook> entity = new HttpEntity<>(hook, headers);
+		try {
+			ResponseEntity<String> data = rt.exchange(jiraUrl + "/rest/webhooks/1.0/webhook/" + id, HttpMethod.PUT,
+					entity, String.class);
+			return data.getBody();
+		} catch (HttpClientErrorException e) {
+			return e.getLocalizedMessage();
+		}
 	}
 
 	// public String makePostRequestToCreateBoard(AgileBoard agileBoard, Long[]
