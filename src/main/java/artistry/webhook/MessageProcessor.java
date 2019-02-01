@@ -18,6 +18,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import artistry.models.Destination;
+import artistry.models.WebHookMessage;
 import artistry.repositories.DestinationRepository;
 import artistry.repositories.MessageRepository;
 
@@ -61,9 +63,9 @@ public class MessageProcessor {
 	/**
 	 * Scheduled method to process the messages saved on database
 	 */
-	@Scheduled(cron = "* * * * * *") // (cron = "0 0 */6 * * *") // Run at minute 0 past every 6th hour.
+	@Scheduled(cron = "0 0 * * * *") // (cron = "0 0 */6 * * *") // Run at minute 0 past every 6th hour.
 	public void scheduledMessagesProcessor() {
-		log.debug("Executing scheduled message processor at {}", new Date(System.currentTimeMillis()));
+		log.info("Executing scheduled message processor at {}", new Date(System.currentTimeMillis()));
 
 		// destinationRepository.findAll().forEach(destination ->
 		// processMessagesForDestination(destination));
@@ -71,7 +73,7 @@ public class MessageProcessor {
 
 	private void processMessagesForDestination(Destination destination) {
 		try {
-			log.debug("Processing messages for Destination {}", destination.getUrl());
+			log.info("Processing messages for Destination {}", destination.getUrl());
 
 			// destinationRepository.setDestinationOnline(destination.getId());
 
@@ -114,18 +116,18 @@ public class MessageProcessor {
 	}
 
 	private void onSendMessageSuccess(WebHookMessage message) {
-		log.debug("Sent Message {}", message.getId());
+		log.info("Sent Message {}", message.getId());
 		deleteMessage(message);
 	}
 
 	private void onSendMessageError(WebHookMessage message) {
-		log.debug("Unsent Message {}", message.getId());
+		log.info("Unsent Message {}", message.getId());
 		// destinationRepository.setDestinationOffline(message.getDestinationId());
 	}
 
 	private void deleteMessage(WebHookMessage message) {
 		// messageRepository.delete(message.getId());
-		log.debug("Deleted Message {}", message.getId());
+		log.info("Deleted Message {}", message.getId());
 	}
 
 }

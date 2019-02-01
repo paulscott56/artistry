@@ -2,6 +2,8 @@ package artistry.webhook;
 
 import org.springframework.context.ApplicationEvent;
 
+import artistry.models.WebHookMessage;
+
 public class MessageReceivedEvent extends ApplicationEvent {
 
 	private static final long serialVersionUID = 1L;

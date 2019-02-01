@@ -1,12 +1,10 @@
-package artistry.webhook;
+package artistry.models;
 
 import java.time.LocalDateTime;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-
-import artistry.models.AbstractAuditableBaseEntity;
 
 @NodeEntity
 public class WebHookMessage extends AbstractAuditableBaseEntity {

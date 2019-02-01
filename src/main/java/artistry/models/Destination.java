@@ -1,10 +1,8 @@
-package artistry.webhook;
+package artistry.models;
 
 import java.util.List;
 
 import org.neo4j.ogm.annotation.NodeEntity;
-
-import artistry.models.AbstractAuditableBaseEntity;
 
 @NodeEntity
 public class Destination extends AbstractAuditableBaseEntity {
