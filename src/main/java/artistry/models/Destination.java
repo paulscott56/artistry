@@ -2,10 +2,16 @@ package artistry.models;
 
 import java.util.List;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
 public class Destination extends AbstractAuditableBaseEntity {
+
+	@Id
+	@GeneratedValue
+	private Long id;
 
 	private String url;
 
@@ -20,6 +26,14 @@ public class Destination extends AbstractAuditableBaseEntity {
 		super();
 		this.url = url;
 		this.online = true;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUrl() {

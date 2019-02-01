@@ -1,6 +1,5 @@
 package artistry.webhook;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,30 +53,25 @@ public class MessageProcessor {
 	@EventListener
 	public void messageReceivedListener(MessageReceivedEvent messageReceivedEvent) {
 		WebHookMessage message = messageReceivedEvent.getWebHookMessage();
-
-		log.debug("Listening Event for Message {}", message.getId());
-
+		log.info("Listening Event for Message {}", message.getId());
 		processMessagesForDestination(message.getDestination());
 	}
 
 	/**
-	 * Scheduled method to process the messages saved on database
+	 * Scheduled method to process the messages saved in database
 	 */
-	@Scheduled(cron = "0 0 * * * *") // (cron = "0 0 */6 * * *") // Run at minute 0 past every 6th hour.
+	@Scheduled(cron = "0 * * * * *") // (cron = "0 0 */6 * * *") // Run at minute 0 past every 6th hour.
 	public void scheduledMessagesProcessor() {
 		log.info("Executing scheduled message processor at {}", new Date(System.currentTimeMillis()));
-
-		// destinationRepository.findAll().forEach(destination ->
-		// processMessagesForDestination(destination));
+		destinationRepository.findAll().forEach(destination -> processMessagesForDestination(destination));
 	}
 
 	private void processMessagesForDestination(Destination destination) {
 		try {
 			log.info("Processing messages for Destination {}", destination.getUrl());
+			destinationRepository.setDestinationOnline(destination.getId());
 
-			// destinationRepository.setDestinationOnline(destination.getId());
-
-			List<WebHookMessage> messages = new ArrayList<>();// messageRepository.findAllByDestinationOrderByIdAsc(destination);
+			List<WebHookMessage> messages = messageRepository.findAllByDestinationOrderByIdAsc(destination);
 			for (WebHookMessage message : messages) {
 				if (message.isMessageTimeout()) {
 					deleteMessage(message);
