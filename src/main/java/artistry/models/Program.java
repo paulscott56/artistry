@@ -40,17 +40,16 @@ public class Program extends AbstractAuditableBaseEntity {
 	@Relationship(type = "HAS_RTE", direction = Relationship.OUTGOING)
 	private Person releaseTrainEngineer;
 
-	private Set<SystemDemo> systemDemo;
+	private Set<SystemDemo> systemDemos;
 	private Set<InspectAndAdapt> inspectAndAdaptWorkshops;
-
-	// private Set<Feature> features;
-
 	private Set<Epic> programEpics;
 	private ProgramBacklog programBacklog;
 	private ProgramKanban programKanban;
-	// private Set<Objective> piObjectives;
 	private Set<Document> architecturalRunway;
 	private String programName;
+
+	@Relationship(type = "HAS_TRAIN", direction = Relationship.OUTGOING)
+	private Train train;
 
 	public Long getId() {
 		return id;
@@ -93,11 +92,11 @@ public class Program extends AbstractAuditableBaseEntity {
 	}
 
 	public Set<SystemDemo> getSystemDemo() {
-		return systemDemo;
+		return systemDemos;
 	}
 
 	public void setSystemDemo(Set<SystemDemo> systemDemo) {
-		this.systemDemo = systemDemo;
+		this.systemDemos = systemDemo;
 	}
 
 	public Set<InspectAndAdapt> getInspectAndAdaptWorkshops() {
@@ -154,6 +153,54 @@ public class Program extends AbstractAuditableBaseEntity {
 
 	public void setPrincipalRoles(Set<PrincipalRole> principalRoles) {
 		this.principalRoles = principalRoles;
+	}
+
+	public Set<Person> getKeyCustomers() {
+		return keyCustomers;
+	}
+
+	public void setKeyCustomers(Set<Person> keyCustomers) {
+		this.keyCustomers = keyCustomers;
+	}
+
+	public Set<String> getSuccessMeasures() {
+		return successMeasures;
+	}
+
+	public void setSuccessMeasures(Set<String> successMeasures) {
+		this.successMeasures = successMeasures;
+	}
+
+	public Set<Person> getOtherStakeholders() {
+		return otherStakeholders;
+	}
+
+	public void setOtherStakeholders(Set<Person> otherStakeholders) {
+		this.otherStakeholders = otherStakeholders;
+	}
+
+	public ValueStream getValueStream() {
+		return valueStream;
+	}
+
+	public void setValueStream(ValueStream valueStream) {
+		this.valueStream = valueStream;
+	}
+
+	public Set<SystemDemo> getSystemDemos() {
+		return systemDemos;
+	}
+
+	public void setSystemDemos(Set<SystemDemo> systemDemos) {
+		this.systemDemos = systemDemos;
+	}
+
+	public Train getTrain() {
+		return train;
+	}
+
+	public void setTrain(Train train) {
+		this.train = train;
 	}
 
 }
