@@ -11,6 +11,6 @@ import artistry.models.WebHookMessage;
 @Repository
 public interface MessageRepository extends Neo4jRepository<WebHookMessage, Long> {
 
-	List<WebHookMessage> findAllByDestinationOrderByIdAsc(Destination destination);
+	List<WebHookMessage> findAllByDestination(Destination destination);
 
 }

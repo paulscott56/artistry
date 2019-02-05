@@ -71,7 +71,7 @@ public class MessageProcessor {
 			log.info("Processing messages for Destination {}", destination.getUrl());
 			destinationRepository.setDestinationOnline(destination.getId());
 
-			List<WebHookMessage> messages = messageRepository.findAllByDestinationOrderByIdAsc(destination);
+			List<WebHookMessage> messages = messageRepository.findAllByDestination(destination);
 			for (WebHookMessage message : messages) {
 				if (message.isMessageTimeout()) {
 					deleteMessage(message);
@@ -92,7 +92,7 @@ public class MessageProcessor {
 
 			Thread.sleep(500); // wait 0.5 second before send message
 
-			log.debug("Sending Message {} to Destination {}", message.getId(), message.getDestinationUrl());
+			log.info("Sending Message {} to Destination {}", message.getId(), message.getDestinationUrl());
 
 			ResponseEntity<String> entity = restTemplate.postForEntity(message.getDestinationUrl(), request,
 					String.class);
@@ -116,11 +116,11 @@ public class MessageProcessor {
 
 	private void onSendMessageError(WebHookMessage message) {
 		log.info("Unsent Message {}", message.getId());
-		// destinationRepository.setDestinationOffline(message.getDestinationId());
+		destinationRepository.setDestinationOffline(message.getId());
 	}
 
 	private void deleteMessage(WebHookMessage message) {
-		// messageRepository.delete(message.getId());
+		messageRepository.deleteById(message.getId());
 		log.info("Deleted Message {}", message.getId());
 	}
 

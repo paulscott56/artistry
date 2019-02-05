@@ -1,7 +1,5 @@
 package artistry.models;
 
-import java.time.LocalDateTime;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -30,7 +28,8 @@ public class WebHookMessage extends AbstractAuditableBaseEntity {
 		super();
 		this.messageBody = messageBody;
 		this.contentType = contentType;
-		this.timestamp = LocalDateTime.now().toEpochSecond(null); // new Timestamp(System.currentTimeMillis());
+		// this.timestamp = LocalDateTime.now().toEpochSecond(null); // new
+		// Timestamp(System.currentTimeMillis());
 		this.destination = destination;
 	}
 
