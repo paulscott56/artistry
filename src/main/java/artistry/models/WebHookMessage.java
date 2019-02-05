@@ -1,5 +1,7 @@
 package artistry.models;
 
+import java.time.Instant;
+
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -28,8 +30,8 @@ public class WebHookMessage extends AbstractAuditableBaseEntity {
 		super();
 		this.messageBody = messageBody;
 		this.contentType = contentType;
-		// this.timestamp = LocalDateTime.now().toEpochSecond(null); // new
-		// Timestamp(System.currentTimeMillis());
+		Instant instant = Instant.now();
+		this.timestamp = instant.toEpochMilli();
 		this.destination = destination;
 	}
 
@@ -62,7 +64,8 @@ public class WebHookMessage extends AbstractAuditableBaseEntity {
 	}
 
 	public Boolean isMessageTimeout() {
-		return timestamp < System.currentTimeMillis() - MESSAGE_TIMEOUT;
+		Instant instant = Instant.now();
+		return timestamp < instant.toEpochMilli() - MESSAGE_TIMEOUT;
 	}
 
 }

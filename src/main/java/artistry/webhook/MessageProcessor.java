@@ -1,7 +1,6 @@
 package artistry.webhook;
 
 import java.util.Date;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,7 +70,7 @@ public class MessageProcessor {
 			log.info("Processing messages for Destination {}", destination.getUrl());
 			destinationRepository.setDestinationOnline(destination.getId());
 
-			List<WebHookMessage> messages = messageRepository.findAllByDestination(destination);
+			Iterable<WebHookMessage> messages = messageRepository.findAll(); // ByDestination(destination);
 			for (WebHookMessage message : messages) {
 				if (message.isMessageTimeout()) {
 					deleteMessage(message);
