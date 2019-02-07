@@ -164,6 +164,25 @@ public class JiraService {
 		}
 	}
 
+	public void createBoard() {
+
+	}
+
+	public String getBoardConfig(int id) {
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+		final HttpEntity<JiraWebhook> entity = new HttpEntity<>(null, headers);
+		try {
+			ResponseEntity<String> data = rt.exchange(jiraUrl + "/rest/agile/latest/board/" + id + "/configuration",
+					HttpMethod.GET, entity, String.class);
+			return data.getBody();
+		} catch (HttpClientErrorException e) {
+			return e.getLocalizedMessage();
+		}
+	}
+
 	// public String makePostRequestToCreateBoard(AgileBoard agileBoard, Long[]
 	// projects) {
 	// String resource = "/rest/greenhopper/1.0/rapidview/create/presets";
