@@ -116,7 +116,7 @@ public class MessageProcessor {
 	private void onSendMessageError(WebHookMessage message) {
 		log.info("Unsent Message {}", message.getId());
 		message.setRetryCount(message.getRetryCount() + 1);
-		destinationRepository.setDestinationOffline(message.getId());
+		destinationRepository.setDestinationOffline(message.getDestination().getId());
 		messageRepository.save(message);
 	}
 
