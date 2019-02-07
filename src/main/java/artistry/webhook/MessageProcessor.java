@@ -72,7 +72,7 @@ public class MessageProcessor {
 
 			Iterable<WebHookMessage> messages = messageRepository.findAll(); // ByDestination(destination);
 			for (WebHookMessage message : messages) {
-				if (message.isMessageTimeout()) {
+				if (message.isMessageTimeout() || message.getTimestamp() == null || message.getRetryCount() > 5) {
 					deleteMessage(message);
 				} else {
 					sendMessage(message);
@@ -115,7 +115,9 @@ public class MessageProcessor {
 
 	private void onSendMessageError(WebHookMessage message) {
 		log.info("Unsent Message {}", message.getId());
+		message.setRetryCount(message.getRetryCount() + 1);
 		destinationRepository.setDestinationOffline(message.getId());
+		messageRepository.save(message);
 	}
 
 	private void deleteMessage(WebHookMessage message) {

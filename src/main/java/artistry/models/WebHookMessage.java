@@ -7,7 +7,7 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class WebHookMessage extends AbstractAuditableBaseEntity {
+public class WebHookMessage { // extends AbstractAuditableBaseEntity {
 
 	static final long MESSAGE_TIMEOUT = 24 * 60 * 60 * 1000;
 
@@ -22,6 +22,8 @@ public class WebHookMessage extends AbstractAuditableBaseEntity {
 	private Long timestamp;
 
 	private Destination destination;
+
+	private int retryCount = 0;
 
 	protected WebHookMessage() {
 	}
@@ -66,6 +68,14 @@ public class WebHookMessage extends AbstractAuditableBaseEntity {
 	public Boolean isMessageTimeout() {
 		Instant instant = Instant.now();
 		return timestamp < instant.toEpochMilli() - MESSAGE_TIMEOUT;
+	}
+
+	public int getRetryCount() {
+		return retryCount;
+	}
+
+	public void setRetryCount(int retryCount) {
+		this.retryCount = retryCount;
 	}
 
 }
