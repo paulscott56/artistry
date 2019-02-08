@@ -1,6 +1,8 @@
 package artistry.services;
 
+import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.json.JSONException;
@@ -18,8 +20,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import artistry.models.BoardEntry;
 import artistry.models.BoardLocation;
+import artistry.models.IssueType;
 import artistry.models.JiraWebhook;
 import artistry.repositories.BoardRepository;
 import artistry.utils.JiraUtils;
@@ -180,6 +188,30 @@ public class JiraService {
 			return data.getBody();
 		} catch (HttpClientErrorException e) {
 			return e.getLocalizedMessage();
+		}
+	}
+
+	public List<IssueType> getIssueTypes() throws JsonParseException, JsonMappingException, IOException {
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+		final HttpEntity<String> entity = new HttpEntity<>(null, headers);
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			ResponseEntity<String> data = rt.exchange(jiraUrl + "/rest/api/latest/issuetype", HttpMethod.GET, entity,
+					String.class);
+			String types = data.getBody();
+			List<IssueType> listtypes = mapper.readValue(types, new TypeReference<List<IssueType>>() {
+			});
+			log.debug(listtypes.toString());
+			// TODO: add or update the types in the db for use later on
+
+			return listtypes;
+		} catch (HttpClientErrorException e) {
+			// IssueTypes i = new IssueTypes();
+			// i.setErrorOrWarning(e.getLocalizedMessage());
+			return null; // i;
 		}
 	}
 
