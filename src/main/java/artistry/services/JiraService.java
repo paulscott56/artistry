@@ -1,6 +1,7 @@
 package artistry.services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -209,9 +210,11 @@ public class JiraService {
 
 			return listtypes;
 		} catch (HttpClientErrorException e) {
-			// IssueTypes i = new IssueTypes();
-			// i.setErrorOrWarning(e.getLocalizedMessage());
-			return null; // i;
+			List<IssueType> errlist = new ArrayList<>();
+			IssueType i = new IssueType();
+			i.setErrorOrWarning(e.getLocalizedMessage());
+			errlist.add(i);
+			return errlist;
 		}
 	}
 
