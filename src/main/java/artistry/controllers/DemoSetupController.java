@@ -48,7 +48,7 @@ import artistry.repositories.RequirementRepository;
 import artistry.repositories.RolesRepository;
 
 public class DemoSetupController {
-	
+
 	@Autowired
 	private PersonRepository personRepo;
 
@@ -57,100 +57,103 @@ public class DemoSetupController {
 
 	@Autowired
 	private RolesRepository rolesRepo;
-	
+
 	@Autowired
 	private DocumentRepository docRepo;
-	
+
 	@Autowired
 	private KpiRepository kpiRepo;
-	
+
 	@Autowired
 	private PortfolioRepository portfolioRepo;
-	
+
 	@Autowired
 	private EpicRepository epicRepo;
-	
+
 	@Autowired
 	private ImplementationTeamRepository teamRepo;
-	
+
 	@Autowired
 	private FeatureRepository featureRepo;
-	
+
 	@Autowired
 	private RequirementRepository requirementRepo;
-	
+
 	@Autowired
 	private NonFunctionalRequirementRepository nfrRepo;
-	
-	@Autowired 
+
+	@Autowired
 	private CompanyRepository coRepo;
-	
+
 	@RequestMapping(value = "/generatedemo", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public void generateDemo() {
 		// createEnterprise();
-//		createCompanies();
-//		createPortfolio();
-//		createLargeSolutions();
-//		createPrograms();
-//		createTeams();
-		
+		// createCompanies();
+		// createPortfolio();
+		// createLargeSolutions();
+		// createPrograms();
+		// createTeams();
+
 	}
 
 	private void createEnterprise() throws MalformedURLException {
 		Enterprise e = new Enterprise();
 		e.setEnterpriseName("Travelport");
-		
+
 		GuardRails gr = new GuardRails();
 		gr.setLowerLimit(new BigDecimal("-10000"));
 		gr.setUpperLimit(new BigDecimal("100000"));
 		e.setGuardRails(gr);
-		
+
 		Set<Person> keyPersonnel = new HashSet<>();
 		keyPersonnel.add(personMaker("ctoperson", "John", "US", Role.CTO, false));
 		keyPersonnel.add(personMaker("ceoperson", "Jack", "US", Role.CEO, false));
 		keyPersonnel.add(personMaker("cfoperson", "Lucy", "US", Role.BUSINESS_OWNER, false));
 		e.setKeyPersonnel(keyPersonnel);
-		
+
 		Set<KPI> kpis = new HashSet<>();
 		kpis.add(kpiMaker("kpi 1"));
 		kpis.add(kpiMaker("kpi 2"));
 		kpis.add(kpiMaker("kpi 3"));
-		e.setKpis(kpis );
-		
+		e.setKpis(kpis);
+
 		PortfolioBudget pb = new PortfolioBudget();
 		Set<URL> budgetLinks = new HashSet<>();
 		budgetLinks.add(new URL("http://accounts/budget1"));
 		budgetLinks.add(new URL("http://accounts/budget2"));
 		pb.setBudgetLinks(budgetLinks);
-		
+
 		Set<Document> supportingDocumentation = new HashSet<>();
 		supportingDocumentation.add(docMaker("supporting budget doc", "budget 2019 OPEX"));
 		supportingDocumentation.add(docMaker("supporting budget doc2", "budget 2019 CAPEX"));
 		pb.setSupportingDocumentation(supportingDocumentation);
 		e.setPortfolioBudget(pb);
-		
+
 		Set<Portfolio> portfolios = new HashSet<>();
 		portfolios.add(portfolioMaker());
 		e.setPortfolios(portfolios);
-		
+
 	}
 
 	private Portfolio portfolioMaker() {
 		Portfolio p = new Portfolio();
-		
+
 		Set<Epic> enablerEpics = new HashSet<>();
-		enablerEpics.add(epicMaker("epic 1", "epic 1", EpicType.PORTFOLIO_EPIC_SPLIT_INTO_PROGRAM_EPICS_AND_DECENTRALIZE, 103, "We will build it, they will come", EpicType.PROGRAM_EPIC_SPIKE_FIRST));
+		enablerEpics
+				.add(epicMaker("epic 1", "epic 1", EpicType.PORTFOLIO_EPIC_SPLIT_INTO_PROGRAM_EPICS_AND_DECENTRALIZE,
+						103, "We will build it, they will come", EpicType.PROGRAM_EPIC_SPIKE_FIRST));
 		p.setEnablerEpics(enablerEpics);
-		
+
 		Set<Epic> businessEpics = new HashSet<>();
 		p.setBusinessEpics(businessEpics);
-		
+
 		p.setEnterpriseArchitect(personMaker("eaperson", "Justin", "US", Role.ENTERPRISE_ARCHITECT, true));
 		return portfolioRepo.save(p);
 	}
 
-	private Epic epicMaker(String epicDescription, String epicName, EpicType epicType, int estimatedStoryPoints, String hypothesisStatement, EpicType incrementalImplementationStrategy) {
+	private Epic epicMaker(String epicDescription, String epicName, EpicType epicType, int estimatedStoryPoints,
+			String hypothesisStatement, EpicType incrementalImplementationStrategy) {
 		Epic e = new Epic();
 
 		Set<Feature> additionalPotentialFeatures = new HashSet<>();
@@ -158,18 +161,18 @@ public class DemoSetupController {
 		e.setAdditionalPotentialFeatures(additionalPotentialFeatures);
 		e.setAnalysisSummary(docMaker("analysisSummary", "analysisSummary"));
 		e.setAnticipatedBusinessImpact(docMaker("anticipatedBusinessImpact", "anticipatedBusinessImpact"));
-		
+
 		Set<Document> attachments = new HashSet<>();
 		attachments.add(docMaker("attachment 1", "attachment1"));
-		e.setAttachments(attachments );
-		
+		e.setAttachments(attachments);
+
 		e.setBusinessOutcomeHypothesis(docMaker("businessOutcomeHypothesis", "businessOutcomeHypothesis"));
 		Set<Person> customers = new HashSet<>();
 		customers.add(personMaker("cust1", "customer1", "IN", Role.CUSTOMER, false));
 		e.setCustomers(customers);
 		e.setEpicDescription(epicDescription);
 		e.setEpicName(epicName);
-		
+
 		e.setEpicOwner(personMaker("epicOwner", "epicOwner", "IE", Role.EPIC_OWNER, false));
 		e.setEpicType(epicType);
 		e.setEstimatedMonetaryCost(new BigDecimal("56"));
@@ -177,48 +180,48 @@ public class DemoSetupController {
 		DevelopmentTimeLine estimatedTimeline = new DevelopmentTimeLine();
 		estimatedTimeline.setEstimatedCompletionDate(new Date());
 		estimatedTimeline.setEstimatedStartDate(new Date());
-		e.setEstimatedTimeline(estimatedTimeline );
+		e.setEstimatedTimeline(estimatedTimeline);
 		e.setFunnelEntryDate(new Date());
 		e.setGoNoGo(true);
 		e.setHypothesisStatement(hypothesisStatement);
-		
+
 		e.setImpactOnProductsAndServices(docMaker("impactOnProductsAndServices", "impactOnProductsAndServices"));
 		e.setImpactOnSalesDeployment(docMaker("ImpactOnSalesDeployment", "ImpactOnSalesDeployment"));
 		e.setIncrementalImplementationStrategy(incrementalImplementationStrategy);
 		e.setInhouseOrExternalDev(docMaker("inhouseOrExternalDev", "inhouseOrExternalDev"));
-		
+
 		Set<Requirement> inScope = new HashSet<>();
 		inScope.add(requirementMaker());
 		e.setInScope(inScope);
-		
+
 		e.setLeadingIndicators(docMaker("leadingIndicators", "leadingIndicators"));
-		e.setMilestones(docMaker("milestones","milestones"));
+		e.setMilestones(docMaker("milestones", "milestones"));
 		Set<Feature> mvpFeatures = new HashSet<>();
 		mvpFeatures.add(featureMaker("benefit3", 6, "feature3"));
 		mvpFeatures.add(featureMaker("benefit7", 4, "feature7"));
-		e.setMvpFeatures(mvpFeatures );
-		
+		e.setMvpFeatures(mvpFeatures);
+
 		Set<NonFunctionalRequirement> nonFunctionalRequirements = new HashSet<>();
 		nonFunctionalRequirements.add(nfrMaker());
 		e.setNonFunctionalRequirements(nonFunctionalRequirements);
-		
+
 		e.setNotesAndComments(docMaker("notesAndComments", "notesAndComments"));
-		
+
 		Set<Requirement> outOfScope = new HashSet<>();
 		outOfScope.add(requirementMaker());
 		e.setOutOfScope(outOfScope);
-		
-		e.setSequencingAndDependencies(docMaker("sequencingAndDependencies","sequencingAndDependencies"));
+
+		e.setSequencingAndDependencies(docMaker("sequencingAndDependencies", "sequencingAndDependencies"));
 		Set<Person> sponsors = new HashSet<>();
 		sponsors.add(personMaker("spons1", "Dan", "US", Role.SUPPLIER, false));
 		sponsors.add(personMaker("spons2", "Denis", "IE", Role.CUSTOMER, false));
 		e.setSponsors(sponsors);
-		
+
 		e.setTypeOfReturn(docMaker("typeOfReturn", "typeOfReturn"));
 		Set<String> usersAndMarketsAffecred = new HashSet<>();
 		usersAndMarketsAffecred.add("Priceline");
 		usersAndMarketsAffecred.add("LATAM");
-		e.setUsersAndMarketsAffecred(usersAndMarketsAffecred );
+		e.setUsersAndMarketsAffecred(usersAndMarketsAffecred);
 
 		return epicRepo.save(e);
 	}
@@ -233,7 +236,7 @@ public class DemoSetupController {
 
 	private Requirement requirementMaker() {
 		Requirement r = new Requirement();
-		
+
 		return requirementRepo.save(r);
 	}
 
@@ -241,23 +244,22 @@ public class DemoSetupController {
 		Feature f = new Feature();
 		Set<Document> acceptanceCriteria = new HashSet<>();
 		f.setAcceptanceCriteria(acceptanceCriteria);
-		
+
 		Set<String> additionalNotes = new HashSet<>();
 		additionalNotes.add("note 1");
 		additionalNotes.add("note 2");
-		f.setAdditionalNotes(additionalNotes );
-		
+		f.setAdditionalNotes(additionalNotes);
+
 		f.setAssumptions(docMaker("assumption 1", "feature assumptions"));
-		
+
 		f.setBenefitStatement(benefitStatement);
 		f.setBusinessValue(businessValue);
 		f.setComplete(false);
 		f.setCreatedBy(personMaker("featurewriter", "Luke", "IE", Role.PRODUCT_OWNER, true));
 		f.setCreationDate(new Date());
-		
+
 		f.setDefinitionOfDone(docMaker("def of done", "definition of done"));
-		
-		
+
 		f.setFeatureDescription(docMaker("featureDescription", "feature 1"));
 		f.setFeatureName(featureName);
 		f.setFeatureOwner(personMaker("featurewriter", "Patrick", "IE", Role.PRODUCT_MANAGER, false));
@@ -268,7 +270,7 @@ public class DemoSetupController {
 	private ImplementationTeam teamMaker() {
 		ImplementationTeam team = new ImplementationTeam();
 		Set<Person> agileTeam = new HashSet<>();
-		team.setAgileTeam(agileTeam );
+		team.setAgileTeam(agileTeam);
 		Set<Person> devTeam = new HashSet<>();
 		devTeam.add(personMaker("dev1", "dev1", "IE", Role.DEVELOPER, true));
 		devTeam.add(personMaker("dev2", "dev2", "IE", Role.DEVELOPER, true));
@@ -276,18 +278,18 @@ public class DemoSetupController {
 		devTeam.add(personMaker("sm1", "sm1", "IE", Role.SCRUM_MASTER, true));
 		devTeam.add(personMaker("test1", "test1", "IE", Role.TESTER, true));
 		team.setDevTeam(devTeam);
-		
-//		team.setCompany(companyMaker("Mobacar"));
-//		team.setInnovationAndPlanningDocuments(innovationAndPlanningDocuments);
-//		team.setIterationPlanningDocuments(iterationPlanningDocuments);
-//		team.setIterationRetrospectives(iterationRetrospectives);
-//		team.setIterationReviews(iterationReviews);
-//		team.setProductOwner(productOwner);
-//		team.setScrumMaster(scrumMaster);
-//		team.setTeamEmail(teamEmail);
-//		team.setTeamLogo(new URL("https://placekitten.com/200/300"));
-//		team.setTeamName(teamName);
-		
+
+		// team.setCompany(companyMaker("Mobacar"));
+		// team.setInnovationAndPlanningDocuments(innovationAndPlanningDocuments);
+		// team.setIterationPlanningDocuments(iterationPlanningDocuments);
+		// team.setIterationRetrospectives(iterationRetrospectives);
+		// team.setIterationReviews(iterationReviews);
+		// team.setProductOwner(productOwner);
+		// team.setScrumMaster(scrumMaster);
+		// team.setTeamEmail(teamEmail);
+		// team.setTeamLogo(new URL("https://placekitten.com/200/300"));
+		// team.setTeamName(teamName);
+
 		return teamRepo.save(team);
 	}
 
@@ -296,7 +298,7 @@ public class DemoSetupController {
 		co.setCompanyName(companyName);
 		co.setContactPerson(personMaker("contact1", "contact1", "IE", Role.CEO, false));
 		co.setCountry(countryMaker("IE"));
-		//co.setTeams(teams);
+		// co.setTeams(teams);
 		return coRepo.save(co);
 	}
 
@@ -320,32 +322,32 @@ public class DemoSetupController {
 		person.setRoles(roles);
 		return personRepo.save(person);
 	}
-	
+
 	private KPI kpiMaker(String objective) {
 		KPI kpi = new KPI();
 		kpi.setActive(true);
-		
+
 		Set<Document> attachedDocumentation = new HashSet<>();
-		kpi.setAttachedDocumentation(attachedDocumentation );
-		
+		kpi.setAttachedDocumentation(attachedDocumentation);
+
 		kpi.setCreationDate(new Date());
 		kpi.setObjective(objective);
 
 		Set<Person> stakeholders = new HashSet<>();
 		stakeholders.add(personMaker("sam", "Sam", "US", Role.BUSINESS_OWNER, false));
 		stakeholders.add(personMaker("sally", "Sally", "US", Role.BUSINESS_OWNER, false));
-		kpi.setStakeholders(stakeholders );
-		
+		kpi.setStakeholders(stakeholders);
+
 		kpi.setVersion(1);
-		
+
 		Set<Document> reviewdoc = new HashSet<>();
 		reviewdoc.add(docMaker("review 1", "review 1"));
 		reviewdoc.add(docMaker("review 2", "review 2"));
-		kpi.setReview(reviewdoc );
-		
+		kpi.setReview(reviewdoc);
+
 		return kpiRepo.save(kpi);
 	}
-	
+
 	private Document docMaker(String documentBody, String title) {
 		Document doc = new Document();
 		doc.setCreationDate(new Date());
@@ -355,7 +357,7 @@ public class DemoSetupController {
 		doc.setStatus(DocumentStatus.DRAFT);
 		doc.setTitle(title);
 		doc.setVersion("v1 - start draft");
-		
+
 		return docRepo.save(doc);
 	}
 

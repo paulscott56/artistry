@@ -61,13 +61,13 @@ public class MessageProcessor {
 	 */
 	@Scheduled(cron = "0 * * * * *") // (cron = "0 0 */6 * * *") // Run at minute 0 past every 6th hour.
 	public void scheduledMessagesProcessor() {
-		log.info("Executing scheduled message processor at {}", new Date(System.currentTimeMillis()));
+		log.debug("Executing scheduled message processor at {}", new Date(System.currentTimeMillis()));
 		destinationRepository.findAll().forEach(destination -> processMessagesForDestination(destination));
 	}
 
 	private void processMessagesForDestination(Destination destination) {
 		try {
-			log.info("Processing messages for Destination {}", destination.getUrl());
+			log.debug("Processing messages for Destination {}", destination.getUrl());
 			destinationRepository.setDestinationOnline(destination.getId());
 
 			Iterable<WebHookMessage> messages = messageRepository.findAll(); // ByDestination(destination);
@@ -109,7 +109,7 @@ public class MessageProcessor {
 	}
 
 	private void onSendMessageSuccess(WebHookMessage message) {
-		log.info("Sent Message {}", message.getId());
+		log.debug("Sent Message {}", message.getId());
 		deleteMessage(message);
 	}
 
