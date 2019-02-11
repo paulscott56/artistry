@@ -44,8 +44,9 @@ public class JiraRestController {
 	@RequestMapping(value = "/getbyteamid", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public BoardEntry getAll(@RequestParam("teamid") int teamid) {
-		return jira.getBoard(teamid);
+	public BoardEntry getByTeamId(@RequestParam("teamid") int teamid) {
+		BoardEntry board = jira.getBoard(teamid);
+		return board;
 	}
 
 	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })

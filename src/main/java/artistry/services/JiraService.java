@@ -26,6 +26,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import artistry.models.BoardConfig;
 import artistry.models.BoardEntry;
 import artistry.models.BoardLocation;
 import artistry.models.IssueType;
@@ -78,6 +79,7 @@ public class JiraService {
 				boardloc.setProjectName(bloc.optString("projectName"));
 				boardloc.setProjectTypeKey(bloc.optString("projectTypeKey"));
 				board.setLocation(boardloc);
+				board.setBoardConfig(getBoardConfig(teamid));
 
 				brepo.save(board);
 				return board;
@@ -177,18 +179,21 @@ public class JiraService {
 
 	}
 
-	public String getBoardConfig(int id) {
+	public BoardConfig getBoardConfig(int id) {
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
-		final HttpEntity<JiraWebhook> entity = new HttpEntity<>(null, headers);
+		final HttpEntity<BoardConfig> entity = new HttpEntity<>(null, headers);
 		try {
-			ResponseEntity<String> data = rt.exchange(jiraUrl + "/rest/agile/latest/board/" + id + "/configuration",
-					HttpMethod.GET, entity, String.class);
+			ResponseEntity<BoardConfig> data = rt.exchange(
+					jiraUrl + "/rest/agile/latest/board/" + id + "/configuration", HttpMethod.GET, entity,
+					BoardConfig.class);
 			return data.getBody();
 		} catch (HttpClientErrorException e) {
-			return e.getLocalizedMessage();
+			BoardConfig cf = new BoardConfig();
+			cf.setErrorOrComment(e.getLocalizedMessage());
+			return cf;
 		}
 	}
 

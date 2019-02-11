@@ -44,6 +44,9 @@ public class ImplementationTeam extends AbstractAuditableBaseEntity {
 	@Relationship(type = "HAS_INNOVATION_DOCUMENT", direction = Relationship.OUTGOING)
 	private Set<Document> innovationAndPlanningDocuments;
 
+	@Relationship(type = "HAS_BOARD", direction = Relationship.OUTGOING)
+	private BoardEntry board;
+
 	public Long getId() {
 		return id;
 	}
@@ -146,6 +149,14 @@ public class ImplementationTeam extends AbstractAuditableBaseEntity {
 
 	public void setInnovationAndPlanningDocuments(Set<Document> innovationAndPlanningDocuments) {
 		this.innovationAndPlanningDocuments = innovationAndPlanningDocuments;
+	}
+
+	public BoardEntry getBoard() {
+		return board;
+	}
+
+	public void setBoard(BoardEntry board) {
+		this.board = board;
 	}
 
 }
