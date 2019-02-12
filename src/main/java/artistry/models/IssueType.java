@@ -17,7 +17,7 @@ public class IssueType {
 	private String self;
 
 	@JsonProperty("id")
-	private String jiraid;
+	private String jiraId;
 
 	private String description;
 	private String iconUrl;
@@ -44,12 +44,12 @@ public class IssueType {
 		this.self = self;
 	}
 
-	public String getJiraid() {
-		return jiraid;
+	public String getJiraId() {
+		return jiraId;
 	}
 
-	public void setJiraid(String jiraid) {
-		this.jiraid = jiraid;
+	public void setJiraId(String jiraId) {
+		this.jiraId = jiraId;
 	}
 
 	public String getDescription() {

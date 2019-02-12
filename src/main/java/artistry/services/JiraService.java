@@ -32,6 +32,7 @@ import artistry.models.BoardLocation;
 import artistry.models.IssueType;
 import artistry.models.JiraWebhook;
 import artistry.repositories.BoardRepository;
+import artistry.repositories.IssueTypeRepository;
 import artistry.utils.JiraUtils;
 
 @Service
@@ -50,6 +51,9 @@ public class JiraService {
 
 	@Autowired
 	private BoardRepository brepo;
+
+	@Autowired
+	private IssueTypeRepository issueTypeRepo;
 
 	public BoardEntry getBoard(int teamid) throws JSONException {
 		Optional<BoardEntry> exists = brepo.findOneByJiraId(teamid);
@@ -210,9 +214,13 @@ public class JiraService {
 			String types = data.getBody();
 			List<IssueType> listtypes = mapper.readValue(types, new TypeReference<List<IssueType>>() {
 			});
-			log.debug(listtypes.toString());
-			// TODO: add or update the types in the db for use later on
-
+			for (IssueType t : listtypes) {
+				// check if it exists first
+				Optional<IssueType> it = issueTypeRepo.findByJiraId(t.getJiraId());
+				if (!it.isPresent()) {
+					issueTypeRepo.save(t);
+				}
+			}
 			return listtypes;
 		} catch (HttpClientErrorException e) {
 			List<IssueType> errlist = new ArrayList<>();
