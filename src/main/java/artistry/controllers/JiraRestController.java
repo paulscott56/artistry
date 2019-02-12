@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import artistry.models.BoardEntry;
 import artistry.models.IssueType;
+import artistry.models.JiraBacklog;
 import artistry.models.JiraWebhook;
 import artistry.models.RapidView;
 import artistry.services.JiraService;
@@ -62,6 +63,14 @@ public class JiraRestController {
 	@ResponseBody
 	public List<IssueType> getIssueTypes() throws JsonParseException, JsonMappingException, IOException {
 		return jira.getIssueTypes();
+	}
+
+	@RequestMapping(value = "/getteambacklog", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	public JiraBacklog getBacklogByTeamId(@RequestParam("teamid") int teamid) {
+		JiraBacklog board = jira.getBacklog(teamid);
+		return board;
 	}
 
 	/**

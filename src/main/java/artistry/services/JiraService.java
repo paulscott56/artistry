@@ -30,6 +30,7 @@ import artistry.models.BoardConfig;
 import artistry.models.BoardEntry;
 import artistry.models.BoardLocation;
 import artistry.models.IssueType;
+import artistry.models.JiraBacklog;
 import artistry.models.JiraWebhook;
 import artistry.repositories.BoardRepository;
 import artistry.repositories.IssueTypeRepository;
@@ -228,6 +229,25 @@ public class JiraService {
 			i.setErrorOrWarning(e.getLocalizedMessage());
 			errlist.add(i);
 			return errlist;
+		}
+	}
+
+	public JiraBacklog getBacklog(int teamid) {
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+		final HttpEntity<JiraBacklog> entity = new HttpEntity<>(null, headers);
+		try {
+			final ResponseEntity<JiraBacklog> data = rt.exchange(
+					jiraUrl + "/rest/agile/latest/board/" + teamid + "/backlog?maxResults=200", HttpMethod.GET, entity,
+					JiraBacklog.class);
+			return data.getBody();
+		} catch (Exception e) {
+			JiraBacklog bl = new JiraBacklog();
+			bl.setErrorOrComment(e.getLocalizedMessage());
+			// e.printStackTrace();
+			return bl;
 		}
 	}
 
