@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -17,6 +19,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "startAt", "maxResults", "total", "worklogs" })
 @NodeEntity
 public class Worklog {
+
+	@Id
+	@GeneratedValue
+	private Long id;
 
 	@JsonProperty("startAt")
 	private Integer startAt;

@@ -3,6 +3,7 @@ package artistry.models;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 public class BoardEntry extends AbstractAuditableBaseEntity {
@@ -18,6 +19,8 @@ public class BoardEntry extends AbstractAuditableBaseEntity {
 	private BoardLocation location;
 	private String commentOrError;
 	private BoardConfig boardConfig;
+	@Relationship(type = "HAS_BACKLOG", direction = Relationship.OUTGOING)
+	private JiraBacklog backlog;
 
 	public Long getId() {
 		return id;
@@ -81,6 +84,14 @@ public class BoardEntry extends AbstractAuditableBaseEntity {
 
 	public void setBoardConfig(BoardConfig boardConfig) {
 		this.boardConfig = boardConfig;
+	}
+
+	public JiraBacklog getBacklog() {
+		return backlog;
+	}
+
+	public void setBacklog(JiraBacklog backlog) {
+		this.backlog = backlog;
 	}
 
 }

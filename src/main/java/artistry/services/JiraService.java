@@ -85,7 +85,8 @@ public class JiraService {
 				boardloc.setProjectTypeKey(bloc.optString("projectTypeKey"));
 				board.setLocation(boardloc);
 				board.setBoardConfig(getBoardConfig(teamid));
-
+				// JiraBacklog bl = getBacklog(teamid);
+				// board.setBacklog(bl);
 				brepo.save(board);
 				return board;
 			} else {

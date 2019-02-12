@@ -1,10 +1,8 @@
 package artistry.models;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,18 +12,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "self", "id", "key", "name", "avatarUrls" })
 public class Project {
 
+	@Id
+	@GeneratedValue
+	@JsonIgnore
+	private Long id;
+
 	@JsonProperty("self")
 	private String self;
 	@JsonProperty("id")
-	private String id;
+	private String jiraId;
 	@JsonProperty("key")
 	private String key;
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("avatarUrls")
 	private AvatarUrls avatarUrls;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	// @JsonIgnore
+	// private Map<String, Object> additionalProperties = new HashMap<String,
+	// Object>();
 
 	@JsonProperty("self")
 	public String getSelf() {
@@ -38,13 +42,13 @@ public class Project {
 	}
 
 	@JsonProperty("id")
-	public String getId() {
-		return id;
+	public String getJiraId() {
+		return jiraId;
 	}
 
 	@JsonProperty("id")
-	public void setId(String id) {
-		this.id = id;
+	public void setJiraId(String jiraId) {
+		this.jiraId = jiraId;
 	}
 
 	@JsonProperty("key")
@@ -77,14 +81,14 @@ public class Project {
 		this.avatarUrls = avatarUrls;
 	}
 
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
+	// @JsonAnyGetter
+	// public Map<String, Object> getAdditionalProperties() {
+	// return this.additionalProperties;
+	// }
+	//
+	// @JsonAnySetter
+	// public void setAdditionalProperty(String name, Object value) {
+	// this.additionalProperties.put(name, value);
+	// }
 
 }

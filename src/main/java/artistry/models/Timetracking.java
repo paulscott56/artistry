@@ -1,12 +1,9 @@
 package artistry.models;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -18,17 +15,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @NodeEntity
 public class Timetracking {
 
+	@Id
+	@GeneratedValue
 	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private Long id;
 
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
+	// @JsonIgnore
+	// private Map<String, Object> additionalProperties = new HashMap<String,
+	// Object>();
+	//
+	// @JsonAnyGetter
+	// public Map<String, Object> getAdditionalProperties() {
+	// return this.additionalProperties;
+	// }
+	//
+	// @JsonAnySetter
+	// public void setAdditionalProperty(String name, Object value) {
+	// this.additionalProperties.put(name, value);
+	// }
 
 }

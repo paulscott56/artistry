@@ -3,6 +3,8 @@ package artistry.models;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -16,6 +18,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "48x48", "24x24", "16x16", "32x32" })
 public class AvatarUrls {
+
+	@Id
+	@GeneratedValue
+	@JsonIgnore
+	private Long id;
 
 	@JsonProperty("48x48")
 	private String _48x48;

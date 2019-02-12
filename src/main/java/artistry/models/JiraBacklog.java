@@ -1,10 +1,11 @@
 package artistry.models;
 
-import java.util.List;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 public class JiraBacklog {
@@ -13,7 +14,8 @@ public class JiraBacklog {
 	@GeneratedValue
 	private Long id;
 
-	private List<JiraIssues> issues;
+	@Relationship(type = "HAS_BACKLOG_ISSUES", direction = Relationship.OUTGOING)
+	private Set<JiraIssues> issues;
 
 	private String errorOrComment;
 
@@ -25,11 +27,11 @@ public class JiraBacklog {
 		this.id = id;
 	}
 
-	public List<JiraIssues> getIssues() {
+	public Set<JiraIssues> getIssues() {
 		return issues;
 	}
 
-	public void setIssues(List<JiraIssues> issues) {
+	public void setIssues(Set<JiraIssues> issues) {
 		this.issues = issues;
 	}
 

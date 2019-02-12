@@ -3,6 +3,8 @@ package artistry.models;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -16,6 +18,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "self", "name", "key", "emailAddress", "avatarUrls", "displayName", "active", "timeZone" })
 @NodeEntity
 public class Assignee {
+
+	@Id
+	@GeneratedValue
+	@JsonIgnore
+	private Long id;
 
 	@JsonProperty("self")
 	private String self;

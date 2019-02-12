@@ -3,6 +3,9 @@ package artistry.models;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,11 +16,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "self", "id", "key", "colorName", "name" })
 public class StatusCategory {
+	@Id
+	@GeneratedValue
+	@JsonIgnore
+	private Long id;
 
 	@JsonProperty("self")
 	private String self;
 	@JsonProperty("id")
-	private Integer id;
+	private Integer jiraId;
 	@JsonProperty("key")
 	private String key;
 	@JsonProperty("colorName")
@@ -38,13 +45,13 @@ public class StatusCategory {
 	}
 
 	@JsonProperty("id")
-	public Integer getId() {
-		return id;
+	public Integer getJiraId() {
+		return jiraId;
 	}
 
 	@JsonProperty("id")
-	public void setId(Integer id) {
-		this.id = id;
+	public void setJiraId(Integer jiraId) {
+		this.jiraId = jiraId;
 	}
 
 	@JsonProperty("key")

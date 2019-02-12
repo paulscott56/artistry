@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -17,6 +19,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "comments", "maxResults", "total", "startAt" })
 @NodeEntity
 public class Comment {
+
+	@Id
+	@GeneratedValue
+	@JsonIgnore
+	private Long id;
 
 	@JsonProperty("comments")
 	private List<Comment> comments = null;

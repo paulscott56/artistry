@@ -3,6 +3,8 @@ package artistry.models;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -16,6 +18,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "self", "watchCount", "isWatching" })
 @NodeEntity
 public class Watches {
+
+	@Id
+	@GeneratedValue
+	private Long id;
 
 	@JsonProperty("self")
 	private String self;

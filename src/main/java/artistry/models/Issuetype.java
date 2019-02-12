@@ -1,12 +1,9 @@
 package artistry.models;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,10 +14,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "self", "id", "description", "iconUrl", "name", "subtask", "avatarId" })
 public class Issuetype {
 
+	@Id
+	@GeneratedValue
+	@JsonIgnore
+	private Long id;
+
 	@JsonProperty("self")
 	private String self;
 	@JsonProperty("id")
-	private String id;
+	private String jiraId;
 	@JsonProperty("description")
 	private String description;
 	@JsonProperty("iconUrl")
@@ -31,8 +33,9 @@ public class Issuetype {
 	private Boolean subtask;
 	@JsonProperty("avatarId")
 	private Integer avatarId;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	// @JsonIgnore
+	// private Map<String, Object> additionalProperties = new HashMap<String,
+	// Object>();
 
 	@JsonProperty("self")
 	public String getSelf() {
@@ -45,13 +48,13 @@ public class Issuetype {
 	}
 
 	@JsonProperty("id")
-	public String getId() {
-		return id;
+	public String getJiraId() {
+		return jiraId;
 	}
 
 	@JsonProperty("id")
-	public void setId(String id) {
-		this.id = id;
+	public void setJiraId(String jiraId) {
+		this.jiraId = jiraId;
 	}
 
 	@JsonProperty("description")
@@ -104,14 +107,14 @@ public class Issuetype {
 		this.avatarId = avatarId;
 	}
 
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
+	// @JsonAnyGetter
+	// public Map<String, Object> getAdditionalProperties() {
+	// return this.additionalProperties;
+	// }
+	//
+	// @JsonAnySetter
+	// public void setAdditionalProperty(String name, Object value) {
+	// this.additionalProperties.put(name, value);
+	// }
 
 }
