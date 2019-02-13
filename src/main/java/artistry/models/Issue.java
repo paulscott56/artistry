@@ -1,13 +1,7 @@
 package artistry.models;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.neo4j.ogm.annotation.NodeEntity;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -25,8 +19,6 @@ public class Issue {
 	private String key;
 	@JsonProperty("fields")
 	private Fields fields;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	@JsonProperty("id")
 	public String getId() {
@@ -66,16 +58,6 @@ public class Issue {
 	@JsonProperty("fields")
 	public void setFields(Fields fields) {
 		this.fields = fields;
-	}
-
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
 	}
 
 }

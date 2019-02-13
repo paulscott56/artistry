@@ -24,6 +24,7 @@ import artistry.models.BoardEntry;
 import artistry.models.IssueType;
 import artistry.models.JiraBacklog;
 import artistry.models.JiraEpics;
+import artistry.models.JiraIssuesWithoutEpic;
 import artistry.models.JiraWebhook;
 import artistry.models.RapidView;
 import artistry.services.JiraService;
@@ -70,28 +71,25 @@ public class JiraRestController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public JiraBacklog getBacklogByTeamId(@RequestParam("teamid") int teamid) {
-		try {
-			JiraBacklog backlog = jira.getBacklog(teamid);
-			return backlog;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-
+		JiraBacklog backlog = jira.getBacklog(teamid);
+		return backlog;
 	}
 
 	@RequestMapping(value = "/getteamepics", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public JiraEpics getEpicsByTeamId(@RequestParam("teamid") int teamid) {
-		try {
-			JiraEpics epics = jira.getTeamEpics(teamid);
-			return epics;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
 
+		JiraEpics epics = jira.getTeamEpics(teamid);
+		return epics;
+	}
+
+	@RequestMapping(value = "/getteamissueswithoutepic", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	public JiraIssuesWithoutEpic getIssuesWithoutEpicsByTeamId(@RequestParam("teamid") int teamid) {
+		JiraIssuesWithoutEpic issues = jira.getTeamIssuesWithoutEpics(teamid);
+		return issues;
 	}
 
 	/**

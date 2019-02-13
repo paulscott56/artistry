@@ -23,9 +23,6 @@ public class Aggregateprogress {
 	private Integer progress;
 	@JsonProperty("total")
 	private Integer total;
-	// @JsonIgnore
-	// private Map<String, Object> additionalProperties = new HashMap<String,
-	// Object>();
 
 	@JsonProperty("progress")
 	public Integer getProgress() {
@@ -46,15 +43,5 @@ public class Aggregateprogress {
 	public void setTotal(Integer total) {
 		this.total = total;
 	}
-
-	// @JsonAnyGetter
-	// public Map<String, Object> getAdditionalProperties() {
-	// return this.additionalProperties;
-	// }
-	//
-	// @JsonAnySetter
-	// public void setAdditionalProperty(String name, Object value) {
-	// this.additionalProperties.put(name, value);
-	// }
 
 }

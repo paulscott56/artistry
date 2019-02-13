@@ -52,7 +52,7 @@ public class Fields {
 	private Object aggregatetimespent;
 
 	@JsonProperty("resolution")
-	private Object resolution;
+	private JiraResolution resolution;
 
 	@JsonProperty("timetracking")
 	private Timetracking timetracking;
@@ -219,12 +219,12 @@ public class Fields {
 	}
 
 	@JsonProperty("resolution")
-	public Object getResolution() {
+	public JiraResolution getResolution() {
 		return resolution;
 	}
 
 	@JsonProperty("resolution")
-	public void setResolution(Object resolution) {
+	public void setResolution(JiraResolution resolution) {
 		this.resolution = resolution;
 	}
 

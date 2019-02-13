@@ -32,10 +32,12 @@ import artistry.models.BoardLocation;
 import artistry.models.IssueType;
 import artistry.models.JiraBacklog;
 import artistry.models.JiraEpics;
+import artistry.models.JiraIssuesWithoutEpic;
 import artistry.models.JiraWebhook;
 import artistry.repositories.BoardRepository;
 import artistry.repositories.IssueTypeRepository;
 import artistry.repositories.JiraBacklogRepository;
+import artistry.repositories.JiraIssuesWithoutEpicRepository;
 import artistry.utils.JiraUtils;
 
 @Service
@@ -60,6 +62,9 @@ public class JiraService {
 
 	@Autowired
 	private JiraBacklogRepository blrepo;
+
+	@Autowired
+	private JiraIssuesWithoutEpicRepository issuesWoEpicRepo;
 
 	public BoardEntry getBoard(int teamid) throws JSONException {
 		Optional<BoardEntry> exists = brepo.findOneByJiraId(teamid);
@@ -277,6 +282,27 @@ public class JiraService {
 			return bl;
 		}
 
+	}
+
+	public JiraIssuesWithoutEpic getTeamIssuesWithoutEpics(int teamid) {
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+		final HttpEntity<JiraIssuesWithoutEpic> entity = new HttpEntity<>(null, headers);
+		try {
+			final ResponseEntity<JiraIssuesWithoutEpic> data = rt.exchange(
+					jiraUrl + "/rest/agile/latest/board/" + teamid + "/epic/none/issue?maxResults=2000", HttpMethod.GET,
+					entity, JiraIssuesWithoutEpic.class);
+			JiraIssuesWithoutEpic backlog = data.getBody();
+			// log.info(new JSONObject(backlog).toString(4));
+			return issuesWoEpicRepo.save(backlog);
+		} catch (Exception e) {
+			JiraIssuesWithoutEpic bl = new JiraIssuesWithoutEpic();
+			bl.setErrorOrComment(e.getLocalizedMessage());
+			// e.printStackTrace();
+			return bl;
+		}
 	}
 
 	// public String makePostRequestToCreateBoard(AgileBoard agileBoard, Long[]
