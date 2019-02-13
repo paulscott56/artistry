@@ -14,8 +14,10 @@ public class JiraBacklog {
 	@GeneratedValue
 	private Long id;
 
-	@Relationship(type = "HAS_BACKLOG_ISSUES", direction = Relationship.OUTGOING)
+	@Relationship(type = "HAS_BACKLOG_ISSUE", direction = Relationship.OUTGOING)
 	private Set<JiraIssues> issues;
+
+	private int total;
 
 	private String errorOrComment;
 
@@ -41,6 +43,14 @@ public class JiraBacklog {
 
 	public void setErrorOrComment(String errorOrComment) {
 		this.errorOrComment = errorOrComment;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
 }

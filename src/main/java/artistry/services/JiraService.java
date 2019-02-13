@@ -248,8 +248,7 @@ public class JiraService {
 					jiraUrl + "/rest/agile/latest/board/" + teamid + "/backlog?maxResults=200", HttpMethod.GET, entity,
 					JiraBacklog.class);
 			JiraBacklog backlog = data.getBody();
-			blrepo.save(backlog);
-			return backlog;
+			return blrepo.save(backlog);
 		} catch (Exception e) {
 			JiraBacklog bl = new JiraBacklog();
 			bl.setErrorOrComment(e.getLocalizedMessage());
