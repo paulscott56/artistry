@@ -1,15 +1,9 @@
 package artistry.models;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -29,8 +23,6 @@ public class Watches {
 	private Integer watchCount;
 	@JsonProperty("isWatching")
 	private Boolean isWatching;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	@JsonProperty("self")
 	public String getSelf() {
@@ -60,16 +52,6 @@ public class Watches {
 	@JsonProperty("isWatching")
 	public void setIsWatching(Boolean isWatching) {
 		this.isWatching = isWatching;
-	}
-
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
 	}
 
 }

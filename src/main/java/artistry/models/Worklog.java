@@ -1,16 +1,11 @@
 package artistry.models;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -31,9 +26,7 @@ public class Worklog {
 	@JsonProperty("total")
 	private Integer total;
 	@JsonProperty("worklogs")
-	private List<Object> worklogs = null;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private List<WorkLogs> worklogs = null;
 
 	@JsonProperty("startAt")
 	public Integer getStartAt() {
@@ -66,23 +59,13 @@ public class Worklog {
 	}
 
 	@JsonProperty("worklogs")
-	public List<Object> getWorklogs() {
+	public List<WorkLogs> getWorklogs() {
 		return worklogs;
 	}
 
 	@JsonProperty("worklogs")
-	public void setWorklogs(List<Object> worklogs) {
+	public void setWorklogs(List<WorkLogs> worklogs) {
 		this.worklogs = worklogs;
-	}
-
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
 	}
 
 }

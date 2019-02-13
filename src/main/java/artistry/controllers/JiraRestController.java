@@ -25,7 +25,6 @@ import artistry.models.IssueType;
 import artistry.models.JiraBacklog;
 import artistry.models.JiraWebhook;
 import artistry.models.RapidView;
-import artistry.repositories.JiraBacklogRepository;
 import artistry.services.JiraService;
 import artistry.services.RapidviewService;
 
@@ -42,9 +41,6 @@ public class JiraRestController {
 
 	@Autowired
 	private RapidviewService rapidview;
-
-	@Autowired
-	private JiraBacklogRepository blrepo;
 
 	@RequestMapping(value = "/getbyteamid", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
@@ -73,12 +69,14 @@ public class JiraRestController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public JiraBacklog getBacklogByTeamId(@RequestParam("teamid") int teamid) {
-		JiraBacklog backlog = jira.getBacklog(teamid);
-		// BoardEntry board = jira.getBoard(teamid);
-		// board.setBacklog(backlog);
-		// brepo.save(board);
-		blrepo.save(backlog);
-		return backlog;
+		try {
+			JiraBacklog backlog = jira.getBacklog(teamid);
+			return backlog;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 	/**

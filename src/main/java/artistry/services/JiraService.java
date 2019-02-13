@@ -34,6 +34,7 @@ import artistry.models.JiraBacklog;
 import artistry.models.JiraWebhook;
 import artistry.repositories.BoardRepository;
 import artistry.repositories.IssueTypeRepository;
+import artistry.repositories.JiraBacklogRepository;
 import artistry.utils.JiraUtils;
 
 @Service
@@ -55,6 +56,9 @@ public class JiraService {
 
 	@Autowired
 	private IssueTypeRepository issueTypeRepo;
+
+	@Autowired
+	private JiraBacklogRepository blrepo;
 
 	public BoardEntry getBoard(int teamid) throws JSONException {
 		Optional<BoardEntry> exists = brepo.findOneByJiraId(teamid);
@@ -243,7 +247,9 @@ public class JiraService {
 			final ResponseEntity<JiraBacklog> data = rt.exchange(
 					jiraUrl + "/rest/agile/latest/board/" + teamid + "/backlog?maxResults=200", HttpMethod.GET, entity,
 					JiraBacklog.class);
-			return data.getBody();
+			JiraBacklog backlog = data.getBody();
+			blrepo.save(backlog);
+			return backlog;
 		} catch (Exception e) {
 			JiraBacklog bl = new JiraBacklog();
 			bl.setErrorOrComment(e.getLocalizedMessage());

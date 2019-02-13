@@ -1,5 +1,7 @@
 package artistry.models;
 
+import java.util.List;
+
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -22,11 +24,14 @@ public class Fields {
 	@GeneratedValue
 	private Long id;
 
+	@JsonProperty("flagged")
+	private boolean flagged;
+
 	@JsonProperty("issuetype")
 	private Issuetype issuetype;
 
-	// @JsonProperty("components")
-	// private List<Object> components = null;
+	@JsonProperty("components")
+	private List<Component> components = null;
 
 	@JsonProperty("timespent")
 	private Object timespent;
@@ -37,11 +42,11 @@ public class Fields {
 	@JsonProperty("description")
 	private String description;
 
-	// @JsonProperty("project")
-	// private Project project;
+	@JsonProperty("project")
+	private Project project;
 
-	// @JsonProperty("fixVersions")
-	// private List<Object> fixVersions = null;
+	@JsonProperty("fixVersions")
+	private List<FixVersion> fixVersions = null;
 
 	@JsonProperty("aggregatetimespent")
 	private Object aggregatetimespent;
@@ -52,8 +57,8 @@ public class Fields {
 	@JsonProperty("timetracking")
 	private Timetracking timetracking;
 
-	// @JsonProperty("attachment")
-	// private List<Object> attachment = null;
+	@JsonProperty("attachment")
+	private List<Attachment> attachment = null;
 
 	@JsonProperty("aggregatetimeestimate")
 	private Object aggregatetimeestimate;
@@ -70,38 +75,38 @@ public class Fields {
 	@JsonProperty("lastViewed")
 	private String lastViewed;
 
-	// @JsonProperty("watches")
-	// private Watches watches;
+	@JsonProperty("watches")
+	private Watches watches;
 
-	// @JsonProperty("creator")
-	// private Creator creator;
+	@JsonProperty("creator")
+	private Creator creator;
 
-	// @JsonProperty("subtasks")
-	// private List<Object> subtasks = null;
+	@JsonProperty("subtasks")
+	private List<SubTask> subtasks = null;
 
-	// @JsonProperty("created")
-	// private String created;
+	@JsonProperty("created")
+	private String created;
 
-	// @JsonProperty("reporter")
-	// private Reporter reporter;
+	@JsonProperty("reporter")
+	private Reporter reporter;
 
-	// @JsonProperty("aggregateprogress")
-	// private Aggregateprogress aggregateprogress;
+	@JsonProperty("aggregateprogress")
+	private Aggregateprogress aggregateprogress;
 
-	// @JsonProperty("priority")
-	// private Priority priority;
+	@JsonProperty("priority")
+	private Priority priority;
 
-	// @JsonProperty("labels")
-	// private List<String> labels = null;
+	@JsonProperty("labels")
+	private List<String> labels = null;
 
 	// @JsonProperty("environment")
 	// private Object environment;
 
-	// @JsonProperty("timeestimate")
-	// private Object timeestimate;
+	@JsonProperty("timeestimate")
+	private Object timeestimate;
 
-	// @JsonProperty("aggregatetimeoriginalestimate")
-	// private Object aggregatetimeoriginalestimate;
+	@JsonProperty("aggregatetimeoriginalestimate")
+	private Object aggregatetimeoriginalestimate;
 
 	// @JsonProperty("versions")
 	// private List<Object> versions = null;
@@ -109,33 +114,29 @@ public class Fields {
 	// @JsonProperty("duedate")
 	// private Object duedate;
 
-	// @JsonProperty("progress")
-	// private Progress progress;
+	@JsonProperty("progress")
+	private Progress progress;
 
-	// @JsonProperty("comment")
-	// private Comment comment;
+	@JsonProperty("comment")
+	private Comment comment;
 
 	// @JsonProperty("issuelinks")
 	// private List<Object> issuelinks = null;
 
-	// @JsonProperty("votes")
-	// private Votes votes;
+	@JsonProperty("votes")
+	private Votes votes;
 
-	// @JsonProperty("worklog")
-	// private Worklog worklog;
+	@JsonProperty("worklog")
+	private Worklog worklog;
 
-	// @JsonProperty("assignee")
-	// private Assignee assignee;
+	@JsonProperty("assignee")
+	private Assignee assignee;
 
-	// @JsonProperty("updated")
-	// private String updated;
+	@JsonProperty("updated")
+	private String updated;
 
-	// @JsonProperty("status")
-	// private Status status;
-
-	// @JsonIgnore
-	// private Map<String, Object> additionalProperties = new HashMap<String,
-	// Object>();
+	@JsonProperty("status")
+	private Status status;
 
 	@JsonProperty("issuetype")
 	public Issuetype getIssuetype() {
@@ -147,15 +148,15 @@ public class Fields {
 		this.issuetype = issuetype;
 	}
 
-	// @JsonProperty("components")
-	// public List<Object> getComponents() {
-	// return components;
-	// }
-	//
-	// @JsonProperty("components")
-	// public void setComponents(List<Object> components) {
-	// this.components = components;
-	// }
+	@JsonProperty("components")
+	public List<Component> getComponents() {
+		return components;
+	}
+
+	@JsonProperty("components")
+	public void setComponents(List<Component> components) {
+		this.components = components;
+	}
 
 	@JsonProperty("timespent")
 	public Object getTimespent() {
@@ -187,25 +188,25 @@ public class Fields {
 		this.description = description;
 	}
 
-	// @JsonProperty("project")
-	// public Project getProject() {
-	// return project;
-	// }
-	//
-	// @JsonProperty("project")
-	// public void setProject(Project project) {
-	// this.project = project;
-	// }
+	@JsonProperty("project")
+	public Project getProject() {
+		return project;
+	}
 
-	// @JsonProperty("fixVersions")
-	// public List<Object> getFixVersions() {
-	// return fixVersions;
-	// }
-	//
-	// @JsonProperty("fixVersions")
-	// public void setFixVersions(List<Object> fixVersions) {
-	// this.fixVersions = fixVersions;
-	// }
+	@JsonProperty("project")
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	@JsonProperty("fixVersions")
+	public List<FixVersion> getFixVersions() {
+		return fixVersions;
+	}
+
+	@JsonProperty("fixVersions")
+	public void setFixVersions(List<FixVersion> fixVersions) {
+		this.fixVersions = fixVersions;
+	}
 
 	@JsonProperty("aggregatetimespent")
 	public Object getAggregatetimespent() {
@@ -237,15 +238,15 @@ public class Fields {
 		this.timetracking = timetracking;
 	}
 
-	// @JsonProperty("attachment")
-	// public List<Object> getAttachment() {
-	// return attachment;
-	// }
-	//
-	// @JsonProperty("attachment")
-	// public void setAttachment(List<Object> attachment) {
-	// this.attachment = attachment;
-	// }
+	@JsonProperty("attachment")
+	public List<Attachment> getAttachment() {
+		return attachment;
+	}
+
+	@JsonProperty("attachment")
+	public void setAttachment(List<Attachment> attachment) {
+		this.attachment = attachment;
+	}
 
 	@JsonProperty("aggregatetimeestimate")
 	public Object getAggregatetimeestimate() {
@@ -297,85 +298,85 @@ public class Fields {
 		this.lastViewed = lastViewed;
 	}
 
-	// @JsonProperty("watches")
-	// public Watches getWatches() {
-	// return watches;
-	// }
-	//
-	// @JsonProperty("watches")
-	// public void setWatches(Watches watches) {
-	// this.watches = watches;
-	// }
+	@JsonProperty("watches")
+	public Watches getWatches() {
+		return watches;
+	}
 
-	// @JsonProperty("creator")
-	// public Creator getCreator() {
-	// return creator;
-	// }
-	//
-	// @JsonProperty("creator")
-	// public void setCreator(Creator creator) {
-	// this.creator = creator;
-	// }
+	@JsonProperty("watches")
+	public void setWatches(Watches watches) {
+		this.watches = watches;
+	}
 
-	// @JsonProperty("subtasks")
-	// public List<Object> getSubtasks() {
-	// return subtasks;
-	// }
-	//
-	// @JsonProperty("subtasks")
-	// public void setSubtasks(List<Object> subtasks) {
-	// this.subtasks = subtasks;
-	// }
+	@JsonProperty("creator")
+	public Creator getCreator() {
+		return creator;
+	}
 
-	// @JsonProperty("created")
-	// public String getCreated() {
-	// return created;
-	// }
-	//
-	// @JsonProperty("created")
-	// public void setCreated(String created) {
-	// this.created = created;
-	// }
+	@JsonProperty("creator")
+	public void setCreator(Creator creator) {
+		this.creator = creator;
+	}
 
-	// @JsonProperty("reporter")
-	// public Reporter getReporter() {
-	// return reporter;
-	// }
-	//
-	// @JsonProperty("reporter")
-	// public void setReporter(Reporter reporter) {
-	// this.reporter = reporter;
-	// }
+	@JsonProperty("subtasks")
+	public List<SubTask> getSubtasks() {
+		return subtasks;
+	}
 
-	// @JsonProperty("aggregateprogress")
-	// public Aggregateprogress getAggregateprogress() {
-	// return aggregateprogress;
-	// }
-	//
-	// @JsonProperty("aggregateprogress")
-	// public void setAggregateprogress(Aggregateprogress aggregateprogress) {
-	// this.aggregateprogress = aggregateprogress;
-	// }
+	@JsonProperty("subtasks")
+	public void setSubtasks(List<SubTask> subtasks) {
+		this.subtasks = subtasks;
+	}
 
-	// @JsonProperty("priority")
-	// public Priority getPriority() {
-	// return priority;
-	// }
-	//
-	// @JsonProperty("priority")
-	// public void setPriority(Priority priority) {
-	// this.priority = priority;
-	// }
+	@JsonProperty("created")
+	public String getCreated() {
+		return created;
+	}
 
-	// @JsonProperty("labels")
-	// public List<String> getLabels() {
-	// return labels;
-	// }
-	//
-	// @JsonProperty("labels")
-	// public void setLabels(List<String> labels) {
-	// this.labels = labels;
-	// }
+	@JsonProperty("created")
+	public void setCreated(String created) {
+		this.created = created;
+	}
+
+	@JsonProperty("reporter")
+	public Reporter getReporter() {
+		return reporter;
+	}
+
+	@JsonProperty("reporter")
+	public void setReporter(Reporter reporter) {
+		this.reporter = reporter;
+	}
+
+	@JsonProperty("aggregateprogress")
+	public Aggregateprogress getAggregateprogress() {
+		return aggregateprogress;
+	}
+
+	@JsonProperty("aggregateprogress")
+	public void setAggregateprogress(Aggregateprogress aggregateprogress) {
+		this.aggregateprogress = aggregateprogress;
+	}
+
+	@JsonProperty("priority")
+	public Priority getPriority() {
+		return priority;
+	}
+
+	@JsonProperty("priority")
+	public void setPriority(Priority priority) {
+		this.priority = priority;
+	}
+
+	@JsonProperty("labels")
+	public List<String> getLabels() {
+		return labels;
+	}
+
+	@JsonProperty("labels")
+	public void setLabels(List<String> labels) {
+		this.labels = labels;
+	}
 
 	// @JsonProperty("environment")
 	// public Object getEnvironment() {
@@ -428,25 +429,25 @@ public class Fields {
 	// this.duedate = duedate;
 	// }
 
-	// @JsonProperty("progress")
-	// public Progress getProgress() {
-	// return progress;
-	// }
-	//
-	// @JsonProperty("progress")
-	// public void setProgress(Progress progress) {
-	// this.progress = progress;
-	// }
+	@JsonProperty("progress")
+	public Progress getProgress() {
+		return progress;
+	}
 
-	// @JsonProperty("comment")
-	// public Comment getComment() {
-	// return comment;
-	// }
-	//
-	// @JsonProperty("comment")
-	// public void setComment(Comment comment) {
-	// this.comment = comment;
-	// }
+	@JsonProperty("progress")
+	public void setProgress(Progress progress) {
+		this.progress = progress;
+	}
+
+	@JsonProperty("comment")
+	public Comment getComment() {
+		return comment;
+	}
+
+	@JsonProperty("comment")
+	public void setComment(Comment comment) {
+		this.comment = comment;
+	}
 
 	// @JsonProperty("issuelinks")
 	// public List<Object> getIssuelinks() {
@@ -458,65 +459,55 @@ public class Fields {
 	// this.issuelinks = issuelinks;
 	// }
 
-	// @JsonProperty("votes")
-	// public Votes getVotes() {
-	// return votes;
-	// }
-	//
-	// @JsonProperty("votes")
-	// public void setVotes(Votes votes) {
-	// this.votes = votes;
-	// }
+	@JsonProperty("votes")
+	public Votes getVotes() {
+		return votes;
+	}
 
-	// @JsonProperty("worklog")
-	// public Worklog getWorklog() {
-	// return worklog;
-	// }
-	//
-	// @JsonProperty("worklog")
-	// public void setWorklog(Worklog worklog) {
-	// this.worklog = worklog;
-	// }
+	@JsonProperty("votes")
+	public void setVotes(Votes votes) {
+		this.votes = votes;
+	}
 
-	// @JsonProperty("assignee")
-	// public Assignee getAssignee() {
-	// return assignee;
-	// }
-	//
-	// @JsonProperty("assignee")
-	// public void setAssignee(Assignee assignee) {
-	// this.assignee = assignee;
-	// }
+	@JsonProperty("worklog")
+	public Worklog getWorklog() {
+		return worklog;
+	}
 
-	// @JsonProperty("updated")
-	// public String getUpdated() {
-	// return updated;
-	// }
-	//
-	// @JsonProperty("updated")
-	// public void setUpdated(String updated) {
-	// this.updated = updated;
-	// }
+	@JsonProperty("worklog")
+	public void setWorklog(Worklog worklog) {
+		this.worklog = worklog;
+	}
 
-	// @JsonProperty("status")
-	// public Status getStatus() {
-	// return status;
-	// }
-	//
-	// @JsonProperty("status")
-	// public void setStatus(Status status) {
-	// this.status = status;
-	// }
+	@JsonProperty("assignee")
+	public Assignee getAssignee() {
+		return assignee;
+	}
 
-	// @JsonAnyGetter
-	// public Map<String, Object> getAdditionalProperties() {
-	// return this.additionalProperties;
-	// }
-	//
-	// @JsonAnySetter
-	// public void setAdditionalProperty(String name, Object value) {
-	// this.additionalProperties.put(name, value);
-	// }
+	@JsonProperty("assignee")
+	public void setAssignee(Assignee assignee) {
+		this.assignee = assignee;
+	}
+
+	@JsonProperty("updated")
+	public String getUpdated() {
+		return updated;
+	}
+
+	@JsonProperty("updated")
+	public void setUpdated(String updated) {
+		this.updated = updated;
+	}
+
+	@JsonProperty("status")
+	public Status getStatus() {
+		return status;
+	}
+
+	@JsonProperty("status")
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	public Long getId() {
 		return id;
@@ -526,9 +517,14 @@ public class Fields {
 		this.id = id;
 	}
 
-	// public void setAdditionalProperties(Map<String, Object> additionalProperties)
-	// {
-	// this.additionalProperties = additionalProperties;
-	// }
+	@JsonProperty("flagged")
+	public boolean isFlagged() {
+		return flagged;
+	}
+
+	@JsonProperty("flagged")
+	public void setFlagged(boolean flagged) {
+		this.flagged = flagged;
+	}
 
 }
