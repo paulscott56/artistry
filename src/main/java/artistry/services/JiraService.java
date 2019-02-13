@@ -31,6 +31,7 @@ import artistry.models.BoardEntry;
 import artistry.models.BoardLocation;
 import artistry.models.IssueType;
 import artistry.models.JiraBacklog;
+import artistry.models.JiraEpics;
 import artistry.models.JiraWebhook;
 import artistry.repositories.BoardRepository;
 import artistry.repositories.IssueTypeRepository;
@@ -255,6 +256,27 @@ public class JiraService {
 			// e.printStackTrace();
 			return bl;
 		}
+	}
+
+	public JiraEpics getTeamEpics(int teamid) {
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+		final HttpEntity<JiraBacklog> entity = new HttpEntity<>(null, headers);
+		try {
+			final ResponseEntity<JiraEpics> data = rt.exchange(
+					jiraUrl + "/rest/agile/latest/board/" + teamid + "/epic?maxResults=200", HttpMethod.GET, entity,
+					JiraEpics.class);
+			JiraEpics epics = data.getBody();
+			return epics;
+		} catch (Exception e) {
+			JiraEpics bl = new JiraEpics();
+			bl.setErrorOrComment(e.getLocalizedMessage());
+			// e.printStackTrace();
+			return bl;
+		}
+
 	}
 
 	// public String makePostRequestToCreateBoard(AgileBoard agileBoard, Long[]
