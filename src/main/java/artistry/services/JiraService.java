@@ -105,8 +105,8 @@ public class JiraService {
 				boardloc.setProjectTypeKey(bloc.optString("projectTypeKey"));
 				board.setLocation(boardloc);
 				board.setBoardConfig(getBoardConfig(teamid));
-				// JiraBacklog bl = getBacklog(teamid);
-				// board.setBacklog(bl);
+				JiraBacklog bl = getBacklog(teamid);
+				board.setBacklog(bl);
 				brepo.save(board);
 				return board;
 			} else {
@@ -346,12 +346,10 @@ public class JiraService {
 			final ResponseEntity<JiraUser> data = rt.exchange(jiraUrl + "/rest/api/latest/user?username=" + username,
 					HttpMethod.GET, entity, JiraUser.class);
 			JiraUser user = data.getBody();
-			// log.info(new JSONObject(backlog).toString(4));
 			return jiraUserRepo.save(user);
 		} catch (Exception e) {
 			JiraUser bl = new JiraUser();
 			bl.setErrorOrComment(e.getLocalizedMessage());
-			// e.printStackTrace();
 			return bl;
 		}
 	}
