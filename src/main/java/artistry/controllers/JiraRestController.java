@@ -25,6 +25,8 @@ import artistry.models.IssueType;
 import artistry.models.JiraBacklog;
 import artistry.models.JiraEpics;
 import artistry.models.JiraIssuesWithoutEpic;
+import artistry.models.JiraProjects;
+import artistry.models.JiraUser;
 import artistry.models.JiraWebhook;
 import artistry.models.RapidView;
 import artistry.services.JiraService;
@@ -90,6 +92,30 @@ public class JiraRestController {
 	public JiraIssuesWithoutEpic getIssuesWithoutEpicsByTeamId(@RequestParam("teamid") int teamid) {
 		JiraIssuesWithoutEpic issues = jira.getTeamIssuesWithoutEpics(teamid);
 		return issues;
+	}
+
+	/**
+	 * Projects
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getprojects", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	public JiraProjects getProjects() {
+		JiraProjects projects = jira.getProjects();
+		return projects;
+	}
+
+	/**
+	 * Users
+	 */
+	@RequestMapping(value = "/getuserbyusername", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@ResponseBody
+	public JiraUser getUserByUsername(@RequestParam("username") String username) {
+		JiraUser user = jira.getUserByUsername(username);
+		return user;
 	}
 
 	/**

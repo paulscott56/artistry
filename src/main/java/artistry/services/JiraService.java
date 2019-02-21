@@ -33,11 +33,15 @@ import artistry.models.IssueType;
 import artistry.models.JiraBacklog;
 import artistry.models.JiraEpics;
 import artistry.models.JiraIssuesWithoutEpic;
+import artistry.models.JiraProjects;
+import artistry.models.JiraUser;
 import artistry.models.JiraWebhook;
 import artistry.repositories.BoardRepository;
 import artistry.repositories.IssueTypeRepository;
 import artistry.repositories.JiraBacklogRepository;
 import artistry.repositories.JiraIssuesWithoutEpicRepository;
+import artistry.repositories.JiraProjectsRepository;
+import artistry.repositories.JiraUserRepository;
 import artistry.utils.JiraUtils;
 
 @Service
@@ -65,6 +69,12 @@ public class JiraService {
 
 	@Autowired
 	private JiraIssuesWithoutEpicRepository issuesWoEpicRepo;
+
+	@Autowired
+	private JiraProjectsRepository projectsRepo;
+
+	@Autowired
+	private JiraUserRepository jiraUserRepo;
 
 	public BoardEntry getBoard(int teamid) throws JSONException {
 		Optional<BoardEntry> exists = brepo.findOneByJiraId(teamid);
@@ -299,6 +309,47 @@ public class JiraService {
 			return issuesWoEpicRepo.save(backlog);
 		} catch (Exception e) {
 			JiraIssuesWithoutEpic bl = new JiraIssuesWithoutEpic();
+			bl.setErrorOrComment(e.getLocalizedMessage());
+			// e.printStackTrace();
+			return bl;
+		}
+	}
+
+	public JiraProjects getProjects() {
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+		final HttpEntity<JiraProjects> entity = new HttpEntity<>(null, headers);
+		try {
+			final ResponseEntity<JiraProjects> data = rt.exchange(
+					jiraUrl + "/rest/api/latest/project/search?maxResults=100", HttpMethod.GET, entity,
+					JiraProjects.class);
+			JiraProjects projects = data.getBody();
+			// log.info(new JSONObject(backlog).toString(4));
+			return projectsRepo.save(projects);
+		} catch (Exception e) {
+			JiraProjects bl = new JiraProjects();
+			bl.setErrorOrComment(e.getLocalizedMessage());
+			// e.printStackTrace();
+			return bl;
+		}
+	}
+
+	public JiraUser getUserByUsername(String username) {
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
+		final HttpEntity<JiraUser> entity = new HttpEntity<>(null, headers);
+		try {
+			final ResponseEntity<JiraUser> data = rt.exchange(jiraUrl + "/rest/api/latest/user?username=" + username,
+					HttpMethod.GET, entity, JiraUser.class);
+			JiraUser user = data.getBody();
+			// log.info(new JSONObject(backlog).toString(4));
+			return jiraUserRepo.save(user);
+		} catch (Exception e) {
+			JiraUser bl = new JiraUser();
 			bl.setErrorOrComment(e.getLocalizedMessage());
 			// e.printStackTrace();
 			return bl;
