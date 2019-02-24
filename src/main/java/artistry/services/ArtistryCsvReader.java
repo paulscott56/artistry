@@ -1,20 +1,12 @@
 package artistry.services;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Optional;
-import java.util.Set;
-
+import artistry.configuration.StorageProperties;
+import artistry.enums.AddressType;
+import artistry.enums.Continents;
+import artistry.models.*;
+import artistry.repositories.*;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,33 +14,14 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-
-import artistry.configuration.StorageProperties;
-import artistry.enums.AddressType;
-import artistry.enums.Continents;
-import artistry.models.Address;
-import artistry.models.AlternateName;
-import artistry.models.Continent;
-import artistry.models.Country;
-import artistry.models.EmailAddress;
-import artistry.models.GeoCountry;
-import artistry.models.GeoMajorCity;
-import artistry.models.GeoPlace;
-import artistry.models.MajorCity;
-import artistry.models.Person;
-import artistry.models.PersonCsv;
-import artistry.models.PersonRole;
-import artistry.models.PhoneNumber;
-import artistry.models.Place;
-import artistry.models.Planet;
-import artistry.repositories.ContinentRepository;
-import artistry.repositories.CountryRepository;
-import artistry.repositories.GeoRepository;
-import artistry.repositories.MajorCityRepository;
-import artistry.repositories.PlanetRepository;
-import artistry.repositories.RolesRepository;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Component
 public class ArtistryCsvReader {
@@ -75,7 +48,7 @@ public class ArtistryCsvReader {
 	@Autowired
 	private RolesRepository rolesRepo;
 
-	public void readCountryByCode(String code) throws URISyntaxException, IOException {
+	public void readCountryByCode(String code) throws IOException {
 		Path CSV_PATH = Paths.get(RESOURCE + code + ".txt");
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoPlace> csvToBean = new CsvToBeanBuilder<GeoPlace>(reader).withType(GeoPlace.class)
@@ -137,7 +110,7 @@ public class ArtistryCsvReader {
 
 	}
 
-	public void readAllCountriesCsv() throws IOException, URISyntaxException, ParseException {
+	public void readAllCountriesCsv() throws IOException {
 		Path CSV_PATH = Paths.get(RESOURCE + "allCountries.txt");
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoPlace> csvToBean = new CsvToBeanBuilder<GeoPlace>(reader).withType(GeoPlace.class)
@@ -217,7 +190,7 @@ public class ArtistryCsvReader {
 		}
 	}
 
-	public void readCountryInfoCsv() throws IOException, URISyntaxException {
+	public void readCountryInfoCsv() throws IOException {
 		Path CSV_PATH = Paths.get(RESOURCE + "countryInfo.txt");
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoCountry> csvToBean = new CsvToBeanBuilder<GeoCountry>(reader).withType(GeoCountry.class)
@@ -259,7 +232,7 @@ public class ArtistryCsvReader {
 				continentRepo.save(continentCheck);
 				// put in a check to see if the place exists first...
 				Country check = countryRepo.findOneByIso(c.getIso());
-				if (check.equals(null)) {
+				if (check == null) {
 					System.out.println("Saving country: " + c.getCountry());
 					countryRepo.save(c);
 				} else {
@@ -271,7 +244,7 @@ public class ArtistryCsvReader {
 		}
 	}
 
-	public void readCity(String file) throws URISyntaxException, IOException {
+	public void readCity(String file) throws IOException {
 		Path CSV_PATH = Paths.get(RESOURCE + file + ".txt");
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoMajorCity> csvToBean = new CsvToBeanBuilder<GeoMajorCity>(reader).withType(GeoMajorCity.class)
@@ -333,7 +306,7 @@ public class ArtistryCsvReader {
 
 	}
 
-	public void readRolesCsv() throws URISyntaxException, IOException {
+	public void readRolesCsv() throws IOException {
 		Path CSV_PATH = Paths.get(RESOURCE + "roles.csv");
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<PersonRole> csvToBean = new CsvToBeanBuilder<PersonRole>(reader).withType(PersonRole.class)
@@ -355,7 +328,7 @@ public class ArtistryCsvReader {
 	}
 
 	@Async
-	public void importPeople(MultipartFile file) throws URISyntaxException, IOException {
+	public void importPeople(MultipartFile file) throws IOException {
 		log.info("Parsing file: " + RESOURCE + file.getOriginalFilename());
 		Path CSV_PATH = Paths.get(RESOURCE + file.getOriginalFilename());
 		Reader reader = Files.newBufferedReader(CSV_PATH);
@@ -370,9 +343,7 @@ public class ArtistryCsvReader {
 				Address address = new Address();
 				Set<String> addlines = new HashSet<>();
 				String[] lines = pcsv.getAddress().split(",");
-				for (String l : lines) {
-					addlines.add(l);
-				}
+				Collections.addAll(addlines, lines);
 				address.setAddressLine(addlines);
 				address.setAddressType(AddressType.PERSON);
 				p.setAddress(address);

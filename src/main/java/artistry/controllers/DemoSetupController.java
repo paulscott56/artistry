@@ -1,51 +1,20 @@
 package artistry.controllers;
 
-import java.math.BigDecimal;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
+import artistry.enums.DocumentStatus;
+import artistry.enums.EpicType;
+import artistry.enums.License;
+import artistry.enums.Role;
+import artistry.models.*;
+import artistry.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import artistry.enums.DocumentStatus;
-import artistry.enums.EpicType;
-import artistry.enums.License;
-import artistry.enums.Role;
-import artistry.models.Company;
-import artistry.models.Country;
-import artistry.models.DevelopmentTimeLine;
-import artistry.models.Document;
-import artistry.models.Enterprise;
-import artistry.models.Epic;
-import artistry.models.Feature;
-import artistry.models.GuardRails;
-import artistry.models.ImplementationTeam;
-import artistry.models.KPI;
-import artistry.models.NonFunctionalRequirement;
-import artistry.models.Person;
-import artistry.models.PersonRole;
-import artistry.models.Portfolio;
-import artistry.models.PortfolioBudget;
-import artistry.models.Requirement;
-import artistry.repositories.CompanyRepository;
-import artistry.repositories.CountryRepository;
-import artistry.repositories.DocumentRepository;
-import artistry.repositories.EpicRepository;
-import artistry.repositories.FeatureRepository;
-import artistry.repositories.ImplementationTeamRepository;
-import artistry.repositories.KpiRepository;
-import artistry.repositories.NonFunctionalRequirementRepository;
-import artistry.repositories.PersonRepository;
-import artistry.repositories.PortfolioRepository;
-import artistry.repositories.RequirementRepository;
-import artistry.repositories.RolesRepository;
+import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.*;
 
 public class DemoSetupController {
 
@@ -314,14 +283,17 @@ public class DemoSetupController {
 		person.setUsername(username);
 		Set<PersonRole> roles = new HashSet<>();
 		Optional<PersonRole> prole = rolesRepo.findByRole(role);
-		roles.add(prole.get());
-		if (agileTeamMember) {
-			Optional<PersonRole> agileteammem = rolesRepo.findByRole(Role.AGILE_TEAM_MEMBER);
-			roles.add(agileteammem.get());
-		}
-		person.setRoles(roles);
-		return personRepo.save(person);
-	}
+        if (prole.isPresent()) {
+            roles.add(prole.get());
+            if (agileTeamMember) {
+                Optional<PersonRole> agileteammem = rolesRepo.findByRole(Role.AGILE_TEAM_MEMBER);
+                agileteammem.ifPresent(roles::add);
+            }
+            person.setRoles(roles);
+            return personRepo.save(person);
+        }
+        return person;
+    }
 
 	private KPI kpiMaker(String objective) {
 		KPI kpi = new KPI();

@@ -1,14 +1,13 @@
 /**
- * 
+ * Repository for implementation teams
  */
 package artistry.repositories;
 
-import java.util.Optional;
-
+import artistry.models.ImplementationTeam;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 
-import artistry.models.ImplementationTeam;
+import java.util.Optional;
 
 /**
  * @author paul

@@ -1,22 +1,16 @@
 package artistry.controllers;
 
-import java.util.Optional;
-
+import artistry.models.NonFunctionalRequirement;
+import artistry.repositories.NonFunctionalRequirementRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import artistry.models.NonFunctionalRequirement;
-import artistry.repositories.NonFunctionalRequirementRepository;
+import java.util.Optional;
 
 @Configuration
 @RestController
@@ -61,9 +55,7 @@ public class NonFunctionalRequirementsRestController {
 	@ResponseBody
 	private void delete(@PathVariable("id") Long id) {
 		Optional<NonFunctionalRequirement> nfr = nfrRepo.findById(id);
-		if (nfr.isPresent()) {
-			nfrRepo.delete(nfr.get());
-		}
+		nfr.ifPresent(nonFunctionalRequirement -> nfrRepo.delete(nonFunctionalRequirement));
 	}
 
 	@RequestMapping(value = "/deleteall", method = RequestMethod.DELETE, produces = {

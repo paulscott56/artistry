@@ -1,31 +1,5 @@
 package artistry.controllers;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TimeZone;
-
-import org.apache.commons.io.FilenameUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Description;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
 import artistry.enums.Role;
 import artistry.exceptions.StorageFileNotFoundException;
 import artistry.models.Country;
@@ -36,6 +10,20 @@ import artistry.repositories.PersonRepository;
 import artistry.repositories.RolesRepository;
 import artistry.services.ArtistryCsvReader;
 import artistry.utils.StorageService;
+import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Description;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Configuration
 @RestController
@@ -69,9 +57,7 @@ public class PersonRestController {
 			Set<PersonRole> roles = person.getRoles();
 			for (PersonRole role : roles) {
 				Optional<PersonRole> existingrole = rolesRepo.findByRole(role.getRole());
-				if (existingrole.isPresent()) {
-					newroles.add(existingrole.get());
-				}
+                existingrole.ifPresent(newroles::add);
 			}
 			person.setCountry(country);
 			person.setRoles(newroles);
@@ -96,9 +82,7 @@ public class PersonRestController {
 			Set<PersonRole> roles = person.getRoles();
 			for (PersonRole role : roles) {
 				Optional<PersonRole> existingrole = rolesRepo.findByRole(role.getRole());
-				if (existingrole.isPresent()) {
-					newroles.add(existingrole.get());
-				}
+                existingrole.ifPresent(newroles::add);
 			}
 			person.setRoles(newroles);
 			person.setCountry(country);
@@ -182,7 +166,7 @@ public class PersonRestController {
 	@RequestMapping(value = "/setuproles", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	private String createBaseRoles() throws URISyntaxException, IOException {
+    private String createBaseRoles() throws IOException {
 		// parse the csv file
 		csvReader.readRolesCsv();
 		return "Import of roles complete";
@@ -196,11 +180,11 @@ public class PersonRestController {
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException, URISyntaxException {
+    public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
 		log.info("uploading file: " + file.getOriginalFilename());
 		if (!file.isEmpty()) {
-			if (file.getContentType().equals("text/csv")
-					&& FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase().equals("csv")) {
+            if (Objects.requireNonNull(file.getContentType()).equals("text/csv")
+                    && Objects.requireNonNull(FilenameUtils.getExtension(file.getOriginalFilename())).toLowerCase().equals("csv")) {
 				storageService.store(file);
 				// send this off for processing now...
 				csvReader.importPeople(file);
@@ -246,14 +230,17 @@ public class PersonRestController {
 		person.setUsername(username);
 		Set<PersonRole> roles = new HashSet<>();
 		Optional<PersonRole> prole = rolesRepo.findByRole(role);
-		roles.add(prole.get());
-		if (agileTeamMember) {
-			Optional<PersonRole> agileteammem = rolesRepo.findByRole(Role.AGILE_TEAM_MEMBER);
-			roles.add(agileteammem.get());
-		}
-		person.setRoles(roles);
-		return personRepo.save(person);
-	}
+        if (prole.isPresent()) {
+            roles.add(prole.get());
+            if (agileTeamMember) {
+                Optional<PersonRole> agileteammem = rolesRepo.findByRole(Role.AGILE_TEAM_MEMBER);
+                agileteammem.ifPresent(roles::add);
+            }
+            person.setRoles(roles);
+            return personRepo.save(person);
+        }
+        return person;
+    }
 
 	@RequestMapping(value = "/deleteall", method = RequestMethod.DELETE, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })

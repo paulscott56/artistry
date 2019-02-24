@@ -1,27 +1,21 @@
 package artistry.controllers;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
+import artistry.models.Company;
+import artistry.models.ImplementationTeam;
+import artistry.models.PersonTeamObject;
+import artistry.repositories.CompanyRepository;
+import artistry.repositories.ImplementationTeamRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import artistry.models.Company;
-import artistry.models.ImplementationTeam;
-import artistry.models.PersonTeamObject;
-import artistry.repositories.CompanyRepository;
-import artistry.repositories.ImplementationTeamRepository;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Configuration
 @RestController
@@ -91,8 +85,6 @@ public class ImplementationTeamRestController {
 	@ResponseBody
 	private void deleteLargeSolution(@PathVariable("id") Long id) {
 		Optional<ImplementationTeam> team = teamRepo.findById(id);
-		if(team.isPresent()) {
-			teamRepo.delete(team.get());
-		}
+		team.ifPresent(implementationTeam -> teamRepo.delete(implementationTeam));
 	}
 }

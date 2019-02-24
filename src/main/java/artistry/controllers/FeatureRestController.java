@@ -1,23 +1,17 @@
 package artistry.controllers;
 
-import java.util.Date;
-import java.util.Optional;
-
+import artistry.models.Feature;
+import artistry.repositories.FeatureRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import artistry.models.Feature;
-import artistry.repositories.FeatureRepository;
+import java.util.Date;
+import java.util.Optional;
 
 @Configuration
 @RestController
@@ -63,9 +57,7 @@ public class FeatureRestController {
 	@ResponseBody
 	private void delete(@PathVariable("id") Long id) {
 		Optional<Feature> feature = featureRepo.findById(id);
-		if (feature.isPresent()) {
-			featureRepo.delete(feature.get());
-		}
+		feature.ifPresent(feature1 -> featureRepo.delete(feature1));
 	}
 	
 	@RequestMapping(value = "/deleteall", method = RequestMethod.DELETE, produces = {

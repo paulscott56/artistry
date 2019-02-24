@@ -1,22 +1,16 @@
 package artistry.controllers;
 
-import java.util.Optional;
-
+import artistry.models.KPI;
+import artistry.repositories.KpiRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import artistry.models.KPI;
-import artistry.repositories.KpiRepository;
+import java.util.Optional;
 
 @Configuration
 @RestController
@@ -64,9 +58,7 @@ public class KpiRestController {
 	@ResponseBody
 	private void deleteKpi(@PathVariable("id") Long id) {
 		Optional<KPI> kpi = kpiRepo.findById(id);
-		if (kpi.isPresent()) {
-			kpiRepo.delete(kpi.get());
-		}
+		kpi.ifPresent(kpi1 -> kpiRepo.delete(kpi1));
 	}
 
 	@RequestMapping(value = "/getkpibyid/{id}", method = RequestMethod.GET, produces = {

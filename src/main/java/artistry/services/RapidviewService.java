@@ -1,23 +1,18 @@
 package artistry.services;
 
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
 import artistry.models.RapidView;
 import artistry.models.RapidviewEntry;
 import artistry.repositories.RapidviewRepository;
 import artistry.utils.JiraUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class RapidviewService {
@@ -85,12 +80,9 @@ public class RapidviewService {
 
 	public RapidviewEntry getViewById(String id) {
 		Optional<RapidviewEntry> data = repo.findOneByRapidviewId(id);
-		if (data.isPresent()) {
-			return data.get();
-		}
-		return null;
+        return data.orElse(null);
 
-	}
+    }
 
 	// public List<RapidviewEntry> getViewByFuzzyName(String name) {
 	// final Query query = new Query();

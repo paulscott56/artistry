@@ -1,25 +1,19 @@
 package artistry.controllers;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
+import artistry.models.Document;
+import artistry.repositories.DocumentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import artistry.models.Document;
-import artistry.repositories.DocumentRepository;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Configuration
 @RestController
@@ -86,9 +80,7 @@ public class DocumentRestController {
 	@ResponseBody
 	private void deleteDocument(@PathVariable("id") Long id) {
 		Optional<Document> document = docRepo.findById(id);
-		if (document.isPresent()) {
-			docRepo.delete(document.get());
-		}
+		document.ifPresent(document1 -> docRepo.delete(document1));
 	}
 
 	@RequestMapping(value = "/deleteall", method = RequestMethod.DELETE, produces = {
