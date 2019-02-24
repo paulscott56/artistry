@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to manage continents")
 @RequestMapping("/continent")
-public class ContinentRestController {
+class ContinentRestController {
 
 	static final Logger log = LoggerFactory.getLogger(ContinentRestController.class);
 

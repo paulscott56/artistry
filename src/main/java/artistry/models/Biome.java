@@ -1,18 +1,18 @@
 package artistry.models;
 
-import java.math.BigDecimal;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import java.math.BigDecimal;
+
 /**
- * @see https://www.pik-potsdam.de/members/cramer/publications/before-2005/Cramer_2002_Enc_GEC.pdf
+ * @link https://www.pik-potsdam.de/members/cramer/publications/before-2005/Cramer_2002_Enc_GEC.pdf
  * @author paul
  *
  */
 @NodeEntity
-public class Biome extends AbstractAuditableBaseEntity {
+class Biome extends AbstractAuditableBaseEntity {
 
 	@Id
 	@GeneratedValue

@@ -1,11 +1,10 @@
 package artistry.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class ColumnStatus {
+class ColumnStatus {
 
 	@Id
 	@GeneratedValue

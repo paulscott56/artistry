@@ -1,12 +1,12 @@
 package artistry.models;
 
-import java.util.Set;
-
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import java.util.Set;
+
 @NodeEntity
-public class SprintList extends AbstractAuditableBaseEntity {
+class SprintList extends AbstractAuditableBaseEntity {
 
 	@Relationship(type = "HAS_SPRINT_ENTRY", direction = Relationship.OUTGOING)
 	private Set<SprintEntry> sprints;

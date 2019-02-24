@@ -1,7 +1,9 @@
 package artistry.webhook;
 
-import java.util.Date;
-
+import artistry.models.Destination;
+import artistry.models.WebHookMessage;
+import artistry.repositories.DestinationRepository;
+import artistry.repositories.MessageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import artistry.models.Destination;
-import artistry.models.WebHookMessage;
-import artistry.repositories.DestinationRepository;
-import artistry.repositories.MessageRepository;
+import java.util.Date;
 
 /**
  * example code
@@ -29,7 +28,7 @@ import artistry.repositories.MessageRepository;
  *
  */
 @Service
-public class MessageProcessor {
+class MessageProcessor {
 
 	private static final Logger log = LoggerFactory.getLogger(MessageProcessor.class);
 
@@ -41,7 +40,7 @@ public class MessageProcessor {
 
 	private final RestTemplate restTemplate;
 
-	public MessageProcessor(RestTemplateBuilder restTemplateBuilder) {
+	private MessageProcessor(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
 	}
 
@@ -62,7 +61,7 @@ public class MessageProcessor {
 	@Scheduled(cron = "0 * * * * *") // (cron = "0 0 */6 * * *") // Run at minute 0 past every 6th hour.
 	public void scheduledMessagesProcessor() {
 		log.debug("Executing scheduled message processor at {}", new Date(System.currentTimeMillis()));
-		destinationRepository.findAll().forEach(destination -> processMessagesForDestination(destination));
+		destinationRepository.findAll().forEach(this::processMessagesForDestination);
 	}
 
 	private void processMessagesForDestination(Destination destination) {

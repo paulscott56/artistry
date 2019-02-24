@@ -17,7 +17,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to manage email addresses")
 @RequestMapping("/emailaddress")
-public class EmailAddressRestController {
+class EmailAddressRestController {
 
 	static final Logger log = LoggerFactory.getLogger(EmailAddressRestController.class);
 

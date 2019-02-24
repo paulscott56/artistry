@@ -1,15 +1,5 @@
 package artistry.configuration;
 
-import java.util.Arrays;
-
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
@@ -19,8 +9,17 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
-public class JsonConfiguration {
+import java.util.Arrays;
+
+class JsonConfiguration {
 
 	@Bean
 	public MappingJackson2HttpMessageConverter mappingJacksonHttpMessageConverter() {
@@ -32,7 +31,7 @@ public class JsonConfiguration {
 	@Bean
 	@Qualifier("artistryObjectMapper")
 	@Primary
-	public ObjectMapper artistryObjectMapper() {
+    private ObjectMapper artistryObjectMapper() {
 		final ObjectMapper mapper = new ObjectMapper();
 		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.UPPER_CAMEL_CASE);
 		mapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
@@ -53,7 +52,7 @@ public class JsonConfiguration {
 	@Bean
 	public MarshallingHttpMessageConverter marshallingHttpMessageConverter() {
 		final Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-		jaxb2Marshaller.setPackagesToScan(new String[] { "artistry.models" });
+        jaxb2Marshaller.setPackagesToScan("artistry.models");
 
 		final MarshallingHttpMessageConverter converter = new MarshallingHttpMessageConverter();
 		converter.setMarshaller(jaxb2Marshaller);

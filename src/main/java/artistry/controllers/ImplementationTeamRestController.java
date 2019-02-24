@@ -21,7 +21,7 @@ import java.util.Set;
 @RestController
 @Description("Controller to for handling implementation teams")
 @RequestMapping("/team")
-public class ImplementationTeamRestController {
+class ImplementationTeamRestController {
 
 	static final Logger log = LoggerFactory.getLogger(ImplementationTeamRestController.class);
 	
@@ -40,8 +40,7 @@ public class ImplementationTeamRestController {
 	@RequestMapping(value = "/getbyname/{name}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Optional<ImplementationTeam> getByName(@PathVariable("name") String name) {
-		Optional<ImplementationTeam> team = teamRepo.findByTeamName(name);
-		return team;
+		return teamRepo.findByTeamName(name);
 	}
 	
 	@RequestMapping(value = "/updatescrummaster", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
@@ -54,8 +53,7 @@ public class ImplementationTeamRestController {
 	@RequestMapping(value = "/getbyid/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Optional<ImplementationTeam> getById(@PathVariable("id") Long id) {
-		Optional<ImplementationTeam> team = teamRepo.findById(id);
-		return team;
+		return teamRepo.findById(id);
 	}
 	
 	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })

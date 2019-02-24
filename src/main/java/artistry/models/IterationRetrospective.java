@@ -1,5 +1,5 @@
 package artistry.models;
 
-public class IterationRetrospective extends AbstractAuditableBaseEntity {
+class IterationRetrospective extends AbstractAuditableBaseEntity {
 
 }

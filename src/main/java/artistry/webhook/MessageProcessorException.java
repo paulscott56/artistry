@@ -1,6 +1,6 @@
 package artistry.webhook;
 
-public class MessageProcessorException extends Exception {
+class MessageProcessorException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 

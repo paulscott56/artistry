@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableAutoConfiguration
 @EntityScan({ "artistry.models", "BOOT-INF.classes.artistry.models" })
-public class Neo4jConfiguration {
+class Neo4jConfiguration {
 
 	@Value("${spring.data.neo4j.uri}")
 	private String uri;
@@ -27,16 +27,15 @@ public class Neo4jConfiguration {
 	private String dbpass;
 
 	@Bean
-	public SessionFactory sessionFactory() {
+	private SessionFactory sessionFactory() {
 		// with domain entity base package(s)
 		return new SessionFactory(configuration(), "artistry.models", "BOOT-INF.classes.artistry.models");
 	}
 
 	@Bean
-	public org.neo4j.ogm.config.Configuration configuration() {
-		org.neo4j.ogm.config.Configuration configuration = new org.neo4j.ogm.config.Configuration.Builder()
+	private org.neo4j.ogm.config.Configuration configuration() {
+		return new org.neo4j.ogm.config.Configuration.Builder()
 				.uri("bolt://" + uri).credentials(dbuser, dbpass).build();
-		return configuration;
 	}
 
 	@Bean

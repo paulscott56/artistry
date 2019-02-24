@@ -1,18 +1,18 @@
 package artistry.models;
 
-import java.util.List;
-import java.util.Set;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * Model for Capability. Capability is made up of many features
  * 
  * @author paul
- * @see https://www.scaledagileframework.com/features-and-capabilities/
+ * @link https://www.scaledagileframework.com/features-and-capabilities/
  */
 @NodeEntity
 public class Capability extends AbstractAuditableBaseEntity {

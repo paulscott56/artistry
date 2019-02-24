@@ -1,5 +1,5 @@
 package artistry.models;
 
-public class IterationGoal extends AbstractAuditableBaseEntity {
+class IterationGoal extends AbstractAuditableBaseEntity {
 
 }

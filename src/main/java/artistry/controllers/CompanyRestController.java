@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to manage companies")
 @RequestMapping("/company")
-public class CompanyRestController {
+class CompanyRestController {
 	static final Logger log = LoggerFactory.getLogger(CompanyRestController.class);
 	
 	@Autowired

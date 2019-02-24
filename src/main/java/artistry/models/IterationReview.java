@@ -1,5 +1,5 @@
 package artistry.models;
 
-public class IterationReview extends AbstractAuditableBaseEntity {
+class IterationReview extends AbstractAuditableBaseEntity {
 
 }

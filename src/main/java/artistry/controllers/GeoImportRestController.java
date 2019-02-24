@@ -1,41 +1,33 @@
 package artistry.controllers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.text.ParseException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
+import artistry.configuration.StorageProperties;
+import artistry.services.ArtistryCsvReader;
+import artistry.utils.DownloadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import artistry.configuration.StorageProperties;
-import artistry.services.ArtistryCsvReader;
-import artistry.utils.DownloadService;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Arrays;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 @Configuration
 @RestController
 @Description("Controller to simplify the import of the geo data")
 @RequestMapping("/geo")
-public class GeoImportRestController {
+class GeoImportRestController {
 
 	private static final String RESOURCE = StorageProperties.getLocation(); //"/artistry/data/csv/";
 
-	static final Logger log = LoggerFactory.getLogger(GeoImportRestController.class);
+	private static final Logger log = LoggerFactory.getLogger(GeoImportRestController.class);
 
 	@Autowired
 	private ArtistryCsvReader csvReader;
@@ -45,7 +37,7 @@ public class GeoImportRestController {
 
 	@RequestMapping(value = "/import", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public String importData() throws IOException, URISyntaxException, ParseException {
+	public String importData() {
 		try {
 			csvReader.readAllCountriesCsv();
 			return "Data import has been completed!";
@@ -69,8 +61,7 @@ public class GeoImportRestController {
 
 	@RequestMapping(value = "/importbycode", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public String importDataByCode(@RequestParam("code") String code)
-			throws IOException, URISyntaxException, ParseException {
+	public String importDataByCode(@RequestParam("code") String code) {
 
 		try {
 			String data = downloader.download("http://download.geonames.org/export/dump/" + code + ".zip", code);
@@ -112,7 +103,7 @@ public class GeoImportRestController {
 
 	@RequestMapping(value = "/importcities", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public String importDataByCity() throws IOException, URISyntaxException, ParseException {
+	public String importDataByCity() {
 
 		try {
 			List<String> downloadfiles = Arrays.asList("cities1000.zip", "cities15000.zip", "cities500.zip",

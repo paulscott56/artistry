@@ -1,6 +1,6 @@
 package artistry.utils;
 
-public class DataForBoardRequest {
+class DataForBoardRequest {
 	private String name;
 	private String projectIds[] = new String[2];
 	private String preset;
@@ -21,8 +21,7 @@ public class DataForBoardRequest {
 	}
 
 	public void setProjectIds(String[] projectIds) {
-		String[] cloneProjectIds = projectIds.clone();
-		this.projectIds = cloneProjectIds;
+		this.projectIds = projectIds.clone();
 	}
 
 	public String getPreset() {

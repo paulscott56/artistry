@@ -1,5 +1,5 @@
 package artistry.models;
 
-public class SystemDemo extends AbstractAuditableBaseEntity {
+class SystemDemo extends AbstractAuditableBaseEntity {
 
 }

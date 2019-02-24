@@ -1,6 +1,6 @@
 package artistry.utils;
 
-import java.awt.Point;
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
@@ -14,8 +14,8 @@ import java.awt.geom.Rectangle2D;
  * system because it provides a better fit with a typical the pixel coordinate
  * system.
  */
-public class GoogleTileUtils {
-	static int TILE_SIZE = 256;
+class GoogleTileUtils {
+	private static final int TILE_SIZE = 256;
 
 	/**
 	 * Returns the pixel offset of a latitude and longitude within a single typical
@@ -69,7 +69,7 @@ public class GoogleTileUtils {
 	 *            in degrees
 	 * @return
 	 */
-	public static Point2D toNormalisedPixelCoords(double lat, double lng) {
+	private static Point2D toNormalisedPixelCoords(double lat, double lng) {
 		// first convert to Mercator projection
 		// first convert the lat lon to mercator coordintes.
 		if (lng > 180) {
@@ -93,7 +93,7 @@ public class GoogleTileUtils {
 	 * @param zoom
 	 * @return
 	 */
-	public static Point toTileXY(double lat, double lng, int zoom) {
+	private static Point toTileXY(double lat, double lng, int zoom) {
 		Point2D normalised = toNormalisedPixelCoords(lat, lng);
 		int scale = 1 << (17 - zoom);
 
@@ -110,7 +110,7 @@ public class GoogleTileUtils {
 	 * @param zoom
 	 * @return
 	 */
-	public static Point toZoomedPixelCoords(double lat, double lng, int zoom) {
+	private static Point toZoomedPixelCoords(double lat, double lng, int zoom) {
 		Point2D normalised = toNormalisedPixelCoords(lat, lng);
 		double scale = (1 << (17 - zoom)) * TILE_SIZE;
 
@@ -133,7 +133,7 @@ public class GoogleTileUtils {
 		int currentX = 0;
 		int currentY = 0;
 
-		StringBuffer satString = new StringBuffer(zoom);
+		StringBuilder satString = new StringBuilder(zoom);
 		satString.append("t");
 
 		for (int i = 0; i < invZoom; i++) {
@@ -164,7 +164,6 @@ public class GoogleTileUtils {
 	/**
 	 * Returns an x,y for a satellite reference
 	 * 
-	 * @param string
 	 * @return
 	 */
 	private static Point satelliteRefToTileXY(String satelliteRef) {
@@ -215,7 +214,6 @@ public class GoogleTileUtils {
 	/**
 	 * Returns the zoom level for the given satellite reference string
 	 * 
-	 * @param string
 	 * @return
 	 */
 	private static int satelliteRefToZoom(String satRef) {

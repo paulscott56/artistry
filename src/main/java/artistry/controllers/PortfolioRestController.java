@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to manage portfolios")
 @RequestMapping("/portfolio")
-public class PortfolioRestController {
+class PortfolioRestController {
 
 static final Logger log = LoggerFactory.getLogger(PortfolioRestController.class);
 	

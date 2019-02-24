@@ -4,7 +4,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class VelocityStatEntry extends AbstractAuditableBaseEntity {
+class VelocityStatEntry extends AbstractAuditableBaseEntity {
 
 	@Relationship(type = "HAS_VELOCITY_ENTRY", direction = Relationship.INCOMING)
 	private VelocityEntry entry;

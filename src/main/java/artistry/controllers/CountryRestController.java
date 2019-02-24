@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to manage countries")
 @RequestMapping("/country")
-public class CountryRestController {
+class CountryRestController {
 	
 	static final Logger log = LoggerFactory.getLogger(CountryRestController.class);
 

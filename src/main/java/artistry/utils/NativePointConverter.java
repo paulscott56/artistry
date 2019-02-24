@@ -1,15 +1,15 @@
 package artistry.utils;
 
-import java.util.Optional;
-
 import org.neo4j.driver.v1.Values;
 import org.neo4j.driver.v1.types.Point;
 import org.neo4j.ogm.typeconversion.AttributeConverter;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
-public class NativePointConverter
+class NativePointConverter
 		implements AttributeConverter<org.springframework.data.geo.Point, org.neo4j.driver.v1.types.Point>,
 		Converter<org.neo4j.driver.v1.types.Point, org.springframework.data.geo.Point> {
 

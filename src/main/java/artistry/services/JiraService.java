@@ -1,53 +1,31 @@
 package artistry.services;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
+import artistry.models.*;
+import artistry.repositories.*;
+import artistry.utils.JiraUtils;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import artistry.models.BoardConfig;
-import artistry.models.BoardEntry;
-import artistry.models.BoardLocation;
-import artistry.models.IssueType;
-import artistry.models.JiraBacklog;
-import artistry.models.JiraEpics;
-import artistry.models.JiraIssuesWithoutEpic;
-import artistry.models.JiraProjects;
-import artistry.models.JiraUser;
-import artistry.models.JiraWebhook;
-import artistry.repositories.BoardRepository;
-import artistry.repositories.IssueTypeRepository;
-import artistry.repositories.JiraBacklogRepository;
-import artistry.repositories.JiraIssuesWithoutEpicRepository;
-import artistry.repositories.JiraProjectsRepository;
-import artistry.repositories.JiraUserRepository;
-import artistry.utils.JiraUtils;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JiraService {
 
-	static final Logger log = LoggerFactory.getLogger(JiraService.class);
+	private static final Logger log = LoggerFactory.getLogger(JiraService.class);
 
 	@Value("${jira.url}")
 	private String jiraUrl;
@@ -110,7 +88,7 @@ public class JiraService {
 				brepo.save(board);
 				return board;
 			} else {
-				Optional<BoardEntry> boarddata = brepo.findOneByJiraId(Integer.valueOf(teamid));
+				Optional<BoardEntry> boarddata = brepo.findOneByJiraId(teamid);
 				if (boarddata.isPresent()) {
 					return boarddata.get();
 				}
@@ -205,7 +183,7 @@ public class JiraService {
 
 	}
 
-	public BoardConfig getBoardConfig(int id) {
+	private BoardConfig getBoardConfig(int id) {
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -223,7 +201,7 @@ public class JiraService {
 		}
 	}
 
-	public List<IssueType> getIssueTypes() throws JsonParseException, JsonMappingException, IOException {
+	public List<IssueType> getIssueTypes() throws IOException {
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -283,8 +261,7 @@ public class JiraService {
 			final ResponseEntity<JiraEpics> data = rt.exchange(
 					jiraUrl + "/rest/agile/latest/board/" + teamid + "/epic?maxResults=200", HttpMethod.GET, entity,
 					JiraEpics.class);
-			JiraEpics epics = data.getBody();
-			return epics;
+			return data.getBody();
 		} catch (Exception e) {
 			JiraEpics bl = new JiraEpics();
 			bl.setErrorOrComment(e.getLocalizedMessage());

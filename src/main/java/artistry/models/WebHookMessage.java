@@ -1,15 +1,15 @@
 package artistry.models;
 
-import java.time.Instant;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import java.time.Instant;
+
 @NodeEntity
 public class WebHookMessage { // extends AbstractAuditableBaseEntity {
 
-	static final long MESSAGE_TIMEOUT = 24 * 60 * 60 * 1000;
+	private static final long MESSAGE_TIMEOUT = 24 * 60 * 60 * 1000;
 
 	@Id
 	@GeneratedValue

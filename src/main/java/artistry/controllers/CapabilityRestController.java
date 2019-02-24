@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to for handling capabilities (master features)")
 @RequestMapping("/capability")
-public class CapabilityRestController {
+class CapabilityRestController {
 	
 	static final Logger log = LoggerFactory.getLogger(CapabilityRestController.class);
 	
@@ -39,16 +39,14 @@ public class CapabilityRestController {
 	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Capability createCapability(@RequestBody Capability capability) {
-		Capability savedcap = capRepo.save(capability);
-		return savedcap;
+		return capRepo.save(capability);
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Capability updateCapability(@RequestBody Capability capability) {
-		Capability savedcap = capRepo.save(capability);
-		return savedcap;
+		return capRepo.save(capability);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = {

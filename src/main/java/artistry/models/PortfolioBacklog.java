@@ -1,5 +1,5 @@
 package artistry.models;
 
-public class PortfolioBacklog extends AbstractAuditableBaseEntity {
+class PortfolioBacklog extends AbstractAuditableBaseEntity {
 
 }

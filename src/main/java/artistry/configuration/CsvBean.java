@@ -1,5 +1,5 @@
 package artistry.configuration;
 
-public class CsvBean {
+class CsvBean {
 
 }

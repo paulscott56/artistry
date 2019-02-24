@@ -8,7 +8,7 @@ package artistry.models;
  * @author paul
  *
  */
-public class CommunicationPreferences extends AbstractAuditableBaseEntity {
+class CommunicationPreferences extends AbstractAuditableBaseEntity {
 
 	private boolean marketingEmail;
 	private boolean personalEmail;

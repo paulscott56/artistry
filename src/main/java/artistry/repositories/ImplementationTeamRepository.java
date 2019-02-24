@@ -1,5 +1,5 @@
-/**
- * Repository for implementation teams
+/*
+  Repository for implementation teams
  */
 package artistry.repositories;
 

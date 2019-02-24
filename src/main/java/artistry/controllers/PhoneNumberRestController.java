@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to for handling phone number objects")
 @RequestMapping("/phone")
-public class PhoneNumberRestController {
+class PhoneNumberRestController {
 
 	static final Logger log = LoggerFactory.getLogger(PhoneNumberRestController.class);
 

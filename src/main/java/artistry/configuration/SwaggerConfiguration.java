@@ -1,12 +1,10 @@
 package artistry.configuration;
 
+import com.fasterxml.classmate.TypeResolver;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.fasterxml.classmate.TypeResolver;
-
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -19,7 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @Configuration
-public class SwaggerConfiguration {
+class SwaggerConfiguration {
 
 	@Autowired
 	private TypeResolver typeResolver;
@@ -27,7 +25,7 @@ public class SwaggerConfiguration {
 	/**
 	 * Swagger config
 	 *
-	 * @return
+	 * @return configuration
 	 */
 
 	@Bean

@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to for handling requirements")
 @RequestMapping("/requirement")
-public class RequirementRestController {
+class RequirementRestController {
 	
 	static final Logger log = LoggerFactory.getLogger(RequirementRestController.class);
 

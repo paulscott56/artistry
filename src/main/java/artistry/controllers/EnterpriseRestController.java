@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to manage enterprises")
 @RequestMapping("/enterprise")
-public class EnterpriseRestController {
+class EnterpriseRestController {
 
 	static final Logger log = LoggerFactory.getLogger(EnterpriseRestController.class);
 
@@ -46,16 +46,14 @@ public class EnterpriseRestController {
 	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Enterprise createEnterprise(@RequestBody Enterprise enterprise) {
-		Enterprise savedenterprise = enterRepo.save(enterprise);
-		return savedenterprise;
+		return enterRepo.save(enterprise);
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Enterprise updateEnterprise(@RequestBody Enterprise enterprise) {
-		Enterprise savedenterprise = enterRepo.save(enterprise);
-		return savedenterprise;
+		return enterRepo.save(enterprise);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = {

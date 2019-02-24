@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to manage KPI's")
 @RequestMapping("/kpi")
-public class KpiRestController {
+class KpiRestController {
 	
 	static final Logger log = LoggerFactory.getLogger(KpiRestController.class);
 	
@@ -33,24 +33,21 @@ public class KpiRestController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private KPI createKPI(@RequestBody KPI kpi) {
-		KPI savedkpi = kpiRepo.save(kpi);
-		return savedkpi;
+		return kpiRepo.save(kpi);
 	}
 
 	@RequestMapping(value = "/getallkpis", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Iterable<KPI> getAllKPIs() {
-		Iterable<KPI> data = kpiRepo.findAll();
-		return data;
+		return kpiRepo.findAll();
 	}
 
 	@RequestMapping(value = "/updatekpi", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private KPI updateKPI(@RequestBody KPI kpi) {
-		KPI savedkpi = kpiRepo.save(kpi);
-		return savedkpi;
+		return kpiRepo.save(kpi);
 	}
 
 	@RequestMapping(value = "/deletekpi/{id}", method = RequestMethod.DELETE, produces = {

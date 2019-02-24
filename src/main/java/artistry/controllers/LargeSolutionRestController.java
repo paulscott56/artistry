@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to manage large solutions")
 @RequestMapping("/largesolution")
-public class LargeSolutionRestController {
+class LargeSolutionRestController {
 
 	static final Logger log = LoggerFactory.getLogger(LargeSolutionRestController.class);
 

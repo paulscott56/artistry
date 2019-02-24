@@ -1,5 +1,7 @@
 package artistry.controllers;
 
+import artistry.models.Train;
+import artistry.repositories.TrainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.context.annotation.Configuration;
@@ -10,15 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import artistry.models.Train;
-import artistry.repositories.TrainRepository;
-
 @Configuration
 @RestController
 @Description("Trains Controller, to facilitate CRUD messages for overall Agile Release Trains")
 @CacheConfig(cacheNames = "trains")
 @RequestMapping("/train")
-public class TrainRestController {
+class TrainRestController {
 
 	@Autowired
 	private TrainRepository repo;

@@ -16,7 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
-public class DemoSetupController {
+class DemoSetupController {
 
 	@Autowired
 	private PersonRepository personRepo;
@@ -110,8 +110,8 @@ public class DemoSetupController {
 
 		Set<Epic> enablerEpics = new HashSet<>();
 		enablerEpics
-				.add(epicMaker("epic 1", "epic 1", EpicType.PORTFOLIO_EPIC_SPLIT_INTO_PROGRAM_EPICS_AND_DECENTRALIZE,
-						103, "We will build it, they will come", EpicType.PROGRAM_EPIC_SPIKE_FIRST));
+                .add(epicMaker(
+                ));
 		p.setEnablerEpics(enablerEpics);
 
 		Set<Epic> businessEpics = new HashSet<>();
@@ -121,8 +121,7 @@ public class DemoSetupController {
 		return portfolioRepo.save(p);
 	}
 
-	private Epic epicMaker(String epicDescription, String epicName, EpicType epicType, int estimatedStoryPoints,
-			String hypothesisStatement, EpicType incrementalImplementationStrategy) {
+    private Epic epicMaker() {
 		Epic e = new Epic();
 
 		Set<Feature> additionalPotentialFeatures = new HashSet<>();
@@ -139,24 +138,24 @@ public class DemoSetupController {
 		Set<Person> customers = new HashSet<>();
 		customers.add(personMaker("cust1", "customer1", "IN", Role.CUSTOMER, false));
 		e.setCustomers(customers);
-		e.setEpicDescription(epicDescription);
-		e.setEpicName(epicName);
+        e.setEpicDescription("epic 1");
+        e.setEpicName("epic 1");
 
 		e.setEpicOwner(personMaker("epicOwner", "epicOwner", "IE", Role.EPIC_OWNER, false));
-		e.setEpicType(epicType);
+        e.setEpicType(EpicType.PORTFOLIO_EPIC_SPLIT_INTO_PROGRAM_EPICS_AND_DECENTRALIZE);
 		e.setEstimatedMonetaryCost(new BigDecimal("56"));
-		e.setEstimatedStoryPoints(estimatedStoryPoints);
+        e.setEstimatedStoryPoints(103);
 		DevelopmentTimeLine estimatedTimeline = new DevelopmentTimeLine();
 		estimatedTimeline.setEstimatedCompletionDate(new Date());
 		estimatedTimeline.setEstimatedStartDate(new Date());
 		e.setEstimatedTimeline(estimatedTimeline);
 		e.setFunnelEntryDate(new Date());
 		e.setGoNoGo(true);
-		e.setHypothesisStatement(hypothesisStatement);
+        e.setHypothesisStatement("We will build it, they will come");
 
 		e.setImpactOnProductsAndServices(docMaker("impactOnProductsAndServices", "impactOnProductsAndServices"));
 		e.setImpactOnSalesDeployment(docMaker("ImpactOnSalesDeployment", "ImpactOnSalesDeployment"));
-		e.setIncrementalImplementationStrategy(incrementalImplementationStrategy);
+        e.setIncrementalImplementationStrategy(EpicType.PROGRAM_EPIC_SPIKE_FIRST);
 		e.setInhouseOrExternalDev(docMaker("inhouseOrExternalDev", "inhouseOrExternalDev"));
 
 		Set<Requirement> inScope = new HashSet<>();
@@ -266,13 +265,13 @@ public class DemoSetupController {
 		Company co = new Company();
 		co.setCompanyName(companyName);
 		co.setContactPerson(personMaker("contact1", "contact1", "IE", Role.CEO, false));
-		co.setCountry(countryMaker("IE"));
+        co.setCountry(countryMaker());
 		// co.setTeams(teams);
 		return coRepo.save(co);
 	}
 
-	private Country countryMaker(String countryCode) {
-		return countryRepo.findOneByIso(countryCode);
+    private Country countryMaker() {
+        return countryRepo.findOneByIso("IE");
 	}
 
 	private Person personMaker(String username, String name, String countryCode, Role role, boolean agileTeamMember) {

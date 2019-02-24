@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to manage addresses")
 @RequestMapping("/address")
-public class AddressRestController {
+class AddressRestController {
 
 	static final Logger log = LoggerFactory.getLogger(AddressRestController.class);
 	

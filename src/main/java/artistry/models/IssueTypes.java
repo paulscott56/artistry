@@ -1,13 +1,13 @@
 package artistry.models;
 
-import java.util.List;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import java.util.List;
+
 @NodeEntity
-public class IssueTypes {
+class IssueTypes {
 	@Id
 	@GeneratedValue
 	private Long id;

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "field", "fieldtype", "from", "fromString", "to", "toString" })
-public class Item {
+class Item {
 
 	@JsonProperty("field")
 	private String field;

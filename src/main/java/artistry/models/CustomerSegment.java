@@ -5,7 +5,7 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class CustomerSegment extends AbstractAuditableBaseEntity {
+class CustomerSegment extends AbstractAuditableBaseEntity {
 
 	@Id
 	@GeneratedValue

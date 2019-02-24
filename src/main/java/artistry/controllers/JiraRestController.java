@@ -1,42 +1,24 @@
 package artistry.controllers;
 
-import java.io.IOException;
-import java.util.List;
-
+import artistry.models.*;
+import artistry.services.JiraService;
+import artistry.services.RapidviewService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-
-import artistry.models.BoardEntry;
-import artistry.models.IssueType;
-import artistry.models.JiraBacklog;
-import artistry.models.JiraEpics;
-import artistry.models.JiraIssuesWithoutEpic;
-import artistry.models.JiraProjects;
-import artistry.models.JiraUser;
-import artistry.models.JiraWebhook;
-import artistry.models.RapidView;
-import artistry.services.JiraService;
-import artistry.services.RapidviewService;
+import java.io.IOException;
+import java.util.List;
 
 @Configuration
 @RestController
 @Description("Controller to manage jira")
 @RequestMapping("/jira")
-public class JiraRestController {
+class JiraRestController {
 
 	static final Logger log = LoggerFactory.getLogger(JiraRestController.class);
 
@@ -50,8 +32,7 @@ public class JiraRestController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public BoardEntry getByTeamId(@RequestParam("teamid") int teamid) {
-		BoardEntry board = jira.getBoard(teamid);
-		return board;
+		return jira.getBoard(teamid);
 	}
 
 	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
@@ -65,7 +46,7 @@ public class JiraRestController {
 	@RequestMapping(value = "/getissuetypes", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public List<IssueType> getIssueTypes() throws JsonParseException, JsonMappingException, IOException {
+	public List<IssueType> getIssueTypes() throws IOException {
 		return jira.getIssueTypes();
 	}
 
@@ -73,8 +54,7 @@ public class JiraRestController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public JiraBacklog getBacklogByTeamId(@RequestParam("teamid") int teamid) {
-		JiraBacklog backlog = jira.getBacklog(teamid);
-		return backlog;
+		return jira.getBacklog(teamid);
 	}
 
 	@RequestMapping(value = "/getteamepics", method = RequestMethod.GET, produces = {
@@ -82,16 +62,14 @@ public class JiraRestController {
 	@ResponseBody
 	public JiraEpics getEpicsByTeamId(@RequestParam("teamid") int teamid) {
 
-		JiraEpics epics = jira.getTeamEpics(teamid);
-		return epics;
+		return jira.getTeamEpics(teamid);
 	}
 
 	@RequestMapping(value = "/getteamissueswithoutepic", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public JiraIssuesWithoutEpic getIssuesWithoutEpicsByTeamId(@RequestParam("teamid") int teamid) {
-		JiraIssuesWithoutEpic issues = jira.getTeamIssuesWithoutEpics(teamid);
-		return issues;
+		return jira.getTeamIssuesWithoutEpics(teamid);
 	}
 
 	/**
@@ -103,8 +81,7 @@ public class JiraRestController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public JiraProjects getProjects() {
-		JiraProjects projects = jira.getProjects();
-		return projects;
+		return jira.getProjects();
 	}
 
 	/**
@@ -114,8 +91,7 @@ public class JiraRestController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public JiraUser getUserByUsername(@RequestParam("username") String username) {
-		JiraUser user = jira.getUserByUsername(username);
-		return user;
+		return jira.getUserByUsername(username);
 	}
 
 	/**
@@ -123,7 +99,7 @@ public class JiraRestController {
 	 * 
 	 * @param hook
 	 * @return
-	 * @see https://developer.atlassian.com/server/jira/platform/webhooks/
+	 * @link https://developer.atlassian.com/server/jira/platform/webhooks/
 	 */
 	@RequestMapping(value = "/createwebhook", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })

@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to for handling non functional requirements")
 @RequestMapping("/nfr")
-public class NonFunctionalRequirementsRestController {
+class NonFunctionalRequirementsRestController {
 	
 	static final Logger log = LoggerFactory.getLogger(NonFunctionalRequirementsRestController.class);
 

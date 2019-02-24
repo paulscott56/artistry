@@ -1,17 +1,17 @@
 package artistry.models;
 
-import java.util.Set;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import java.util.Set;
+
 /**
  * Portfolio level model
  * 
  * @author paul
- * @see https://www.scaledagileframework.com/portfolio-level/
+ * @link https://www.scaledagileframework.com/portfolio-level/
  *
  */
 @NodeEntity

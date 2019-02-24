@@ -1,14 +1,12 @@
 package artistry.configuration;
 
-import java.io.File;
-import java.io.IOException;
-
+import artistry.utils.StorageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import artistry.utils.StorageService;
+import java.io.File;
 
 @Configuration
 public class StorageProperties {
@@ -16,7 +14,7 @@ public class StorageProperties {
 	@Value("${artistry.data.directory}")
 	private static String location;
 
-	public StorageProperties() throws IOException {
+	public StorageProperties() {
 		super();
 		File flocation = new File("/tmp/artistry/data"); // ResourceUtils.getFile("classpath:csv").toString();
 		if (!flocation.exists()) {
@@ -40,7 +38,7 @@ public class StorageProperties {
 	}
 
 	public void setLocation(String location) {
-		this.location = location;
+		StorageProperties.location = location;
 	}
 
 	@Bean

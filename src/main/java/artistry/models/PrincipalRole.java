@@ -1,11 +1,10 @@
 package artistry.models;
 
+import artistry.enums.Role;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-import artistry.enums.Role;
-
 @NodeEntity("PrincipalRole")
-public class PrincipalRole extends AbstractAuditableBaseEntity {
+class PrincipalRole extends AbstractAuditableBaseEntity {
 
 	private Role role;
 	private Person person;

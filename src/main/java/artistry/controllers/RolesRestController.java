@@ -19,7 +19,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to for handling roles that people play)")
 @RequestMapping("/role")
-public class RolesRestController {
+class RolesRestController {
 
 	static final Logger log = LoggerFactory.getLogger(RolesRestController.class);
 
@@ -52,16 +52,14 @@ public class RolesRestController {
 	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private PersonRole createPersonRole(@RequestBody PersonRole personRole) {
-		PersonRole savedrole = roleRepo.save(personRole);
-		return savedrole;
+		return roleRepo.save(personRole);
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private PersonRole updatePersonRole(@RequestBody PersonRole personRole) {
-		PersonRole savedrole = roleRepo.save(personRole);
-		return savedrole;
+		return roleRepo.save(personRole);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = {

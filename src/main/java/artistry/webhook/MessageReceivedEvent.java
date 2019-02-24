@@ -1,14 +1,13 @@
 package artistry.webhook;
 
-import org.springframework.context.ApplicationEvent;
-
 import artistry.models.WebHookMessage;
+import org.springframework.context.ApplicationEvent;
 
 public class MessageReceivedEvent extends ApplicationEvent {
 
 	private static final long serialVersionUID = 1L;
 
-	private WebHookMessage webHookMessage;
+	private final WebHookMessage webHookMessage;
 
 	public MessageReceivedEvent(Object source, WebHookMessage message) {
 		super(source);

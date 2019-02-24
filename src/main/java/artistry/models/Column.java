@@ -1,11 +1,11 @@
 package artistry.models;
 
-import java.util.List;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 
-public class Column {
+import java.util.List;
+
+class Column {
 
 	@Id
 	@GeneratedValue

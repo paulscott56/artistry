@@ -19,7 +19,7 @@ import java.util.Set;
 @RestController
 @Description("Controller to manage documents")
 @RequestMapping("/document")
-public class DocumentRestController {
+class DocumentRestController {
 
 	static final Logger log = LoggerFactory.getLogger(DocumentRestController.class);
 
@@ -43,8 +43,7 @@ public class DocumentRestController {
 	@ResponseBody
 	private Document createDocument(@RequestBody Document document) {
 		document.setCreationDate(new Date());
-		Document saveddocument = docRepo.save(document);
-		return saveddocument;
+		return docRepo.save(document);
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = {

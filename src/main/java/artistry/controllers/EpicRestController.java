@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to manage epics")
 @RequestMapping("/epic")
-public class EpicRestController {
+class EpicRestController {
 	
 	static final Logger log = LoggerFactory.getLogger(EpicRestController.class);
 

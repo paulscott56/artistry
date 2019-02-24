@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @EnableAutoConfiguration
 @EnableCaching
 @Transactional
-public class ArtistryApplication {
+class ArtistryApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ArtistryApplication.class, args);

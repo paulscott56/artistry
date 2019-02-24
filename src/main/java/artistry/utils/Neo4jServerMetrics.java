@@ -1,20 +1,19 @@
 package artistry.utils;
 
-import static java.util.Collections.emptyMap;
+import io.micrometer.core.instrument.Gauge;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.binder.MeterBinder;
+import org.neo4j.ogm.session.Session;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.ToDoubleFunction;
 
-import org.neo4j.ogm.session.Session;
-import org.springframework.stereotype.Component;
-
-import io.micrometer.core.instrument.Gauge;
-import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.core.instrument.binder.MeterBinder;
+import static java.util.Collections.emptyMap;
 
 @Component
-public class Neo4jServerMetrics implements MeterBinder {
+class Neo4jServerMetrics implements MeterBinder {
 
 	private final Session session;
 

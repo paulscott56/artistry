@@ -1,18 +1,17 @@
 package artistry.models;
 
+import artistry.enums.EpicType;
+import org.neo4j.ogm.annotation.NodeEntity;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
-
-import org.neo4j.ogm.annotation.NodeEntity;
-
-import artistry.enums.EpicType;
 
 /**
  * Define an epic
  * 
  * @author paul
- * @see https://www.scaledagileframework.com/epic/
+ * @link https://www.scaledagileframework.com/epic/
  */
 @NodeEntity
 public class Epic extends AbstractAuditableBaseEntity {

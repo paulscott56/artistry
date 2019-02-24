@@ -26,7 +26,7 @@ import java.util.*;
 @Component
 public class ArtistryCsvReader {
 
-	static final Logger log = LoggerFactory.getLogger(ArtistryCsvReader.class);
+	private static final Logger log = LoggerFactory.getLogger(ArtistryCsvReader.class);
 	
 	private static final String RESOURCE = StorageProperties.getLocation();
 
@@ -53,46 +53,44 @@ public class ArtistryCsvReader {
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoPlace> csvToBean = new CsvToBeanBuilder<GeoPlace>(reader).withType(GeoPlace.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator('\t').build();
-		Iterator<GeoPlace> geoIterator = csvToBean.iterator();
-		while (geoIterator.hasNext()) {
+		for (GeoPlace aCsvToBean : csvToBean) {
 			try {
-				GeoPlace place = geoIterator.next();
-				System.out.println("Processing place: " + place.getName());
-				Country country = countryRepo.findOneByIso(place.getCountryCode());
+				System.out.println("Processing place: " + aCsvToBean.getName());
+				Country country = countryRepo.findOneByIso(aCsvToBean.getCountryCode());
 
 				Place poi = new Place();
 
-				poi.setAdmin1Code(place.getAdmin1Code());
-				poi.setAdmin2Code(place.getAdmin2Code());
-				poi.setAdmin3Code(place.getAdmin3Code());
-				poi.setAdmin4Code(place.getAdmin4Code());
+				poi.setAdmin1Code(aCsvToBean.getAdmin1Code());
+				poi.setAdmin2Code(aCsvToBean.getAdmin2Code());
+				poi.setAdmin3Code(aCsvToBean.getAdmin3Code());
+				poi.setAdmin4Code(aCsvToBean.getAdmin4Code());
 
 				Set<AlternateName> alternatenames = new HashSet<>();
-				String[] anames = place.getAlternateNames().split(",");
+				String[] anames = aCsvToBean.getAlternateNames().split(",");
 				for (String a : anames) {
 					AlternateName alt = new AlternateName();
 					alt.setAlternateName(a);
 					alternatenames.add(alt);
 				}
 				poi.setAlternateNames(alternatenames);
-				poi.setAsciiName(place.getAsciiName());
-				poi.setCc2(place.getCc2());
+				poi.setAsciiName(aCsvToBean.getAsciiName());
+				poi.setCc2(aCsvToBean.getCc2());
 				poi.setCountry(country);
-				poi.setCountryCode(place.getCountryCode());
-				poi.setDem(place.getDem());
-				poi.setElevation(place.getElevation());
-				poi.setFeatureClass(place.getFeatureClass());
-				poi.setFeatureCode(place.getFeatureCode());
-				poi.setGeonameId(place.getGeonameId());
-				poi.setLatitude(place.getLatitude());
-				poi.setLongitude(place.getLongitude());
+				poi.setCountryCode(aCsvToBean.getCountryCode());
+				poi.setDem(aCsvToBean.getDem());
+				poi.setElevation(aCsvToBean.getElevation());
+				poi.setFeatureClass(aCsvToBean.getFeatureClass());
+				poi.setFeatureCode(aCsvToBean.getFeatureCode());
+				poi.setGeonameId(aCsvToBean.getGeonameId());
+				poi.setLatitude(aCsvToBean.getLatitude());
+				poi.setLongitude(aCsvToBean.getLongitude());
 				String pattern = "yyyy-MM-dd";
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-				Date moddate = simpleDateFormat.parse(place.getModificationDate());
+				Date moddate = simpleDateFormat.parse(aCsvToBean.getModificationDate());
 				poi.setModificationDate(moddate);
-				poi.setName(place.getName());
-				poi.setPopulation(place.getPopulation());
-				poi.setTimezoneId(place.getTimezoneId());
+				poi.setName(aCsvToBean.getName());
+				poi.setPopulation(aCsvToBean.getPopulation());
+				poi.setTimezoneId(aCsvToBean.getTimezoneId());
 
 				Set<Place> placelist = new HashSet<>();
 				Set<Place> countrytoadd = country.getPlaces();
@@ -115,46 +113,44 @@ public class ArtistryCsvReader {
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoPlace> csvToBean = new CsvToBeanBuilder<GeoPlace>(reader).withType(GeoPlace.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator('\t').build();
-		Iterator<GeoPlace> geoIterator = csvToBean.iterator();
-		while (geoIterator.hasNext()) {
+		for (GeoPlace aCsvToBean : csvToBean) {
 			try {
-				GeoPlace place = geoIterator.next();
-				System.out.println("Processing place in country code: " + place.getCountryCode());
-				Country country = countryRepo.findOneByIso(place.getCountryCode());
+				System.out.println("Processing place in country code: " + aCsvToBean.getCountryCode());
+				Country country = countryRepo.findOneByIso(aCsvToBean.getCountryCode());
 
 				Place poi = new Place();
 
-				poi.setAdmin1Code(place.getAdmin1Code());
-				poi.setAdmin2Code(place.getAdmin2Code());
-				poi.setAdmin3Code(place.getAdmin3Code());
-				poi.setAdmin4Code(place.getAdmin4Code());
+				poi.setAdmin1Code(aCsvToBean.getAdmin1Code());
+				poi.setAdmin2Code(aCsvToBean.getAdmin2Code());
+				poi.setAdmin3Code(aCsvToBean.getAdmin3Code());
+				poi.setAdmin4Code(aCsvToBean.getAdmin4Code());
 
 				Set<AlternateName> alternatenames = new HashSet<>();
-				String[] anames = place.getAlternateNames().split(",");
+				String[] anames = aCsvToBean.getAlternateNames().split(",");
 				for (String a : anames) {
 					AlternateName alt = new AlternateName();
 					alt.setAlternateName(a);
 					alternatenames.add(alt);
 				}
 				poi.setAlternateNames(alternatenames);
-				poi.setAsciiName(place.getAsciiName());
-				poi.setCc2(place.getCc2());
+				poi.setAsciiName(aCsvToBean.getAsciiName());
+				poi.setCc2(aCsvToBean.getCc2());
 				poi.setCountry(country);
-				poi.setCountryCode(place.getCountryCode());
-				poi.setDem(place.getDem());
-				poi.setElevation(place.getElevation());
-				poi.setFeatureClass(place.getFeatureClass());
-				poi.setFeatureCode(place.getFeatureCode());
-				poi.setGeonameId(place.getGeonameId());
-				poi.setLatitude(place.getLatitude());
-				poi.setLongitude(place.getLongitude());
+				poi.setCountryCode(aCsvToBean.getCountryCode());
+				poi.setDem(aCsvToBean.getDem());
+				poi.setElevation(aCsvToBean.getElevation());
+				poi.setFeatureClass(aCsvToBean.getFeatureClass());
+				poi.setFeatureCode(aCsvToBean.getFeatureCode());
+				poi.setGeonameId(aCsvToBean.getGeonameId());
+				poi.setLatitude(aCsvToBean.getLatitude());
+				poi.setLongitude(aCsvToBean.getLongitude());
 				String pattern = "yyyy-MM-dd";
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-				Date moddate = simpleDateFormat.parse(place.getModificationDate());
+				Date moddate = simpleDateFormat.parse(aCsvToBean.getModificationDate());
 				poi.setModificationDate(moddate);
-				poi.setName(place.getName());
-				poi.setPopulation(place.getPopulation());
-				poi.setTimezoneId(place.getTimezoneId());
+				poi.setName(aCsvToBean.getName());
+				poi.setPopulation(aCsvToBean.getPopulation());
+				poi.setTimezoneId(aCsvToBean.getTimezoneId());
 
 				Set<Place> placelist = new HashSet<>();
 				Set<Place> countrytoadd = country.getPlaces();
@@ -195,38 +191,36 @@ public class ArtistryCsvReader {
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoCountry> csvToBean = new CsvToBeanBuilder<GeoCountry>(reader).withType(GeoCountry.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator('\t').build();
-		Iterator<GeoCountry> geoIterator = csvToBean.iterator();
-		while (geoIterator.hasNext()) {
+		for (GeoCountry aCsvToBean : csvToBean) {
 			try {
 				Set<Country> countriestoadd = new HashSet<>();
-				GeoCountry place = geoIterator.next();
 
 				Country c = new Country();
-				c.setAreainsqkm(place.getAreainsqkm());
-				c.setCapital(place.getCapital());
-				String continent = place.getContinent();
+				c.setAreainsqkm(aCsvToBean.getAreainsqkm());
+				c.setCapital(aCsvToBean.getCapital());
+				String continent = aCsvToBean.getContinent();
 				Continent continentCheck = continentRepo.findOneByCode(continent);
 				Set<Country> countriesoncontinent = continentCheck.getCountry();
 				if (countriesoncontinent == null) {
 					countriesoncontinent = countriestoadd;
 				}
 				c.setContinent(continentCheck);
-				c.setCountry(place.getCountry());
-				c.setCurrencyCode(place.getCurrencyCode());
-				c.setCurrencyName(place.getCurrencyName());
-				c.setEquivalentFipsCode(place.getEquivalentFipsCode());
-				c.setFips(place.getFips());
-				c.setGeonameid(place.getGeonameid());
-				c.setIso(place.getIso());
-				c.setIso3(place.getIso3());
-				c.setIsoNumeric(place.getIsoNumeric());
-				c.setLanguages(place.getLanguages());
-				c.setNeighbours(place.getNeighbours());
-				c.setPhone(place.getPhone());
-				c.setPopulation(place.getPopulation());
-				c.setPostalCodeFormat(place.getPostalCodeFormat());
-				c.setPostalCodeRegex(place.getPostalCodeRegex());
-				c.setTld(place.getTld());
+				c.setCountry(aCsvToBean.getCountry());
+				c.setCurrencyCode(aCsvToBean.getCurrencyCode());
+				c.setCurrencyName(aCsvToBean.getCurrencyName());
+				c.setEquivalentFipsCode(aCsvToBean.getEquivalentFipsCode());
+				c.setFips(aCsvToBean.getFips());
+				c.setGeonameid(aCsvToBean.getGeonameid());
+				c.setIso(aCsvToBean.getIso());
+				c.setIso3(aCsvToBean.getIso3());
+				c.setIsoNumeric(aCsvToBean.getIsoNumeric());
+				c.setLanguages(aCsvToBean.getLanguages());
+				c.setNeighbours(aCsvToBean.getNeighbours());
+				c.setPhone(aCsvToBean.getPhone());
+				c.setPopulation(aCsvToBean.getPopulation());
+				c.setPostalCodeFormat(aCsvToBean.getPostalCodeFormat());
+				c.setPostalCodeRegex(aCsvToBean.getPostalCodeRegex());
+				c.setTld(aCsvToBean.getTld());
 				countriesoncontinent.add(c);
 				continentCheck.setCountry(countriesoncontinent);
 				continentRepo.save(continentCheck);
@@ -249,46 +243,44 @@ public class ArtistryCsvReader {
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<GeoMajorCity> csvToBean = new CsvToBeanBuilder<GeoMajorCity>(reader).withType(GeoMajorCity.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator('\t').build();
-		Iterator<GeoMajorCity> geoIterator = csvToBean.iterator();
-		while (geoIterator.hasNext()) {
+		for (GeoMajorCity aCsvToBean : csvToBean) {
 			try {
-				GeoMajorCity place = geoIterator.next();
-				System.out.println("Processing city: " + place.getName());
-				Country country = countryRepo.findOneByIso(place.getCountryCode());
+				System.out.println("Processing city: " + aCsvToBean.getName());
+				Country country = countryRepo.findOneByIso(aCsvToBean.getCountryCode());
 
 				MajorCity poi = new MajorCity();
 
-				poi.setAdmin1Code(place.getAdmin1Code());
-				poi.setAdmin2Code(place.getAdmin2Code());
-				poi.setAdmin3Code(place.getAdmin3Code());
-				poi.setAdmin4Code(place.getAdmin4Code());
+				poi.setAdmin1Code(aCsvToBean.getAdmin1Code());
+				poi.setAdmin2Code(aCsvToBean.getAdmin2Code());
+				poi.setAdmin3Code(aCsvToBean.getAdmin3Code());
+				poi.setAdmin4Code(aCsvToBean.getAdmin4Code());
 
 				Set<AlternateName> alternatenames = new HashSet<>();
-				String[] anames = place.getAlternateNames().split(",");
+				String[] anames = aCsvToBean.getAlternateNames().split(",");
 				for (String a : anames) {
 					AlternateName alt = new AlternateName();
 					alt.setAlternateName(a);
 					alternatenames.add(alt);
 				}
 				poi.setAlternateNames(alternatenames);
-				poi.setAsciiName(place.getAsciiName());
-				poi.setCc2(place.getCc2());
+				poi.setAsciiName(aCsvToBean.getAsciiName());
+				poi.setCc2(aCsvToBean.getCc2());
 				poi.setCountry(country);
-				poi.setCountryCode(place.getCountryCode());
-				poi.setDem(place.getDem());
-				poi.setElevation(place.getElevation());
-				poi.setFeatureClass(place.getFeatureClass());
-				poi.setFeatureCode(place.getFeatureCode());
-				poi.setGeonameId(place.getGeonameId());
-				poi.setLatitude(place.getLatitude());
-				poi.setLongitude(place.getLongitude());
+				poi.setCountryCode(aCsvToBean.getCountryCode());
+				poi.setDem(aCsvToBean.getDem());
+				poi.setElevation(aCsvToBean.getElevation());
+				poi.setFeatureClass(aCsvToBean.getFeatureClass());
+				poi.setFeatureCode(aCsvToBean.getFeatureCode());
+				poi.setGeonameId(aCsvToBean.getGeonameId());
+				poi.setLatitude(aCsvToBean.getLatitude());
+				poi.setLongitude(aCsvToBean.getLongitude());
 				String pattern = "yyyy-MM-dd";
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-				Date moddate = simpleDateFormat.parse(place.getModificationDate());
+				Date moddate = simpleDateFormat.parse(aCsvToBean.getModificationDate());
 				poi.setModificationDate(moddate);
-				poi.setName(place.getName());
-				poi.setPopulation(place.getPopulation());
-				poi.setTimezoneId(place.getTimezoneId());
+				poi.setName(aCsvToBean.getName());
+				poi.setPopulation(aCsvToBean.getPopulation());
+				poi.setTimezoneId(aCsvToBean.getTimezoneId());
 
 				Set<Place> placelist = new HashSet<>();
 				Set<Place> countrytoadd = country.getPlaces();
@@ -311,15 +303,13 @@ public class ArtistryCsvReader {
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<PersonRole> csvToBean = new CsvToBeanBuilder<PersonRole>(reader).withType(PersonRole.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator(',').withSkipLines(1).build();
-		Iterator<PersonRole> roleIterator = csvToBean.iterator();
-		while (roleIterator.hasNext()) {
+		for (PersonRole aCsvToBean : csvToBean) {
 			try {
-				PersonRole role = roleIterator.next();
-				log.info("Importing role: " + role.getRoleName() + " " + role.getRole().toString());
+				log.info("Importing role: " + aCsvToBean.getRoleName() + " " + aCsvToBean.getRole().toString());
 				// first check the role doesn't alraedy exist
-				Optional<PersonRole> rec = rolesRepo.findByRole(role.getRole());
-				if(!rec.isPresent()) {
-					rolesRepo.save(role);    	
+				Optional<PersonRole> rec = rolesRepo.findByRole(aCsvToBean.getRole());
+				if (!rec.isPresent()) {
+					rolesRepo.save(aCsvToBean);
 				}
 			} catch (Exception e) {
 				log.error(e.getMessage());
@@ -334,34 +324,32 @@ public class ArtistryCsvReader {
 		Reader reader = Files.newBufferedReader(CSV_PATH);
 		CsvToBean<PersonCsv> csvToBean = new CsvToBeanBuilder<PersonCsv>(reader).withType(PersonCsv.class)
 				.withIgnoreLeadingWhiteSpace(true).withSeparator(',').withSkipLines(1).build();
-		Iterator<PersonCsv> personIterator = csvToBean.iterator();
-		while (personIterator.hasNext()) {
+		for (PersonCsv aCsvToBean : csvToBean) {
 			try {
-				PersonCsv pcsv = personIterator.next();
 				Person p = new Person();
-				p.setActive(pcsv.isActive());
+				p.setActive(aCsvToBean.isActive());
 				Address address = new Address();
 				Set<String> addlines = new HashSet<>();
-				String[] lines = pcsv.getAddress().split(",");
+				String[] lines = aCsvToBean.getAddress().split(",");
 				Collections.addAll(addlines, lines);
 				address.setAddressLine(addlines);
 				address.setAddressType(AddressType.PERSON);
 				p.setAddress(address);
-				p.setCountryCode(pcsv.getCountryCode());
+				p.setCountryCode(aCsvToBean.getCountryCode());
 				p.setDateCreated(LocalDateTime.now());
 				EmailAddress emailAddress = new EmailAddress();
-				emailAddress.setPersonalEmail(pcsv.getPersonalEmail());
-				emailAddress.setWorkEmail(pcsv.getWorkemail());
+				emailAddress.setPersonalEmail(aCsvToBean.getPersonalEmail());
+				emailAddress.setWorkEmail(aCsvToBean.getWorkemail());
 				p.setEmailAddress(emailAddress);
-				p.setName(pcsv.getName());
-				p.setNickname(pcsv.getNickname());
+				p.setName(aCsvToBean.getName());
+				p.setNickname(aCsvToBean.getNickname());
 				PhoneNumber phoneNumber = new PhoneNumber();
-				phoneNumber.setOfficePhone(pcsv.getWorkPhone());
-				phoneNumber.setMobilePhone(pcsv.getMobilePhone());
+				phoneNumber.setOfficePhone(aCsvToBean.getWorkPhone());
+				phoneNumber.setMobilePhone(aCsvToBean.getMobilePhone());
 				p.setPhoneNumber(phoneNumber);
-				p.setSurname(pcsv.getSurname());
-				p.setUsername(pcsv.getUsername());
-				
+				p.setSurname(aCsvToBean.getSurname());
+				p.setUsername(aCsvToBean.getUsername());
+
 			} catch (Exception e) {
 				log.error(e.getMessage());
 			}

@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to for handling cities")
 @RequestMapping("/city")
-public class MajorCityRestController {
+class MajorCityRestController {
 	
 	static final Logger log = LoggerFactory.getLogger(MajorCityRestController.class);
 

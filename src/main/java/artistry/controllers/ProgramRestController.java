@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to manage programs")
 @RequestMapping("/program")
-public class ProgramRestController {
+class ProgramRestController {
 	
 	static final Logger log = LoggerFactory.getLogger(ProgramRestController.class);
 

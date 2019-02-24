@@ -1,38 +1,29 @@
 package artistry.controllers;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
+import artistry.enums.Role;
+import artistry.models.*;
+import artistry.repositories.CompanyRepository;
+import artistry.repositories.EnterpriseRepository;
+import artistry.repositories.ImplementationTeamRepository;
+import artistry.repositories.PersonRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import artistry.enums.Role;
-import artistry.models.Company;
-import artistry.models.Enterprise;
-import artistry.models.ImplementationTeam;
-import artistry.models.Person;
-import artistry.models.PersonTeamObject;
-import artistry.repositories.CompanyRepository;
-import artistry.repositories.EnterpriseRepository;
-import artistry.repositories.ImplementationTeamRepository;
-import artistry.repositories.PersonRepository;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Configuration
 @RestController
 @Description("Controller to set up and maintain the various levels of organization")
 @RequestMapping("/org")
-public class OrganizationRestController {
+class OrganizationRestController {
 
 	static final Logger log = LoggerFactory.getLogger(OrganizationRestController.class);
 
@@ -51,15 +42,13 @@ public class OrganizationRestController {
 	@RequestMapping(value = "/newenterprise", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Enterprise createEnterprise(@RequestBody Enterprise enterprise) {
-		Enterprise savedenterprise = enterpriseRepo.save(enterprise);
-		return savedenterprise;
+		return enterpriseRepo.save(enterprise);
 	}
 
 	@RequestMapping(value = "/newcompany", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Company createCompany(@RequestBody Company company) {
-		Company savedcompany = companyRepo.save(company);
-		return savedcompany;
+		return companyRepo.save(company);
 	}
 
 	@RequestMapping(value = "/newteam", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })

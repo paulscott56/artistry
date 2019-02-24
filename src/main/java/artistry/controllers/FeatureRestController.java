@@ -17,7 +17,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to for handling features")
 @RequestMapping("/feature")
-public class FeatureRestController {
+class FeatureRestController {
 	
 	static final Logger log = LoggerFactory.getLogger(FeatureRestController.class);
 	

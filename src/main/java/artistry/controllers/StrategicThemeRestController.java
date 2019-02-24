@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Description("Controller to manage Strategic themes")
 @RequestMapping("/theme")
-public class StrategicThemeRestController {
+class StrategicThemeRestController {
 	
 	static final Logger log = LoggerFactory.getLogger(StrategicThemeRestController.class);
 	
@@ -30,24 +30,21 @@ public class StrategicThemeRestController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private StrategicTheme createTheme(@RequestBody StrategicTheme theme) {
-		StrategicTheme savedtheme = themeRepo.save(theme);
-		return savedtheme;
+		return themeRepo.save(theme);
 	}
 
 	@RequestMapping(value = "/getallthemes", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Iterable<StrategicTheme> getAllThemess() {
-		Iterable<StrategicTheme> data = themeRepo.findAll();
-		return data;
+		return themeRepo.findAll();
 	}
 
 	@RequestMapping(value = "/updatetheme", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private StrategicTheme updateTheme(@RequestBody StrategicTheme theme) {
-		StrategicTheme savedtheme = themeRepo.save(theme);
-		return savedtheme;
+		return themeRepo.save(theme);
 	}
 
 	@RequestMapping(value = "/deletetheme/{id}", method = RequestMethod.DELETE, produces = {

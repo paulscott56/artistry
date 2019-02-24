@@ -29,9 +29,9 @@ import java.util.*;
 @RestController
 @Description("Controller to set up and maintain representations of people within the environment")
 @RequestMapping("/person")
-public class PersonRestController {
+class PersonRestController {
 
-	static final Logger log = LoggerFactory.getLogger(PersonRestController.class);
+    private static final Logger log = LoggerFactory.getLogger(PersonRestController.class);
 
 	@Autowired
 	private PersonRepository personRepo;
@@ -137,16 +137,14 @@ public class PersonRestController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Person getByUsername(@RequestParam("username") String username) {
-		Person person = personRepo.findByUsername(username);
-		return person;
+        return personRepo.findByUsername(username);
 	}
 
 	@RequestMapping(value = "/getbyid/{id}", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Optional<Person> getById(@PathVariable("id") Long id) {
-		Optional<Person> person = personRepo.findById(id);
-		return person;
+        return personRepo.findById(id);
 	}
 
 	@RequestMapping(value = "/createrole", method = RequestMethod.POST, produces = {
@@ -175,8 +173,7 @@ public class PersonRestController {
 	@RequestMapping(value = "/getall", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	private Iterable<Person> getAll() {
-		Iterable<Person> person = personRepo.findAll();
-		return person;
+        return personRepo.findAll();
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
