@@ -28,7 +28,7 @@ import java.util.Date;
  *
  */
 @Service
-class MessageProcessor {
+public class MessageProcessor {
 
 	private static final Logger log = LoggerFactory.getLogger(MessageProcessor.class);
 
@@ -40,7 +40,7 @@ class MessageProcessor {
 
 	private final RestTemplate restTemplate;
 
-	private MessageProcessor(RestTemplateBuilder restTemplateBuilder) {
+	public MessageProcessor(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
 	}
 
