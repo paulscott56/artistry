@@ -27,15 +27,15 @@ class Neo4jConfiguration {
 	private String dbpass;
 
 	@Bean
-	private SessionFactory sessionFactory() {
+	SessionFactory sessionFactory() {
 		// with domain entity base package(s)
 		return new SessionFactory(configuration(), "artistry.models", "BOOT-INF.classes.artistry.models");
 	}
 
 	@Bean
-	private org.neo4j.ogm.config.Configuration configuration() {
-		return new org.neo4j.ogm.config.Configuration.Builder()
-				.uri("bolt://" + uri).credentials(dbuser, dbpass).build();
+	org.neo4j.ogm.config.Configuration configuration() {
+		return new org.neo4j.ogm.config.Configuration.Builder().uri("bolt://" + uri).credentials(dbuser, dbpass)
+				.build();
 	}
 
 	@Bean
