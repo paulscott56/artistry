@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ArtistryApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ArtistryApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ArtistryApplication.class, args);
+    }
 }

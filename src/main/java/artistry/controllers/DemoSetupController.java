@@ -1,20 +1,52 @@
 package artistry.controllers;
 
-import artistry.enums.DocumentStatus;
-import artistry.enums.EpicType;
-import artistry.enums.License;
-import artistry.enums.Role;
-import artistry.models.*;
-import artistry.repositories.*;
+import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.math.BigDecimal;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.*;
+import artistry.enums.DocumentStatus;
+import artistry.enums.EpicType;
+import artistry.enums.License;
+import artistry.enums.Role;
+import artistry.models.Company;
+import artistry.models.Country;
+import artistry.models.DevelopmentTimeLine;
+import artistry.models.Document;
+import artistry.models.Enterprise;
+import artistry.models.Epic;
+import artistry.models.Feature;
+import artistry.models.GuardRails;
+import artistry.models.ImplementationTeam;
+import artistry.models.KPI;
+import artistry.models.LargeSolution;
+import artistry.models.NonFunctionalRequirement;
+import artistry.models.Person;
+import artistry.models.PersonRole;
+import artistry.models.Portfolio;
+import artistry.models.PortfolioBudget;
+import artistry.models.Requirement;
+import artistry.repositories.CompanyRepository;
+import artistry.repositories.CountryRepository;
+import artistry.repositories.DocumentRepository;
+import artistry.repositories.EpicRepository;
+import artistry.repositories.FeatureRepository;
+import artistry.repositories.ImplementationTeamRepository;
+import artistry.repositories.KpiRepository;
+import artistry.repositories.NonFunctionalRequirementRepository;
+import artistry.repositories.PersonRepository;
+import artistry.repositories.PortfolioRepository;
+import artistry.repositories.RequirementRepository;
+import artistry.repositories.RolesRepository;
 
 class DemoSetupController {
 
@@ -57,18 +89,18 @@ class DemoSetupController {
 	@RequestMapping(value = "/generatedemo", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public void generateDemo() {
-		// createEnterprise();
-		// createCompanies();
-		// createPortfolio();
-		// createLargeSolutions();
-		// createPrograms();
-		// createTeams();
+		try {
+			createEnterprise();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
 	private void createEnterprise() throws MalformedURLException {
 		Enterprise e = new Enterprise();
-		e.setEnterpriseName("Travelport");
+		e.setEnterpriseName("Demo");
 
 		GuardRails gr = new GuardRails();
 		gr.setLowerLimit(new BigDecimal("-10000"));
@@ -109,19 +141,47 @@ class DemoSetupController {
 		Portfolio p = new Portfolio();
 
 		Set<Epic> enablerEpics = new HashSet<>();
-		enablerEpics
-                .add(epicMaker(
-                ));
+		enablerEpics.add(epicMaker());
 		p.setEnablerEpics(enablerEpics);
 
 		Set<Epic> businessEpics = new HashSet<>();
 		p.setBusinessEpics(businessEpics);
 
 		p.setEnterpriseArchitect(personMaker("eaperson", "Justin", "US", Role.ENTERPRISE_ARCHITECT, true));
+
+		// we want to create a large solution now
+
+		Set<LargeSolution> largeSolutions = new HashSet<>();
+		largeSolutions.add(largeSolutionMaker());
+		p.setLargeSolutions(largeSolutions);
 		return portfolioRepo.save(p);
 	}
 
-    private Epic epicMaker() {
+	private LargeSolution largeSolutionMaker() {
+		LargeSolution ls = new LargeSolution();
+		ls.setCustomer(personMaker("cust1", "customer", "IE", Role.CUSTOMER, false));
+		// ls.setCapabilities(capabilityMaker());
+		// ls.setInspectAndAdaptEvent(inspectAndAdaptEventMaker());
+		ls.setLargeSolutionName("demo large solution");
+		// ls.setNonFunctionalRequirements(nfrMaker());
+		// ls.setPostPlanningDocuments(docMaker("post planning thing", "Post
+		// planning"));
+		// ls.setPrePlanningDocuments(docMaker("pre planning thing", "Pre planning"));
+		// ls.setPrograms(programMaker());
+		ls.setSolutionArchitect(personMaker("sarch", "Seamus", "US", Role.SOLUTION_ARCHITECT, false));
+		// ls.setSolutionBacklog(solutionBacklogMaker());
+		ls.setSolutionContext(docMaker("solution context", "sl context"));
+		ls.setSolutionDemo(new Date());
+		// ls.setSolutionEpics(solutionEpics);
+		ls.setSolutionIntent(docMaker("solution intent", "intent"));
+		// ls.setSolutionManagement(solutionManagement);
+		ls.setSolutionTrainEngineer(personMaker("steperson", "Steve", "US", Role.STE, false));
+		// ls.setTrains(trains);
+
+		return ls;
+	}
+
+	private Epic epicMaker() {
 		Epic e = new Epic();
 
 		Set<Feature> additionalPotentialFeatures = new HashSet<>();
@@ -138,24 +198,24 @@ class DemoSetupController {
 		Set<Person> customers = new HashSet<>();
 		customers.add(personMaker("cust1", "customer1", "IN", Role.CUSTOMER, false));
 		e.setCustomers(customers);
-        e.setEpicDescription("epic 1");
-        e.setEpicName("epic 1");
+		e.setEpicDescription("epic 1");
+		e.setEpicName("epic 1");
 
 		e.setEpicOwner(personMaker("epicOwner", "epicOwner", "IE", Role.EPIC_OWNER, false));
-        e.setEpicType(EpicType.PORTFOLIO_EPIC_SPLIT_INTO_PROGRAM_EPICS_AND_DECENTRALIZE);
+		e.setEpicType(EpicType.PORTFOLIO_EPIC_SPLIT_INTO_PROGRAM_EPICS_AND_DECENTRALIZE);
 		e.setEstimatedMonetaryCost(new BigDecimal("56"));
-        e.setEstimatedStoryPoints(103);
+		e.setEstimatedStoryPoints(103);
 		DevelopmentTimeLine estimatedTimeline = new DevelopmentTimeLine();
 		estimatedTimeline.setEstimatedCompletionDate(new Date());
 		estimatedTimeline.setEstimatedStartDate(new Date());
 		e.setEstimatedTimeline(estimatedTimeline);
 		e.setFunnelEntryDate(new Date());
 		e.setGoNoGo(true);
-        e.setHypothesisStatement("We will build it, they will come");
+		e.setHypothesisStatement("We will build it, they will come");
 
 		e.setImpactOnProductsAndServices(docMaker("impactOnProductsAndServices", "impactOnProductsAndServices"));
 		e.setImpactOnSalesDeployment(docMaker("ImpactOnSalesDeployment", "ImpactOnSalesDeployment"));
-        e.setIncrementalImplementationStrategy(EpicType.PROGRAM_EPIC_SPIKE_FIRST);
+		e.setIncrementalImplementationStrategy(EpicType.PROGRAM_EPIC_SPIKE_FIRST);
 		e.setInhouseOrExternalDev(docMaker("inhouseOrExternalDev", "inhouseOrExternalDev"));
 
 		Set<Requirement> inScope = new HashSet<>();
@@ -265,13 +325,13 @@ class DemoSetupController {
 		Company co = new Company();
 		co.setCompanyName(companyName);
 		co.setContactPerson(personMaker("contact1", "contact1", "IE", Role.CEO, false));
-        co.setCountry(countryMaker());
+		co.setCountry(countryMaker());
 		// co.setTeams(teams);
 		return coRepo.save(co);
 	}
 
-    private Country countryMaker() {
-        return countryRepo.findOneByIso("IE");
+	private Country countryMaker() {
+		return countryRepo.findOneByIso("IE");
 	}
 
 	private Person personMaker(String username, String name, String countryCode, Role role, boolean agileTeamMember) {
@@ -282,17 +342,17 @@ class DemoSetupController {
 		person.setUsername(username);
 		Set<PersonRole> roles = new HashSet<>();
 		Optional<PersonRole> prole = rolesRepo.findByRole(role);
-        if (prole.isPresent()) {
-            roles.add(prole.get());
-            if (agileTeamMember) {
-                Optional<PersonRole> agileteammem = rolesRepo.findByRole(Role.AGILE_TEAM_MEMBER);
-                agileteammem.ifPresent(roles::add);
-            }
-            person.setRoles(roles);
-            return personRepo.save(person);
-        }
-        return person;
-    }
+		if (prole.isPresent()) {
+			roles.add(prole.get());
+			if (agileTeamMember) {
+				Optional<PersonRole> agileteammem = rolesRepo.findByRole(Role.AGILE_TEAM_MEMBER);
+				agileteammem.ifPresent(roles::add);
+			}
+			person.setRoles(roles);
+			return personRepo.save(person);
+		}
+		return person;
+	}
 
 	private KPI kpiMaker(String objective) {
 		KPI kpi = new KPI();

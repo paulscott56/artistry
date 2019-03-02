@@ -34,8 +34,8 @@ class Neo4jConfiguration {
 
 	@Bean
 	org.neo4j.ogm.config.Configuration configuration() {
-		return new org.neo4j.ogm.config.Configuration.Builder()
-				.uri("bolt://" + uri).credentials(dbuser, dbpass).build();
+		return new org.neo4j.ogm.config.Configuration.Builder().uri("bolt://" + uri).credentials(dbuser, dbpass)
+				.build();
 	}
 
 	@Bean
