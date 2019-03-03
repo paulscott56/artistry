@@ -61,7 +61,12 @@ jira:
 artistry:
   data:
     directory: /tmp/artistry/data
-  
+
+aws:
+  region: EU_WEST_1
+  bucket-name: artistry-bucket
+  max-upload-threads: 5
+
 ---
   
 spring:
@@ -113,7 +118,11 @@ jira:
 artistry:
   data:
     directory: /tmp/artistry/data
-  
+
+aws:
+  region: EU_WEST_1
+  bucket-name: artistry-bucket
+  max-upload-threads: 5
 ---
 
 spring:
@@ -154,4 +163,8 @@ jira:
 artistry:
   data:
     directory: /tmp/artistry/data
- 
+
+aws:
+  region: EU_WEST_1
+  bucket-name: artistry-bucket
+  max-upload-threads: 5
