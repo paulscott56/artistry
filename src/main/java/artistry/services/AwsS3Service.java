@@ -1,4 +1,5 @@
 
+/*
 package artistry.services;
 
 import com.amazonaws.AmazonClientException;
@@ -133,3 +134,4 @@ public class AwsS3Service {
 
     }
 }
+*/
