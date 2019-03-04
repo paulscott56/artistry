@@ -29,7 +29,7 @@ import artistry.repositories.MessageRepository;
  *
  */
 @Service
-class MessageProcessor {
+public class MessageProcessor {
 
 	private static final Logger log = LoggerFactory.getLogger(MessageProcessor.class);
 

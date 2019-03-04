@@ -16,10 +16,9 @@ public class StorageProperties {
 
 	public StorageProperties() {
 		super();
-		File flocation = new File("/tmp/artistry/data"); // ResourceUtils.getFile("classpath:csv").toString();
+		File flocation = new File("/tmp/artistry/data");
 		if (!flocation.exists()) {
 			flocation.mkdirs();
-			// flocation.createNewFile();
 			location = flocation.toString();
 		} else {
 			location = flocation.toString();
@@ -29,10 +28,6 @@ public class StorageProperties {
 	/**
 	 * Folder location for storing files
 	 */
-	// private static String location;
-	// //getClass().getResourceAsStream("csv/").toString();
-	// //ClassLoader.getSystemClassLoader().getResource("csv/").toString();
-
 	public static String getLocation() {
 		return location;
 	}
