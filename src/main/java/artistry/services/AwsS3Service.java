@@ -1,4 +1,4 @@
-/*
+
 package artistry.services;
 
 import com.amazonaws.AmazonClientException;
@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.util.List;
 import java.util.concurrent.Executors;
+
+import static com.amazonaws.services.route53.model.ResettableElementName.Regions;
 
 @Service
 @Configuration
@@ -131,4 +133,3 @@ public class AwsS3Service {
 
     }
 }
-*/

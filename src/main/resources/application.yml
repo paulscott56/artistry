@@ -42,7 +42,7 @@ management:
       influx:
         uri: http://localhost:8086
         db: artistry
-        step: 5s ### <- (1)
+        step: 5s
 
 eureka:
   instance:
@@ -102,7 +102,7 @@ management:
       influx:
         uri: http://localhost:8086
         db: artistry
-        step: 5s ### <- (1)
+        step: 5s
 
 eureka:
   instance:
@@ -185,4 +185,4 @@ management:
       influx:
         uri: http://localhost:8086
         db: artistry
-        step: 5s ### <- (1)
+        step: 5s

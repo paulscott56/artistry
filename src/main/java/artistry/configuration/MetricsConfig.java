@@ -23,11 +23,11 @@ public class MetricsConfig {
     private String serviceId;
 
     @Bean
-    public MeterRegistryCustomizer<MeterRegistry> metricsCommonTags() throws UnknownHostException { // (2)
+    public MeterRegistryCustomizer<MeterRegistry> metricsCommonTags() throws UnknownHostException {
         InetAddress ip = InetAddress.getLocalHost();
         return registry -> registry.config()
-                .commonTags("host", ip.getHostName(), "service", serviceId) // (3)
-                .meterFilter(MeterFilter.deny(id -> { // (4)
+                .commonTags("host", ip.getHostName(), "service", serviceId)
+                .meterFilter(MeterFilter.deny(id -> {
                     String uri = id.getTag("uri");
                     return uri != null && uri.startsWith("/swagger");
                 }))
@@ -37,9 +37,9 @@ public class MetricsConfig {
                                                                  DistributionStatisticConfig config) {
                         return config.merge(DistributionStatisticConfig.builder()
                                 .percentilesHistogram(true)
-                                .percentiles(0.5, 0.75, 0.95) // (5)
-                                .expiry(HISTOGRAM_EXPIRY) // (6)
-                                .bufferLength((int) (HISTOGRAM_EXPIRY.toMillis() / STEP.toMillis())) // (7)
+                                .percentiles(0.5, 0.75, 0.95)
+                                .expiry(HISTOGRAM_EXPIRY)
+                                .bufferLength((int) (HISTOGRAM_EXPIRY.toMillis() / STEP.toMillis()))
                                 .build());
                     }
                 });
