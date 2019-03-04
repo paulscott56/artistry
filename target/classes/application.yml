@@ -27,6 +27,8 @@ spring:
   resources:
     chain:
       enabled: true
+  application:
+    name: artistry
 
 management:
   endpoint:
@@ -35,6 +37,12 @@ management:
     web:
       exposure:
         include: "*"
+  metrics:
+    export:
+      influx:
+        uri: http://localhost:8086
+        db: artistry
+        step: 5s ### <- (1)
 
 eureka:
   instance:
@@ -79,6 +87,8 @@ spring:
   resources:
     chain:
       enabled: true
+  application:
+    name: artistry
 
 management:
   endpoint:
@@ -87,6 +97,12 @@ management:
     web:
       exposure:
         include: "*"
+  metrics:
+    export:
+      influx:
+        uri: http://localhost:8086
+        db: artistry
+        step: 5s ### <- (1)
 
 eureka:
   instance:
@@ -128,6 +144,8 @@ spring:
       max-file-size: 128MB
       max-request-size: 128MB
       enabled: true
+  application:
+    name: artistry
 
 eureka:
   instance:
@@ -155,3 +173,16 @@ artistry:
   data:
     directory: /tmp/artistry/data
  
+management:
+  endpoint:
+    auditevents:
+      enabled: true
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      influx:
+        uri: http://localhost:8086
+        db: artistry
+        step: 5s ### <- (1)

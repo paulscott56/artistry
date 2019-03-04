@@ -17,30 +17,30 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan({ "artistry.models", "BOOT-INF.classes.artistry.models" })
 class Neo4jConfiguration {
 
-	@Value("${spring.data.neo4j.uri}")
-	private String uri;
+    @Value("${spring.data.neo4j.uri}")
+    private String uri;
 
-	@Value("${spring.data.neo4j.username}")
-	private String dbuser;
+    @Value("${spring.data.neo4j.username}")
+    private String dbuser;
 
-	@Value("${spring.data.neo4j.password}")
-	private String dbpass;
+    @Value("${spring.data.neo4j.password}")
+    private String dbpass;
 
-	@Bean
-	SessionFactory sessionFactory() {
-		// with domain entity base package(s)
-		return new SessionFactory(configuration(), "artistry.models", "BOOT-INF.classes.artistry.models");
-	}
+    @Bean
+    SessionFactory sessionFactory() {
+        // with domain entity base package(s)
+        return new SessionFactory(configuration(), "artistry.models", "BOOT-INF.classes.artistry.models");
+    }
 
-	@Bean
-	org.neo4j.ogm.config.Configuration configuration() {
-		return new org.neo4j.ogm.config.Configuration.Builder().uri("bolt://" + uri).credentials(dbuser, dbpass)
-				.build();
-	}
+    @Bean
+    org.neo4j.ogm.config.Configuration configuration() {
+        return new org.neo4j.ogm.config.Configuration.Builder().uri("bolt://" + uri).credentials(dbuser, dbpass)
+                .build();
+    }
 
-	@Bean
-	public Neo4jTransactionManager transactionManager() {
-		return new Neo4jTransactionManager(sessionFactory());
-	}
+    @Bean
+    public Neo4jTransactionManager transactionManager() {
+        return new Neo4jTransactionManager(sessionFactory());
+    }
 
 }
