@@ -1,52 +1,20 @@
 package artistry.controllers;
 
-import java.math.BigDecimal;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
+import artistry.enums.DocumentStatus;
+import artistry.enums.EpicType;
+import artistry.enums.License;
+import artistry.enums.Role;
+import artistry.models.*;
+import artistry.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import artistry.enums.DocumentStatus;
-import artistry.enums.EpicType;
-import artistry.enums.License;
-import artistry.enums.Role;
-import artistry.models.Company;
-import artistry.models.Country;
-import artistry.models.DevelopmentTimeLine;
-import artistry.models.Document;
-import artistry.models.Enterprise;
-import artistry.models.Epic;
-import artistry.models.Feature;
-import artistry.models.GuardRails;
-import artistry.models.ImplementationTeam;
-import artistry.models.KPI;
-import artistry.models.LargeSolution;
-import artistry.models.NonFunctionalRequirement;
-import artistry.models.Person;
-import artistry.models.PersonRole;
-import artistry.models.Portfolio;
-import artistry.models.PortfolioBudget;
-import artistry.models.Requirement;
-import artistry.repositories.CompanyRepository;
-import artistry.repositories.CountryRepository;
-import artistry.repositories.DocumentRepository;
-import artistry.repositories.EpicRepository;
-import artistry.repositories.FeatureRepository;
-import artistry.repositories.ImplementationTeamRepository;
-import artistry.repositories.KpiRepository;
-import artistry.repositories.NonFunctionalRequirementRepository;
-import artistry.repositories.PersonRepository;
-import artistry.repositories.PortfolioRepository;
-import artistry.repositories.RequirementRepository;
-import artistry.repositories.RolesRepository;
+import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.*;
 
 class DemoSetupController {
 
@@ -160,14 +128,23 @@ class DemoSetupController {
 	private LargeSolution largeSolutionMaker() {
 		LargeSolution ls = new LargeSolution();
 		ls.setCustomer(personMaker("cust1", "customer", "IE", Role.CUSTOMER, false));
-		// ls.setCapabilities(capabilityMaker());
-		// ls.setInspectAndAdaptEvent(inspectAndAdaptEventMaker());
+		Set<Capability> caps = new HashSet<>();
+		caps.add(capabilityMaker());
+		ls.setCapabilities(caps);
+		ls.setInspectAndAdaptEvent(inspectAndAdaptEventMaker());
 		ls.setLargeSolutionName("demo large solution");
-		// ls.setNonFunctionalRequirements(nfrMaker());
-		// ls.setPostPlanningDocuments(docMaker("post planning thing", "Post
-		// planning"));
-		// ls.setPrePlanningDocuments(docMaker("pre planning thing", "Pre planning"));
-		// ls.setPrograms(programMaker());
+		Set<NonFunctionalRequirement> nfrset = new HashSet<>();
+		nfrset.add(nfrMaker());
+		ls.setNonFunctionalRequirements(nfrset);
+		Set<Document> ppdocs = new HashSet<>();
+		ppdocs.add(docMaker("post planning thing", "Post planning"));
+		ls.setPostPlanningDocuments(ppdocs);
+		Set<Document> predocs = new HashSet<>();
+		predocs.add(docMaker("pre planning thing", "Pre planning"));
+		ls.setPrePlanningDocuments(predocs);
+		Set<Program> progs = new HashSet<>();
+		progs.add(programMaker());
+		ls.setPrograms(progs);
 		ls.setSolutionArchitect(personMaker("sarch", "Seamus", "US", Role.SOLUTION_ARCHITECT, false));
 		// ls.setSolutionBacklog(solutionBacklogMaker());
 		ls.setSolutionContext(docMaker("solution context", "sl context"));
@@ -179,6 +156,58 @@ class DemoSetupController {
 		// ls.setTrains(trains);
 
 		return ls;
+	}
+
+	private Program programMaker() {
+		Program p = new Program();
+		Set<Document> ardocs = new HashSet<>();
+		ardocs.add(docMaker("Architectural runway doc 1", "Architectural runway"));
+		p.setArchitecturalRunway(ardocs);
+		Set<Person> bos = new HashSet<>();
+		bos.add(personMaker("bo1", "denis", "US", Role.BUSINESS_OWNER, false));
+		bos.add(personMaker("bo2", "froy", "NO", Role.BUSINESS_OWNER, false));
+		p.setBusinessOwners(bos);
+		Set<InspectAndAdapt> ia = new HashSet<>();
+		ia.add(inspectAndAdaptEventMaker());
+		p.setInspectAndAdaptWorkshops(ia);
+		Set<Person> cust = new HashSet<>();
+		cust.add(personMaker("pcln", "priceline", "US", Role.CUSTOMER, false));
+		p.setKeyCustomers(cust);
+		Set<Person> stake = new HashSet<>();
+		p.setOtherStakeholders(stake);
+		Set<PrincipalRole> principalRoles = new HashSet<>();
+		principalRoles.add(principalRoleMaker());
+		p.setPrincipalRoles(principalRoles);
+
+
+		return p;
+	}
+
+	private PrincipalRole principalRoleMaker() {
+		PrincipalRole p = new PrincipalRole();
+		p.setDescription("A person that looks after a product");
+		p.setRole(Role.PRODUCT_MANAGER);
+		p.setPerson(personMaker("pm2", "PM 2", "US", Role.PRODUCT_MANAGER, false));
+		return p;
+	}
+
+	private InspectAndAdapt inspectAndAdaptEventMaker() {
+		InspectAndAdapt ia = new InspectAndAdapt();
+		return ia;
+	}
+
+	private Capability capabilityMaker() {
+		Capability c = new Capability();
+		c.setAccepted(true);
+		c.setCapabilityName("Capability 1");
+		c.setBenefitHypothesis(docMaker("benefit hypothesis 1", "ben 1"));
+		c.setSolutionBacklog(solutionBacklogMaker());
+		return c;
+	}
+
+	private SolutionBacklog solutionBacklogMaker() {
+		SolutionBacklog s = new SolutionBacklog();
+		return s;
 	}
 
 	private Epic epicMaker() {
