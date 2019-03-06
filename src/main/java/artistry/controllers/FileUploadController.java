@@ -1,7 +1,8 @@
 package artistry.controllers;
 
-import artistry.services.AwsS3Service;
-import com.amazonaws.SdkClientException;
+
+//import com.amazonaws.SdkClientException;
+// import artistry.services.AwsS3Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class FileUploadController {
 
     static final Logger log = LoggerFactory.getLogger(FileUploadController.class);
 
-    @Autowired
+    /*@Autowired
     private AwsS3Service s3;
 
     @RequestMapping(value = "/checkbucketexists", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
@@ -30,7 +31,7 @@ public class FileUploadController {
             log.info(e.getLocalizedMessage());
             return false;
         }
-    }
+    }*/
 
 
 }
