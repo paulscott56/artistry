@@ -7,15 +7,22 @@ import artistry.enums.Role;
 import artistry.models.*;
 import artistry.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
+@Configuration
+@RestController
+@Description("Controller to set up a demo")
+@RequestMapping("/demo")
 class DemoSetupController {
 
 	@Autowired
@@ -122,7 +129,7 @@ class DemoSetupController {
 		Set<LargeSolution> largeSolutions = new HashSet<>();
 		largeSolutions.add(largeSolutionMaker());
 		p.setLargeSolutions(largeSolutions);
-		return portfolioRepo.save(p);
+		return p; // portfolioRepo.save(p);
 	}
 
 	private LargeSolution largeSolutionMaker() {
@@ -280,7 +287,7 @@ class DemoSetupController {
 		usersAndMarketsAffecred.add("LATAM");
 		e.setUsersAndMarketsAffecred(usersAndMarketsAffecred);
 
-		return epicRepo.save(e);
+		return e; // epicRepo.save(e);
 	}
 
 	private NonFunctionalRequirement nfrMaker() {
@@ -288,7 +295,8 @@ class DemoSetupController {
 		HashMap<String, String> keyValuePairs = new HashMap<>();
 		keyValuePairs.put("Testing", "test plan to be included for 3 story points");
 		nfr.setKeyValuePairs(keyValuePairs);
-		return nfrRepo.save(nfr);
+		//return nfrRepo.save(nfr);
+		return nfr;
 	}
 
 	private Requirement requirementMaker() {
@@ -321,7 +329,7 @@ class DemoSetupController {
 		f.setFeatureName(featureName);
 		f.setFeatureOwner(personMaker("featurewriter", "Patrick", "IE", Role.PRODUCT_MANAGER, false));
 		f.setFeatureOwnerTeam(teamMaker());
-		return null;
+		return f;
 	}
 
 	private ImplementationTeam teamMaker() {
