@@ -1,10 +1,11 @@
 package artistry.models;
 
-import java.util.HashMap;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Properties;
+
+import java.util.Map;
 
 @NodeEntity
 public class NonFunctionalRequirement extends AbstractAuditableBaseEntity {
@@ -13,7 +14,8 @@ public class NonFunctionalRequirement extends AbstractAuditableBaseEntity {
 	@GeneratedValue
 	private Long id;
 
-	private HashMap<String, String> keyValuePairs;
+	@Properties
+	private Map<String, String> keyValuePairs;
 
 	public Long getId() {
 		return id;
@@ -23,11 +25,11 @@ public class NonFunctionalRequirement extends AbstractAuditableBaseEntity {
 		this.id = id;
 	}
 
-	public HashMap<String, String> getKeyValuePairs() {
+	public Map<String, String> getKeyValuePairs() {
 		return keyValuePairs;
 	}
 
-	public void setKeyValuePairs(HashMap<String, String> keyValuePairs) {
+	public void setKeyValuePairs(Map<String, String> keyValuePairs) {
 		this.keyValuePairs = keyValuePairs;
 	}
 

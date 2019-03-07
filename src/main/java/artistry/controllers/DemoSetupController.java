@@ -6,6 +6,8 @@ import artistry.enums.License;
 import artistry.enums.Role;
 import artistry.models.*;
 import artistry.repositories.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
@@ -24,6 +26,8 @@ import java.util.*;
 @Description("Controller to set up a demo")
 @RequestMapping("/demo")
 class DemoSetupController {
+
+	static final Logger log = LoggerFactory.getLogger(DemoSetupController.class);
 
 	@Autowired
 	private PersonRepository personRepo;
@@ -60,6 +64,18 @@ class DemoSetupController {
 
 	@Autowired
 	private CompanyRepository coRepo;
+
+	@Autowired
+	private LargeSolutionRepository largeSolutionRepo;
+
+	@Autowired
+	private ProgramRepository programRepo;
+
+	@Autowired
+	private PrincipalRoleRepository principalRoleRepo;
+
+	@Autowired
+	private CapabilityRepository capRepo;
 
 	@RequestMapping(value = "/generatedemo", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
@@ -129,7 +145,7 @@ class DemoSetupController {
 		Set<LargeSolution> largeSolutions = new HashSet<>();
 		largeSolutions.add(largeSolutionMaker());
 		p.setLargeSolutions(largeSolutions);
-		return p; // portfolioRepo.save(p);
+		return portfolioRepo.save(p);
 	}
 
 	private LargeSolution largeSolutionMaker() {
@@ -162,7 +178,7 @@ class DemoSetupController {
 		ls.setSolutionTrainEngineer(personMaker("steperson", "Steve", "US", Role.STE, false));
 		// ls.setTrains(trains);
 
-		return ls;
+		return largeSolutionRepo.save(ls);
 	}
 
 	private Program programMaker() {
@@ -187,7 +203,7 @@ class DemoSetupController {
 		p.setPrincipalRoles(principalRoles);
 
 
-		return p;
+		return programRepo.save(p);
 	}
 
 	private PrincipalRole principalRoleMaker() {
@@ -195,7 +211,7 @@ class DemoSetupController {
 		p.setDescription("A person that looks after a product");
 		p.setRole(Role.PRODUCT_MANAGER);
 		p.setPerson(personMaker("pm2", "PM 2", "US", Role.PRODUCT_MANAGER, false));
-		return p;
+		return principalRoleRepo.save(p);
 	}
 
 	private InspectAndAdapt inspectAndAdaptEventMaker() {
@@ -209,7 +225,7 @@ class DemoSetupController {
 		c.setCapabilityName("Capability 1");
 		c.setBenefitHypothesis(docMaker("benefit hypothesis 1", "ben 1"));
 		c.setSolutionBacklog(solutionBacklogMaker());
-		return c;
+		return capRepo.save(c);
 	}
 
 	private SolutionBacklog solutionBacklogMaker() {
@@ -234,6 +250,7 @@ class DemoSetupController {
 		Set<Person> customers = new HashSet<>();
 		customers.add(personMaker("cust1", "customer1", "IN", Role.CUSTOMER, false));
 		e.setCustomers(customers);
+
 		e.setEpicDescription("epic 1");
 		e.setEpicName("epic 1");
 
@@ -241,10 +258,12 @@ class DemoSetupController {
 		e.setEpicType(EpicType.PORTFOLIO_EPIC_SPLIT_INTO_PROGRAM_EPICS_AND_DECENTRALIZE);
 		e.setEstimatedMonetaryCost(new BigDecimal("56"));
 		e.setEstimatedStoryPoints(103);
+
 		DevelopmentTimeLine estimatedTimeline = new DevelopmentTimeLine();
 		estimatedTimeline.setEstimatedCompletionDate(new Date());
 		estimatedTimeline.setEstimatedStartDate(new Date());
 		e.setEstimatedTimeline(estimatedTimeline);
+
 		e.setFunnelEntryDate(new Date());
 		e.setGoNoGo(true);
 		e.setHypothesisStatement("We will build it, they will come");
@@ -260,6 +279,7 @@ class DemoSetupController {
 
 		e.setLeadingIndicators(docMaker("leadingIndicators", "leadingIndicators"));
 		e.setMilestones(docMaker("milestones", "milestones"));
+
 		Set<Feature> mvpFeatures = new HashSet<>();
 		mvpFeatures.add(featureMaker("benefit3", 6, "feature3"));
 		mvpFeatures.add(featureMaker("benefit7", 4, "feature7"));
@@ -287,16 +307,15 @@ class DemoSetupController {
 		usersAndMarketsAffecred.add("LATAM");
 		e.setUsersAndMarketsAffecred(usersAndMarketsAffecred);
 
-		return e; // epicRepo.save(e);
+		return epicRepo.save(e);
 	}
 
 	private NonFunctionalRequirement nfrMaker() {
 		NonFunctionalRequirement nfr = new NonFunctionalRequirement();
-		HashMap<String, String> keyValuePairs = new HashMap<>();
+		Map<String, String> keyValuePairs = new HashMap<>();
 		keyValuePairs.put("Testing", "test plan to be included for 3 story points");
 		nfr.setKeyValuePairs(keyValuePairs);
-		//return nfrRepo.save(nfr);
-		return nfr;
+		return nfrRepo.save(nfr);
 	}
 
 	private Requirement requirementMaker() {
@@ -329,7 +348,7 @@ class DemoSetupController {
 		f.setFeatureName(featureName);
 		f.setFeatureOwner(personMaker("featurewriter", "Patrick", "IE", Role.PRODUCT_MANAGER, false));
 		f.setFeatureOwnerTeam(teamMaker());
-		return f;
+		return featureRepo.save(f);
 	}
 
 	private ImplementationTeam teamMaker() {
@@ -387,8 +406,14 @@ class DemoSetupController {
 			}
 			person.setRoles(roles);
 			return personRepo.save(person);
+		} else {
+			PersonRole pr = new PersonRole();
+			pr.setRole(role);
+			rolesRepo.save(pr);
+			person.setRoles(roles);
+
+			return personRepo.save(person);
 		}
-		return person;
 	}
 
 	private KPI kpiMaker(String objective) {
