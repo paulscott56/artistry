@@ -169,10 +169,10 @@ class DemoSetupController {
 		progs.add(programMaker());
 		ls.setPrograms(progs);
 		ls.setSolutionArchitect(personMaker("sarch", "Seamus", "US", Role.SOLUTION_ARCHITECT, false));
-		// ls.setSolutionBacklog(solutionBacklogMaker());
+		ls.setSolutionBacklog(solutionBacklogMaker());
 		ls.setSolutionContext(docMaker("solution context", "sl context"));
 		ls.setSolutionDemo(new Date());
-		// ls.setSolutionEpics(solutionEpics);
+		//ls.setSolutionEpics(solutionEpics);
 		ls.setSolutionIntent(docMaker("solution intent", "intent"));
 		// ls.setSolutionManagement(solutionManagement);
 		ls.setSolutionTrainEngineer(personMaker("steperson", "Steve", "US", Role.STE, false));
