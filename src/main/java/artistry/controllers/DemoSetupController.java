@@ -77,6 +77,9 @@ class DemoSetupController {
 	@Autowired
 	private CapabilityRepository capRepo;
 
+	@Autowired
+	private TrainRepository trainRepo;
+
 	@RequestMapping(value = "/generatedemo", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public void generateDemo() {
@@ -151,57 +154,127 @@ class DemoSetupController {
 	private LargeSolution largeSolutionMaker() {
 		LargeSolution ls = new LargeSolution();
 		ls.setCustomer(personMaker("cust1", "customer", "IE", Role.CUSTOMER, false));
+
 		Set<Capability> caps = new HashSet<>();
 		caps.add(capabilityMaker());
 		ls.setCapabilities(caps);
+
 		ls.setInspectAndAdaptEvent(inspectAndAdaptEventMaker());
 		ls.setLargeSolutionName("demo large solution");
+
 		Set<NonFunctionalRequirement> nfrset = new HashSet<>();
 		nfrset.add(nfrMaker());
 		ls.setNonFunctionalRequirements(nfrset);
+
 		Set<Document> ppdocs = new HashSet<>();
 		ppdocs.add(docMaker("post planning thing", "Post planning"));
 		ls.setPostPlanningDocuments(ppdocs);
+
 		Set<Document> predocs = new HashSet<>();
 		predocs.add(docMaker("pre planning thing", "Pre planning"));
 		ls.setPrePlanningDocuments(predocs);
+
 		Set<Program> progs = new HashSet<>();
 		progs.add(programMaker());
 		ls.setPrograms(progs);
+
 		ls.setSolutionArchitect(personMaker("sarch", "Seamus", "US", Role.SOLUTION_ARCHITECT, false));
 		ls.setSolutionBacklog(solutionBacklogMaker());
+
 		ls.setSolutionContext(docMaker("solution context", "sl context"));
 		ls.setSolutionDemo(new Date());
-		//ls.setSolutionEpics(solutionEpics);
+
+		Set<Epic> se = new HashSet<>();
+		se.add(epicMaker());
+		se.add(epicMaker());
+		ls.setSolutionEpics(se);
+
 		ls.setSolutionIntent(docMaker("solution intent", "intent"));
-		// ls.setSolutionManagement(solutionManagement);
+		Set<Person> solman = new HashSet<>();
+		solman.add(personMaker("solman1", "solution manager", "US", Role.SOLUTION_MANAGER, false));
+		ls.setSolutionManagement(solman);
 		ls.setSolutionTrainEngineer(personMaker("steperson", "Steve", "US", Role.STE, false));
-		// ls.setTrains(trains);
+
+		Set<Train> trains = new HashSet<>();
+		trains.add(trainMaker("train 1"));
+		ls.setTrains(trains);
 
 		return largeSolutionRepo.save(ls);
 	}
 
+	private Train trainMaker(String name) {
+		Train t = new Train();
+		t.setName(name);
+
+		Set<ImplementationTeam> teams = new HashSet<>();
+		t.setPeopleAndLocations(teams);
+
+		Set<ProgramIncrement> pis = new HashSet<>();
+		t.setPi(pis);
+
+		t.setSolutionStatement(docMaker("Solution statement body", "sol statement"));
+		t.setTeamDesignStrategy(docMaker("Team strategy 1", "Strategy"));
+		t.setVisionStatement(docMaker("Our vision", "to do stuff"));
+
+		return trainRepo.save(t);
+	}
+
 	private Program programMaker() {
 		Program p = new Program();
+
 		Set<Document> ardocs = new HashSet<>();
 		ardocs.add(docMaker("Architectural runway doc 1", "Architectural runway"));
 		p.setArchitecturalRunway(ardocs);
+
 		Set<Person> bos = new HashSet<>();
 		bos.add(personMaker("bo1", "denis", "US", Role.BUSINESS_OWNER, false));
 		bos.add(personMaker("bo2", "froy", "NO", Role.BUSINESS_OWNER, false));
 		p.setBusinessOwners(bos);
+
 		Set<InspectAndAdapt> ia = new HashSet<>();
 		ia.add(inspectAndAdaptEventMaker());
 		p.setInspectAndAdaptWorkshops(ia);
+
 		Set<Person> cust = new HashSet<>();
 		cust.add(personMaker("pcln", "priceline", "US", Role.CUSTOMER, false));
 		p.setKeyCustomers(cust);
+
 		Set<Person> stake = new HashSet<>();
 		p.setOtherStakeholders(stake);
+
 		Set<PrincipalRole> principalRoles = new HashSet<>();
 		principalRoles.add(principalRoleMaker());
 		p.setPrincipalRoles(principalRoles);
 
+		Set<Person> pm = new HashSet<>();
+		p.setProductManagement(pm);
+
+		ProgramBacklog pb = new ProgramBacklog();
+		p.setProgramBacklog(pb);
+
+		Set<Epic> pe = new HashSet<>();
+		p.setProgramEpics(pe);
+
+		ProgramKanban pk = new ProgramKanban();
+		p.setProgramKanban(pk);
+
+		p.setProgramName("HCCD");
+
+		p.setReleaseTrainEngineer(personMaker("rte1", "Rte 1", "US", Role.RTE, false));
+
+		Set<String> successmeasures = new HashSet<>();
+		successmeasures.add("we get something done");
+		p.setSuccessMeasures(successmeasures);
+
+		p.setSystemArchitect(personMaker("ste1", "Ste ve", "US", Role.STE, false));
+
+		Set<SystemDemo> sd = new HashSet<>();
+		p.setSystemDemo(sd);
+
+		p.setTrain(trainMaker("train 2"));
+
+		ValueStream vs = new ValueStream();
+		p.setValueStream(vs);
 
 		return programRepo.save(p);
 	}
