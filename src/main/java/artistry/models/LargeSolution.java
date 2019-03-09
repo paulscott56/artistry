@@ -26,8 +26,8 @@ public class LargeSolution { //extends AbstractAuditableBaseEntity {
 	@Relationship(type = "HAS_SOLUTION_TRAIN_ENGINEER", direction = Relationship.OUTGOING)
 	private Person solutionTrainEngineer;
 
-	@Relationship(type = "HAS_TRAIN", direction = Relationship.OUTGOING)
-	private Set<Train> trains;
+    //@Relationship(type = "HAS_TRAIN", direction = Relationship.OUTGOING)
+    //private Set<Train> trains;
 
 	private Document solutionIntent;
 
@@ -101,13 +101,13 @@ public class LargeSolution { //extends AbstractAuditableBaseEntity {
 		this.solutionTrainEngineer = solutionTrainEngineer;
 	}
 
-	public Set<Train> getTrains() {
-		return trains;
-	}
+    //public Set<Train> getTrains() {
+//		return trains;
+    //}
 
-	public void setTrains(Set<Train> trains) {
-		this.trains = trains;
-	}
+    //public void setTrains(Set<Train> trains) {
+//		this.trains = trains;
+//	}
 
 	public Document getSolutionIntent() {
 		return solutionIntent;

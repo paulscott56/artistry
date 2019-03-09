@@ -80,6 +80,15 @@ class DemoSetupController {
 	@Autowired
 	private TrainRepository trainRepo;
 
+	@Autowired
+	private EnterpriseRepository enterpriseRepo;
+
+	@Autowired
+	private InspectAndAdaptRepository iaRepo;
+
+	@Autowired
+	private SolutionBacklogRepository solutionBacklogRepo;
+
 	@RequestMapping(value = "/generatedemo", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public void generateDemo() {
@@ -129,6 +138,8 @@ class DemoSetupController {
 		portfolios.add(portfolioMaker());
 		e.setPortfolios(portfolios);
 
+		enterpriseRepo.save(e);
+
 	}
 
 	private Portfolio portfolioMaker() {
@@ -175,7 +186,7 @@ class DemoSetupController {
 		ls.setPrePlanningDocuments(predocs);
 
 		Set<Program> progs = new HashSet<>();
-		progs.add(programMaker());
+		// progs.add(programMaker());
 		ls.setPrograms(progs);
 
 		ls.setSolutionArchitect(personMaker("sarch", "Seamus", "US", Role.SOLUTION_ARCHITECT, false));
@@ -195,9 +206,9 @@ class DemoSetupController {
 		ls.setSolutionManagement(solman);
 		ls.setSolutionTrainEngineer(personMaker("steperson", "Steve", "US", Role.STE, false));
 
-		Set<Train> trains = new HashSet<>();
-		trains.add(trainMaker("train 1"));
-		ls.setTrains(trains);
+		//Set<Train> trains = new HashSet<>();
+		//trains.add(trainMaker("train 1"));
+		//ls.setTrains(trains);
 
 		return largeSolutionRepo.save(ls);
 	}
@@ -222,59 +233,61 @@ class DemoSetupController {
 	private Program programMaker() {
 		Program p = new Program();
 
-		Set<Document> ardocs = new HashSet<>();
-		ardocs.add(docMaker("Architectural runway doc 1", "Architectural runway"));
-		p.setArchitecturalRunway(ardocs);
+		ValueStream vs = new ValueStream();
+		p.setValueStream(vs);
+
+		p.setTrain(trainMaker("train 2"));
+
+		p.setSystemArchitect(personMaker("ste1", "Ste ve", "US", Role.STE, false));
+
+		Set<String> successmeasures = new HashSet<>();
+		successmeasures.add("we get something done");
+		p.setSuccessMeasures(successmeasures);
+
+		p.setReleaseTrainEngineer(personMaker("rte1", "Rte 1", "US", Role.RTE, false));
+
+		p.setProgramName("HCCD");
+
+		ProgramKanban pk = new ProgramKanban();
+		p.setProgramKanban(pk);
+
+		Set<Epic> pe = new HashSet<>();
+		pe.add(epicMaker());
+		p.setProgramEpics(pe);
+
+		ProgramBacklog pb = new ProgramBacklog();
+		p.setProgramBacklog(pb);
+
+		Set<Person> pm = new HashSet<>();
+		pm.add(personMaker("pm1", "pm person", "US", Role.PRODUCT_MANAGER, false));
+		p.setProductManagement(pm);
+
+		Set<PrincipalRole> principalRoles = new HashSet<>();
+		principalRoles.add(principalRoleMaker());
+		p.setPrincipalRoles(principalRoles);
+
+		Set<Person> stake = new HashSet<>();
+		p.setOtherStakeholders(stake);
+
+		Set<Person> cust = new HashSet<>();
+		cust.add(personMaker("pcln", "priceline", "US", Role.CUSTOMER, false));
+		p.setKeyCustomers(cust);
+
+		Set<InspectAndAdapt> ia = new HashSet<>();
+		ia.add(inspectAndAdaptEventMaker());
+		p.setInspectAndAdaptWorkshops(ia);
 
 		Set<Person> bos = new HashSet<>();
 		bos.add(personMaker("bo1", "denis", "US", Role.BUSINESS_OWNER, false));
 		bos.add(personMaker("bo2", "froy", "NO", Role.BUSINESS_OWNER, false));
 		p.setBusinessOwners(bos);
 
-		Set<InspectAndAdapt> ia = new HashSet<>();
-		ia.add(inspectAndAdaptEventMaker());
-		p.setInspectAndAdaptWorkshops(ia);
-
-		Set<Person> cust = new HashSet<>();
-		cust.add(personMaker("pcln", "priceline", "US", Role.CUSTOMER, false));
-		p.setKeyCustomers(cust);
-
-		Set<Person> stake = new HashSet<>();
-		p.setOtherStakeholders(stake);
-
-		Set<PrincipalRole> principalRoles = new HashSet<>();
-		principalRoles.add(principalRoleMaker());
-		p.setPrincipalRoles(principalRoles);
-
-		Set<Person> pm = new HashSet<>();
-		p.setProductManagement(pm);
-
-		ProgramBacklog pb = new ProgramBacklog();
-		p.setProgramBacklog(pb);
-
-		Set<Epic> pe = new HashSet<>();
-		p.setProgramEpics(pe);
-
-		ProgramKanban pk = new ProgramKanban();
-		p.setProgramKanban(pk);
-
-		p.setProgramName("HCCD");
-
-		p.setReleaseTrainEngineer(personMaker("rte1", "Rte 1", "US", Role.RTE, false));
-
-		Set<String> successmeasures = new HashSet<>();
-		successmeasures.add("we get something done");
-		p.setSuccessMeasures(successmeasures);
-
-		p.setSystemArchitect(personMaker("ste1", "Ste ve", "US", Role.STE, false));
+		Set<Document> ardocs = new HashSet<>();
+		ardocs.add(docMaker("Architectural runway doc 1", "Architectural runway"));
+		p.setArchitecturalRunway(ardocs);
 
 		Set<SystemDemo> sd = new HashSet<>();
-		p.setSystemDemo(sd);
-
-		p.setTrain(trainMaker("train 2"));
-
-		ValueStream vs = new ValueStream();
-		p.setValueStream(vs);
+		p.setSystemDemos(sd);
 
 		return programRepo.save(p);
 	}
@@ -289,7 +302,8 @@ class DemoSetupController {
 
 	private InspectAndAdapt inspectAndAdaptEventMaker() {
 		InspectAndAdapt ia = new InspectAndAdapt();
-		return ia;
+		return iaRepo.save(ia);
+
 	}
 
 	private Capability capabilityMaker() {
@@ -303,7 +317,7 @@ class DemoSetupController {
 
 	private SolutionBacklog solutionBacklogMaker() {
 		SolutionBacklog s = new SolutionBacklog();
-		return s;
+		return solutionBacklogRepo.save(s);
 	}
 
 	private Epic epicMaker() {

@@ -1,11 +1,17 @@
 package artistry.models;
 
-import java.util.Set;
-
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import java.util.Set;
+
 @NodeEntity
-public class DevelopmentValueStream extends AbstractAuditableBaseEntity {
+public class DevelopmentValueStream {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
 	private String valueStreamName;
 	private OperationalValueStream operationalValueStream;
@@ -179,4 +185,11 @@ public class DevelopmentValueStream extends AbstractAuditableBaseEntity {
 		this.solutionArchitect = solutionArchitect;
 	}
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
