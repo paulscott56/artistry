@@ -1,15 +1,11 @@
 package artistry.models;
 
+import org.neo4j.ogm.annotation.*;
+
 import java.util.Set;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.Index;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
-
 @NodeEntity("Company")
-public class Company extends AbstractAuditableBaseEntity {
+public class Company {
 
 	@Id
 	@GeneratedValue

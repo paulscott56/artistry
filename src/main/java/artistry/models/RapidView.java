@@ -1,12 +1,18 @@
 package artistry.models;
 
-import java.util.Set;
-
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import java.util.Set;
+
 @NodeEntity
-public class RapidView extends AbstractAuditableBaseEntity {
+public class RapidView {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
 	@Relationship(type = "HAS_RAPIDVIEW_ENTRIES", direction = Relationship.OUTGOING)
 	private Set<RapidviewEntry> views;
@@ -18,4 +24,12 @@ public class RapidView extends AbstractAuditableBaseEntity {
 	public void setViews(Set<RapidviewEntry> views) {
 		this.views = views;
 	}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

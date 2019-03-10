@@ -8,7 +8,7 @@ import org.neo4j.ogm.annotation.Properties;
 import java.util.Map;
 
 @NodeEntity
-public class NonFunctionalRequirement extends AbstractAuditableBaseEntity {
+public class NonFunctionalRequirement {
 
 	@Id
 	@GeneratedValue

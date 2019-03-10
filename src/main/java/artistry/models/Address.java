@@ -1,15 +1,14 @@
 package artistry.models;
 
-import java.util.Set;
-
+import artistry.enums.AddressType;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-import artistry.enums.AddressType;
+import java.util.Set;
 
 @NodeEntity("Address")
-public class Address extends AbstractAuditableBaseEntity {
+public class Address {
 
 	@Id
 	@GeneratedValue

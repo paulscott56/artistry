@@ -1,11 +1,10 @@
 package artistry.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @NodeEntity
 public class IssueType {
@@ -99,5 +98,6 @@ public class IssueType {
 	public void setErrorOrWarning(String errorOrWarning) {
 		this.errorOrWarning = errorOrWarning;
 	}
+
 
 }

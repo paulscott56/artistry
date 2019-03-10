@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Set;
 
 @NodeEntity
-public class LargeSolution { //extends AbstractAuditableBaseEntity {
+public class LargeSolution {
 
 	@Id
 	@GeneratedValue
@@ -100,14 +100,6 @@ public class LargeSolution { //extends AbstractAuditableBaseEntity {
 	public void setSolutionTrainEngineer(Person solutionTrainEngineer) {
 		this.solutionTrainEngineer = solutionTrainEngineer;
 	}
-
-    //public Set<Train> getTrains() {
-//		return trains;
-    //}
-
-    //public void setTrains(Set<Train> trains) {
-//		this.trains = trains;
-//	}
 
 	public Document getSolutionIntent() {
 		return solutionIntent;

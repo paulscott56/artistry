@@ -74,4 +74,5 @@ public class JiraWebHookMessage {
 		this.changelog = changelog;
 	}
 
+
 }

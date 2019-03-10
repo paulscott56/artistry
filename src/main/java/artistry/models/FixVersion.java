@@ -78,4 +78,5 @@ class FixVersion {
 		this.released = released;
 	}
 
+
 }

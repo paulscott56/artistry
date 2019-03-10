@@ -1,36 +1,54 @@
 package artistry.models;
 
+import artistry.enums.Role;
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
+
 import java.util.List;
 
-import artistry.enums.Role;
-
+@NodeEntity
 public class PersonTeamObject extends AbstractAuditableBaseEntity {
 
-	private Long personId;
-	private Long implementationTeamId;
-	private List<Role> roles;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	public Long getPersonId() {
-		return personId;
-	}
+    private Long personId;
+    private Long implementationTeamId;
+    private List<Role> roles;
 
-	public void setPersonId(Long personId) {
-		this.personId = personId;
-	}
+    public Long getPersonId() {
+        return personId;
+    }
 
-	public Long getImplementationTeamId() {
-		return implementationTeamId;
-	}
+    public void setPersonId(Long personId) {
+        this.personId = personId;
+    }
 
-	public void setImplementationTeamId(Long implemantationTeamId) {
-		this.implementationTeamId = implemantationTeamId;
-	}
+    public Long getImplementationTeamId() {
+        return implementationTeamId;
+    }
 
-	public List<Role> getRoles() {
-		return roles;
-	}
+    public void setImplementationTeamId(Long implemantationTeamId) {
+        this.implementationTeamId = implemantationTeamId;
+    }
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

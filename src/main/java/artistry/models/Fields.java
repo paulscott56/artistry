@@ -1,14 +1,13 @@
 package artistry.models;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.util.List;
 
 @NodeEntity
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -527,4 +526,19 @@ public class Fields {
 		this.flagged = flagged;
 	}
 
+    public Object getTimeestimate() {
+        return timeestimate;
+    }
+
+    public void setTimeestimate(Object timeestimate) {
+        this.timeestimate = timeestimate;
+    }
+
+    public Object getAggregatetimeoriginalestimate() {
+        return aggregatetimeoriginalestimate;
+    }
+
+    public void setAggregatetimeoriginalestimate(Object aggregatetimeoriginalestimate) {
+        this.aggregatetimeoriginalestimate = aggregatetimeoriginalestimate;
+    }
 }

@@ -1,15 +1,14 @@
 package artistry.models;
 
-import java.net.URL;
-import java.util.Set;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import java.util.Set;
+
 @NodeEntity
-public class ImplementationTeam extends AbstractAuditableBaseEntity {
+public class ImplementationTeam {
 
     @Id
     @GeneratedValue
@@ -18,7 +17,7 @@ public class ImplementationTeam extends AbstractAuditableBaseEntity {
     private String teamName;
     private EmailAddress teamEmail;
     private Company company;
-    private URL teamLogo;
+    private String teamLogo;
 
     @Relationship(type = "HAS_PRODUCT_OWNER", direction = Relationship.OUTGOING)
     private Person productOwner;
@@ -79,11 +78,11 @@ public class ImplementationTeam extends AbstractAuditableBaseEntity {
         this.company = company;
     }
 
-    public URL getTeamLogo() {
+    public String getTeamLogo() {
         return teamLogo;
     }
 
-    public void setTeamLogo(URL teamLogo) {
+    public void setTeamLogo(String teamLogo) {
         this.teamLogo = teamLogo;
     }
 

@@ -1,8 +1,17 @@
 package artistry.models;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
+
 import java.util.Date;
 
-public class DevelopmentTimeLine extends AbstractAuditableBaseEntity {
+@NodeEntity
+public class DevelopmentTimeLine {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
 	private Date estimatedStartDate;
 	private Date estimatedCompletionDate;
@@ -22,4 +31,12 @@ public class DevelopmentTimeLine extends AbstractAuditableBaseEntity {
 	public void setEstimatedCompletionDate(Date estimatedCompletionDate) {
 		this.estimatedCompletionDate = estimatedCompletionDate;
 	}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

@@ -1,17 +1,15 @@
 package artistry.models;
 
+import artistry.enums.Role;
+import artistry.utils.RoleTypeEnumConverter;
+import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvCustomBindByPosition;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-import com.opencsv.bean.CsvBindByPosition;
-import com.opencsv.bean.CsvCustomBindByPosition;
-
-import artistry.enums.Role;
-import artistry.utils.RoleTypeEnumConverter;
-
 @NodeEntity
-public class PersonRole extends AbstractAuditableBaseEntity {
+public class PersonRole {
 
 	@Id
 	@GeneratedValue
@@ -65,4 +63,5 @@ public class PersonRole extends AbstractAuditableBaseEntity {
 	public void setSafeRole(boolean safeRole) {
 		this.safeRole = safeRole;
 	}
+
 }

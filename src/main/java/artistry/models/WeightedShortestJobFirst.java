@@ -1,14 +1,14 @@
 package artistry.models;
 
-import java.math.BigDecimal;
-import java.util.Set;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import java.math.BigDecimal;
+import java.util.Set;
+
 @NodeEntity
-public class WeightedShortestJobFirst extends AbstractAuditableBaseEntity {
+public class WeightedShortestJobFirst {
 
 	@Id
 	@GeneratedValue

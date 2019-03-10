@@ -15,7 +15,7 @@ import java.util.Set;
  *
  */
 @NodeEntity
-public class Portfolio extends AbstractAuditableBaseEntity {
+public class Portfolio {
 
 	@Id
 	@GeneratedValue

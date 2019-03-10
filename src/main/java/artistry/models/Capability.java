@@ -15,7 +15,7 @@ import java.util.Set;
  * @link https://www.scaledagileframework.com/features-and-capabilities/
  */
 @NodeEntity
-public class Capability extends AbstractAuditableBaseEntity {
+public class Capability {
 
 	@Id
 	@GeneratedValue

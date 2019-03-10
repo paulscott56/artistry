@@ -6,7 +6,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class RapidviewEntry extends AbstractAuditableBaseEntity {
+public class RapidviewEntry {
 
 	@Id
 	@GeneratedValue

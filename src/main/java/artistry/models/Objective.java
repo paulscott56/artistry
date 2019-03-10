@@ -8,7 +8,7 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.Date;
 
 @NodeEntity
-class Objective extends AbstractAuditableBaseEntity {
+class Objective {
 
 	@Id
 	@GeneratedValue
@@ -92,4 +92,5 @@ class Objective extends AbstractAuditableBaseEntity {
 	public void setPi(ProgramIncrement pi) {
 		this.pi = pi;
 	}
+
 }

@@ -5,7 +5,7 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-class Enabler extends AbstractAuditableBaseEntity {
+class Enabler {
 
 	@Id
 	@GeneratedValue
@@ -13,4 +13,19 @@ class Enabler extends AbstractAuditableBaseEntity {
 
 	private String enablerName;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEnablerName() {
+        return enablerName;
+    }
+
+    public void setEnablerName(String enablerName) {
+        this.enablerName = enablerName;
+    }
 }

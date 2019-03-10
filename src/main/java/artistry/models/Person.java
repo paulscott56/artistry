@@ -1,19 +1,14 @@
 package artistry.models;
 
+import org.neo4j.ogm.annotation.*;
+
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.TimeZone;
 
-import javax.validation.constraints.NotNull;
-
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.Index;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
-
 @NodeEntity
-public class Person extends AbstractAuditableBaseEntity {
+public class Person {
 
 	@Id
 	@GeneratedValue
@@ -171,4 +166,5 @@ public class Person extends AbstractAuditableBaseEntity {
 	public void setJiraUsername(String jiraUsername) {
 		this.jiraUsername = jiraUsername;
 	}
+
 }

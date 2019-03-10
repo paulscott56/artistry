@@ -1,53 +1,69 @@
 package artistry.models;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
+
 import java.util.Set;
 
+@NodeEntity
 public class JiraWebhook {
 
-	private String name;
-	private String url;
-	private Set<String> events;
-	private JiraFilter filters;
-	private boolean excludeBody;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	public String getName() {
-		return name;
-	}
+    private String name;
+    private String url;
+    private Set<String> events;
+    private JiraFilter filters;
+    private boolean excludeBody;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public Set<String> getEvents() {
-		return events;
-	}
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-	public void setEvents(Set<String> events) {
-		this.events = events;
-	}
+    public Set<String> getEvents() {
+        return events;
+    }
 
-	public JiraFilter getFilters() {
-		return filters;
-	}
+    public void setEvents(Set<String> events) {
+        this.events = events;
+    }
 
-	public void setFilters(JiraFilter filters) {
-		this.filters = filters;
-	}
+    public JiraFilter getFilters() {
+        return filters;
+    }
 
-	public boolean isExcludeBody() {
-		return excludeBody;
-	}
+    public void setFilters(JiraFilter filters) {
+        this.filters = filters;
+    }
 
-	public void setExcludeBody(boolean excludeBody) {
-		this.excludeBody = excludeBody;
-	}
+    public boolean isExcludeBody() {
+        return excludeBody;
+    }
 
+    public void setExcludeBody(boolean excludeBody) {
+        this.excludeBody = excludeBody;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

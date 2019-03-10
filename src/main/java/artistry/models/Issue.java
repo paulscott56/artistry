@@ -1,10 +1,9 @@
 package artistry.models;
 
-import org.neo4j.ogm.annotation.NodeEntity;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -59,5 +58,6 @@ public class Issue {
 	public void setFields(Fields fields) {
 		this.fields = fields;
 	}
+
 
 }

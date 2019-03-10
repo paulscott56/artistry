@@ -1,5 +1,9 @@
 package artistry.models;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
+
 /**
  * An object to determine communication preferences. Each field is a boolean as
  * to whether the person/company/etc would like to receive comms on each of the
@@ -8,7 +12,12 @@ package artistry.models;
  * @author paul
  *
  */
-class CommunicationPreferences extends AbstractAuditableBaseEntity {
+@NodeEntity
+class CommunicationPreferences {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
 	private boolean marketingEmail;
 	private boolean personalEmail;
@@ -82,4 +91,12 @@ class CommunicationPreferences extends AbstractAuditableBaseEntity {
 	public void setActiveCustomer(boolean activeCustomer) {
 		this.activeCustomer = activeCustomer;
 	}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

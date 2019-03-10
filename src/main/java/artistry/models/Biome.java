@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  *
  */
 @NodeEntity
-class Biome extends AbstractAuditableBaseEntity {
+class Biome {
 
 	@Id
 	@GeneratedValue

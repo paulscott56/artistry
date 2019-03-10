@@ -88,4 +88,5 @@ class JiraEpic {
 		this.done = done;
 	}
 
+
 }

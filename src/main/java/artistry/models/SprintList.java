@@ -1,12 +1,18 @@
 package artistry.models;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 import java.util.Set;
 
 @NodeEntity
-class SprintList extends AbstractAuditableBaseEntity {
+class SprintList {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
 	@Relationship(type = "HAS_SPRINT_ENTRY", direction = Relationship.OUTGOING)
 	private Set<SprintEntry> sprints;
@@ -29,4 +35,12 @@ class SprintList extends AbstractAuditableBaseEntity {
 	public void setVelocities(Set<VelocityEntry> velocities) {
 		this.velocities = velocities;
 	}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

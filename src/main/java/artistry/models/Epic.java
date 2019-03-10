@@ -1,6 +1,8 @@
 package artistry.models;
 
 import artistry.enums.EpicType;
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 import java.math.BigDecimal;
@@ -14,7 +16,11 @@ import java.util.Set;
  * @link https://www.scaledagileframework.com/epic/
  */
 @NodeEntity
-public class Epic extends AbstractAuditableBaseEntity {
+public class Epic {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
 	private Set<Person> customers;
 	private String hypothesisStatement;
@@ -304,4 +310,11 @@ public class Epic extends AbstractAuditableBaseEntity {
 		this.notesAndComments = notesAndComments;
 	}
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

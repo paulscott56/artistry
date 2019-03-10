@@ -78,4 +78,23 @@ public class WebHookMessage { // extends AbstractAuditableBaseEntity {
 		this.retryCount = retryCount;
 	}
 
+	public static long getMessageTimeout() {
+		return MESSAGE_TIMEOUT;
+	}
+
+	public void setMessageBody(String messageBody) {
+		this.messageBody = messageBody;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	public void setTimestamp(Long timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public void setDestination(Destination destination) {
+		this.destination = destination;
+	}
 }

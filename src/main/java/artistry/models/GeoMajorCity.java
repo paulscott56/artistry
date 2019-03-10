@@ -1,14 +1,13 @@
 package artistry.models;
 
+import com.opencsv.bean.CsvBindByPosition;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
-import com.opencsv.bean.CsvBindByPosition;
-
 @NodeEntity
-public class GeoMajorCity extends AbstractAuditableBaseEntity {
+public class GeoMajorCity {
 
 	@Id
 	@GeneratedValue

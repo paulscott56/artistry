@@ -8,23 +8,23 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.List;
 
 @NodeEntity
-class Ocean extends AbstractAuditableBaseEntity {
+class Ocean {
 
 	@Id
 	@GeneratedValue
-	private long id;
+    private Long id;
 
 	private String name;
-	private long averageDepth;
+    private Long averageDepth;
 
 	@Relationship(type = "HAS_FEATURE", direction = Relationship.OUTGOING)
 	private List<OceanFeature> feature;
 
-	public long getId() {
+    public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+    public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -52,4 +52,7 @@ class Ocean extends AbstractAuditableBaseEntity {
 		this.feature = feature;
 	}
 
+    public void setAverageDepth(Long averageDepth) {
+        this.averageDepth = averageDepth;
+    }
 }

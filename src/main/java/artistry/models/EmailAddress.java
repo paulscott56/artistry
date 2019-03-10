@@ -5,7 +5,7 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class EmailAddress extends AbstractAuditableBaseEntity {
+public class EmailAddress {
 
 	@Id
 	@GeneratedValue

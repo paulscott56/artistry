@@ -1,10 +1,9 @@
 package artistry.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @NodeEntity
 public class JiraResolution {
@@ -62,5 +61,6 @@ public class JiraResolution {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 }

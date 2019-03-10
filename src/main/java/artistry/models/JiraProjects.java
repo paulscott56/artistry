@@ -1,10 +1,10 @@
 package artistry.models;
 
-import java.util.Set;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+
+import java.util.Set;
 
 @NodeEntity
 public class JiraProjects {
@@ -85,5 +85,6 @@ public class JiraProjects {
 	public void setValues(Set<JiraProject> values) {
 		this.values = values;
 	}
+
 
 }

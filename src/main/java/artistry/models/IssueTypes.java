@@ -39,4 +39,5 @@ class IssueTypes {
 		this.errorOrWarning = errorOrWarning;
 	}
 
+
 }

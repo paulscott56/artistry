@@ -1,15 +1,15 @@
 package artistry.models;
 
-import java.util.Date;
-import java.util.Set;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import java.util.Date;
+import java.util.Set;
+
 @NodeEntity(label = "MajorCity")
-public class MajorCity extends AbstractAuditableBaseEntity {
+public class MajorCity {
 
 	@Id
 	@GeneratedValue
@@ -211,5 +211,6 @@ public class MajorCity extends AbstractAuditableBaseEntity {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
+
 
 }

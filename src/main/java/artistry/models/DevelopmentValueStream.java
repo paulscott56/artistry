@@ -112,4 +112,6 @@ public class DevelopmentValueStream {
 	public void setSolutionArchitect(Person solutionArchitect) {
 		this.solutionArchitect = solutionArchitect;
 	}
+
+
 }

@@ -5,7 +5,7 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-class OceanFeature extends AbstractAuditableBaseEntity {
+class OceanFeature {
 
 	@Id
 	@GeneratedValue

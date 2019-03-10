@@ -5,7 +5,7 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class PhoneNumber extends AbstractAuditableBaseEntity {
+public class PhoneNumber {
 
 	@Id
 	@GeneratedValue
@@ -55,5 +55,6 @@ public class PhoneNumber extends AbstractAuditableBaseEntity {
 	// public void setOtherPhone(Map<String, String> otherPhone) {
 	// this.otherPhone = otherPhone;
 	// }
+
 
 }

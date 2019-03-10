@@ -1,13 +1,13 @@
 package artistry.models;
 
-import java.math.BigDecimal;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import java.math.BigDecimal;
+
 @NodeEntity
-public class GuardRails extends AbstractAuditableBaseEntity {
+public class GuardRails {
 
 	@Id
 	@GeneratedValue

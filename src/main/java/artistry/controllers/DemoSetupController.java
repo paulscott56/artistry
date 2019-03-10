@@ -111,10 +111,10 @@ class DemoSetupController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public void generateDemo() {
 		try {
+			// largeSolutionMaker();
 			createEnterprise();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			e.getMessage();
 		}
 
 	}
@@ -182,6 +182,7 @@ class DemoSetupController {
 
 	private LargeSolution largeSolutionMaker() {
 		LargeSolution ls = new LargeSolution();
+
 		ls.setCustomer(personMaker("cust1", "customer", "IE", Role.CUSTOMER, false));
 
 		Set<Capability> caps = new HashSet<>();
@@ -453,6 +454,7 @@ class DemoSetupController {
 
 	private Requirement requirementMaker() {
 		Requirement r = new Requirement();
+		r.setRequirementName("req 1");
 
 		return requirementRepo.save(r);
 	}
@@ -480,11 +482,15 @@ class DemoSetupController {
 		f.setFeatureDescription(docMaker("featureDescription", "feature 1"));
 		f.setFeatureName(featureName);
 		f.setFeatureOwner(personMaker("featurewriter", "Patrick", "IE", Role.PRODUCT_MANAGER, false));
-		f.setFeatureOwnerTeam(teamMaker());
+		try {
+			f.setFeatureOwnerTeam(teamMaker());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 		return featureRepo.save(f);
 	}
 
-	private ImplementationTeam teamMaker() {
+	private ImplementationTeam teamMaker() throws MalformedURLException {
 		ImplementationTeam team = new ImplementationTeam();
 		Set<Person> agileTeam = new HashSet<>();
 		team.setAgileTeam(agileTeam);
@@ -492,20 +498,32 @@ class DemoSetupController {
 		devTeam.add(personMaker("dev1", "dev1", "IE", Role.DEVELOPER, true));
 		devTeam.add(personMaker("dev2", "dev2", "IE", Role.DEVELOPER, true));
 		devTeam.add(personMaker("dev3", "dev3", "IE", Role.DEVELOPER, true));
-		devTeam.add(personMaker("sm1", "sm1", "IE", Role.SCRUM_MASTER, true));
 		devTeam.add(personMaker("test1", "test1", "IE", Role.TESTER, true));
 		team.setDevTeam(devTeam);
+		team.setScrumMaster(personMaker("sm1", "sm1", "IE", Role.SCRUM_MASTER, true));
+		team.setTeamLogo(new URL("https://placekitten.com/200/300").toString());
 
-		// team.setCompany(companyMaker("Mobacar"));
-		// team.setInnovationAndPlanningDocuments(innovationAndPlanningDocuments);
-		// team.setIterationPlanningDocuments(iterationPlanningDocuments);
-		// team.setIterationRetrospectives(iterationRetrospectives);
-		// team.setIterationReviews(iterationReviews);
-		// team.setProductOwner(productOwner);
-		// team.setScrumMaster(scrumMaster);
-		// team.setTeamEmail(teamEmail);
-		// team.setTeamLogo(new URL("https://placekitten.com/200/300"));
-		// team.setTeamName(teamName);
+		//team.setCompany(companyMaker("Company co"));
+		Set<Document> innovationAndPlanningDocuments = new HashSet<>();
+		team.setInnovationAndPlanningDocuments(innovationAndPlanningDocuments);
+
+		Set<Document> iterationPlanningDocuments = new HashSet<>();
+		iterationPlanningDocuments.add(docMaker("plan", "plan"));
+		team.setIterationPlanningDocuments(iterationPlanningDocuments);
+
+		Set<IterationRetrospective> iterationRetrospectives = new HashSet<>();
+		team.setIterationRetrospectives(iterationRetrospectives);
+
+		Set<IterationReview> iterationReviews = new HashSet<>();
+		team.setIterationReviews(iterationReviews);
+
+		team.setProductOwner(personMaker("pm56", "sdfsd", "IE", Role.PRODUCT_MANAGER, false));
+
+		EmailAddress teamEmail = new EmailAddress();
+		teamEmail.setWorkEmail("info@company.com");
+		team.setTeamEmail(teamEmail);
+
+		team.setTeamName("monkeys");
 
 		return teamRepo.save(team);
 	}
@@ -515,7 +533,13 @@ class DemoSetupController {
 		co.setCompanyName(companyName);
 		co.setContactPerson(personMaker("contact1", "contact1", "IE", Role.CEO, false));
 		co.setCountry(countryMaker());
-		// co.setTeams(teams);
+		Set<ImplementationTeam> teams = new HashSet<>();
+		try {
+			teams.add(teamMaker());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		co.setTeams(teams);
 		return coRepo.save(co);
 	}
 

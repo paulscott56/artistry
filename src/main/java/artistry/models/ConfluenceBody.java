@@ -1,14 +1,31 @@
 package artistry.models;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
+
+@NodeEntity
 public class ConfluenceBody {
 
-	private ConfluenceStorage storage;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	public ConfluenceStorage getStorage() {
-		return storage;
-	}
+    private ConfluenceStorage storage;
 
-	public void setStorage(ConfluenceStorage storage) {
-		this.storage = storage;
-	}
+    public ConfluenceStorage getStorage() {
+        return storage;
+    }
+
+    public void setStorage(ConfluenceStorage storage) {
+        this.storage = storage;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

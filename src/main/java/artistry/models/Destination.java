@@ -1,13 +1,13 @@
 package artistry.models;
 
-import java.util.List;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import java.util.List;
+
 @NodeEntity
-public class Destination { // extends AbstractAuditableBaseEntity {
+public class Destination {
 
 	@Id
 	@GeneratedValue
@@ -59,5 +59,6 @@ public class Destination { // extends AbstractAuditableBaseEntity {
 	public void setOnline(boolean online) {
 		this.online = online;
 	}
+
 
 }

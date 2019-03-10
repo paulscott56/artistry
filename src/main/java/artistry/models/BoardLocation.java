@@ -1,6 +1,6 @@
 package artistry.models;
 
-public class BoardLocation extends AbstractAuditableBaseEntity {
+public class BoardLocation {
 
 	private String projectId;
 	private String displayName;

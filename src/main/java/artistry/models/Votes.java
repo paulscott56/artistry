@@ -1,15 +1,20 @@
 package artistry.models;
 
-import org.neo4j.ogm.annotation.NodeEntity;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "self", "votes", "hasVoted" })
 @NodeEntity
 public class Votes {
+
+	@Id
+	@GeneratedValue
+	private Long id;
 
 	@JsonProperty("self")
 	private String self;
@@ -48,4 +53,11 @@ public class Votes {
 		this.hasVoted = hasVoted;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }

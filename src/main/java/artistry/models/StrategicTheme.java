@@ -1,14 +1,14 @@
 package artistry.models;
 
-import java.util.Date;
-import java.util.Set;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import java.util.Date;
+import java.util.Set;
+
 @NodeEntity
-public class StrategicTheme extends AbstractAuditableBaseEntity {
+public class StrategicTheme {
 
 	@Id
 	@GeneratedValue

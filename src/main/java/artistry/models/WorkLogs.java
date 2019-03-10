@@ -113,5 +113,4 @@ class WorkLogs {
 	public void setIssueId(String issueId) {
 		this.issueId = issueId;
 	}
-
 }

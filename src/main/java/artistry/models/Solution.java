@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Set;
 
 @NodeEntity
-class Solution extends AbstractAuditableBaseEntity {
+class Solution {
 
 	@Id
 	@GeneratedValue

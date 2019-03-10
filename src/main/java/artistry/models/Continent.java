@@ -1,19 +1,14 @@
 package artistry.models;
 
-import java.util.Set;
+import org.neo4j.ogm.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.Index;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+import java.util.Set;
 
 @NodeEntity
-public class Continent extends AbstractAuditableBaseEntity {
+public class Continent {
 
 	@Id
 	@GeneratedValue
@@ -85,4 +80,6 @@ public class Continent extends AbstractAuditableBaseEntity {
 			hasChanges = true;
 		return hasChanges;
 	}
+
+
 }

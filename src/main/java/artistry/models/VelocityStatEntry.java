@@ -1,10 +1,16 @@
 package artistry.models;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-class VelocityStatEntry extends AbstractAuditableBaseEntity {
+class VelocityStatEntry {
+
+	@Id
+	@GeneratedValue
+	private Long id;
 
 	@Relationship(type = "HAS_VELOCITY_ENTRY", direction = Relationship.INCOMING)
 	private VelocityEntry entry;
@@ -17,4 +23,11 @@ class VelocityStatEntry extends AbstractAuditableBaseEntity {
 		this.entry = entry;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }

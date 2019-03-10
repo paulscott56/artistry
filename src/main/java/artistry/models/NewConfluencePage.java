@@ -1,42 +1,58 @@
 package artistry.models;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
+
+@NodeEntity
 public class NewConfluencePage {
 
-	private String type;
-	private String title;
-	private ConfluenceSpace space;
-	private ConfluenceBody body;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	public String getType() {
-		return type;
-	}
+    private String type;
+    private String title;
+    private ConfluenceSpace space;
+    private ConfluenceBody body;
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public ConfluenceSpace getSpace() {
-		return space;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setSpace(ConfluenceSpace space) {
-		this.space = space;
-	}
+    public ConfluenceSpace getSpace() {
+        return space;
+    }
 
-	public ConfluenceBody getBody() {
-		return body;
-	}
+    public void setSpace(ConfluenceSpace space) {
+        this.space = space;
+    }
 
-	public void setBody(ConfluenceBody body) {
-		this.body = body;
-	}
+    public ConfluenceBody getBody() {
+        return body;
+    }
 
+    public void setBody(ConfluenceBody body) {
+        this.body = body;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

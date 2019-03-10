@@ -1,10 +1,11 @@
 package artistry.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+@NodeEntity
 public class JiraBoardFilter {
 
 	@Id
@@ -31,4 +32,11 @@ public class JiraBoardFilter {
 		this.jiraId = jiraId;
 	}
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

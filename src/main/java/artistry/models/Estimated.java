@@ -1,9 +1,15 @@
 package artistry.models;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
-public class Estimated extends AbstractAuditableBaseEntity {
+public class Estimated {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
 	private double value;
 	private String text;
@@ -24,4 +30,11 @@ public class Estimated extends AbstractAuditableBaseEntity {
 		this.text = text;
 	}
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
