@@ -610,5 +610,4 @@ class DemoSetupController {
 
 		return docRepo.save(doc);
 	}
-
 }
