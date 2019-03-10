@@ -69,4 +69,36 @@ public class Capability {
 	public void setAccepted(boolean accepted) {
 		this.accepted = accepted;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Set<Feature> getFeatures() {
+		return features;
+	}
+
+	public void setFeatures(Set<Feature> features) {
+		this.features = features;
+	}
+
+	public List<Train> getTrains() {
+		return trains;
+	}
+
+	public void setTrains(List<Train> trains) {
+		this.trains = trains;
+	}
+
+	public Set<Enabler> getEnablers() {
+		return enablers;
+	}
+
+	public void setEnablers(Set<Enabler> enablers) {
+		this.enablers = enablers;
+	}
 }

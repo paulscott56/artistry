@@ -1,6 +1,15 @@
 package artistry.models;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
+
+@NodeEntity
 public class BoardLocation {
+
+	@Id
+	@GeneratedValue
+	private Long id;
 
 	private String projectId;
 	private String displayName;
@@ -66,4 +75,11 @@ public class BoardLocation {
 		this.name = name;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }
