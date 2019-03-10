@@ -89,6 +89,24 @@ class DemoSetupController {
 	@Autowired
 	private SolutionBacklogRepository solutionBacklogRepo;
 
+	@Autowired
+	private DevelopmentValueStreamRepository dsRepo;
+
+	@Autowired
+	private OperationalValueStreamRepository opRepo;
+
+	@Autowired
+	private SystemDemoRepository sdRepo;
+
+	@Autowired
+	private ValueStreamRepository vsRepo;
+
+	@Autowired
+	private ProgramBacklogRepository pbRepo;
+
+	@Autowired
+	private ProgramKanbanRepository pkRepo;
+
 	@RequestMapping(value = "/generatedemo", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public void generateDemo() {
@@ -186,7 +204,7 @@ class DemoSetupController {
 		ls.setPrePlanningDocuments(predocs);
 
 		Set<Program> progs = new HashSet<>();
-		// progs.add(programMaker());
+		progs.add(programMaker());
 		ls.setPrograms(progs);
 
 		ls.setSolutionArchitect(personMaker("sarch", "Seamus", "US", Role.SOLUTION_ARCHITECT, false));
@@ -233,40 +251,8 @@ class DemoSetupController {
 	private Program programMaker() {
 		Program p = new Program();
 
-		ValueStream vs = new ValueStream();
-		p.setValueStream(vs);
-
-		p.setTrain(trainMaker("train 2"));
-
-		p.setSystemArchitect(personMaker("ste1", "Ste ve", "US", Role.STE, false));
-
-		Set<String> successmeasures = new HashSet<>();
-		successmeasures.add("we get something done");
-		p.setSuccessMeasures(successmeasures);
-
-		p.setReleaseTrainEngineer(personMaker("rte1", "Rte 1", "US", Role.RTE, false));
-
-		p.setProgramName("HCCD");
-
-		ProgramKanban pk = new ProgramKanban();
-		p.setProgramKanban(pk);
-
-		Set<Epic> pe = new HashSet<>();
-		pe.add(epicMaker());
-		p.setProgramEpics(pe);
-
-		ProgramBacklog pb = new ProgramBacklog();
-		p.setProgramBacklog(pb);
-
-		Set<Person> pm = new HashSet<>();
-		pm.add(personMaker("pm1", "pm person", "US", Role.PRODUCT_MANAGER, false));
-		p.setProductManagement(pm);
-
-		Set<PrincipalRole> principalRoles = new HashSet<>();
-		principalRoles.add(principalRoleMaker());
-		p.setPrincipalRoles(principalRoles);
-
 		Set<Person> stake = new HashSet<>();
+		stake.add(personMaker("st1", "Stakeholder 1", "IE", Role.CUSTOMER, false));
 		p.setOtherStakeholders(stake);
 
 		Set<Person> cust = new HashSet<>();
@@ -287,7 +273,67 @@ class DemoSetupController {
 		p.setArchitecturalRunway(ardocs);
 
 		Set<SystemDemo> sd = new HashSet<>();
+		SystemDemo sdemo = new SystemDemo();
+		sd.add(sdRepo.save(sdemo));
 		p.setSystemDemos(sd);
+
+		Set<PrincipalRole> principalRoles = new HashSet<>();
+		principalRoles.add(principalRoleMaker());
+		p.setPrincipalRoles(principalRoles);
+
+		Set<Person> pm = new HashSet<>();
+		pm.add(personMaker("pm1", "pm person", "US", Role.PRODUCT_MANAGER, false));
+		p.setProductManagement(pm);
+
+		ProgramBacklog pb = new ProgramBacklog();
+		p.setProgramBacklog(pbRepo.save(pb));
+
+		Set<Epic> pe = new HashSet<>();
+		pe.add(epicMaker());
+		p.setProgramEpics(pe);
+
+		ProgramKanban pk = new ProgramKanban();
+		p.setProgramKanban(pkRepo.save(pk));
+
+		p.setProgramName("HCCD");
+		p.setReleaseTrainEngineer(personMaker("rte1", "Rte 1", "US", Role.RTE, false));
+
+		Set<String> successmeasures = new HashSet<>();
+		successmeasures.add("we get something done");
+		p.setSuccessMeasures(successmeasures);
+
+		p.setSystemArchitect(personMaker("ste1", "Ste ve", "US", Role.STE, false));
+		p.setTrain(trainMaker("train 2"));
+
+		ValueStream vs = new ValueStream();
+		DevelopmentValueStream ds = new DevelopmentValueStream();
+		ds.setBudget(docMaker("OPEX", "Dev value"));
+		Set<Document> dsdocs = new HashSet<>();
+		dsdocs.add(docMaker("customer rels", "relationships"));
+		ds.setCustomerRelationships(dsdocs);
+
+		ds.setEconomicFramework(docMaker("ef", "eco framework"));
+
+		Set<Person> dsppl = new HashSet<>();
+		dsppl.add(personMaker("ds2", "ds2", "US", Role.BUSINESS_OWNER, false));
+		ds.setPeople(dsppl);
+
+		ds.setSolutionArchitect(personMaker("sa3", "sa3", "IE", Role.SOLUTION_ARCHITECT, false));
+		Set<Person> sm = new HashSet<>();
+		sm.add(personMaker("sm5", "sm5", "US", Role.SOLUTION_MANAGER, false));
+		ds.setSolutionManagement(sm);
+
+		ds.setSolutionTrainEngineer(personMaker("ste7", "ste7", "US", Role.STE, false));
+
+		ds.setValueProposition(docMaker("value prop", "value proposition"));
+		ds.setValueStreamName("test value stream");
+
+		vs.setDevelopmentValueStream(dsRepo.save(ds));
+
+		OperationalValueStream os = new OperationalValueStream();
+		vs.setOperationalValueStream(opRepo.save(os));
+
+		p.setValueStream(vsRepo.save(vs));
 
 		return programRepo.save(p);
 	}

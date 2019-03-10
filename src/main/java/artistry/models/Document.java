@@ -1,15 +1,14 @@
 package artistry.models;
 
-import java.util.Date;
-import java.util.Set;
-
+import artistry.enums.DocumentStatus;
+import artistry.enums.License;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
-import artistry.enums.DocumentStatus;
-import artistry.enums.License;
+import java.util.Date;
+import java.util.Set;
 
 /**
  * Generic document (for things that could be strings, but want more structure
@@ -19,7 +18,7 @@ import artistry.enums.License;
  */
 
 @NodeEntity
-public class Document extends AbstractAuditableBaseEntity {
+public class Document {
 
 	@Id
 	@GeneratedValue

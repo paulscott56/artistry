@@ -14,24 +14,32 @@ public class DevelopmentValueStream {
     private Long id;
 
 	private String valueStreamName;
-	private OperationalValueStream operationalValueStream;
+	//private OperationalValueStream operationalValueStream;
 	private Document valueProposition;
-	private Set<Solution> solutions;
-	private Set<CustomerSegment> customerSegments;
+	//private Set<Solution> solutions;
+	//private Set<CustomerSegment> customerSegments;
 	private Document budget;
-	private SolutionContext solutionContext;
-	private Set<Channel> channels;
-	private Set<KPI> kpis;
-	private Revenue revenueStatement;
+	//private SolutionContext solutionContext;
+	//private Set<Channel> channels;
+	//private Set<KPI> kpis;
+	//private Revenue revenueStatement;
 	private Set<Person> people;
-	private Set<Country> locations;
+	//private Set<Country> locations;
 	private Set<Document> customerRelationships;
 	private Document economicFramework;
-	private Set<Train> trains;
-	private Set<Supplier> suppliers;
+	//private Set<Train> trains;
+	//private Set<Supplier> suppliers;
 	private Person solutionTrainEngineer;
 	private Set<Person> solutionManagement;
 	private Person solutionArchitect;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getValueStreamName() {
 		return valueStreamName;
@@ -39,14 +47,6 @@ public class DevelopmentValueStream {
 
 	public void setValueStreamName(String valueStreamName) {
 		this.valueStreamName = valueStreamName;
-	}
-
-	public OperationalValueStream getOperationalValueStream() {
-		return operationalValueStream;
-	}
-
-	public void setOperationalValueStream(OperationalValueStream operationalValueStream) {
-		this.operationalValueStream = operationalValueStream;
 	}
 
 	public Document getValueProposition() {
@@ -57,22 +57,6 @@ public class DevelopmentValueStream {
 		this.valueProposition = valueProposition;
 	}
 
-	public Set<Solution> getSolutions() {
-		return solutions;
-	}
-
-	public void setSolutions(Set<Solution> solutions) {
-		this.solutions = solutions;
-	}
-
-	public Set<CustomerSegment> getCustomerSegments() {
-		return customerSegments;
-	}
-
-	public void setCustomerSegments(Set<CustomerSegment> customerSegments) {
-		this.customerSegments = customerSegments;
-	}
-
 	public Document getBudget() {
 		return budget;
 	}
@@ -81,52 +65,12 @@ public class DevelopmentValueStream {
 		this.budget = budget;
 	}
 
-	public SolutionContext getSolutionContext() {
-		return solutionContext;
-	}
-
-	public void setSolutionContext(SolutionContext solutionContext) {
-		this.solutionContext = solutionContext;
-	}
-
-	public Set<Channel> getChannels() {
-		return channels;
-	}
-
-	public void setChannels(Set<Channel> channels) {
-		this.channels = channels;
-	}
-
-	public Set<KPI> getKpis() {
-		return kpis;
-	}
-
-	public void setKpis(Set<KPI> kpis) {
-		this.kpis = kpis;
-	}
-
-	public Revenue getRevenueStatement() {
-		return revenueStatement;
-	}
-
-	public void setRevenueStatement(Revenue revenueStatement) {
-		this.revenueStatement = revenueStatement;
-	}
-
 	public Set<Person> getPeople() {
 		return people;
 	}
 
 	public void setPeople(Set<Person> people) {
 		this.people = people;
-	}
-
-	public Set<Country> getLocations() {
-		return locations;
-	}
-
-	public void setLocations(Set<Country> locations) {
-		this.locations = locations;
 	}
 
 	public Set<Document> getCustomerRelationships() {
@@ -143,22 +87,6 @@ public class DevelopmentValueStream {
 
 	public void setEconomicFramework(Document economicFramework) {
 		this.economicFramework = economicFramework;
-	}
-
-	public Set<Train> getTrains() {
-		return trains;
-	}
-
-	public void setTrains(Set<Train> trains) {
-		this.trains = trains;
-	}
-
-	public Set<Supplier> getSuppliers() {
-		return suppliers;
-	}
-
-	public void setSuppliers(Set<Supplier> suppliers) {
-		this.suppliers = suppliers;
 	}
 
 	public Person getSolutionTrainEngineer() {
@@ -184,12 +112,4 @@ public class DevelopmentValueStream {
 	public void setSolutionArchitect(Person solutionArchitect) {
 		this.solutionArchitect = solutionArchitect;
 	}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

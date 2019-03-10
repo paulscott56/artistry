@@ -3,9 +3,6 @@ package artistry.models;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
-
-import java.util.Set;
 
 @NodeEntity
 public class ValueStream {
@@ -17,8 +14,8 @@ public class ValueStream {
 	private OperationalValueStream operationalValueStream;
 	private DevelopmentValueStream developmentValueStream;
 
-	@Relationship(type = "IS_ON_TRAIN", direction = Relationship.OUTGOING)
-	private Set<Train> trains;
+	//@Relationship(type = "IS_ON_TRAIN", direction = Relationship.OUTGOING)
+	//private Set<Train> trains;
 
 	public Long getId() {
 		return id;
@@ -44,11 +41,11 @@ public class ValueStream {
 		this.developmentValueStream = developmentValueStream;
 	}
 
-	public Set<Train> getTrains() {
-		return trains;
-	}
+	//public Set<Train> getTrains() {
+	//	return trains;
+	//}
 
-	public void setTrains(Set<Train> trains) {
-		this.trains = trains;
-	}
+	//public void setTrains(Set<Train> trains) {
+	//	this.trains = trains;
+	//}
 }
