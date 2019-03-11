@@ -208,43 +208,32 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
-
 			<plugin>
 				<groupId>com.spotify</groupId>
-				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>1.4.10</version>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.11</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
-					<repository>${docker.image.prefix}/${project.artifactId}</repository>
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<imageTags>0.0.1-SNAPSHOT</imageTags>
+					<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
 				</configuration>
 			</plugin>
-
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-dependency-plugin</artifactId> -->
-<!-- 				<version>3.1.1</version> -->
-<!-- 				<executions> -->
-<!-- 					<execution> -->
-<!-- 						<id>unpack</id> -->
-<!-- 						<phase>package</phase> -->
-<!-- 						<goals> -->
-<!-- 							<goal>unpack</goal> -->
-<!-- 						</goals> -->
-<!-- 						<configuration> -->
-<!-- 							<artifactItems> -->
-<!-- 								<artifactItem> -->
-<!-- 									<groupId>${project.groupId}</groupId> -->
-<!-- 									<artifactId>${project.artifactId}</artifactId> -->
-<!-- 									<version>${project.version}</version> -->
-<!-- 								</artifactItem> -->
-<!-- 							</artifactItems> -->
-<!-- 						</configuration> -->
-<!-- 					</execution> -->
-<!-- 				</executions> -->
-<!-- 			</plugin> -->
-
-			
-
 		</plugins>
 	</build>
 </project>
