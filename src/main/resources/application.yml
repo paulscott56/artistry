@@ -146,19 +146,36 @@ spring:
       enabled: true
   application:
     name: artistry
+  resources:
+    chain:
+      enabled: true
+  
+management:
+  endpoint:
+    auditevents:
+      enabled: true
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      influx:
+        uri: http://influxdb:8086
+        db: artistry
+        step: 5s
 
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
     preferIpAddress: false
-    hostname: registry
+    hostname: localhost
        
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+      defaultZone: http://registry:8761/eureka/
     healthcheck:
       enabled: true
     lease:
@@ -172,17 +189,4 @@ jira:
 artistry:
   data:
     directory: /tmp/artistry/data
- 
-management:
-  endpoint:
-    auditevents:
-      enabled: true
-    web:
-      exposure:
-        include: "*"
-  metrics:
-    export:
-      influx:
-        uri: http://localhost:8086
-        db: artistry
-        step: 5s
+  
