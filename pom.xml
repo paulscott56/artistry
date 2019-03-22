@@ -192,12 +192,12 @@
 			<scope>compile</scope>
 		</dependency>
 
-        <!-- Amazon SDK for S3 uploads and possible other stuff... -->
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk</artifactId>
-            <version>1.11.510</version>
-        </dependency>
+<!--         Amazon SDK for S3 uploads and possible other stuff... -->
+<!--         <dependency> -->
+<!--             <groupId>com.amazonaws</groupId> -->
+<!--             <artifactId>aws-java-sdk</artifactId> -->
+<!--             <version>1.11.510</version> -->
+<!--         </dependency> -->
 
 
     </dependencies>

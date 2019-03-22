@@ -66,6 +66,9 @@ jira:
   username: myusername
   password: sometrickyPassword
   
+sonarqube:
+  url: http://10.62.164.115:9000
+  
 artistry:
   data:
     directory: /tmp/artistry/data
@@ -125,7 +128,10 @@ jira:
   url: http://myjira.company.com
   username: myusername
   password: sometrickyPassword
-    
+
+sonarqube:
+  url: http://10.62.164.115:9000
+      
 artistry:
   data:
     directory: /tmp/artistry/data
@@ -185,7 +191,10 @@ jira:
   url: http://myjira.company.com
   username: myusername
   password: sometrickyPassword
-  
+
+sonarqube:
+  url: http://10.62.164.115:9000
+    
 artistry:
   data:
     directory: /tmp/artistry/data
