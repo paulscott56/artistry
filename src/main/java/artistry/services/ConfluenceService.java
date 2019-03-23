@@ -1,5 +1,6 @@
 package artistry.services;
 
+import artistry.models.ConfluenceSpaces;
 import artistry.models.NewConfluencePage;
 import artistry.utils.JiraUtils;
 import org.slf4j.Logger;
@@ -13,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 
 @Service
-class ConfluenceService {
+public class ConfluenceService {
 
 	static final Logger log = LoggerFactory.getLogger(JiraService.class);
 
@@ -26,14 +27,14 @@ class ConfluenceService {
 	@Autowired
 	private JiraUtils utils;
 
-	public String getSpaces() {
+	public ConfluenceSpaces getSpaces() {
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
-		final HttpEntity<String> entity = new HttpEntity<>(null, headers);
-		final ResponseEntity<String> data = rt.exchange(jiraUrl + "/wiki/rest/space", HttpMethod.GET, entity,
-				String.class);
+		final HttpEntity<ConfluenceSpaces> entity = new HttpEntity<>(null, headers);
+		final ResponseEntity<ConfluenceSpaces> data = rt.exchange(jiraUrl + "/wiki/rest/api/space", HttpMethod.GET, entity,
+				ConfluenceSpaces.class);
 		return data.getBody();
 	}
 
@@ -43,7 +44,7 @@ class ConfluenceService {
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
 		final HttpEntity<String> entity = new HttpEntity<>(null, headers);
-		final ResponseEntity<String> data = rt.exchange(jiraUrl + "/wiki/rest/space/" + key + "/", HttpMethod.GET,
+		final ResponseEntity<String> data = rt.exchange(jiraUrl + "/wiki/rest/api/space/" + key + "/", HttpMethod.GET,
 				entity, String.class);
 		return data.getBody();
 	}
@@ -54,7 +55,7 @@ class ConfluenceService {
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.set("Authorization", "Basic " + utils.makeBase64Credentials());
 		final HttpEntity<String> entity = new HttpEntity<>(null, headers);
-		final ResponseEntity<String> data = rt.exchange(jiraUrl + "/wiki/rest/space/" + key + "/content",
+		final ResponseEntity<String> data = rt.exchange(jiraUrl + "/wiki/rest/api/space/" + key + "/content",
 				HttpMethod.GET, entity, String.class);
 		return data.getBody();
 	}
