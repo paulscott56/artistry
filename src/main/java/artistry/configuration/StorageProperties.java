@@ -16,7 +16,7 @@ public class StorageProperties {
 
 	public StorageProperties() {
 		super();
-		File flocation = new File("/tmp/artistry/data");
+		File flocation = new File("/tmp/artistry/data/");
 		if (!flocation.exists()) {
 			flocation.mkdirs();
 			location = flocation.toString();
