@@ -1,12 +1,11 @@
 package artistry.repositories;
 
-import java.util.List;
-
+import artistry.models.Destination;
+import artistry.models.WebHookMessage;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 
-import artistry.models.Destination;
-import artistry.models.WebHookMessage;
+import java.util.List;
 
 @Repository
 public interface MessageRepository extends Neo4jRepository<WebHookMessage, Long> {

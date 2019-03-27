@@ -1,12 +1,11 @@
 package artistry.repositories;
 
-import java.util.Set;
-
+import artistry.models.MajorCity;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 
-import artistry.models.MajorCity;
+import java.util.Set;
 
 //@RepositoryRestResource(collectionResourceRel = "geo", path = "MajorCity")
 @Repository

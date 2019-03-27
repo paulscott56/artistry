@@ -1,10 +1,9 @@
 package artistry.repositories;
 
-import org.springframework.data.neo4j.repository.Neo4jRepository;
-import org.springframework.stereotype.Repository;
-
 import artistry.models.EmailAddress;
 import artistry.models.Person;
+import org.springframework.data.neo4j.repository.Neo4jRepository;
+import org.springframework.stereotype.Repository;
 
 //@RepositoryRestResource(collectionResourceRel = "people", path = "person")
 @Repository

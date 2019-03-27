@@ -1,9 +1,8 @@
 package artistry.repositories;
 
+import artistry.models.Continent;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
-
-import artistry.models.Continent;
 
 //@RepositoryRestResource(collectionResourceRel = "geo", path = "continent")
 @Repository

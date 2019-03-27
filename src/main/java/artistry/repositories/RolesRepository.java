@@ -1,12 +1,11 @@
 package artistry.repositories;
 
-import java.util.Optional;
-
+import artistry.enums.Role;
+import artistry.models.PersonRole;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 
-import artistry.enums.Role;
-import artistry.models.PersonRole;
+import java.util.Optional;
 
 //@RepositoryRestResource(collectionResourceRel = "person", path = "role")
 @Repository

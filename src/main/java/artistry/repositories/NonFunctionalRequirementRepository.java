@@ -1,9 +1,8 @@
 package artistry.repositories;
 
+import artistry.models.NonFunctionalRequirement;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
-
-import artistry.models.NonFunctionalRequirement;
 
 //@RepositoryRestResource(collectionResourceRel = "feature", path = "nfr")
 @Repository

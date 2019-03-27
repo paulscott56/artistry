@@ -1,9 +1,8 @@
 package artistry.repositories;
 
+import artistry.models.KPI;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
-
-import artistry.models.KPI;
 
 //@RepositoryRestResource(collectionResourceRel = "enterprise", path = "kpi")
 @Repository

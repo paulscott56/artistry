@@ -1,7 +1,6 @@
 package artistry.models;
 
-import java.time.LocalDateTime;
-
+import artistry.utils.NoOpLocalDateTimeConversion;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -9,7 +8,7 @@ import org.neo4j.ogm.annotation.typeconversion.Convert;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import artistry.utils.NoOpLocalDateTimeConversion;
+import java.time.LocalDateTime;
 
 @NodeEntity
 abstract class AbstractAuditableBaseEntity {

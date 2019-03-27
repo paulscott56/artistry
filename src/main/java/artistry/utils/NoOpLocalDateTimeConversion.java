@@ -1,8 +1,8 @@
 package artistry.utils;
 
-import java.time.LocalDateTime;
-
 import org.neo4j.ogm.typeconversion.AttributeConverter;
+
+import java.time.LocalDateTime;
 
 /**
  * This is a stupid workaround for a bug in OGM together with Java-Driver 1.6
