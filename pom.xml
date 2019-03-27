@@ -161,46 +161,82 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.mobacar.common.util</groupId>
+			<artifactId>common-utils</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
+					<groupId>org.springframework.cloud</groupId>
+					<artifactId>spring-cloud-sleuth-core</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<version>2.0.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.testcontainers</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<version>${testcontainers.version}</version>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito2</artifactId>
+			<version>2.0.0</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-support</artifactId>
+			<version>2.0.0</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>neo4j</artifactId>
 			<version>${testcontainers.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Amazon SDK for S3 uploads and possible other stuff... -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.amazonaws</groupId> -->
+		<!-- <artifactId>aws-java-sdk</artifactId> -->
+		<!-- <version>1.11.510</version> -->
+		<!-- </dependency> -->
+
+
 		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<version>RELEASE</version>
-			<scope>compile</scope>
+			<groupId>com.mobacar.common.util</groupId>
+			<artifactId>common-utils</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
-
-<!--         Amazon SDK for S3 uploads and possible other stuff... -->
-<!--         <dependency> -->
-<!--             <groupId>com.amazonaws</groupId> -->
-<!--             <artifactId>aws-java-sdk</artifactId> -->
-<!--             <version>1.11.510</version> -->
-<!--         </dependency> -->
-
-
-    </dependencies>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<version>2.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito2</artifactId>
+			<version>2.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-support</artifactId>
+			<version>2.0.0</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>

@@ -3,7 +3,7 @@ package artistry.models;
 
 import java.util.*;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang3.SerializationUtils;
@@ -14,7 +14,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -32,14 +31,14 @@ import static org.mockito.Mockito.when;
 import utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CapabilityTest {
+public class KPITest {
 
 	/**
 	 * If the class has a default constructor, then you don't need to instantiate it manually. InjectMocks annotation will do it.<br/>
 	 * Otherwise use the {@link #setupTest()} method for creating the underTest object.
 	 */
 	@InjectMocks
-	private Capability underTest;
+	private KPI underTest;
 
 	@Before
 	public void setupTest() {
@@ -48,47 +47,25 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetBenefitHypothesis() throws Exception {
+	public void testGetAttachedDocumentation() throws Exception {
 		// given
-		Document value = new Document();
-		underTest.setBenefitHypothesis(value);
+		Set<Document> value = new TreeSet<>();
+		underTest.setAttachedDocumentation(value);
 		// when
-		Document actual = underTest.getBenefitHypothesis();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetCapabilityName() throws Exception {
-		// given
-		String value = "capabilityName";
-		underTest.setCapabilityName(value);
-		// when
-		String actual = underTest.getCapabilityName();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetEnablers() throws Exception {
-		// given
-		Set<Enabler> value = new TreeSet<>();
-		underTest.setEnablers(value);
-		// when
-		Set<Enabler> actual = underTest.getEnablers();
+		Set<Document> actual = underTest.getAttachedDocumentation();
 		// then
 		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
-	public void testGetFeatures() throws Exception {
+	public void testGetCreationDate() throws Exception {
 		// given
-		Set<Feature> value = new TreeSet<>();
-		underTest.setFeatures(value);
+		Date value = new Date();
+		underTest.setCreationDate(value);
 		// when
-		Set<Feature> actual = underTest.getFeatures();
+		Date actual = underTest.getCreationDate();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(value, actual);
 	}
 
 	@Test
@@ -103,34 +80,67 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetSolutionBacklog() throws Exception {
+	public void testGetModificationDate() throws Exception {
 		// given
-		SolutionBacklog value = new SolutionBacklog();
-		underTest.setSolutionBacklog(value);
+		Date value = new Date();
+		underTest.setModificationDate(value);
 		// when
-		SolutionBacklog actual = underTest.getSolutionBacklog();
+		Date actual = underTest.getModificationDate();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetTrains() throws Exception {
+	public void testGetObjective() throws Exception {
 		// given
-		List<Train> value = Arrays.asList();
-		underTest.setTrains(value);
+		String value = "objective";
+		underTest.setObjective(value);
 		// when
-		List<Train> actual = underTest.getTrains();
+		String actual = underTest.getObjective();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetReview() throws Exception {
+		// given
+		Set<Document> value = new TreeSet<>();
+		underTest.setReview(value);
+		// when
+		Set<Document> actual = underTest.getReview();
 		// then
 		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
-	public void testIsAccepted() throws Exception {
+	public void testGetStakeholders() throws Exception {
+		// given
+		Set<Person> value = new TreeSet<>();
+		underTest.setStakeholders(value);
+		// when
+		Set<Person> actual = underTest.getStakeholders();
+		// then
+		assertArrayEquals(value.toArray(), actual.toArray());
+	}
+
+	@Test
+	public void testGetVersion() throws Exception {
+		// given
+		int value = 0;
+		underTest.setVersion(value);
+		// when
+		int actual = underTest.getVersion();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testIsActive() throws Exception {
 		// given
 		boolean value = false;
-		underTest.setAccepted(value);
+		underTest.setActive(value);
 		// when
-		boolean actual = underTest.isAccepted();
+		boolean actual = underTest.isActive();
 		// then
 		assertEquals(value, actual);
 	}

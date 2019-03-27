@@ -3,7 +3,6 @@ package artistry.models;
 
 import java.util.*;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang3.SerializationUtils;
@@ -14,7 +13,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -32,14 +30,14 @@ import static org.mockito.Mockito.when;
 import utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CapabilityTest {
+public class JiraWebhookTest {
 
 	/**
 	 * If the class has a default constructor, then you don't need to instantiate it manually. InjectMocks annotation will do it.<br/>
 	 * Otherwise use the {@link #setupTest()} method for creating the underTest object.
 	 */
 	@InjectMocks
-	private Capability underTest;
+	private JiraWebhook underTest;
 
 	@Before
 	public void setupTest() {
@@ -48,47 +46,25 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetBenefitHypothesis() throws Exception {
+	public void testGetEvents() throws Exception {
 		// given
-		Document value = new Document();
-		underTest.setBenefitHypothesis(value);
+		Set<String> value = new TreeSet<>();
+		underTest.setEvents(value);
 		// when
-		Document actual = underTest.getBenefitHypothesis();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetCapabilityName() throws Exception {
-		// given
-		String value = "capabilityName";
-		underTest.setCapabilityName(value);
-		// when
-		String actual = underTest.getCapabilityName();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetEnablers() throws Exception {
-		// given
-		Set<Enabler> value = new TreeSet<>();
-		underTest.setEnablers(value);
-		// when
-		Set<Enabler> actual = underTest.getEnablers();
+		Set<String> actual = underTest.getEvents();
 		// then
 		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
-	public void testGetFeatures() throws Exception {
+	public void testGetFilters() throws Exception {
 		// given
-		Set<Feature> value = new TreeSet<>();
-		underTest.setFeatures(value);
+		JiraFilter value = new JiraFilter();
+		underTest.setFilters(value);
 		// when
-		Set<Feature> actual = underTest.getFeatures();
+		JiraFilter actual = underTest.getFilters();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(value, actual);
 	}
 
 	@Test
@@ -103,34 +79,34 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetSolutionBacklog() throws Exception {
+	public void testGetName() throws Exception {
 		// given
-		SolutionBacklog value = new SolutionBacklog();
-		underTest.setSolutionBacklog(value);
+		String value = "name";
+		underTest.setName(value);
 		// when
-		SolutionBacklog actual = underTest.getSolutionBacklog();
+		String actual = underTest.getName();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetTrains() throws Exception {
+	public void testGetUrl() throws Exception {
 		// given
-		List<Train> value = Arrays.asList();
-		underTest.setTrains(value);
+		String value = "url";
+		underTest.setUrl(value);
 		// when
-		List<Train> actual = underTest.getTrains();
+		String actual = underTest.getUrl();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testIsAccepted() throws Exception {
+	public void testIsExcludeBody() throws Exception {
 		// given
 		boolean value = false;
-		underTest.setAccepted(value);
+		underTest.setExcludeBody(value);
 		// when
-		boolean actual = underTest.isAccepted();
+		boolean actual = underTest.isExcludeBody();
 		// then
 		assertEquals(value, actual);
 	}

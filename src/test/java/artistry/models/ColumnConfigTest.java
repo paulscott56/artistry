@@ -4,7 +4,6 @@ package artistry.models;
 import java.util.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.*;
@@ -14,7 +13,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -32,14 +30,14 @@ import static org.mockito.Mockito.when;
 import utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CapabilityTest {
+public class ColumnConfigTest {
 
 	/**
 	 * If the class has a default constructor, then you don't need to instantiate it manually. InjectMocks annotation will do it.<br/>
 	 * Otherwise use the {@link #setupTest()} method for creating the underTest object.
 	 */
 	@InjectMocks
-	private Capability underTest;
+	private ColumnConfig underTest;
 
 	@Before
 	public void setupTest() {
@@ -48,47 +46,25 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetBenefitHypothesis() throws Exception {
+	public void testGetColumns() throws Exception {
 		// given
-		Document value = new Document();
-		underTest.setBenefitHypothesis(value);
+		List<Column> value = Arrays.asList();
+		underTest.setColumns(value);
 		// when
-		Document actual = underTest.getBenefitHypothesis();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetCapabilityName() throws Exception {
-		// given
-		String value = "capabilityName";
-		underTest.setCapabilityName(value);
-		// when
-		String actual = underTest.getCapabilityName();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetEnablers() throws Exception {
-		// given
-		Set<Enabler> value = new TreeSet<>();
-		underTest.setEnablers(value);
-		// when
-		Set<Enabler> actual = underTest.getEnablers();
+		List<Column> actual = underTest.getColumns();
 		// then
 		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
-	public void testGetFeatures() throws Exception {
+	public void testGetConstraintType() throws Exception {
 		// given
-		Set<Feature> value = new TreeSet<>();
-		underTest.setFeatures(value);
+		String value = "constraintType";
+		underTest.setConstraintType(value);
 		// when
-		Set<Feature> actual = underTest.getFeatures();
+		String actual = underTest.getConstraintType();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(value, actual);
 	}
 
 	@Test
@@ -98,39 +74,6 @@ public class CapabilityTest {
 		underTest.setId(value);
 		// when
 		Long actual = underTest.getId();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetSolutionBacklog() throws Exception {
-		// given
-		SolutionBacklog value = new SolutionBacklog();
-		underTest.setSolutionBacklog(value);
-		// when
-		SolutionBacklog actual = underTest.getSolutionBacklog();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetTrains() throws Exception {
-		// given
-		List<Train> value = Arrays.asList();
-		underTest.setTrains(value);
-		// when
-		List<Train> actual = underTest.getTrains();
-		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
-	}
-
-	@Test
-	public void testIsAccepted() throws Exception {
-		// given
-		boolean value = false;
-		underTest.setAccepted(value);
-		// when
-		boolean actual = underTest.isAccepted();
 		// then
 		assertEquals(value, actual);
 	}

@@ -3,8 +3,6 @@ package artistry.models;
 
 import java.util.*;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.*;
@@ -14,7 +12,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -32,14 +29,14 @@ import static org.mockito.Mockito.when;
 import utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CapabilityTest {
+public class JiraWebHookMessageTest {
 
 	/**
 	 * If the class has a default constructor, then you don't need to instantiate it manually. InjectMocks annotation will do it.<br/>
 	 * Otherwise use the {@link #setupTest()} method for creating the underTest object.
 	 */
 	@InjectMocks
-	private Capability underTest;
+	private JiraWebHookMessage underTest;
 
 	@Before
 	public void setupTest() {
@@ -48,47 +45,14 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetBenefitHypothesis() throws Exception {
+	public void testGetChangelog() throws Exception {
 		// given
-		Document value = new Document();
-		underTest.setBenefitHypothesis(value);
+		Changelog value = new Changelog();
+		underTest.setChangelog(value);
 		// when
-		Document actual = underTest.getBenefitHypothesis();
+		Changelog actual = underTest.getChangelog();
 		// then
 		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetCapabilityName() throws Exception {
-		// given
-		String value = "capabilityName";
-		underTest.setCapabilityName(value);
-		// when
-		String actual = underTest.getCapabilityName();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetEnablers() throws Exception {
-		// given
-		Set<Enabler> value = new TreeSet<>();
-		underTest.setEnablers(value);
-		// when
-		Set<Enabler> actual = underTest.getEnablers();
-		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
-	}
-
-	@Test
-	public void testGetFeatures() throws Exception {
-		// given
-		Set<Feature> value = new TreeSet<>();
-		underTest.setFeatures(value);
-		// when
-		Set<Feature> actual = underTest.getFeatures();
-		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
@@ -103,34 +67,56 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetSolutionBacklog() throws Exception {
+	public void testGetIssue() throws Exception {
 		// given
-		SolutionBacklog value = new SolutionBacklog();
-		underTest.setSolutionBacklog(value);
+		Issue value = new Issue();
+		underTest.setIssue(value);
 		// when
-		SolutionBacklog actual = underTest.getSolutionBacklog();
+		Issue actual = underTest.getIssue();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetTrains() throws Exception {
+	public void testGetIssue_event_type_name() throws Exception {
 		// given
-		List<Train> value = Arrays.asList();
-		underTest.setTrains(value);
+		String value = "issue_event_type_name";
+		underTest.setIssue_event_type_name(value);
 		// when
-		List<Train> actual = underTest.getTrains();
+		String actual = underTest.getIssue_event_type_name();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testIsAccepted() throws Exception {
+	public void testGetTimestamp() throws Exception {
 		// given
-		boolean value = false;
-		underTest.setAccepted(value);
+		Long value = 0L;
+		underTest.setTimestamp(value);
 		// when
-		boolean actual = underTest.isAccepted();
+		Long actual = underTest.getTimestamp();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetUser() throws Exception {
+		// given
+		User value = new User();
+		underTest.setUser(value);
+		// when
+		User actual = underTest.getUser();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetWebhookEvent() throws Exception {
+		// given
+		String value = "webhookEvent";
+		underTest.setWebhookEvent(value);
+		// when
+		String actual = underTest.getWebhookEvent();
 		// then
 		assertEquals(value, actual);
 	}

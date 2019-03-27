@@ -3,8 +3,6 @@ package artistry.models;
 
 import java.util.*;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.*;
@@ -32,14 +30,14 @@ import static org.mockito.Mockito.when;
 import utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CapabilityTest {
+public class BoardEntryTest {
 
 	/**
 	 * If the class has a default constructor, then you don't need to instantiate it manually. InjectMocks annotation will do it.<br/>
 	 * Otherwise use the {@link #setupTest()} method for creating the underTest object.
 	 */
 	@InjectMocks
-	private Capability underTest;
+	private BoardEntry underTest;
 
 	@Before
 	public void setupTest() {
@@ -48,47 +46,36 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetBenefitHypothesis() throws Exception {
+	public void testGetBacklog() throws Exception {
 		// given
-		Document value = new Document();
-		underTest.setBenefitHypothesis(value);
+		JiraBacklog value = new JiraBacklog();
+		underTest.setBacklog(value);
 		// when
-		Document actual = underTest.getBenefitHypothesis();
+		JiraBacklog actual = underTest.getBacklog();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetCapabilityName() throws Exception {
+	public void testGetBoardConfig() throws Exception {
 		// given
-		String value = "capabilityName";
-		underTest.setCapabilityName(value);
+		BoardConfig value = new BoardConfig();
+		underTest.setBoardConfig(value);
 		// when
-		String actual = underTest.getCapabilityName();
+		BoardConfig actual = underTest.getBoardConfig();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetEnablers() throws Exception {
+	public void testGetCommentOrError() throws Exception {
 		// given
-		Set<Enabler> value = new TreeSet<>();
-		underTest.setEnablers(value);
+		String value = "commentOrError";
+		underTest.setCommentOrError(value);
 		// when
-		Set<Enabler> actual = underTest.getEnablers();
+		String actual = underTest.getCommentOrError();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
-	}
-
-	@Test
-	public void testGetFeatures() throws Exception {
-		// given
-		Set<Feature> value = new TreeSet<>();
-		underTest.setFeatures(value);
-		// when
-		Set<Feature> actual = underTest.getFeatures();
-		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(value, actual);
 	}
 
 	@Test
@@ -103,34 +90,56 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetSolutionBacklog() throws Exception {
+	public void testGetJiraId() throws Exception {
 		// given
-		SolutionBacklog value = new SolutionBacklog();
-		underTest.setSolutionBacklog(value);
+		int value = 0;
+		underTest.setJiraId(value);
 		// when
-		SolutionBacklog actual = underTest.getSolutionBacklog();
+		int actual = underTest.getJiraId();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetTrains() throws Exception {
+	public void testGetLocation() throws Exception {
 		// given
-		List<Train> value = Arrays.asList();
-		underTest.setTrains(value);
+		BoardLocation value = new BoardLocation();
+		underTest.setLocation(value);
 		// when
-		List<Train> actual = underTest.getTrains();
+		BoardLocation actual = underTest.getLocation();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testIsAccepted() throws Exception {
+	public void testGetName() throws Exception {
 		// given
-		boolean value = false;
-		underTest.setAccepted(value);
+		String value = "name";
+		underTest.setName(value);
 		// when
-		boolean actual = underTest.isAccepted();
+		String actual = underTest.getName();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetType() throws Exception {
+		// given
+		String value = "type";
+		underTest.setType(value);
+		// when
+		String actual = underTest.getType();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetUrl() throws Exception {
+		// given
+		String value = "url";
+		underTest.setUrl(value);
+		// when
+		String actual = underTest.getUrl();
 		// then
 		assertEquals(value, actual);
 	}

@@ -2,36 +2,35 @@
 package artistry.services;
 
 import artistry.configuration.StorageProperties;
-import artistry.enums.AddressType;
-import artistry.enums.Continents;
-import artistry.models.*;
-import artistry.repositories.*;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
+import artistry.exceptions.StorageException;
+import artistry.exceptions.StorageFileNotFoundException;
+import artistry.utils.StorageService;
 import java.io.IOException;
-import java.io.Reader;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.nio.charset.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Stream;
 import org.apache.commons.io.*;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.FileSystemUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import static org.junit.Assert.assertArrayEquals;
@@ -54,29 +53,11 @@ import utils.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
-@ContextConfiguration(classes = ArtistryCsvReader.class)
-public class ArtistryCsvReaderTest {
+@ContextConfiguration(classes = FileSystemStorageService.class)
+public class FileSystemStorageServiceTest {
 
 	@Autowired
-	private ArtistryCsvReader underTest;
-
-	@MockBean
-	private MajorCityRepository cityRepo;
-
-	@MockBean
-	private ContinentRepository continentRepo;
-
-	@MockBean
-	private CountryRepository countryRepo;
-
-	@MockBean
-	private GeoRepository geoRepo;
-
-	@MockBean
-	private PlanetRepository planetRepo;
-
-	@MockBean
-	private RolesRepository rolesRepo;
+	private FileSystemStorageService underTest;
 
 	@Before
 	public void setupTest() {
@@ -84,67 +65,58 @@ public class ArtistryCsvReaderTest {
 	}
 
 	@Test
-	public void testCreatePlanetEarth() throws Exception {
+	public void testDeleteAll() throws Exception {
 		// given
 		// when
-		underTest.createPlanetEarth();
+		underTest.deleteAll();
 		// then
 		// TODO add meaningful assert or verify(mock).method();
 	}
 
 	@Test
-	public void testImportPeople() throws Exception {
+	public void testInit() throws Exception {
+		// given
+		// when
+		underTest.init();
+		// then
+		// TODO add meaningful assert or verify(mock).method();
+	}
+
+	@Test
+	public void testLoad() throws Exception {
+		// given
+		String filename = "filename";
+		// when
+		Path actual = underTest.load(filename);
+		// then
+		assertNotNull(actual);
+	}
+
+	@Test
+	public void testLoadAll() throws Exception {
+		// given
+		// when
+		Stream<Path> actual = underTest.loadAll();
+		// then
+		assertNotNull(actual);
+	}
+
+	@Test
+	public void testLoadAsResource() throws Exception {
+		// given
+		String filename = "filename";
+		// when
+		Resource actual = underTest.loadAsResource(filename);
+		// then
+		assertNotNull(actual);
+	}
+
+	@Test
+	public void testStore() throws Exception {
 		// given
 		MultipartFile file = new MockMultipartFile("fileName", "content".getBytes());
 		// when
-		underTest.importPeople(file);
-		// then
-		// TODO add meaningful assert or verify(mock).method();
-	}
-
-	@Test
-	public void testReadAllCountriesCsv() throws Exception {
-		// given
-		// when
-		underTest.readAllCountriesCsv();
-		// then
-		// TODO add meaningful assert or verify(mock).method();
-	}
-
-	@Test
-	public void testReadCity() throws Exception {
-		// given
-		String file = "file";
-		// when
-		underTest.readCity(file);
-		// then
-		// TODO add meaningful assert or verify(mock).method();
-	}
-
-	@Test
-	public void testReadCountryByCode() throws Exception {
-		// given
-		String code = "code";
-		// when
-		underTest.readCountryByCode(code);
-		// then
-		// TODO add meaningful assert or verify(mock).method();
-	}
-
-	@Test
-	public void testReadCountryInfoCsv() throws Exception {
-		// given
-		// when
-		underTest.readCountryInfoCsv();
-		// then
-		// TODO add meaningful assert or verify(mock).method();
-	}
-
-	@Test
-	public void testReadRolesCsv() throws Exception {
-		// given
-		// when
-		underTest.readRolesCsv();
+		underTest.store(file);
 		// then
 		// TODO add meaningful assert or verify(mock).method();
 	}

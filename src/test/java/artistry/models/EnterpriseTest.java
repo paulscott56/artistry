@@ -3,7 +3,6 @@ package artistry.models;
 
 import java.util.*;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang3.SerializationUtils;
@@ -32,14 +31,14 @@ import static org.mockito.Mockito.when;
 import utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CapabilityTest {
+public class EnterpriseTest {
 
 	/**
 	 * If the class has a default constructor, then you don't need to instantiate it manually. InjectMocks annotation will do it.<br/>
 	 * Otherwise use the {@link #setupTest()} method for creating the underTest object.
 	 */
 	@InjectMocks
-	private Capability underTest;
+	private Enterprise underTest;
 
 	@Before
 	public void setupTest() {
@@ -48,47 +47,25 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetBenefitHypothesis() throws Exception {
+	public void testGetEnterpriseName() throws Exception {
 		// given
-		Document value = new Document();
-		underTest.setBenefitHypothesis(value);
+		String value = "enterpriseName";
+		underTest.setEnterpriseName(value);
 		// when
-		Document actual = underTest.getBenefitHypothesis();
+		String actual = underTest.getEnterpriseName();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetCapabilityName() throws Exception {
+	public void testGetGuardRails() throws Exception {
 		// given
-		String value = "capabilityName";
-		underTest.setCapabilityName(value);
+		GuardRails value = new GuardRails();
+		underTest.setGuardRails(value);
 		// when
-		String actual = underTest.getCapabilityName();
+		GuardRails actual = underTest.getGuardRails();
 		// then
 		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetEnablers() throws Exception {
-		// given
-		Set<Enabler> value = new TreeSet<>();
-		underTest.setEnablers(value);
-		// when
-		Set<Enabler> actual = underTest.getEnablers();
-		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
-	}
-
-	@Test
-	public void testGetFeatures() throws Exception {
-		// given
-		Set<Feature> value = new TreeSet<>();
-		underTest.setFeatures(value);
-		// when
-		Set<Feature> actual = underTest.getFeatures();
-		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
@@ -103,36 +80,69 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetSolutionBacklog() throws Exception {
+	public void testGetKeyPersonnel() throws Exception {
 		// given
-		SolutionBacklog value = new SolutionBacklog();
-		underTest.setSolutionBacklog(value);
+		Set<Person> value = new TreeSet<>();
+		underTest.setKeyPersonnel(value);
 		// when
-		SolutionBacklog actual = underTest.getSolutionBacklog();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetTrains() throws Exception {
-		// given
-		List<Train> value = Arrays.asList();
-		underTest.setTrains(value);
-		// when
-		List<Train> actual = underTest.getTrains();
+		Set<Person> actual = underTest.getKeyPersonnel();
 		// then
 		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
-	public void testIsAccepted() throws Exception {
+	public void testGetKpis() throws Exception {
 		// given
-		boolean value = false;
-		underTest.setAccepted(value);
+		Set<KPI> value = new TreeSet<>();
+		underTest.setKpis(value);
 		// when
-		boolean actual = underTest.isAccepted();
+		Set<KPI> actual = underTest.getKpis();
+		// then
+		assertArrayEquals(value.toArray(), actual.toArray());
+	}
+
+	@Test
+	public void testGetPortfolioBudget() throws Exception {
+		// given
+		PortfolioBudget value = new PortfolioBudget();
+		underTest.setPortfolioBudget(value);
+		// when
+		PortfolioBudget actual = underTest.getPortfolioBudget();
 		// then
 		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetPortfolios() throws Exception {
+		// given
+		Set<Portfolio> value = new TreeSet<>();
+		underTest.setPortfolios(value);
+		// when
+		Set<Portfolio> actual = underTest.getPortfolios();
+		// then
+		assertArrayEquals(value.toArray(), actual.toArray());
+	}
+
+	@Test
+	public void testGetQualitativeData() throws Exception {
+		// given
+		Set<Document> value = new TreeSet<>();
+		underTest.setQualitativeData(value);
+		// when
+		Set<Document> actual = underTest.getQualitativeData();
+		// then
+		assertArrayEquals(value.toArray(), actual.toArray());
+	}
+
+	@Test
+	public void testGetStrategicThemes() throws Exception {
+		// given
+		Set<StrategicTheme> value = new TreeSet<>();
+		underTest.setStrategicThemes(value);
+		// when
+		Set<StrategicTheme> actual = underTest.getStrategicThemes();
+		// then
+		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 }

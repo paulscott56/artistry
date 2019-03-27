@@ -3,7 +3,6 @@ package artistry.models;
 
 import java.util.*;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang3.SerializationUtils;
@@ -32,14 +31,14 @@ import static org.mockito.Mockito.when;
 import utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CapabilityTest {
+public class PlanetTest {
 
 	/**
 	 * If the class has a default constructor, then you don't need to instantiate it manually. InjectMocks annotation will do it.<br/>
 	 * Otherwise use the {@link #setupTest()} method for creating the underTest object.
 	 */
 	@InjectMocks
-	private Capability underTest;
+	private Planet underTest;
 
 	@Before
 	public void setupTest() {
@@ -48,45 +47,23 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetBenefitHypothesis() throws Exception {
+	public void testGetBiome() throws Exception {
 		// given
-		Document value = new Document();
-		underTest.setBenefitHypothesis(value);
+		Set<Biome> value = new TreeSet<>();
+		underTest.setBiome(value);
 		// when
-		Document actual = underTest.getBenefitHypothesis();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetCapabilityName() throws Exception {
-		// given
-		String value = "capabilityName";
-		underTest.setCapabilityName(value);
-		// when
-		String actual = underTest.getCapabilityName();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetEnablers() throws Exception {
-		// given
-		Set<Enabler> value = new TreeSet<>();
-		underTest.setEnablers(value);
-		// when
-		Set<Enabler> actual = underTest.getEnablers();
+		Set<Biome> actual = underTest.getBiome();
 		// then
 		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
-	public void testGetFeatures() throws Exception {
+	public void testGetContinent() throws Exception {
 		// given
-		Set<Feature> value = new TreeSet<>();
-		underTest.setFeatures(value);
+		Set<Continent> value = new TreeSet<>();
+		underTest.setContinent(value);
 		// when
-		Set<Feature> actual = underTest.getFeatures();
+		Set<Continent> actual = underTest.getContinent();
 		// then
 		assertArrayEquals(value.toArray(), actual.toArray());
 	}
@@ -103,36 +80,36 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetSolutionBacklog() throws Exception {
+	public void testGetIsland() throws Exception {
 		// given
-		SolutionBacklog value = new SolutionBacklog();
-		underTest.setSolutionBacklog(value);
+		Set<Island> value = new TreeSet<>();
+		underTest.setIsland(value);
 		// when
-		SolutionBacklog actual = underTest.getSolutionBacklog();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetTrains() throws Exception {
-		// given
-		List<Train> value = Arrays.asList();
-		underTest.setTrains(value);
-		// when
-		List<Train> actual = underTest.getTrains();
+		Set<Island> actual = underTest.getIsland();
 		// then
 		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
-	public void testIsAccepted() throws Exception {
+	public void testGetName() throws Exception {
 		// given
-		boolean value = false;
-		underTest.setAccepted(value);
+		String value = "name";
+		underTest.setName(value);
 		// when
-		boolean actual = underTest.isAccepted();
+		String actual = underTest.getName();
 		// then
 		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetOcean() throws Exception {
+		// given
+		Set<Ocean> value = new TreeSet<>();
+		underTest.setOcean(value);
+		// when
+		Set<Ocean> actual = underTest.getOcean();
+		// then
+		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 }

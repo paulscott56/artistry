@@ -3,8 +3,6 @@ package artistry.models;
 
 import java.util.*;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.*;
@@ -14,7 +12,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -32,14 +29,14 @@ import static org.mockito.Mockito.when;
 import utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CapabilityTest {
+public class ConfluenceExpandableTest {
 
 	/**
 	 * If the class has a default constructor, then you don't need to instantiate it manually. InjectMocks annotation will do it.<br/>
 	 * Otherwise use the {@link #setupTest()} method for creating the underTest object.
 	 */
 	@InjectMocks
-	private Capability underTest;
+	private ConfluenceExpandable underTest;
 
 	@Before
 	public void setupTest() {
@@ -48,47 +45,47 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetBenefitHypothesis() throws Exception {
+	public void testGetDescription() throws Exception {
 		// given
-		Document value = new Document();
-		underTest.setBenefitHypothesis(value);
+		String value = "description";
+		underTest.setDescription(value);
 		// when
-		Document actual = underTest.getBenefitHypothesis();
+		String actual = underTest.getDescription();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetCapabilityName() throws Exception {
+	public void testGetHistory() throws Exception {
 		// given
-		String value = "capabilityName";
-		underTest.setCapabilityName(value);
+		String value = "history";
+		underTest.setHistory(value);
 		// when
-		String actual = underTest.getCapabilityName();
+		String actual = underTest.getHistory();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetEnablers() throws Exception {
+	public void testGetHomepage() throws Exception {
 		// given
-		Set<Enabler> value = new TreeSet<>();
-		underTest.setEnablers(value);
+		String value = "homepage";
+		underTest.setHomepage(value);
 		// when
-		Set<Enabler> actual = underTest.getEnablers();
+		String actual = underTest.getHomepage();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetFeatures() throws Exception {
+	public void testGetIcon() throws Exception {
 		// given
-		Set<Feature> value = new TreeSet<>();
-		underTest.setFeatures(value);
+		String value = "icon";
+		underTest.setIcon(value);
 		// when
-		Set<Feature> actual = underTest.getFeatures();
+		String actual = underTest.getIcon();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(value, actual);
 	}
 
 	@Test
@@ -103,34 +100,67 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetSolutionBacklog() throws Exception {
+	public void testGetLookAndFeel() throws Exception {
 		// given
-		SolutionBacklog value = new SolutionBacklog();
-		underTest.setSolutionBacklog(value);
+		String value = "lookAndFeel";
+		underTest.setLookAndFeel(value);
 		// when
-		SolutionBacklog actual = underTest.getSolutionBacklog();
+		String actual = underTest.getLookAndFeel();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetTrains() throws Exception {
+	public void testGetMetadata() throws Exception {
 		// given
-		List<Train> value = Arrays.asList();
-		underTest.setTrains(value);
+		String value = "metadata";
+		underTest.setMetadata(value);
 		// when
-		List<Train> actual = underTest.getTrains();
+		String actual = underTest.getMetadata();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testIsAccepted() throws Exception {
+	public void testGetOperations() throws Exception {
 		// given
-		boolean value = false;
-		underTest.setAccepted(value);
+		String value = "operations";
+		underTest.setOperations(value);
 		// when
-		boolean actual = underTest.isAccepted();
+		String actual = underTest.getOperations();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetPermissions() throws Exception {
+		// given
+		String value = "permissions";
+		underTest.setPermissions(value);
+		// when
+		String actual = underTest.getPermissions();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetSettings() throws Exception {
+		// given
+		String value = "settings";
+		underTest.setSettings(value);
+		// when
+		String actual = underTest.getSettings();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetTheme() throws Exception {
+		// given
+		String value = "theme";
+		underTest.setTheme(value);
+		// when
+		String actual = underTest.getTheme();
 		// then
 		assertEquals(value, actual);
 	}

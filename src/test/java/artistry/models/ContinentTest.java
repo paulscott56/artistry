@@ -3,18 +3,17 @@ package artistry.models;
 
 import java.util.*;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.*;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -32,14 +31,14 @@ import static org.mockito.Mockito.when;
 import utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CapabilityTest {
+public class ContinentTest {
 
 	/**
 	 * If the class has a default constructor, then you don't need to instantiate it manually. InjectMocks annotation will do it.<br/>
 	 * Otherwise use the {@link #setupTest()} method for creating the underTest object.
 	 */
 	@InjectMocks
-	private Capability underTest;
+	private Continent underTest;
 
 	@Before
 	public void setupTest() {
@@ -48,45 +47,23 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetBenefitHypothesis() throws Exception {
+	public void testGetCode() throws Exception {
 		// given
-		Document value = new Document();
-		underTest.setBenefitHypothesis(value);
+		String value = "code";
+		underTest.setCode(value);
 		// when
-		Document actual = underTest.getBenefitHypothesis();
+		String actual = underTest.getCode();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetCapabilityName() throws Exception {
+	public void testGetCountry() throws Exception {
 		// given
-		String value = "capabilityName";
-		underTest.setCapabilityName(value);
+		Set<Country> value = new TreeSet<>();
+		underTest.setCountry(value);
 		// when
-		String actual = underTest.getCapabilityName();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetEnablers() throws Exception {
-		// given
-		Set<Enabler> value = new TreeSet<>();
-		underTest.setEnablers(value);
-		// when
-		Set<Enabler> actual = underTest.getEnablers();
-		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
-	}
-
-	@Test
-	public void testGetFeatures() throws Exception {
-		// given
-		Set<Feature> value = new TreeSet<>();
-		underTest.setFeatures(value);
-		// when
-		Set<Feature> actual = underTest.getFeatures();
+		Set<Country> actual = underTest.getCountry();
 		// then
 		assertArrayEquals(value.toArray(), actual.toArray());
 	}
@@ -103,34 +80,32 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetSolutionBacklog() throws Exception {
+	public void testGetName() throws Exception {
 		// given
-		SolutionBacklog value = new SolutionBacklog();
-		underTest.setSolutionBacklog(value);
+		String value = "name";
+		underTest.setName(value);
 		// when
-		SolutionBacklog actual = underTest.getSolutionBacklog();
+		String actual = underTest.getName();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetTrains() throws Exception {
+	public void testHasChanges() throws Exception {
 		// given
-		List<Train> value = Arrays.asList();
-		underTest.setTrains(value);
 		// when
-		List<Train> actual = underTest.getTrains();
+		boolean actual = underTest.hasChanges();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(false, actual);
 	}
 
 	@Test
-	public void testIsAccepted() throws Exception {
+	public void testIsHasChanges() throws Exception {
 		// given
 		boolean value = false;
-		underTest.setAccepted(value);
+		underTest.setHasChanges(value);
 		// when
-		boolean actual = underTest.isAccepted();
+		boolean actual = underTest.isHasChanges();
 		// then
 		assertEquals(value, actual);
 	}

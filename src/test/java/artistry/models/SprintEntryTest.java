@@ -3,8 +3,6 @@ package artistry.models;
 
 import java.util.*;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.*;
@@ -32,14 +30,14 @@ import static org.mockito.Mockito.when;
 import utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CapabilityTest {
+public class SprintEntryTest {
 
 	/**
 	 * If the class has a default constructor, then you don't need to instantiate it manually. InjectMocks annotation will do it.<br/>
 	 * Otherwise use the {@link #setupTest()} method for creating the underTest object.
 	 */
 	@InjectMocks
-	private Capability underTest;
+	private SprintEntry underTest;
 
 	@Before
 	public void setupTest() {
@@ -48,47 +46,14 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetBenefitHypothesis() throws Exception {
+	public void testGetGoal() throws Exception {
 		// given
-		Document value = new Document();
-		underTest.setBenefitHypothesis(value);
+		String value = "goal";
+		underTest.setGoal(value);
 		// when
-		Document actual = underTest.getBenefitHypothesis();
+		String actual = underTest.getGoal();
 		// then
 		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetCapabilityName() throws Exception {
-		// given
-		String value = "capabilityName";
-		underTest.setCapabilityName(value);
-		// when
-		String actual = underTest.getCapabilityName();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetEnablers() throws Exception {
-		// given
-		Set<Enabler> value = new TreeSet<>();
-		underTest.setEnablers(value);
-		// when
-		Set<Enabler> actual = underTest.getEnablers();
-		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
-	}
-
-	@Test
-	public void testGetFeatures() throws Exception {
-		// given
-		Set<Feature> value = new TreeSet<>();
-		underTest.setFeatures(value);
-		// when
-		Set<Feature> actual = underTest.getFeatures();
-		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
@@ -103,34 +68,67 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetSolutionBacklog() throws Exception {
+	public void testGetJiraId() throws Exception {
 		// given
-		SolutionBacklog value = new SolutionBacklog();
-		underTest.setSolutionBacklog(value);
+		int value = 0;
+		underTest.setJiraId(value);
 		// when
-		SolutionBacklog actual = underTest.getSolutionBacklog();
+		int actual = underTest.getJiraId();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetTrains() throws Exception {
+	public void testGetLinkedPageCount() throws Exception {
 		// given
-		List<Train> value = Arrays.asList();
-		underTest.setTrains(value);
+		int value = 0;
+		underTest.setLinkedPageCount(value);
 		// when
-		List<Train> actual = underTest.getTrains();
+		int actual = underTest.getLinkedPageCount();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testIsAccepted() throws Exception {
+	public void testGetName() throws Exception {
 		// given
-		boolean value = false;
-		underTest.setAccepted(value);
+		String value = "name";
+		underTest.setName(value);
 		// when
-		boolean actual = underTest.isAccepted();
+		String actual = underTest.getName();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetRapidviewId() throws Exception {
+		// given
+		String value = "rapidviewId";
+		underTest.setRapidviewId(value);
+		// when
+		String actual = underTest.getRapidviewId();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetSequence() throws Exception {
+		// given
+		int value = 0;
+		underTest.setSequence(value);
+		// when
+		int actual = underTest.getSequence();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetState() throws Exception {
+		// given
+		String value = "state";
+		underTest.setState(value);
+		// when
+		String actual = underTest.getState();
 		// then
 		assertEquals(value, actual);
 	}

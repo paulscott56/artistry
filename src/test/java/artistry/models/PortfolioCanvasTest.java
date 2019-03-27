@@ -3,7 +3,7 @@ package artistry.models;
 
 import java.util.*;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang3.SerializationUtils;
@@ -32,14 +32,14 @@ import static org.mockito.Mockito.when;
 import utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CapabilityTest {
+public class PortfolioCanvasTest {
 
 	/**
 	 * If the class has a default constructor, then you don't need to instantiate it manually. InjectMocks annotation will do it.<br/>
 	 * Otherwise use the {@link #setupTest()} method for creating the underTest object.
 	 */
 	@InjectMocks
-	private Capability underTest;
+	private PortfolioCanvas underTest;
 
 	@Before
 	public void setupTest() {
@@ -48,45 +48,34 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetBenefitHypothesis() throws Exception {
+	public void testGetBusinessEpics() throws Exception {
 		// given
-		Document value = new Document();
-		underTest.setBenefitHypothesis(value);
+		Set<Epic> value = new TreeSet<>();
+		underTest.setBusinessEpics(value);
 		// when
-		Document actual = underTest.getBenefitHypothesis();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetCapabilityName() throws Exception {
-		// given
-		String value = "capabilityName";
-		underTest.setCapabilityName(value);
-		// when
-		String actual = underTest.getCapabilityName();
-		// then
-		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetEnablers() throws Exception {
-		// given
-		Set<Enabler> value = new TreeSet<>();
-		underTest.setEnablers(value);
-		// when
-		Set<Enabler> actual = underTest.getEnablers();
+		Set<Epic> actual = underTest.getBusinessEpics();
 		// then
 		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
-	public void testGetFeatures() throws Exception {
+	public void testGetDate() throws Exception {
 		// given
-		Set<Feature> value = new TreeSet<>();
-		underTest.setFeatures(value);
+		Date value = new Date();
+		underTest.setDate(value);
 		// when
-		Set<Feature> actual = underTest.getFeatures();
+		Date actual = underTest.getDate();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetEnablerEpics() throws Exception {
+		// given
+		Set<Epic> value = new TreeSet<>();
+		underTest.setEnablerEpics(value);
+		// when
+		Set<Epic> actual = underTest.getEnablerEpics();
 		// then
 		assertArrayEquals(value.toArray(), actual.toArray());
 	}
@@ -103,34 +92,56 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetSolutionBacklog() throws Exception {
+	public void testGetPortfolioBacklog() throws Exception {
 		// given
-		SolutionBacklog value = new SolutionBacklog();
-		underTest.setSolutionBacklog(value);
+		PortfolioBacklog value = mock(PortfolioBacklog.class);
+		underTest.setPortfolioBacklog(value);
 		// when
-		SolutionBacklog actual = underTest.getSolutionBacklog();
+		PortfolioBacklog actual = underTest.getPortfolioBacklog();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetTrains() throws Exception {
+	public void testGetPortfolioName() throws Exception {
 		// given
-		List<Train> value = Arrays.asList();
-		underTest.setTrains(value);
+		String value = "portfolioName";
+		underTest.setPortfolioName(value);
 		// when
-		List<Train> actual = underTest.getTrains();
+		String actual = underTest.getPortfolioName();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetStrategicThemes() throws Exception {
+		// given
+		Set<StrategicTheme> value = new TreeSet<>();
+		underTest.setStrategicThemes(value);
+		// when
+		Set<StrategicTheme> actual = underTest.getStrategicThemes();
 		// then
 		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
-	public void testIsAccepted() throws Exception {
+	public void testGetValueStreams() throws Exception {
 		// given
-		boolean value = false;
-		underTest.setAccepted(value);
+		Set<ValueStream> value = new TreeSet<>();
+		underTest.setValueStreams(value);
 		// when
-		boolean actual = underTest.isAccepted();
+		Set<ValueStream> actual = underTest.getValueStreams();
+		// then
+		assertArrayEquals(value.toArray(), actual.toArray());
+	}
+
+	@Test
+	public void testGetVersion() throws Exception {
+		// given
+		String value = "version";
+		underTest.setVersion(value);
+		// when
+		String actual = underTest.getVersion();
 		// then
 		assertEquals(value, actual);
 	}

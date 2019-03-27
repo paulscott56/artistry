@@ -3,8 +3,6 @@ package artistry.models;
 
 import java.util.*;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.*;
@@ -14,7 +12,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -32,14 +29,14 @@ import static org.mockito.Mockito.when;
 import utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CapabilityTest {
+public class BoardLocationTest {
 
 	/**
 	 * If the class has a default constructor, then you don't need to instantiate it manually. InjectMocks annotation will do it.<br/>
 	 * Otherwise use the {@link #setupTest()} method for creating the underTest object.
 	 */
 	@InjectMocks
-	private Capability underTest;
+	private BoardLocation underTest;
 
 	@Before
 	public void setupTest() {
@@ -48,47 +45,25 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetBenefitHypothesis() throws Exception {
+	public void testGetAvatarURI() throws Exception {
 		// given
-		Document value = new Document();
-		underTest.setBenefitHypothesis(value);
+		String value = "avatarURI";
+		underTest.setAvatarURI(value);
 		// when
-		Document actual = underTest.getBenefitHypothesis();
+		String actual = underTest.getAvatarURI();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetCapabilityName() throws Exception {
+	public void testGetDisplayName() throws Exception {
 		// given
-		String value = "capabilityName";
-		underTest.setCapabilityName(value);
+		String value = "displayName";
+		underTest.setDisplayName(value);
 		// when
-		String actual = underTest.getCapabilityName();
+		String actual = underTest.getDisplayName();
 		// then
 		assertEquals(value, actual);
-	}
-
-	@Test
-	public void testGetEnablers() throws Exception {
-		// given
-		Set<Enabler> value = new TreeSet<>();
-		underTest.setEnablers(value);
-		// when
-		Set<Enabler> actual = underTest.getEnablers();
-		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
-	}
-
-	@Test
-	public void testGetFeatures() throws Exception {
-		// given
-		Set<Feature> value = new TreeSet<>();
-		underTest.setFeatures(value);
-		// when
-		Set<Feature> actual = underTest.getFeatures();
-		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
 	}
 
 	@Test
@@ -103,34 +78,56 @@ public class CapabilityTest {
 	}
 
 	@Test
-	public void testGetSolutionBacklog() throws Exception {
+	public void testGetName() throws Exception {
 		// given
-		SolutionBacklog value = new SolutionBacklog();
-		underTest.setSolutionBacklog(value);
+		String value = "name";
+		underTest.setName(value);
 		// when
-		SolutionBacklog actual = underTest.getSolutionBacklog();
+		String actual = underTest.getName();
 		// then
 		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testGetTrains() throws Exception {
+	public void testGetProjectId() throws Exception {
 		// given
-		List<Train> value = Arrays.asList();
-		underTest.setTrains(value);
+		String value = "projectId";
+		underTest.setProjectId(value);
 		// when
-		List<Train> actual = underTest.getTrains();
+		String actual = underTest.getProjectId();
 		// then
-		assertArrayEquals(value.toArray(), actual.toArray());
+		assertEquals(value, actual);
 	}
 
 	@Test
-	public void testIsAccepted() throws Exception {
+	public void testGetProjectKey() throws Exception {
 		// given
-		boolean value = false;
-		underTest.setAccepted(value);
+		String value = "projectKey";
+		underTest.setProjectKey(value);
 		// when
-		boolean actual = underTest.isAccepted();
+		String actual = underTest.getProjectKey();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetProjectName() throws Exception {
+		// given
+		String value = "projectName";
+		underTest.setProjectName(value);
+		// when
+		String actual = underTest.getProjectName();
+		// then
+		assertEquals(value, actual);
+	}
+
+	@Test
+	public void testGetProjectTypeKey() throws Exception {
+		// given
+		String value = "projectTypeKey";
+		underTest.setProjectTypeKey(value);
+		// when
+		String actual = underTest.getProjectTypeKey();
 		// then
 		assertEquals(value, actual);
 	}
